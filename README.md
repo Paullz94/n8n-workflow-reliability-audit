@@ -31,3 +31,9 @@ python -m unittest discover -s tests -v
 ```
 
 The project intentionally uses only the Python standard library.
+
+## Fixed-scope audit service
+
+The analyzer is also the proof artifact for a small, manual reliability-audit pilot. See [SERVICE.md](SERVICE.md) for scope, boundaries, pricing hypotheses, and delivery process.
+
+To ask whether an existing workflow fits, [open an audit-request issue](../../issues/new?template=workflow-audit-request.yml). Share metadata only—never credentials, customer data, private workflow exports, or confidential logs in a public issue.

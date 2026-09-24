@@ -1,0 +1,80 @@
+name: Workflow reliability audit request
+description: Check whether an existing n8n workflow fits the fixed-scope audit pilot. Public metadata only.
+title: "[Audit request] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This issue is public. **Do not attach workflow JSON, credentials, tokens, customer/personal data, private URLs, or confidential logs/screenshots.** Describe the workflow at a high level only.
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Requested scope
+      options:
+        - Static audit (target EUR 99)
+        - Reliability retrofit (target EUR 350 after scope review)
+        - Unsure — fit question only
+    validations:
+      required: true
+
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Intended business outcome
+      description: What should happen when the workflow succeeds? Do not include private data.
+      placeholder: A submitted form should create or update one CRM contact and schedule one follow-up.
+    validations:
+      required: true
+
+  - type: input
+    id: systems
+    attributes:
+      label: Connected systems
+      description: Product/service names only; no URLs, account IDs, tokens, or credentials.
+      placeholder: n8n, HubSpot, PostgreSQL
+    validations:
+      required: true
+
+  - type: textarea
+    id: symptom
+    attributes:
+      label: Current symptom or reliability concern
+      placeholder: Retried webhooks sometimes create duplicate CRM notes.
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: n8n version and hosting type
+      placeholder: n8n 2.40.x, self-hosted Docker
+    validations:
+      required: true
+
+  - type: input
+    id: node_count
+    attributes:
+      label: Approximate node count
+      placeholder: "24"
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: What result would count as fixed or useful?
+      placeholder: Replaying the same synthetic event twice creates only one CRM note and returns a traceable duplicate status.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Public issue safety confirmation
+      options:
+        - label: I have not included secrets, credentials, private workflow exports, customer/personal data, or confidential logs.
+          required: true
+        - label: I understand that opening this issue does not create a contract or authorize production access/changes.
+          required: true
+
