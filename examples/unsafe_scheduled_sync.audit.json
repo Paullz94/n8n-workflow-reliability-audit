@@ -1,0 +1,61 @@
+{
+  "tool": "Workflow Reliability Audit",
+  "schema_version": 1,
+  "workflow": {
+    "name": "Unsafe Scheduled CRM Sync",
+    "active": true,
+    "node_count": 3,
+    "connection_source_count": 2
+  },
+  "scope": "Static export review only; execution, credentials, instance configuration, and business correctness remain unverified.",
+  "summary": {
+    "critical": 0,
+    "high": 2,
+    "medium": 2,
+    "low": 1,
+    "info": 0
+  },
+  "findings": [
+    {
+      "rule_id": "DATA-001",
+      "severity": "high",
+      "title": "No visible duplicate-prevention step",
+      "node": null,
+      "evidence": "An active trigger reaches side-effect-capable nodes, but no node name/type signals deduplication or idempotency.",
+      "recommendation": "Define an idempotency key, persist processed-event state, and test repeated delivery. This heuristic requires human confirmation."
+    },
+    {
+      "rule_id": "RECOVERY-001",
+      "severity": "high",
+      "title": "No workflow-level error workflow",
+      "node": null,
+      "evidence": "The workflow is active but `settings.errorWorkflow` is not configured.",
+      "recommendation": "Attach an error workflow that records context and alerts an operator without exposing payload secrets."
+    },
+    {
+      "rule_id": "RECOVERY-002",
+      "severity": "medium",
+      "title": "HTTP call has no node retry policy",
+      "node": "Fetch Records",
+      "evidence": "`retryOnFail` is not enabled.",
+      "recommendation": "Add bounded retries with backoff only for retry-safe failures; protect writes with idempotency."
+    },
+    {
+      "rule_id": "RECOVERY-003",
+      "severity": "medium",
+      "title": "HTTP call has no explicit timeout",
+      "node": "Fetch Records",
+      "evidence": "No `parameters.options.timeout` value is present.",
+      "recommendation": "Set a finite timeout and route exhausted failures to an observable recovery path."
+    },
+    {
+      "rule_id": "OPS-001",
+      "severity": "low",
+      "title": "No exported version identifier",
+      "node": null,
+      "evidence": "The active workflow has no `versionId` in this export.",
+      "recommendation": "Record the exact source version and keep before/after exports for rollback."
+    }
+  ],
+  "input_sha256": "aff644cdb545dacec1465f642c13f3807d9c9447b3f74afb4b37905796bfa5bc"
+}

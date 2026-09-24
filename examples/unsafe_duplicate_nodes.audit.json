@@ -1,0 +1,37 @@
+{
+  "tool": "Workflow Reliability Audit",
+  "schema_version": 1,
+  "workflow": {
+    "name": "Ambiguous Notification Demo",
+    "active": false,
+    "node_count": 3,
+    "connection_source_count": 1
+  },
+  "scope": "Static export review only; execution, credentials, instance configuration, and business correctness remain unverified.",
+  "summary": {
+    "critical": 0,
+    "high": 1,
+    "medium": 1,
+    "low": 0,
+    "info": 0
+  },
+  "findings": [
+    {
+      "rule_id": "STRUCT-002",
+      "severity": "high",
+      "title": "Duplicate node names",
+      "node": null,
+      "evidence": "Duplicate names: Notify.",
+      "recommendation": "Use unique node names so expressions, connections, and incident reports are unambiguous."
+    },
+    {
+      "rule_id": "SEC-002",
+      "severity": "medium",
+      "title": "Powerful node requires manual review",
+      "node": "Notify",
+      "evidence": "Node type `n8n-nodes-base.executeCommand` can execute code, commands, SSH, or file operations.",
+      "recommendation": "Review inputs, escaping, permissions, network/file access, and secret exposure; sandbox where possible."
+    }
+  ],
+  "input_sha256": "97aeb6ef674ba7e9948c4acf1fcb714015694f1654eaeafc2cf9a7b6f3c5d935"
+}

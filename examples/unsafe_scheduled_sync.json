@@ -1,0 +1,33 @@
+{
+  "name": "Unsafe Scheduled CRM Sync",
+  "active": true,
+  "nodes": [
+    {
+      "parameters": {"rule": {"interval": [{"field": "minutes", "minutesInterval": 5}]}},
+      "name": "Every Five Minutes",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {"url": "https://example.invalid/new-records", "options": {}},
+      "name": "Fetch Records",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [220, 0]
+    },
+    {
+      "parameters": {"operation": "append"},
+      "name": "Append CRM Rows",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [440, 0]
+    }
+  ],
+  "connections": {
+    "Every Five Minutes": {"main": [[{"node": "Fetch Records", "type": "main", "index": 0}]]},
+    "Fetch Records": {"main": [[{"node": "Append CRM Rows", "type": "main", "index": 0}]]}
+  },
+  "settings": {}
+}
+

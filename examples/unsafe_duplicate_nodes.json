@@ -1,0 +1,32 @@
+{
+  "name": "Ambiguous Notification Demo",
+  "active": false,
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {"command": "echo unsafe-demo"},
+      "name": "Notify",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [220, 0]
+    },
+    {
+      "parameters": {},
+      "name": "Notify",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [220, 200]
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {"main": [[{"node": "Notify", "type": "main", "index": 0}]]}
+  },
+  "settings": {}
+}
+

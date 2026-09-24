@@ -1,0 +1,56 @@
+{
+  "name": "Hardened Order Intake Demo",
+  "active": true,
+  "versionId": "demo-version-2",
+  "nodes": [
+    {
+      "parameters": {"path": "order-intake", "authentication": "headerAuth"},
+      "name": "Authenticated Order Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 0],
+      "credentials": {"httpHeaderAuth": {"id": "credential-reference-only", "name": "Order Signature"}}
+    },
+    {
+      "parameters": {"assignments": {"assignments": [{"name": "idempotencyKey", "value": "={{ $json.eventId }}", "type": "string"}]}},
+      "name": "Derive Idempotency Key",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [220, 0]
+    },
+    {
+      "parameters": {"conditions": {"options": {}, "conditions": [{"leftValue": "={{ $json.idempotencyKey }}", "rightValue": "", "operator": {"type": "string", "operation": "notEmpty"}}]}},
+      "name": "Reject Missing Idempotency Key",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [440, 0]
+    },
+    {
+      "parameters": {"operation": "get", "key": "={{ $json.idempotencyKey }}"},
+      "name": "Check Duplicate Event",
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [660, 0],
+      "credentials": {"redis": {"id": "credential-reference-only", "name": "Idempotency Store"}}
+    },
+    {
+      "parameters": {"method": "POST", "url": "https://example.invalid/orders", "authentication": "predefinedCredentialType", "options": {"timeout": 10000}},
+      "name": "Create ERP Order",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [880, 0],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000,
+      "credentials": {"httpHeaderAuth": {"id": "credential-reference-only", "name": "ERP API"}}
+    }
+  ],
+  "connections": {
+    "Authenticated Order Webhook": {"main": [[{"node": "Derive Idempotency Key", "type": "main", "index": 0}]]},
+    "Derive Idempotency Key": {"main": [[{"node": "Reject Missing Idempotency Key", "type": "main", "index": 0}]]},
+    "Reject Missing Idempotency Key": {"main": [[{"node": "Check Duplicate Event", "type": "main", "index": 0}]]},
+    "Check Duplicate Event": {"main": [[{"node": "Create ERP Order", "type": "main", "index": 0}]]}
+  },
+  "settings": {"errorWorkflow": "demo-error-workflow-id"}
+}
+

@@ -1,0 +1,45 @@
+{
+  "name": "Unsafe Order Intake Demo",
+  "active": true,
+  "nodes": [
+    {
+      "parameters": {"path": "order-intake", "authentication": "none"},
+      "name": "Order Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {"jsCode": "return $input.all();"},
+      "name": "Normalize Order",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [240, 0]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://example.invalid/orders",
+        "authorization": "Bearer demo-secret-value-123456",
+        "options": {}
+      },
+      "name": "Create ERP Order",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [480, 0]
+    },
+    {
+      "parameters": {},
+      "name": "Old Debug Node",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [480, 220]
+    }
+  ],
+  "connections": {
+    "Order Webhook": {"main": [[{"node": "Normalize Order", "type": "main", "index": 0}]]},
+    "Normalize Order": {"main": [[{"node": "Create ERP Order", "type": "main", "index": 0}]]}
+  },
+  "settings": {}
+}
+

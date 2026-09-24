@@ -1,0 +1,93 @@
+{
+  "tool": "Workflow Reliability Audit",
+  "schema_version": 1,
+  "workflow": {
+    "name": "Unsafe Order Intake Demo",
+    "active": true,
+    "node_count": 4,
+    "connection_source_count": 2
+  },
+  "scope": "Static export review only; execution, credentials, instance configuration, and business correctness remain unverified.",
+  "summary": {
+    "critical": 1,
+    "high": 4,
+    "medium": 3,
+    "low": 1,
+    "info": 0
+  },
+  "findings": [
+    {
+      "rule_id": "SEC-003",
+      "severity": "critical",
+      "title": "Possible hard-coded secret",
+      "node": "Create ERP Order",
+      "evidence": "A credential-like value is present at `parameters.authorization` (value redacted).",
+      "recommendation": "Remove it from node parameters, rotate if real, and use n8n credentials or an external secret store."
+    },
+    {
+      "rule_id": "DATA-001",
+      "severity": "high",
+      "title": "No visible duplicate-prevention step",
+      "node": null,
+      "evidence": "An active trigger reaches side-effect-capable nodes, but no node name/type signals deduplication or idempotency.",
+      "recommendation": "Define an idempotency key, persist processed-event state, and test repeated delivery. This heuristic requires human confirmation."
+    },
+    {
+      "rule_id": "GRAPH-001",
+      "severity": "high",
+      "title": "Unreachable nodes",
+      "node": null,
+      "evidence": "Not reachable from a trigger/root: Old Debug Node.",
+      "recommendation": "Remove stale nodes or connect them deliberately, then exercise every branch."
+    },
+    {
+      "rule_id": "RECOVERY-001",
+      "severity": "high",
+      "title": "No workflow-level error workflow",
+      "node": null,
+      "evidence": "The workflow is active but `settings.errorWorkflow` is not configured.",
+      "recommendation": "Attach an error workflow that records context and alerts an operator without exposing payload secrets."
+    },
+    {
+      "rule_id": "SEC-001",
+      "severity": "high",
+      "title": "Unauthenticated webhook",
+      "node": "Order Webhook",
+      "evidence": "Webhook authentication is absent or set to none.",
+      "recommendation": "Require an appropriate authentication/signature check, rate limit the endpoint, and reject replayed requests."
+    },
+    {
+      "rule_id": "RECOVERY-002",
+      "severity": "medium",
+      "title": "HTTP call has no node retry policy",
+      "node": "Create ERP Order",
+      "evidence": "`retryOnFail` is not enabled.",
+      "recommendation": "Add bounded retries with backoff only for retry-safe failures; protect writes with idempotency."
+    },
+    {
+      "rule_id": "RECOVERY-003",
+      "severity": "medium",
+      "title": "HTTP call has no explicit timeout",
+      "node": "Create ERP Order",
+      "evidence": "No `parameters.options.timeout` value is present.",
+      "recommendation": "Set a finite timeout and route exhausted failures to an observable recovery path."
+    },
+    {
+      "rule_id": "SEC-002",
+      "severity": "medium",
+      "title": "Powerful node requires manual review",
+      "node": "Normalize Order",
+      "evidence": "Node type `n8n-nodes-base.code` can execute code, commands, SSH, or file operations.",
+      "recommendation": "Review inputs, escaping, permissions, network/file access, and secret exposure; sandbox where possible."
+    },
+    {
+      "rule_id": "OPS-001",
+      "severity": "low",
+      "title": "No exported version identifier",
+      "node": null,
+      "evidence": "The active workflow has no `versionId` in this export.",
+      "recommendation": "Record the exact source version and keep before/after exports for rollback."
+    }
+  ],
+  "input_sha256": "d96c21e7bfe605e7764747092e44e624203b25a89aa8f9213aade898326fd25b"
+}

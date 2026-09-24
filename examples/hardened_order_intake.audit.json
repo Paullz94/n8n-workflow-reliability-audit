@@ -1,0 +1,20 @@
+{
+  "tool": "Workflow Reliability Audit",
+  "schema_version": 1,
+  "workflow": {
+    "name": "Hardened Order Intake Demo",
+    "active": true,
+    "node_count": 5,
+    "connection_source_count": 4
+  },
+  "scope": "Static export review only; execution, credentials, instance configuration, and business correctness remain unverified.",
+  "summary": {
+    "critical": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "info": 0
+  },
+  "findings": [],
+  "input_sha256": "354f058fe967ba3e9259b4d30720d592f4e9cd46340ac4a359614ef2bded6564"
+}
