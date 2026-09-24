@@ -1,5 +1,7 @@
 # n8n Workflow Reliability Audit
 
+[![Public tests](https://github.com/Paullz94/n8n-workflow-reliability-audit/actions/workflows/test.yml/badge.svg)](https://github.com/Paullz94/n8n-workflow-reliability-audit/actions/workflows/test.yml)
+
 A deterministic, dependency-free portfolio artifact for reviewing exported n8n workflow JSON without credentials or production access. It produces redacted Markdown and JSON findings.
 
 It currently checks structure/reachability, duplicate names, active workflows without an error workflow, unauthenticated webhooks, HTTP timeouts/retries, powerful nodes, possible hard-coded secrets, and a heuristic absence of duplicate prevention before side effects.
@@ -31,6 +33,8 @@ python -m unittest discover -s tests -v
 ```
 
 The project intentionally uses only the Python standard library.
+
+The same tests run on every public push and pull request using a standard GitHub-hosted Linux runner. The workflow has read-only repository permissions, a five-minute timeout, no cache/artifact storage, and pinned official action revisions.
 
 ## Fixed-scope audit service
 
