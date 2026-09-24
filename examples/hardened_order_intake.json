@@ -1,10 +1,12 @@
 {
   "name": "Hardened Order Intake Demo",
+  "id": "wf-hardened-order-intake-demo",
   "active": true,
   "versionId": "demo-version-2",
   "nodes": [
     {
       "parameters": {"path": "order-intake", "authentication": "headerAuth"},
+      "id": "04e76f91-73b5-4b60-a899-6e5bd879d04a",
       "name": "Authenticated Order Webhook",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
@@ -13,6 +15,7 @@
     },
     {
       "parameters": {"assignments": {"assignments": [{"name": "idempotencyKey", "value": "={{ $json.eventId }}", "type": "string"}]}},
+      "id": "9b1ed7e4-0274-46e4-96e9-5f4fb1b06e72",
       "name": "Derive Idempotency Key",
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
@@ -20,6 +23,7 @@
     },
     {
       "parameters": {"conditions": {"options": {}, "conditions": [{"leftValue": "={{ $json.idempotencyKey }}", "rightValue": "", "operator": {"type": "string", "operation": "notEmpty"}}]}},
+      "id": "59859d07-6fcc-40db-98d5-065a3d503f3e",
       "name": "Reject Missing Idempotency Key",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
@@ -27,6 +31,7 @@
     },
     {
       "parameters": {"operation": "get", "key": "={{ $json.idempotencyKey }}"},
+      "id": "810dfe7a-6797-4fc8-b420-36e5e3ea8956",
       "name": "Check Duplicate Event",
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
@@ -35,6 +40,7 @@
     },
     {
       "parameters": {"method": "POST", "url": "https://example.invalid/orders", "authentication": "predefinedCredentialType", "options": {"timeout": 10000}},
+      "id": "b602926d-1963-4d2a-a734-067c9580f755",
       "name": "Create ERP Order",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
@@ -53,4 +59,3 @@
   },
   "settings": {"errorWorkflow": "demo-error-workflow-id"}
 }
-

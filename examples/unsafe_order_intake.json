@@ -1,9 +1,11 @@
 {
   "name": "Unsafe Order Intake Demo",
+  "id": "wf-unsafe-order-intake-demo",
   "active": true,
   "nodes": [
     {
       "parameters": {"path": "order-intake", "authentication": "none"},
+      "id": "b54fa282-93bd-4c55-8ed8-18eaa44c59da",
       "name": "Order Webhook",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
@@ -11,6 +13,7 @@
     },
     {
       "parameters": {"jsCode": "return $input.all();"},
+      "id": "a11753e2-2a43-46f3-a93d-af2e8d096369",
       "name": "Normalize Order",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -23,6 +26,7 @@
         "authorization": "DEMO_ONLY_NOT_A_REAL_SECRET",
         "options": {}
       },
+      "id": "950c2685-ab45-4493-aab2-94d7d07c86ec",
       "name": "Create ERP Order",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
@@ -30,6 +34,7 @@
     },
     {
       "parameters": {},
+      "id": "e63b6bbe-1ed7-41f1-8b2a-21e75b761411",
       "name": "Old Debug Node",
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,

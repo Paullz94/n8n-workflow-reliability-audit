@@ -1,9 +1,11 @@
 {
   "name": "Ambiguous Notification Demo",
+  "id": "wf-ambiguous-notification-demo",
   "active": false,
   "nodes": [
     {
       "parameters": {},
+      "id": "1ac357f8-1066-4a89-b39c-c87430e3cf4d",
       "name": "Manual Trigger",
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
@@ -11,6 +13,7 @@
     },
     {
       "parameters": {"command": "echo unsafe-demo"},
+      "id": "cb32d454-9684-493f-aa4a-dee3c6940ac3",
       "name": "Notify",
       "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
@@ -18,6 +21,7 @@
     },
     {
       "parameters": {},
+      "id": "d44c562f-17e4-4f1e-8d66-7653d66888bd",
       "name": "Notify",
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
@@ -29,4 +33,3 @@
   },
   "settings": {}
 }
-

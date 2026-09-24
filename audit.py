@@ -100,6 +100,12 @@ def _reachable(adjacency: dict[str, set[str]], roots: set[str]) -> set[str]:
 def audit_workflow(workflow: dict[str, Any]) -> dict[str, Any]:
     """Return a redacted static audit result for one exported workflow."""
     findings: list[Finding] = []
+    if not isinstance(workflow.get("id"), str) or not workflow.get("id", "").strip():
+        findings.append(Finding(
+            "STRUCT-004", "critical", "Missing workflow identifier", None,
+            "The export has no non-empty string `id`; current n8n imports require one.",
+            "Use an actual n8n export or assign a unique workflow ID before import.",
+        ))
     nodes = workflow.get("nodes")
     if not isinstance(nodes, list):
         nodes = []
@@ -125,6 +131,14 @@ def audit_workflow(workflow: dict[str, Any]) -> dict[str, Any]:
             "STRUCT-003", "high", "Unnamed nodes", None,
             f"{unnamed_count} node(s) have no usable name.",
             "Name every node before handoff.",
+        ))
+
+    nodes_without_id = [str(node.get("name", "<unnamed>")) for node in named_nodes if not isinstance(node.get("id"), str) or not node.get("id", "").strip()]
+    if nodes_without_id:
+        findings.append(Finding(
+            "STRUCT-005", "high", "Nodes missing identifiers", None,
+            f"Missing node `id`: {', '.join(nodes_without_id)}.",
+            "Assign stable unique node IDs or regenerate the export from n8n before import/handoff.",
         ))
 
     connections = workflow.get("connections", {})

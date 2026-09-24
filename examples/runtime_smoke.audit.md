@@ -1,8 +1,8 @@
-# Workflow Reliability Audit — Hardened Order Intake Demo
+# Workflow Reliability Audit — Runtime Smoke Demo
 
-- Active: True
-- Nodes: 5
-- Input SHA-256: `0106bafab8f18d7fbbdc6dcaf2301cd2789c8bb51afc2042bedc2c5a63e3142f`
+- Active: False
+- Nodes: 2
+- Input SHA-256: `c0c3fc5d1e7e84e16f82861017f9432094714515c2a78ca3cd4079f45d2101b5`
 - Scope: Static export review only; execution, credentials, instance configuration, and business correctness remain unverified.
 - Secrets: values are never printed in this report
 

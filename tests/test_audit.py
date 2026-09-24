@@ -31,6 +31,21 @@ class PublicPortfolioTests(unittest.TestCase):
         result = audit_workflow(self.load("unsafe_duplicate_nodes.json"))
         self.assertIn("STRUCT-002", {item["rule_id"] for item in result["findings"]})
 
+    def test_missing_workflow_and_node_ids_are_rejected(self):
+        result = audit_workflow({
+            "name": "No IDs",
+            "active": False,
+            "nodes": [{"name": "Manual Trigger", "type": "n8n-nodes-base.manualTrigger", "parameters": {}}],
+            "connections": {},
+        })
+        rules = {item["rule_id"] for item in result["findings"]}
+        self.assertTrue({"STRUCT-004", "STRUCT-005"}.issubset(rules))
+
+    def test_runtime_smoke_fixture_has_no_static_release_blocker(self):
+        result = audit_workflow(self.load("runtime_smoke.json"))
+        self.assertEqual(result["summary"]["critical"], 0)
+        self.assertEqual(result["summary"]["high"], 0)
+
 
 if __name__ == "__main__":
     unittest.main()

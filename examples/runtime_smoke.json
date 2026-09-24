@@ -1,0 +1,36 @@
+{
+  "name": "Runtime Smoke Demo",
+  "id": "wf-runtime-smoke-demo",
+  "active": false,
+  "versionId": "d52f1080-46fd-428f-82aa-a998245743c9",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "b6d36eb4-5267-4d69-943b-12a316b08026",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {"id": "smoke-status", "name": "status", "value": "ok", "type": "string"}
+          ]
+        },
+        "options": {}
+      },
+      "id": "4a6e04e2-fc34-41ed-8401-f85644145ff4",
+      "name": "Emit Smoke Result",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [240, 0]
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {"main": [[{"node": "Emit Smoke Result", "type": "main", "index": 0}]]}
+  },
+  "settings": {"executionOrder": "v1"}
+}
+

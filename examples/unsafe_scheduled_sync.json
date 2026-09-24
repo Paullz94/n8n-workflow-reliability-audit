@@ -1,9 +1,11 @@
 {
   "name": "Unsafe Scheduled CRM Sync",
+  "id": "wf-unsafe-scheduled-sync-demo",
   "active": true,
   "nodes": [
     {
       "parameters": {"rule": {"interval": [{"field": "minutes", "minutesInterval": 5}]}},
+      "id": "11512d26-73a0-4214-af91-c1db6ae49ca2",
       "name": "Every Five Minutes",
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.2,
@@ -11,6 +13,7 @@
     },
     {
       "parameters": {"url": "https://example.invalid/new-records", "options": {}},
+      "id": "662d19cc-2d4c-4f6b-90aa-59f82e9ecfb3",
       "name": "Fetch Records",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
@@ -19,6 +22,7 @@
     },
     {
       "parameters": {"operation": "append"},
+      "id": "cb5d4d4e-6189-44b3-be5f-f60be76678ef",
       "name": "Append CRM Rows",
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.6,
