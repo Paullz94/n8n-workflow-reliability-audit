@@ -11,9 +11,9 @@ Runtime verification uses n8n 2.40.6: the hardened, unsafe-order, scheduled-sync
 ## Run
 
 ```powershell
-python -m app.workflow_audit.audit app/workflow_audit/examples/unsafe_order_intake.json `
-  --output app/workflow_audit/examples/unsafe_order_intake.audit.md `
-  --json-output app/workflow_audit/examples/unsafe_order_intake.audit.json
+python audit.py examples/unsafe_order_intake.json `
+  --output examples/unsafe_order_intake.audit.md `
+  --json-output examples/unsafe_order_intake.audit.json
 ```
 
 ## Boundary
