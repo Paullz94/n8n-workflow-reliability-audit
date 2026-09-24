@@ -2,7 +2,7 @@
 
 - Active: True
 - Nodes: 3
-- Input SHA-256: `aff644cdb545dacec1465f642c13f3807d9c9447b3f74afb4b37905796bfa5bc`
+- Input SHA-256: `0d6af09c278180bafcb31aff93b4b1359b1c34c1d3cdd25b5ea919ccd80f01da`
 - Scope: Static export review only; execution, credentials, instance configuration, and business correctness remain unverified.
 - Secrets: values are never printed in this report
 
@@ -10,7 +10,7 @@
 
 | Critical | High | Medium | Low | Info |
 |---:|---:|---:|---:|---:|
-| 0 | 2 | 2 | 1 | 0 |
+| 0 | 2 | 3 | 1 | 0 |
 
 ## Findings
 
@@ -37,6 +37,12 @@ Recommendation: Add bounded retries with backoff only for retry-safe failures; p
 Evidence: No `parameters.options.timeout` value is present.
 
 Recommendation: Set a finite timeout and route exhausted failures to an observable recovery path.
+
+### MEDIUM RECOVERY-004: Node may convert a failure into a successful execution — `Fetch Records`
+
+Evidence: The node uses `onError=continueRegularOutput`.
+
+Recommendation: Confirm the continuation branch handles and surfaces the failure. A workflow-level Error Trigger runs only when the execution actually ends in error.
 
 ### LOW OPS-001: No exported version identifier
 

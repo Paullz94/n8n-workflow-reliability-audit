@@ -25,7 +25,7 @@ class PublicPortfolioTests(unittest.TestCase):
     def test_scheduled_sync_flags_recovery_and_idempotency(self):
         result = audit_workflow(self.load("unsafe_scheduled_sync.json"))
         rules = {item["rule_id"] for item in result["findings"]}
-        self.assertTrue({"RECOVERY-001", "RECOVERY-002", "RECOVERY-003", "DATA-001"}.issubset(rules))
+        self.assertTrue({"RECOVERY-001", "RECOVERY-002", "RECOVERY-003", "RECOVERY-004", "DATA-001"}.issubset(rules))
 
     def test_duplicate_names_are_rejected(self):
         result = audit_workflow(self.load("unsafe_duplicate_nodes.json"))

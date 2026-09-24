@@ -191,6 +191,22 @@ def audit_workflow(workflow: dict[str, Any]) -> dict[str, Any]:
                     "Set a finite timeout and route exhausted failures to an observable recovery path.",
                 ))
 
+        on_error = str(node.get("onError", "stopWorkflow"))
+        if node.get("continueOnFail") is True or on_error not in {"", "stopWorkflow"}:
+            mode = "legacy continueOnFail=true" if node.get("continueOnFail") is True else f"onError={on_error}"
+            findings.append(Finding(
+                "RECOVERY-004", "medium", "Node may convert a failure into a successful execution", name,
+                f"The node uses `{mode}`.",
+                "Confirm the continuation branch handles and surfaces the failure. A workflow-level Error Trigger runs only when the execution actually ends in error.",
+            ))
+
+        if node.get("disabled") is True:
+            findings.append(Finding(
+                "OPS-002", "medium", "Disabled node remains in workflow graph", name,
+                "The exported node has `disabled=true`.",
+                "Confirm this is intentional and test the effective connection path; remove stale disabled nodes before handoff.",
+            ))
+
         if any(marker in node_type for marker in RISKY_NODE_MARKERS):
             findings.append(Finding(
                 "SEC-002", "medium", "Powerful node requires manual review", name,

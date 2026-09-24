@@ -14,7 +14,8 @@
       "name": "Fetch Records",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [220, 0]
+      "position": [220, 0],
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {"operation": "append"},
@@ -30,4 +31,3 @@
   },
   "settings": {}
 }
-
