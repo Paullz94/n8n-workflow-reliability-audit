@@ -15,7 +15,7 @@ class PublicPortfolioTests(unittest.TestCase):
     def test_seeded_secret_is_reported_but_never_rendered(self):
         result = audit_workflow(self.load("unsafe_order_intake.json"))
         self.assertIn("SEC-003", {item["rule_id"] for item in result["findings"]})
-        self.assertNotIn("demo-secret-value", render_markdown(result))
+        self.assertNotIn("DEMO_ONLY_NOT_A_REAL_SECRET", render_markdown(result))
 
     def test_hardened_counterpart_has_no_critical_or_high_findings(self):
         result = audit_workflow(self.load("hardened_order_intake.json"))
@@ -34,4 +34,3 @@ class PublicPortfolioTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

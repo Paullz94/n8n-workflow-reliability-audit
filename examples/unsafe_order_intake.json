@@ -20,7 +20,7 @@
       "parameters": {
         "method": "POST",
         "url": "https://example.invalid/orders",
-        "authorization": "Bearer demo-secret-value-123456",
+        "authorization": "DEMO_ONLY_NOT_A_REAL_SECRET",
         "options": {}
       },
       "name": "Create ERP Order",
@@ -42,4 +42,3 @@
   },
   "settings": {}
 }
-
