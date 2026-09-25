@@ -130,6 +130,13 @@ class AuditMakeTests(unittest.TestCase):
         self.assertIn("auto-commit-recovery-review", rules)
         self.assertIn("rollback-limited-by-autocommit-review", rules)
 
+    def test_make_webhook_url_is_treated_as_secret_like(self):
+        webhook = "https://hook.eu1.make.com/abcdefghijklmnopqrstuvwxyz123456"
+        bp = {"flow": [{"id": 1, "module": "http:ActionSendData", "mapper": {"url": webhook}}]}
+        findings = audit_make.scan_blueprint(bp)
+        hit = next(f for f in findings if f.rule == "possible-secret-in-blueprint")
+        self.assertNotIn("abcdefghijklmnopqrstuvwxyz", hit.message)
+
 
 if __name__ == "__main__":
     unittest.main()
