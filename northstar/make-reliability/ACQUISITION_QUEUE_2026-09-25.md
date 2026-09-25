@@ -433,3 +433,60 @@ It is:
 > “I already have or am receiving an important workflow and I need confidence that retries, failures, duplicates, ordering and recovery will not corrupt the business process.”
 
 That is the niche PCFlows should test first.
+
+
+---
+
+## Fresh demand re-check — 2026-09-26
+
+Registration/checkout is still closed. The items below are **preparation only** until the Belgian enterprise/VAT launch gate is complete.
+
+### NEW P1 — Upwork: Make.com Automation Specialist — QA & Troubleshooting
+
+URL:
+https://www.upwork.com/freelance-jobs/apply/Make-com-Automation-Specialist-Troubleshooting_~022098474011690711653/
+
+Why this moves to the front of the launch queue:
+- the buyer explicitly wants existing Make.com scenarios **reviewed and tested** rather than a greenfield build;
+- scope names data mapping, webhooks, APIs, third-party integrations, workflow errors and reliability issues;
+- QA support is the engagement itself, which is unusually close to the current PCFlows audit/QA offer;
+- the client has substantial marketplace history/spend, so this is a stronger buyer signal than an idea-stage post.
+
+Observed at re-check:
+- hourly, under 30h/week;
+- 1–3 month engagement;
+- 15–20 proposals;
+- 6 interviewing.
+
+PCFlows angle:
+- propose a small bounded first milestone: sanitized scenario review + prioritized reliability/data-integrity findings + verification checklist;
+- do **not** claim that PCFlows will edit production or independently verify runtime fixes unless that separate access/proof scope exists;
+- if the buyer requires direct implementation from day one, keep scope truthful rather than stretching the product.
+
+Priority: **P1 launch-day re-check.**
+
+### New research signal — Upwork: CapaciDesk paid qualification
+
+URL:
+https://www.upwork.com/freelance-jobs/apply/Automation-Specialist-for-Paid-Qualification-Project-n8n-Make-CRM-API-Integrations_~022101749575310645866/
+
+Why it matters:
+- the evaluation explicitly scores duplicate prevention/idempotency, temporary API failure handling/retries, logging and repeated-failure alerts;
+- it is a paid qualification into a possible white-label supplier network;
+- this independently validates the same reliability outcomes PCFlows sells.
+
+Why it is **not** a launch-day PCFlows audit pitch:
+- the immediate paid task is to **build** a workflow, not merely audit one;
+- first-€1,000 strategy is intentionally audit/QA-first and must not promise implementation capability that is outside the current public scope.
+
+Priority: **RESEARCH / future agency-channel signal unless the buyer explicitly accepts a bounded QA-only milestone.**
+
+### Launch-day order after this re-check
+
+If still open after registration:
+1. Make.com QA & Troubleshooting — best direct current-product fit.
+2. B2B Client Onboarding — propose a bounded QA/handoff milestone, not the full implementation.
+3. Existing Make news/video automation — duplicate-publication/retry QA angle.
+4. Reusable agency template — pre-release QA angle.
+
+Before submitting any proposal, re-check the live post. Do not use stale proposal counts as if they were current.
