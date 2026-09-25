@@ -21,7 +21,7 @@ Updated: 2026-09-25
 - [x] Paid report does not echo arbitrary mapper values.
 - [x] Context is allowlisted/bounded.
 - [x] Intake schema explicitly excludes arbitrary extra fields.
-- [ ] Public deployment domain/static host activated.
+- [x] Public GitHub Pages deployment activated.
 
 The unchecked deployment item is not a product blocker for continued offline validation.
 
@@ -53,7 +53,7 @@ The unchecked deployment item is not a product blocker for continued offline val
 - [x] Strict provider-verified ledger exists.
 - [x] Owner/test/pending/refunded target exclusions tested.
 - [x] Reinvestment/expenses/refunds/net result separated.
-- [ ] Direct payment provider activated and identity/business/payout requirements satisfied.
+- [x] Stripe account connected and live-capable.\n- [ ] Belgian enterprise number / VAT setup completed before paid launch.
 - [ ] Provider import/webhook normalization implemented against the chosen provider's real schema.
 
 ## Gate F — operating autonomy
@@ -63,7 +63,7 @@ The unchecked deployment item is not a product blocker for continued offline val
 - [x] Qualification fields are structured.
 - [x] Support scope is bounded in the pilot definition.
 - [x] Revenue measurement logic is deterministic.
-- [ ] Checkout -> intake -> delivery wiring is live.
+- [ ] Checkout -> intake -> delivery wiring is live for paid customers (checkout intentionally paused pending registration).
 - [ ] Re-scan entitlement/delivery is automated.
 - [ ] Real support burden measured from pilot customers.
 
@@ -72,3 +72,10 @@ The unchecked deployment item is not a product blocker for continued offline val
 **Continue EUR 0 technical/launch preparation. Do not inject owner capital.**
 
 The first genuinely non-delegable gate is expected to be legitimate payment/marketplace account activation (identity, business, payout, tax/KYC as applicable), not further product coding.
+
+
+## Registration pause
+
+As of 2026-09-25, Xerius has accepted the self-employed affiliation and the enterprise number is still being processed. The live Stripe Payment Link is disabled until the business-registration/VAT gate is completed.
+
+During the pause, Northstar may continue free market validation through the public local scanner, no-payment interest CTA, documentation, buyer research and product hardening.
