@@ -111,3 +111,17 @@ As of 2026-09-25:
 The live Stripe Payment Link remains inactive until the registration/tax gate is complete.
 
 During the pause, Northstar may continue only useful EUR 0 work. Major safe technical launch preparation is now complete; avoid speculative feature expansion until the enterprise/VAT details or real customer evidence create a concrete need.
+
+
+## Package ladder readiness
+- [x] PCFlows is the sole public/trade brand; Northstar remains internal.
+- [x] EUR0 Reliability Preflight exists.
+- [x] EUR79 Focused Risk Check renderer exists.
+- [x] EUR149 Data Integrity Audit exists.
+- [x] Lead Flow / Invoice & Payment / AI Guardrails specialist modes exist inside the EUR149 audit.
+- [x] EUR399 Portfolio / Release QA supports up to three scenarios.
+- [x] Combined Portfolio remediation re-scan exists.
+- [x] Public Services & Pricing page and local service chooser exist.
+- [x] Site source QA passes after package redesign.
+- [ ] Stripe products/prices/payment links for EUR79 and EUR399 created after launch configuration review.
+- [ ] Checkout buttons activated only after Belgian enterprise/VAT gate.
