@@ -14,9 +14,13 @@ Use this only after Xerius issues the official Belgian enterprise number. Re-che
    - registered activities;
    - official start date.
 3. If the KBO record is materially wrong, resolve it with Xerius before paid launch.
+4. Confirm the effective economic-activity start date has been reached. The current planned date is **2026-10-01**. Do not accept paid orders before that date merely because the enterprise number was issued earlier.
 
 Official KBO public search:
 https://kbopub.economie.fgov.be/
+
+Official activity-registration guidance:
+https://economie.fgov.be/nl/themas/ondernemingen/kruispuntbank-van/inschrijving-kbo/definities-van-de-soorten
 
 ## Phase 2 — VAT identification
 
@@ -78,7 +82,7 @@ Do not count the checkout test toward Northstar revenue.
 
 ## Phase 6 — launch
 
-Only after the above:
+Only after the above **and after the official activity start date is effective**:
 - create/verify inactive Stripe checkout paths for the fixed paid package ladder;
 - activate only the package checkout links that have matching fulfillment support;
 - replace the disabled website CTAs with the correct package-specific checkout buttons;
