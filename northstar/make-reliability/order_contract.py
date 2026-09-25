@@ -30,7 +30,7 @@ def validate_paid_order(snapshot: dict[str, Any]) -> dict[str, Any]:
         raise OrderContractError("missing valid Stripe Checkout Session id")
 
     payment_status = str(snapshot.get("payment_status") or "").lower()
-    if payment_status not in {"paid", "no_payment_required"}:
+    if payment_status != "paid":
         raise OrderContractError("Stripe Checkout Session is not paid")
 
     currency = str(snapshot.get("currency") or "").lower()
