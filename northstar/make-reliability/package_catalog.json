@@ -118,6 +118,17 @@
         "unsafe customer/CRM action",
         "human takeover not respected"
       ]
+    },
+    {
+      "id": "client_onboarding",
+      "name": "Client Onboarding Reliability",
+      "price_behavior": "Included in Data Integrity Audit when context matches",
+      "examples": [
+        "project or folder created twice",
+        "welcome email sent but internal setup missing",
+        "onboarding stops halfway after API failure",
+        "automation continues after human handoff"
+      ]
     }
   ]
 }
