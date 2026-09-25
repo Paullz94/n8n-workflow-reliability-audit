@@ -69,3 +69,16 @@ The packs are internally ready for further testing, but remain non-public paid p
 - each synthetic fixture/report passes the validation suite;
 - the main EUR149 offer can be purchased legally;
 - at least one channel can be operated autonomously or through a connected integration.
+
+
+## 4. Client Onboarding Reliability
+
+Plain customer problem:
+> A new customer is created in some systems but missing from others, gets duplicate welcome/setup actions, or becomes stuck halfway through onboarding.
+
+The pack adds:
+- duplicate client/project/folder/task replay test;
+- partial-onboarding failure test;
+- required-step silent-skip test;
+- automation-to-human handoff test;
+- onboarding-completion context prompts.
