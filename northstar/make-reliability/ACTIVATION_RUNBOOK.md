@@ -65,7 +65,7 @@ Do not buy Dexxter or another subscription solely because it is convenient unles
 
 Before reactivating public checkout:
 - verify Stripe charges/payouts remain enabled;
-- verify the EUR 149 product/price;
+- verify the EUR 79 Focused Risk Check, EUR 149 Data Integrity Audit and EUR 399 Portfolio / Release QA products/prices;
 - verify billing address collection;
 - verify Scenario name field;
 - verify Buying as classification;
@@ -79,8 +79,9 @@ Do not count the checkout test toward Northstar revenue.
 ## Phase 6 — launch
 
 Only after the above:
-- reactivate the Stripe Payment Link;
-- replace the disabled website CTA with the real checkout button;
+- create/verify inactive Stripe checkout paths for the fixed paid package ladder;
+- activate only the package checkout links that have matching fulfillment support;
+- replace the disabled website CTAs with the correct package-specific checkout buttons;
 - verify the live page once;
 - launch one acquisition surface at a time;
 - keep Make Community autonomous activity research-only under its current rules;
@@ -116,3 +117,15 @@ For each order track privately:
 - customer objection/questions.
 
 These observations determine whether PCFlows should automate further, change price, or pivot.
+
+
+## Package-specific checkout mapping
+
+Do not use one generic payment link for every scope.
+
+Planned mapping:
+- EUR79 -> Focused Risk Check;
+- EUR149 -> Data Integrity Audit (generic or automatic Lead/Invoice/AI specialist mode);
+- EUR399 -> Portfolio / Release QA, max 3 scenarios.
+
+Every checkout must propagate a stable package identifier in Stripe metadata so autonomous fulfillment cannot confuse scope/price.
