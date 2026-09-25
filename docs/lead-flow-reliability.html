@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lead Flow Reliability — PCFlows</title>
+<meta name="description" content="Check Make.com lead workflows for duplicate CRM contacts, double follow-up, routing races, silent failures and unsafe retries.">
+<meta name="theme-color" content="#050505"><link rel="stylesheet" href="site.css">
+</head>
+<body>
+<header class="site-header"><div class="wrap site-nav"><a class="wordmark" href="./">PCFlows</a><nav class="nav-links"><a href="packages.html">Services</a><a href="method.html">Method</a><a class="nav-cta" href="scanner.html">Free preflight</a></nav></div></header>
+<main>
+<section class="hero"><div class="wrap hero-grid">
+<div><div class="kicker">Specialist mode · included in €149 audit</div><h1>Paid leads should not disappear, duplicate or get contacted twice.</h1><p class="lead">Lead Flow Reliability reviews Make.com scenarios that move leads between forms, CRM, sales routing, SMS/email and booking systems.</p><div class="actions"><a class="button primary" href="scanner.html">Start with free preflight</a><a class="button secondary" href="packages.html">Compare services</a></div></div>
+<div class="hero-proof">
+<div class="hero-proof-row"><span>Duplicate lead</span><strong>Can one form event create two CRM contacts?</strong></div>
+<div class="hero-proof-row"><span>Routing</span><strong>Can two sales owners claim the same lead?</strong></div>
+<div class="hero-proof-row"><span>Follow-up</span><strong>Does automation stop after reply or booking?</strong></div>
+<div class="hero-proof-row"><span>Failure</span><strong>Is a failed lead still visible and recoverable?</strong></div>
+</div></div></section>
+
+<section class="section"><div class="wrap">
+<div class="section-head"><div class="kicker">Realistic failure patterns</div><h2>Problems businesses actually notice.</h2></div>
+<div class="grid-3">
+<div class="panel"><h3>Double contact</h3><p>A webhook retries after a timeout. Make creates the CRM contact again and the customer receives two confirmation messages.</p></div>
+<div class="panel"><h3>Lost paid lead</h3><p>The form succeeds, but the CRM write fails. The scenario stops and nobody notices that an advertising lead never reached sales.</p></div>
+<div class="panel"><h3>Follow-up after reply</h3><p>A prospect replies or books a call, but no explicit stop/handoff state exists, so scheduled follow-up continues anyway.</p></div>
+<div class="panel"><h3>Wrong owner</h3><p>Two near-simultaneous routing events overwrite each other and the lead ends up with the wrong salesperson.</p></div>
+<div class="panel"><h3>Silent filter skip</h3><p>A filter excludes a valid lead. The Make run is technically successful, but the expected CRM action never happens.</p></div>
+<div class="panel"><h3>Duplicate appointment work</h3><p>The same lead event is replayed and downstream task/appointment creation is not idempotent.</p></div>
+</div>
+</div></section>
+
+<section class="section"><div class="wrap grid-2">
+<div><div class="kicker">What PCFlows verifies</div><h2>Exactly-once lead handling where it matters.</h2></div>
+<div class="rule-list">
+<div class="rule-row"><div class="label">Replay test</div><div class="value">Submit the same synthetic lead twice and verify one intended CRM/outreach result.</div></div>
+<div class="rule-row"><div class="label">Race test</div><div class="value">Send two near-simultaneous events for the same lead and verify deterministic routing.</div></div>
+<div class="rule-row"><div class="label">Failure test</div><div class="value">Force a downstream CRM/SMS/email failure and verify the lead stays observable and recoverable.</div></div>
+<div class="rule-row"><div class="label">Handoff test</div><div class="value">Move a synthetic lead to reply/booking/human ownership and verify automated follow-up stops.</div></div>
+</div></div></section>
+</main>
+<footer class="footer"><div class="wrap footer-row"><div><strong style="color:var(--text)">PCFlows</strong><br>Independent technical service · Not affiliated with Make.com</div><div class="footer-links"><a href="packages.html">Services</a><a href="privacy.html">Privacy</a><a href="mailto:PCMotionstudios@gmail.com">Support</a></div></div></footer>
+</body></html>
