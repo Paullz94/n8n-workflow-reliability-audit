@@ -64,7 +64,7 @@ def build_focused_delivery(
     order: dict[str,Any],
     blueprint_path: Path,
     context_path: Path,
-    focus: str,
+    focus: str | None,
     out_dir: Path,
 ) -> dict[str,Any]:
     checked=order_contract.validate_paid_order(order)
@@ -76,8 +76,11 @@ def build_focused_delivery(
     context=report_builder.sanitize_context(raw_context)
     fulfill_order.validate_context(context)
     findings=_safe_scan(blueprint)
-    if focus not in focused_risk_check.FOCUS_RULES:
-        raise PackageFulfillmentError(f"unsupported focus: {focus}")
+    effective_focus=(focus or str(raw_context.get("requested_focus") or "")).strip()
+    if effective_focus not in focused_risk_check.FOCUS_RULES:
+        raise PackageFulfillmentError(
+            "focused_risk_check requires one focus: duplicates, silent_skips, recovery or ordering"
+        )
 
     _ensure_empty(out_dir)
     report_path=out_dir/"pcflows-focused-risk-check.md"
@@ -86,13 +89,13 @@ def build_focused_delivery(
     manifest_path=out_dir/"pcflows-manifest.json"
 
     report=focused_risk_check.render_focused_report(
-        focus,blueprint_path.name,blueprint,raw_context
+        effective_focus,blueprint_path.name,blueprint,raw_context
     )
     report_path.write_text(report,encoding="utf-8")
     findings_path.write_text(json.dumps({
         "order_ref":checked["session_id"],
         "package_id":checked["package_id"],
-        "focus":focus,
+        "focus":effective_focus,
         "summary":audit_make.summary(findings),
         "findings":[f.__dict__ for f in findings],
     },indent=2)+"\n",encoding="utf-8")
@@ -100,7 +103,7 @@ def build_focused_delivery(
 
     manifest={
         "order":checked,
-        "focus":focus,
+        "focus":effective_focus,
         "blueprint_source_name":blueprint_path.name,
         "blueprint_sha256":_sha256(blueprint_path),
         "context_source_name":context_path.name,
@@ -125,7 +128,7 @@ def build_focused_delivery(
     return {
         "order_ref":checked["session_id"],
         "package_id":checked["package_id"],
-        "focus":focus,
+        "focus":effective_focus,
         "zip":str(zip_path),
         "report":str(report_path),
         "manifest":str(manifest_path),
@@ -261,7 +264,7 @@ def main()->int:
     p1.add_argument("--order",type=Path,required=True)
     p1.add_argument("--blueprint",type=Path,required=True)
     p1.add_argument("--context",type=Path,required=True)
-    p1.add_argument("--focus",required=True,choices=sorted(focused_risk_check.FOCUS_RULES))
+    p1.add_argument("--focus",choices=sorted(focused_risk_check.FOCUS_RULES))
     p1.add_argument("--out-dir",type=Path,required=True)
 
     p2=sub.add_parser("data_integrity_audit")
