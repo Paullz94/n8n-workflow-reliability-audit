@@ -20,11 +20,33 @@ ALLOWED_RESULT_KEYS={
     "status",
     "side_effect_ids",
     "side_effect_count",
+    "duplicate_side_effect_count",
     "failure_injected",
     "failure_observable",
     "recovery_succeeded",
+    "missing_action_observable",
+    "silent_success_prevented",
     "fallback_used",
+    "fallback_distinguishable",
     "false_success_prevented",
+    "partial_state_identified",
+    "committed_state_identified",
+    "reconciliation_succeeded",
+    "compensation_or_reconciliation_succeeded",
+    "rollback_boundary_observed",
+    "remaining_state_matches_design",
+    "nonmatching_event_tested",
+    "skip_observable",
+    "missing_work_not_misreported_complete",
+    "concurrent_test_executed",
+    "final_state_deterministic",
+    "failed_work_locatable",
+    "resume_or_replay_succeeded",
+    "failed_work_recoverable",
+    "unintended_data_loss_count",
+    "correlation_available",
+    "affected_event_identifiable",
+    "sensitive_payload_exposed",
     "human_handoff",
     "automated_actions_after_handoff",
     "final_state",
@@ -76,11 +98,7 @@ def assert_failure_recovery(result:dict[str,Any])->dict[str,bool]:
         "failure_injected":r.get("failure_injected") is True,
         "failure_observable":r.get("failure_observable") is True,
         "recovery_path_succeeds":r.get("recovery_succeeded") is True,
-        "duplicate_side_effects_zero":(
-            r.get("side_effect_count") in {0,1}
-            if isinstance(r.get("side_effect_count"),int)
-            else False
-        ),
+        "duplicate_side_effects_zero":r.get("duplicate_side_effect_count")==0,
     }
 
 
@@ -119,4 +137,96 @@ def assert_required_onboarding_resources(result:dict[str,Any])->dict[str,bool]:
     return {
         "required_resources_tested":isinstance(required,list) and bool(required),
         "missing_required_resources_zero":isinstance(missing,list) and len(missing)==0,
+    }
+
+
+def assert_skip_visibility(result:dict[str,Any])->dict[str,bool]:
+    r=sanitize_result(result)
+    return {
+        "failure_injected":r.get("failure_injected") is True,
+        "missing_action_observable":r.get("missing_action_observable") is True,
+        "silent_success_prevented":r.get("silent_success_prevented") is True,
+    }
+
+
+def assert_resume_fallback(result:dict[str,Any])->dict[str,bool]:
+    r=sanitize_result(result)
+    return {
+        "failure_injected":r.get("failure_injected") is True,
+        "fallback_distinguishable":r.get("fallback_distinguishable") is True,
+        "false_success_prevented":r.get("false_success_prevented") is True,
+    }
+
+
+def assert_partial_state_reconciliation(result:dict[str,Any])->dict[str,bool]:
+    r=sanitize_result(result)
+    return {
+        "failure_injected":r.get("failure_injected") is True,
+        "partial_state_identified":r.get("partial_state_identified") is True,
+        "reconciliation_path_succeeds":r.get("reconciliation_succeeded") is True,
+    }
+
+
+def assert_committed_state_reconciliation(result:dict[str,Any])->dict[str,bool]:
+    r=sanitize_result(result)
+    return {
+        "failure_injected":r.get("failure_injected") is True,
+        "committed_state_identified":r.get("committed_state_identified") is True,
+        "compensation_or_reconciliation_succeeds":r.get("compensation_or_reconciliation_succeeded") is True,
+    }
+
+
+def assert_rollback_boundary(result:dict[str,Any])->dict[str,bool]:
+    r=sanitize_result(result)
+    return {
+        "failure_injected":r.get("failure_injected") is True,
+        "rollback_boundary_observed":r.get("rollback_boundary_observed") is True,
+        "remaining_state_matches_design":r.get("remaining_state_matches_design") is True,
+    }
+
+
+def assert_filter_skip(result:dict[str,Any])->dict[str,bool]:
+    r=sanitize_result(result)
+    return {
+        "nonmatching_event_tested":r.get("nonmatching_event_tested") is True,
+        "skip_observable":r.get("skip_observable") is True,
+        "missing_work_not_misreported_complete":r.get("missing_work_not_misreported_complete") is True,
+    }
+
+
+def assert_concurrency(result:dict[str,Any])->dict[str,bool]:
+    r=sanitize_result(result)
+    return {
+        "concurrent_test_executed":r.get("concurrent_test_executed") is True,
+        "final_state_deterministic":r.get("final_state_deterministic") is True,
+        "duplicate_side_effects_zero":r.get("duplicate_side_effect_count")==0,
+    }
+
+
+def assert_failed_work_replay(result:dict[str,Any])->dict[str,bool]:
+    r=sanitize_result(result)
+    return {
+        "failure_injected":r.get("failure_injected") is True,
+        "failed_work_locatable":r.get("failed_work_locatable") is True,
+        "resume_or_replay_succeeds":r.get("resume_or_replay_succeeded") is True,
+        "duplicate_side_effects_zero":r.get("duplicate_side_effect_count")==0,
+    }
+
+
+def assert_data_loss_recovery(result:dict[str,Any])->dict[str,bool]:
+    r=sanitize_result(result)
+    return {
+        "failure_injected":r.get("failure_injected") is True,
+        "failed_work_recoverable":r.get("failed_work_recoverable") is True,
+        "unintended_data_loss_zero":r.get("unintended_data_loss_count")==0,
+    }
+
+
+def assert_privacy_safe_observability(result:dict[str,Any])->dict[str,bool]:
+    r=sanitize_result(result)
+    return {
+        "failure_injected":r.get("failure_injected") is True,
+        "correlation_available":r.get("correlation_available") is True,
+        "affected_event_identifiable":r.get("affected_event_identifiable") is True,
+        "sensitive_payload_not_exposed":r.get("sensitive_payload_exposed") is False,
     }
