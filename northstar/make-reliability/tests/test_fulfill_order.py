@@ -43,6 +43,9 @@ class FulfillmentTests(unittest.TestCase):
             self.assertFalse((out / "blueprint.json").exists())
             manifest = json.loads((out / "pcflows-manifest.json").read_text())
             self.assertFalse(manifest["privacy"]["raw_blueprint_included"])
+            self.assertTrue(manifest["privacy"]["case_isolation_enabled"])
+            self.assertTrue(manifest["privacy"]["literal_customer_data_guard_enabled"])
+            self.assertTrue(manifest["case_scope_id"].startswith("pcfcase_"))
             report = (out / "pcflows-data-integrity-audit.md").read_text()
             packet = (out / "pcflows-ai-review-packet.json").read_text()
             self.assertNotIn(private_value, report)
@@ -73,6 +76,27 @@ class FulfillmentTests(unittest.TestCase):
                     out_dir=root / "out",
                 )
 
+    def test_personal_email_literal_hard_stops(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=pathlib.Path(tmp)
+            bp=root/"blueprint.json"
+            context=root/"context.json"
+            email="real.person"+"@"+"private-domain.be"
+            bp.write_text(json.dumps({
+                "flow":[{"id":1,"module":"crm:updateContact","mapper":{"email":email}}]
+            }),encoding="utf-8")
+            context.write_text(json.dumps({
+                "scenario_name":"Demo",
+                "business_goal":"Update CRM"
+            }),encoding="utf-8")
+            with self.assertRaises(fulfill_order.FulfillmentError):
+                fulfill_order.build_delivery(
+                    blueprint_path=bp,
+                    context_path=context,
+                    order_ref="cs_live_demo_123",
+                    out_dir=root/"out",
+                )
+
     def test_fulfillment_autoselects_lead_pack(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = pathlib.Path(tmp)
@@ -98,6 +122,7 @@ class FulfillmentTests(unittest.TestCase):
                 out_dir=out,
             )
             self.assertEqual(result["pack_selection"]["pack_id"], "lead_flow")
+            self.assertTrue(result["case_scope_id"].startswith("pcfcase_"))
             report = (out / "pcflows-data-integrity-audit.md").read_text()
             self.assertIn("Lead Flow Reliability Audit", report)
 
