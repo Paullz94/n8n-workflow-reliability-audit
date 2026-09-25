@@ -23,6 +23,8 @@ def required_test_ids(pack_id:str)->list[str]:
 def verify_pack_acceptance(
     pack_id:str,
     evidence_items:list[dict[str,Any]],
+    *,
+    trusted_connected_evidence:bool=False,
 )->dict[str,Any]:
     required=required_test_ids(pack_id)
     by_id={}
@@ -44,10 +46,22 @@ def verify_pack_acceptance(
             })
             continue
         source=str(evidence.get("source") or "").strip()
+        assertions=evidence.get("assertions")
+        assertions_ok=isinstance(assertions,dict) and bool(assertions) and all(value is True for value in assertions.values())
+        execution_ids=evidence.get("execution_ids")
+        connected_ok=(
+            trusted_connected_evidence is True
+            and source in TRUSTED_SOURCES
+            and evidence.get("provider")=="make"
+            and evidence.get("observed_by_pcflows") is True
+            and isinstance(execution_ids,list)
+            and bool([x for x in execution_ids if x])
+            and assertions_ok
+        )
         passed=evidence.get("passed") is True
         if not passed:
             status="failed"
-        elif source in TRUSTED_SOURCES:
+        elif connected_ok:
             status="passed_connected"
         elif source in SUPPORTING_SOURCES:
             status="passed_supporting"
