@@ -125,3 +125,18 @@ During the pause, Northstar may continue only useful EUR 0 work. Major safe tech
 - [x] Site source QA passes after package redesign.
 - [x] Inactive Stripe products/prices for EUR79 and EUR399 created; no public payment links yet.
 - [ ] Package-specific Payment Links configured/verified and checkout buttons activated only after Belgian enterprise/VAT gate.
+
+
+## Fix-verification readiness
+- [x] Every current deterministic rule is registered in a central rule list.
+- [x] Every rule has a verification specification.
+- [x] Every rule has a synthetic static before/after regression fixture.
+- [x] Re-scan language says statically cleared / remaining / new, not simply fixed.
+- [x] Customer claim guard blocks unsupported absolute success/fix claims in paid reports.
+- [x] Remediation proof report distinguishes static clearance, supporting evidence and independently verified fixed.
+- [x] Public verification page explains the proof levels before purchase.
+- [ ] Direct connected Make.com synthetic test path available.
+- [ ] Runtime-dependent issues independently verified end-to-end in that connected test path.
+- [ ] Done-for-you repair/fix package remains NOT launched until the two gates above pass.
+
+Commercial rule: the current packages sell audit, remediation guidance, verification plans and re-scan. Do not market a guaranteed live fix.
