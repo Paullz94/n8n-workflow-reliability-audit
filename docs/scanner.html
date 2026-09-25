@@ -133,8 +133,8 @@
   $('scan').addEventListener('click', () => {
     try {
       const parsed = JSON.parse(textarea.value);
-      const findings = NorthstarScanner.scanBlueprint(parsed);
-      current = {source:sourceName, summary:NorthstarScanner.summarize(findings), findings};
+      const findings = PCFlowsScanner.scanBlueprint(parsed);
+      current = {source:sourceName, summary:PCFlowsScanner.summarize(findings), findings};
       render(current);
       status.textContent='Scan complete. Processed in this browser.';
       results.scrollIntoView({behavior:'smooth',block:'start'});
@@ -190,7 +190,7 @@
   }
 
   $('downloadJson').addEventListener('click',()=>{if(current)download('pcflows-preflight.json','application/json',JSON.stringify(current,null,2)+'\n');});
-  $('downloadMd').addEventListener('click',()=>{if(current)download('pcflows-preflight.md','text/markdown',NorthstarScanner.renderMarkdown(current.source,current.findings));});
+  $('downloadMd').addEventListener('click',()=>{if(current)download('pcflows-preflight.md','text/markdown',PCFlowsScanner.renderMarkdown(current.source,current.findings));});
 })();
 </script>
 </body>
