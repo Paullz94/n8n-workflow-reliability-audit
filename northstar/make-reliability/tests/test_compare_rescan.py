@@ -15,6 +15,9 @@ class ReScanCompareTests(unittest.TestCase):
         result = compare_rescan.compare(before, after)
         rules = {x["rule"] for x in result["resolved"]}
         self.assertIn("write-without-error-handler", rules)
+        hit=next(x for x in result["resolved"] if x["rule"]=="write-without-error-handler")
+        self.assertEqual(hit["verification"]["status"],"statically_cleared_runtime_pending")
+        self.assertFalse(hit["verification"]["verified_fixed"])
 
     def test_new_finding_is_reported(self):
         before = {"flow": [{"id": 1, "module": "json:ParseJSON", "mapper": {}}]}
@@ -51,7 +54,7 @@ class ReScanCompareTests(unittest.TestCase):
             }]},
         )
         md = compare_rescan.render_markdown(result)
-        self.assertIn("does not prove", md)
+        self.assertIn("must not call them fixed", md)
 
     def test_module_reorder_does_not_create_false_new_and_resolved(self):
         before = {"flow": [
