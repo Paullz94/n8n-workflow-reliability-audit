@@ -151,7 +151,7 @@ Commercial rule: the current packages sell audit, remediation guidance, verifica
 - [x] Make delegated-access/service-identity model documented.
 - [x] Internal EUR299 one-issue Verified Repair price hypothesis benchmarked; not public.
 - [ ] Dedicated PCFlows Make service identity exists.
-- [ ] Secure Make API/MCP authorization connected without emailing credentials.
+- [ ] Official Make ChatGPT plugin/MCP server or restricted MCP toolbox connected without emailing credentials.
 - [ ] Safe sandbox/test-team execution exercised against real Make.
 - [ ] Scenario backup/retrieval before write verified.
 - [ ] Safe update/deployment flow verified.
@@ -169,3 +169,10 @@ The Northstar validation command now runs:
 - browser scanner regression when Node is available.
 
 The latest branch contains substantially more tests than the last fully executed 31-test checkpoint. A direct local clone/run could not be executed from the current ChatGPT container because outbound DNS to GitHub is unavailable. Do **not** claim that the complete current suite has passed until it is executed by an environment that has the branch checkout. Static/source-level guards and individual connector-side checks were still performed during this hardening round.
+
+
+### Make MCP integration update
+- [x] Official Make ChatGPT plugin/MCP availability verified against current Make documentation.
+- [x] MCP toolbox identified as preferred least-scope test-tool path.
+- [x] Normal ChatGPT connection path exists; Work/Codex is not required for this prerequisite.
+- [ ] Make MCP/plugin actually connected to this ChatGPT environment.
