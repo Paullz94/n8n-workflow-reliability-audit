@@ -36,8 +36,14 @@ Escalate only:
 - third-party account authorization/KYC/CAPTCHA;
 - a request that materially changes the contract/product beyond published scope.
 
-## Required one-time prerequisite
+## Support mailbox state — connected
 
-The Gmail connector currently available to ChatGPT is not connected to the public PCFlows support mailbox.
+The public PCFlows support mailbox **PCMotionstudios@gmail.com** is connected and verified through the Gmail connector.
 
-For customer support to be truly autonomous, Paul must once connect/authorize **PCMotionstudios@gmail.com** (or change the public support address to a mailbox already connected). After that, routine inbox work can be handled by the operating policy without daily owner involvement.
+Operational labels created:
+- `PCFlows/Customer`
+- `PCFlows/Order`
+- `PCFlows/Needs Review`
+- `PCFlows/Closed`
+
+An hourly condition-watch automation (`PCFlows Inbox Operator`) is enabled to process new routine PCFlows customer/support/order messages autonomously. During the registration pause it must not solicit payment or claim checkout is open. Owner escalation remains limited to the explicit exception classes above.
