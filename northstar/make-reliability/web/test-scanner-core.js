@@ -23,6 +23,16 @@ assert.ok(secretFinding);
 assert.ok(!secretFinding.message.includes('abcdefghijklmnopqrstuvwxyz'));
 const makeHook = scanner.scanBlueprint({ flow: [{ id: 1, module: 'http:ActionSendData', mapper: { url: 'https://hook.eu1.make.com/abcdefghijklmnopqrstuvwxyz123456' } }] });
 assert.ok(makeHook.some(f => f.rule === 'possible-secret-in-blueprint'));
+for (const providerSecret of [
+  'sk_' + 'live_' + '1234567890abcdefghijklmnop',
+  'ghp_' + '1234567890abcdefghijklmnopqrst',
+  'AKIA' + '1234567890ABCDEF',
+  'AIza' + '1234567890abcdefghijklmnopqrstuvw',
+  'xoxb-' + '1234567890-' + 'abcdefghijklmno'
+]) {
+  const hits = scanner.scanBlueprint({ flow: [{ id: 1, module: 'http:ActionSendData', mapper: { value: providerSecret } }] });
+  assert.ok(hits.some(f => f.rule === 'possible-secret-in-blueprint'), providerSecret.slice(0, 8));
+}
 
 const index = fs.readFileSync('./index.html', 'utf8');
 assert.ok(index.includes('Local-only core scan'));
