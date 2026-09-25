@@ -67,6 +67,7 @@ python report_builder.py \
 
 The builder:
 - preserves severity ordering;
+- links higher-consequence findings to official Make documentation where available;
 - categorizes work into prevent / detect / recover;
 - adds business-impact guidance;
 - adds deterministic remediation and verification steps;
@@ -77,6 +78,17 @@ Synthetic example:
 - `examples/synthetic-order-intake.json`
 - `examples/synthetic-context.json`
 - `examples/synthetic-paid-audit.md`
+
+Paid fulfillment can be packaged with:
+
+```bash
+python fulfill_order.py customer-blueprint.json \
+  --context customer-intake.json \
+  --order-ref cs_... \
+  --out-dir delivery/cs_...
+```
+
+The fulfillment command hard-stops on a possible secret-like finding and deliberately excludes the raw customer blueprint from the delivery ZIP. See `FULFILLMENT_RUNBOOK.md` and `RULE_EVIDENCE.md`.
 
 ## Pilot price hypotheses
 
@@ -155,17 +167,13 @@ The browser test is skipped only when Node.js is unavailable.
 
 ## Checkout status
 
-No payment/KYC account has been activated by Northstar.
+Stripe is connected and live-capable. The EUR 149 PCFlows product, one-time price and Payment Link exist.
 
-Current direct-customer candidates:
-1. Stripe Payment Links;
-2. Payhip;
-3. Ko-fi;
-4. Gumroad.
+The live Payment Link is deliberately **inactive** while the Belgian enterprise-number/VAT setup is incomplete. The public site therefore exposes no active paid checkout CTA.
 
-Lemon Squeezy is rejected for the current service pilot because its published policy excludes services.
+Prepared checkout behavior includes a required non-sensitive scenario name, a post-payment Checkout Session reference, and a bounded customer file-delivery handoff.
 
-Marketplace-originated leads must use the payment path required by that marketplace; direct checkout must never be used to circumvent marketplace fees/rules.
+Marketplace-originated leads must always use the payment path required by that marketplace; direct Stripe checkout must never be used to circumvent marketplace fees or rules.
 
 ## Autonomy requirement
 
