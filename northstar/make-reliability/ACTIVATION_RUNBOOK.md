@@ -129,3 +129,18 @@ Planned mapping:
 - EUR399 -> Portfolio / Release QA, max 3 scenarios.
 
 Every checkout must propagate a stable package identifier in Stripe metadata so autonomous fulfillment cannot confuse scope/price.
+
+
+## Prepared Stripe package objects
+
+See `STRIPE_PACKAGE_CATALOG.md`.
+
+EUR79 and EUR399 products/prices already exist in live Stripe but are inactive. The existing EUR149 Payment Link remains inactive.
+
+At launch:
+1. re-read all three products/prices from Stripe;
+2. activate only the intended price/product objects;
+3. create/verify package-specific Payment Links;
+4. ensure each path propagates the exact `pcflows_package` identifier;
+5. keep the EUR149 existing link inactive until its final launch test passes;
+6. only then expose checkout URLs on the site.
