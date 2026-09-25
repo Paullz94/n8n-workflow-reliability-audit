@@ -1,73 +1,111 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Sample Data Integrity Audit — PCFlows</title>
-<meta name="description" content="See a synthetic example of the evidence, prioritization and verification steps in a PCFlows Make.com Data Integrity Audit.">
-<meta name="theme-color" content="#081019"><link rel="icon" href="favicon.svg" type="image/svg+xml">
-<style>
-:root{--bg:#081019;--panel:#0d1722;--line:#223244;--text:#f5f7fa;--muted:#9caabd;--accent:#78e6c2;--accent2:#7bb8ff;--warn:#f4c96b;--danger:#ff8b81;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color-scheme:dark}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 75% -10%,rgba(123,184,255,.10),transparent 30%),var(--bg);color:var(--text)}a{color:var(--accent2)}
-main{max-width:960px;margin:auto;padding:42px 20px 80px}h1{font-size:clamp(42px,7vw,64px);line-height:1;letter-spacing:-.045em;margin:14px 0 18px}h2{margin-top:42px;letter-spacing:-.025em}p,li{color:#afbdcb;line-height:1.7}.eyebrow{color:var(--accent);font-size:12px;font-weight:850;letter-spacing:.12em;text-transform:uppercase}
-.summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:26px 0}.metric,.finding,.card{border:1px solid var(--line);background:var(--panel);border-radius:18px;padding:19px}.metric b{display:block;font-size:30px}.metric span{color:#8190a0;text-transform:uppercase;font-size:10px;letter-spacing:.08em}
-.finding{margin:13px 0}.finding h3{margin:0 0 13px;font-size:18px}.finding p{margin:9px 0}.tag{display:inline-block;border:1px solid #2d4154;border-radius:999px;padding:6px 9px;font-size:11px;color:#afbdcb;margin-right:5px}
-.layout{display:grid;grid-template-columns:240px 1fr;gap:22px}.aside{position:sticky;top:20px;height:max-content}.aside a{display:block;padding:7px 0;text-decoration:none;color:#8fa0b2;font-size:13px}.aside a:hover{color:var(--text)}.callout{border-left:3px solid var(--accent);padding:14px 16px;background:rgba(120,230,194,.045);border-radius:0 12px 12px 0}.button{display:inline-block;padding:12px 16px;border-radius:10px;background:var(--text);color:#081019;text-decoration:none;font-weight:800}
-@media(max-width:760px){.summary{grid-template-columns:repeat(2,1fr)}.layout{grid-template-columns:1fr}.aside{position:static}.aside nav{display:flex;gap:12px;flex-wrap:wrap}.aside a{display:inline-block}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Sample Data Integrity Audit — PCFlows</title>
+  <meta name="description" content="Synthetic example of a PCFlows Make.com reliability and data-integrity audit.">
+  <meta name="theme-color" content="#050505">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="site.css">
 </head>
-<body><main>
-<p><a href="./">← PCFlows</a> · <a href="method.html">Method</a> · <a href="scanner.html">Free preflight</a></p>
-<div class="eyebrow">Synthetic example · no customer data</div>
-<h1>Sample Make.com Data Integrity Audit</h1>
-<p>This example shows the structure of a paid PCFlows deliverable. The scenario, findings and business context are synthetic. The report is not a claim about any real customer system.</p>
-
-<div class="summary">
-  <div class="metric"><b>0</b><span>Critical</span></div>
-  <div class="metric"><b>2</b><span>High</span></div>
-  <div class="metric"><b>5</b><span>Medium</span></div>
-  <div class="metric"><b>1</b><span>Low</span></div>
-</div>
-
-<div class="callout"><strong>Executive view:</strong><p style="margin-bottom:0">The scenario writes order state into multiple systems. The highest-priority work is to make downstream failures recoverable and to prevent retries/concurrent runs from creating duplicate or conflicting state.</p></div>
-
-<div class="layout">
-  <aside class="aside card"><div class="eyebrow">In this sample</div><nav>
-    <a href="#recover">Recovery gaps</a>
-    <a href="#concurrency">Concurrency</a>
-    <a href="#retry">Retry / idempotency</a>
-    <a href="#silent">Silent skip</a>
-    <a href="#verify">Verification</a>
-  </nav></aside>
-
-  <div>
-    <h2 id="recover">Prioritized remediation</h2>
-
-    <article class="finding"><span class="tag">HIGH</span><span class="tag">RECOVER</span><h3>1. Write without explicit recovery route</h3><p><strong>Evidence:</strong> A write-like HTTP module has no exported error route.</p><p><strong>Why it matters:</strong> A failed external write may stop or diverge without an explicit recovery path.</p><p><strong>Recommended next step:</strong> Define transient/permanent failure behavior: retry, quarantine, alert, compensate, or stop deliberately.</p><p><strong>Verification:</strong> Inject a safe synthetic downstream failure and confirm the chosen recovery path is observable and bounded.</p></article>
-
-    <article class="finding"><span class="tag">HIGH</span><span class="tag">RECOVER</span><h3>2. Ledger write without explicit recovery route</h3><p><strong>Evidence:</strong> A spreadsheet write has no exported error route.</p><p><strong>Why it matters:</strong> A missing ledger write can leave systems disagreeing about the same order.</p><p><strong>Recommended next step:</strong> Add explicit failure/recovery handling and a reconciliation signal.</p><p><strong>Verification:</strong> Force a synthetic write failure and verify the missing side effect is visible and recoverable.</p></article>
-
-    <article class="finding" id="concurrency"><span class="tag">MEDIUM</span><span class="tag">PREVENT</span><h3>3. Concurrent execution needs review</h3><p><strong>Evidence:</strong> The scenario allows overlapping runs while performing external writes.</p><p><strong>Why it matters:</strong> Two events for the same business key can race or arrive out of order.</p><p><strong>Recommended next step:</strong> Decide whether per-key serialization, optimistic checks, or idempotent writes are required.</p><p><strong>Verification:</strong> Submit two synthetic events for the same key concurrently and verify the final state is deterministic.</p></article>
-
-    <article class="finding" id="retry"><span class="tag">MEDIUM</span><span class="tag">PREVENT</span><h3>4. Automatic retry needs idempotency protection</h3><p><strong>Evidence:</strong> A write-like module has automatic retry enabled.</p><p><strong>Why it matters:</strong> A retry can repeat an external side effect if the first attempt committed before the failure became visible.</p><p><strong>Recommended next step:</strong> Add a stable business key, upsert/deduplication guard or endpoint idempotency mechanism.</p><p><strong>Verification:</strong> Replay the same synthetic business event twice and confirm there is only one intended side effect.</p></article>
-
-    <article class="finding" id="silent"><span class="tag">MEDIUM</span><span class="tag">DETECT</span><h3>5. Filtered write can become a silent business skip</h3><p><strong>Evidence:</strong> A filter gates a write-like module.</p><p><strong>Why it matters:</strong> A filtered bundle can look like a successful scenario while the expected business action never happened.</p><p><strong>Recommended next step:</strong> Count, log or explicitly route unexpected non-matches.</p><p><strong>Verification:</strong> Feed a non-matching synthetic event and verify operators can distinguish an intentional skip from missing work.</p></article>
-
-    <h2 id="verify">Verification checklist</h2>
-    <div class="card"><ul>
-      <li>Use only sanitized or synthetic test events.</li>
-      <li>Exercise each affected write path.</li>
-      <li>Replay duplicate business events where idempotency matters.</li>
-      <li>Exercise transient and permanent downstream failures separately.</li>
-      <li>Confirm skips, retries and recovery events are observable without exposing sensitive payloads.</li>
-      <li>Re-export and use the included re-scan after remediation.</li>
-    </ul></div>
-
-    <h2>What happens on the included re-scan?</h2>
-    <p>The revised blueprint is compared with the original static findings. The result separates <strong>resolved</strong>, <strong>remaining</strong> and <strong>new</strong> findings. “Resolved” means the static rule no longer matches; it still needs runtime verification.</p>
-
-    <p><a class="button" href="scanner.html">Run the free preflight first →</a></p>
+<body>
+<header class="site-header">
+  <div class="wrap site-nav">
+    <a class="wordmark" href="./">PCFlows</a>
+    <nav class="nav-links">
+      <a href="method.html">Method</a>
+      <a href="guides/make-error-handlers-reliability.html">Guide</a>
+      <a class="nav-cta" href="scanner.html">Free preflight</a>
+    </nav>
   </div>
-</div>
+</header>
 
-<p><small style="color:#7f8fa0">Static analysis does not guarantee runtime correctness or completeness. PCFlows is independent and is not affiliated with Make.com.</small></p>
-</main></body></html>
+<main>
+  <div class="wrap article">
+    <div class="article-top">
+      <div class="kicker">Synthetic example · no customer data</div>
+      <h1>Sample Data Integrity Audit</h1>
+      <p class="lead">A realistic preview of the paid deliverable: evidence, business impact, remediation and verification. The scenario and findings below are synthetic.</p>
+    </div>
+
+    <div class="summary-grid">
+      <div class="metric"><b>0</b><span>Critical</span></div>
+      <div class="metric"><b>2</b><span>High</span></div>
+      <div class="metric"><b>5</b><span>Medium</span></div>
+      <div class="metric"><b>1</b><span>Low</span></div>
+      <div class="metric"><b>8</b><span>Total</span></div>
+    </div>
+
+    <div class="notice">
+      <strong>Executive view.</strong> The scenario writes order state into multiple systems. The highest-priority work is to make downstream failures recoverable and to prevent retries or concurrent runs from creating duplicate or conflicting state.
+    </div>
+
+    <h2>Prioritized remediation</h2>
+
+    <article class="finding" data-severity="high">
+      <h3>HIGH · RECOVER · write-without-error-handler</h3>
+      <p><strong>Evidence:</strong> A write-like HTTP module has no exported error route.</p>
+      <p><strong>Why it matters:</strong> A failed external write may stop or diverge without an explicit recovery path.</p>
+      <p><strong>Recommended next step:</strong> Define transient/permanent failure behavior: retry, quarantine, alert, compensate, or stop deliberately.</p>
+      <p><strong>Verification:</strong> Inject a safe synthetic downstream failure and confirm the chosen recovery path is observable and bounded.</p>
+    </article>
+
+    <article class="finding" data-severity="high">
+      <h3>HIGH · RECOVER · write-without-error-handler</h3>
+      <p><strong>Evidence:</strong> A spreadsheet write has no exported error route.</p>
+      <p><strong>Why it matters:</strong> A missing ledger write can leave systems disagreeing about the same order.</p>
+      <p><strong>Recommended next step:</strong> Add explicit failure/recovery handling and a reconciliation signal.</p>
+      <p><strong>Verification:</strong> Force a synthetic write failure and verify the missing side effect is visible and recoverable.</p>
+    </article>
+
+    <article class="finding" data-severity="medium">
+      <h3>MEDIUM · PREVENT · concurrency-review</h3>
+      <p><strong>Evidence:</strong> The scenario allows overlapping runs while performing external writes.</p>
+      <p><strong>Why it matters:</strong> Two events for the same business key can race or arrive out of order.</p>
+      <p><strong>Recommended next step:</strong> Decide whether per-key serialization, optimistic checks, or idempotent writes are required.</p>
+      <p><strong>Verification:</strong> Submit two synthetic events for the same key concurrently and verify the final state is deterministic.</p>
+    </article>
+
+    <article class="finding" data-severity="medium">
+      <h3>MEDIUM · PREVENT · retrying-write-idempotency-review</h3>
+      <p><strong>Evidence:</strong> A write-like module has automatic retry enabled.</p>
+      <p><strong>Why it matters:</strong> A retry can repeat an external side effect if the first attempt committed before the failure became visible.</p>
+      <p><strong>Recommended next step:</strong> Add a stable business key, upsert/deduplication guard or endpoint idempotency mechanism.</p>
+      <p><strong>Verification:</strong> Replay the same synthetic business event twice and confirm there is only one intended side effect.</p>
+    </article>
+
+    <article class="finding" data-severity="medium">
+      <h3>MEDIUM · DETECT · filtered-write-silent-skip-review</h3>
+      <p><strong>Evidence:</strong> A filter gates a write-like module.</p>
+      <p><strong>Why it matters:</strong> A filtered bundle can look like a successful scenario while the expected business action never happened.</p>
+      <p><strong>Recommended next step:</strong> Count, log or explicitly route unexpected non-matches.</p>
+      <p><strong>Verification:</strong> Feed a non-matching synthetic event and verify operators can distinguish an intentional skip from missing work.</p>
+    </article>
+
+    <h2>Verification checklist</h2>
+    <div class="card">
+      <ul class="clean-list">
+        <li>Use only sanitized or synthetic test events.</li>
+        <li>Exercise each affected write path.</li>
+        <li>Replay duplicate business events where idempotency matters.</li>
+        <li>Exercise transient and permanent downstream failures separately.</li>
+        <li>Confirm skips, retries and recovery events are observable without exposing sensitive payloads.</li>
+        <li>Re-export and use the included re-scan after remediation.</li>
+      </ul>
+    </div>
+
+    <h2>What the included re-scan adds</h2>
+    <p>The revised blueprint is compared with the original static findings. The result separates <strong>resolved</strong>, <strong>remaining</strong> and <strong>new</strong> findings. “Resolved” means the static rule no longer matches; runtime verification is still required.</p>
+
+    <div class="actions">
+      <a class="button primary" href="scanner.html">Run free preflight</a>
+      <a class="button secondary" href="method.html">Read the method</a>
+    </div>
+
+    <hr>
+    <p class="small">Static analysis does not guarantee runtime correctness or completeness. PCFlows is independent and is not affiliated with Make.com.</p>
+  </div>
+</main>
+</body>
+</html>
