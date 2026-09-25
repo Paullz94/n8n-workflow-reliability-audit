@@ -239,10 +239,6 @@ Implemented for this directive:
 - `build_pack_report.py` — buyer-specific report/acceptance-test renderer;
 - synthetic fixtures/contexts for all three initial demand packs.
 
-Current one-time integration blocker for autonomous customer replies:
-- the connected Gmail account is not the public PCFlows support mailbox;
-- connect/authorize `PCMotionstudios@gmail.com` (or intentionally change the public support address to an already connected mailbox).
-
 Channel connector research:
 - no direct Upwork or Contra action connector was returned in current plugin discovery;
 - Clay is available for prospect discovery/engagement and has been surfaced as an optional connection;
@@ -530,3 +526,62 @@ Latest isolated validation after these changes:
 - package consistency PASS;
 - browser scanner regression/privacy PASS;
 - overall PCFlows/Northstar validation PASS.
+
+
+## Takeover checkpoint — 2026-09-26
+
+### Verified operating state
+
+- Product branch remained isolated under `northstar/`; site branch remained isolated under `docs/`.
+- Draft PR #2 remains draft and unmerged.
+- Public PCFlows Pages deployment is green on site commit `2b5103da0a8f1592e52e60bbba33c3b8db06574e`.
+- Latest live Stripe reconciliation check found **0 PaymentIntents**; verified gross external revenue remains **EUR 0**.
+- EUR149 Payment Link `plink_1UJYXyLEUPyOUtb0elSom4yX` remains **inactive**.
+- EUR79 and EUR399 products/prices remain **inactive** and their Payment Links remain uncreated.
+- PCFlows Gmail contains no actionable customer/order traffic and no Xerius/KBO enterprise-number confirmation in the connected mailboxes at this checkpoint.
+- One redundant duplicate daily buyer-demand automation was disabled; the richer daily buyer-demand scan remains enabled.
+- Hourly PCFlows Inbox Operator, Clay agency research, and post-launch weekly guide tasks remain enabled within their existing gates.
+
+### Fresh commercial evidence
+
+The strongest newly re-checked launch-day buyer fit is an Upwork Make.com **QA & Troubleshooting** engagement asking for review/testing of existing Make scenarios, mappings, webhooks, APIs and reliability issues. This is closer to the currently sellable audit/QA offer than generic implementation work.
+
+Updated:
+- `prospect_queue.json`;
+- `ACQUISITION_QUEUE_2026-09-25.md`;
+- `FIRST_WAVE_PROPOSALS.md`.
+
+The proposal draft is deliberately truthful:
+- no customer testimonials/case studies claimed;
+- no Make certification claimed;
+- no production-write access implied;
+- runtime-dependent issues are not called fixed from static evidence.
+
+A separate paid qualification post strongly validates demand for idempotency/retry/logging/failure-alert outcomes, but it requires implementation work and therefore stays research-only unless the buyer explicitly accepts a bounded QA milestone.
+
+Clay research was refreshed for small/mid-sized Make/n8n/Zapier/CRM implementation firms. Working company research stays in Clay; no contact enrichment or cold outreach was performed because the separate direct-marketing gate remains closed.
+
+### Effective-date launch gate
+
+Official Belgian guidance treats revenue-generating service activity as economic activity and requires enterprise/VAT startup formalities around the commencement of that activity. The current official planned activity start is **2026-10-01**.
+
+Therefore PCFlows now has an explicit extra launch condition:
+- receiving an enterprise number before 2026-10-01 is **not enough** to open paid checkout;
+- paid checkout stays closed until the official activity start date is effective **and** enterprise/VAT/public-identity/checkout gates are complete.
+
+This is now encoded in:
+- `PILOT_LAUNCH_GATES.md`;
+- `ACTIVATION_RUNBOOK.md`;
+- `REGISTRATION_READINESS.md`.
+
+### Current highest-impact blocker
+
+The next material step is still non-delegable registration state:
+1. enterprise number / KBO confirmation;
+2. effective activity start date reached;
+3. VAT/e604 treatment confirmed;
+4. official business identity copied to site + Stripe;
+5. safe owner/test checkout validation excluded from revenue;
+6. activate package-specific checkout and begin the small platform-native acquisition wave.
+
+Until those conditions change, do not create artificial features, do not open payment paths, do not send cold email, and do not spend owner capital.
