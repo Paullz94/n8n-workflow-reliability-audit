@@ -61,6 +61,16 @@ h3{font-size:18px;letter-spacing:-.02em;margin:0 0 8px}
 .rule-row .label{font:700 11px ui-monospace,SFMono-Regular,Menlo,monospace;text-transform:uppercase;letter-spacing:.06em;color:var(--muted-2)}
 .rule-row .value{color:#c8c8c2;line-height:1.6;font-size:14px}
 .offer-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.package-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.package-card{border:1px solid var(--line);border-radius:14px;padding:22px;background:var(--surface);display:flex;flex-direction:column}
+.package-card.featured{border-color:#3a3a3a;background:#0e0e0e}
+.package-card .price{font-size:34px;margin:12px 0 14px}
+.package-card .clean-list{font-size:13px;flex:1}
+.chooser{border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:22px}
+.chooser-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.recommendation{margin-top:18px;border-top:1px solid var(--line);padding-top:18px}
+.specialist-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.specialist{border:1px solid var(--line);border-radius:14px;padding:22px;background:var(--surface)}
 .offer{border:1px solid var(--line);border-radius:14px;padding:28px;background:var(--surface)}
 .offer.featured{border-color:#343434;background:#0d0d0d}
 .price{font-size:42px;font-weight:850;letter-spacing:-.05em;margin:14px 0 18px}
@@ -109,6 +119,9 @@ hr{border:0;border-top:1px solid var(--line);margin:36px 0}
   .hero-grid{grid-template-columns:1fr;gap:42px}
   .grid-4,.grid-3{grid-template-columns:repeat(2,1fr)}
   .offer-grid,.grid-2{grid-template-columns:1fr}
+  .package-grid{grid-template-columns:repeat(2,1fr)}
+  .specialist-grid{grid-template-columns:1fr}
+  .chooser-grid{grid-template-columns:1fr}
 }
 @media(max-width:640px){
   .wrap{width:min(var(--max),calc(100% - 24px))}
@@ -116,7 +129,7 @@ hr{border:0;border-top:1px solid var(--line);margin:36px 0}
   .hero{padding:68px 0 54px}
   h1{font-size:46px}
   .section{padding:58px 0}
-  .grid-4,.grid-3{grid-template-columns:1fr}
+  .grid-4,.grid-3,.package-grid{grid-template-columns:1fr}
   .rule-row{grid-template-columns:1fr;gap:7px}
   .summary-grid{grid-template-columns:repeat(2,1fr)}
   .status{width:100%;margin-left:0}
