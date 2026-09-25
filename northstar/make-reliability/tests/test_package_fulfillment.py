@@ -47,6 +47,9 @@ class PackageFulfillmentTests(unittest.TestCase):
                 self.assertIn("pcflows-focused-risk-check.md",names)
             manifest=json.loads((out/"pcflows-manifest.json").read_text())
             self.assertFalse(manifest["privacy"]["included_rescan"])
+            self.assertTrue(manifest["privacy"]["case_isolation_enabled"])
+            self.assertTrue(manifest["privacy"]["literal_customer_data_guard_enabled"])
+            self.assertTrue(r["case_scope_id"].startswith("pcfcase_"))
 
     def test_wrong_amount_cannot_unlock_portfolio(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -69,6 +72,7 @@ class PackageFulfillmentTests(unittest.TestCase):
                 out_dir=out
             )
             self.assertEqual(r["scenario_count"],2)
+            self.assertTrue(r["case_scope_id"].startswith("pcfcase_"))
             with zipfile.ZipFile(r["zip"]) as z:
                 names=set(z.namelist())
                 self.assertFalse(any("ai-review" in x for x in names))
