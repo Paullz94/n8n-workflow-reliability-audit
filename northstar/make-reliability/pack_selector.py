@@ -23,6 +23,10 @@ KEYWORDS = {
         "ai", "llm", "openai", "claude", "gpt", "classification", "classify",
         "extract", "extraction", "prompt", "model", "human approval", "confidence"
     },
+    "client_onboarding": {
+        "onboarding", "onboard", "welcome", "kickoff", "project setup", "folder",
+        "provisioning", "client setup", "new customer", "implementation kickoff"
+    },
 }
 
 
