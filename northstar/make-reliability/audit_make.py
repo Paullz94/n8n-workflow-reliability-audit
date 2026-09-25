@@ -19,6 +19,8 @@ SECRET_PATTERNS = [
     re.compile(r"\bBearer\s+[A-Za-z0-9._~+/=-]{16,}", re.I),
     re.compile(r"\bsk-[A-Za-z0-9_-]{16,}\b"),
     re.compile(r"https://hooks\.slack\.com/services/[A-Za-z0-9/_-]+", re.I),
+    re.compile(r"https://hook(?:\.[a-z0-9-]+)?\.make\.com/[A-Za-z0-9_-]{12,}", re.I),
+    re.compile(r"https://hook\.integromat\.com/[A-Za-z0-9_-]{12,}", re.I),
     re.compile(r"(?:api[_-]?key|secret|token)\s*[:=]\s*[A-Za-z0-9._~+/=-]{12,}", re.I),
 ]
 HTTP_WRITE_METHODS = {"POST", "PUT", "PATCH", "DELETE"}
