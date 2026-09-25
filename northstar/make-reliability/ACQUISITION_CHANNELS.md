@@ -28,15 +28,16 @@ This is a portfolio, not a blast list. Each channel has a separate role and must
 
 All candidates below can be evaluated without owner capital. Account creation, KYC, payout/banking or tax attestations remain non-delegable gates when required.
 
-- **Lemon Squeezy** — EUR/USD-compatible ecommerce, no monthly ecommerce charge; public pricing states 5% + USD 0.50 base transaction fee and Merchant-of-Record/tax handling.
-- **Payhip Free** — USD 0/month + 5% platform transaction fee, with payment processor fees on top.
-- **Ko-fi** — USD 0/month, 5% on shop/commission sales plus normal processor fees.
-- **Gumroad** — no monthly charge, but materially higher direct-sale fees; keep as fallback/marketplace-discovery experiment rather than first checkout.
+- **Stripe Payment Links** — current first choice for a service audit. Stripe's Belgian pricing is pay-as-you-go with no setup/monthly fee on standard pricing; Payment Links is included. Public Belgian pricing lists 1.5% + EUR 0.25 for standard EEA cards. Requires Paul's identity/business/payout setup when we actually go live.
+- **Payhip Free** — USD 0/month + 5% Payhip transaction fee, plus payment-processor fees. Payhip explicitly supports coaching/services as well as digital products.
+- **Ko-fi Commissions** — USD 0/month; 5% service fee for commissions plus normal processor fees. Ko-fi explicitly permits custom work and services.
+- **Gumroad** — no monthly charge but materially higher direct-sale fees; keep as a fallback rather than first checkout.
+- **Lemon Squeezy — rejected for this service model.** Its prohibited-products policy explicitly bans services, including consulting, design, marketing and web development. It remains unsuitable unless Northstar later becomes a genuine self-serve software/digital product with little/no individual service fulfilment.
 
-Provisional checkout priority for later KYC validation:
-1. Lemon Squeezy;
+Provisional checkout priority for the current audit-service MVP:
+1. Stripe Payment Links;
 2. Payhip;
 3. Ko-fi;
 4. Gumroad.
 
-This is not a request to open accounts yet.
+No payment/KYC account should be opened or activated autonomously. That becomes a Paul gate only once a live willingness-to-pay test is ready.
