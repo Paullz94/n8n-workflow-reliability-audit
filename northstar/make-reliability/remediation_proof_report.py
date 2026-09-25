@@ -23,6 +23,8 @@ def build_proof(
     before:dict[str,Any],
     after:dict[str,Any],
     evidence_items:list[dict[str,Any]]|None=None,
+    *,
+    trusted_connected_evidence:bool=False,
 )->dict[str,Any]:
     comparison=compare_rescan.compare(before,after)
     evidence_map={}
@@ -38,6 +40,7 @@ def build_proof(
             rule=row["rule"],
             still_present_after=False,
             evidence=evidence,
+            trusted_connected_evidence=trusted_connected_evidence,
         )
         statuses.append({
             "rule":row["rule"],
@@ -142,7 +145,8 @@ def main()->int:
             if not isinstance(raw,list):
                 raise ProofReportError("evidence root must be an array")
             evidence=raw
-        result=build_proof(before,after,evidence)
+        # Evidence loaded from a user-supplied JSON file is never allowed to self-certify as connected.
+        result=build_proof(before,after,evidence,trusted_connected_evidence=False)
         report=render_proof(result)
     except (OSError,json.JSONDecodeError,ProofReportError,compare_rescan.CompareError,fix_verification.VerificationError) as exc:
         print(json.dumps({"error":str(exc)}))
