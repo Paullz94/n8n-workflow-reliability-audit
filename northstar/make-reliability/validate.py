@@ -17,7 +17,13 @@ def run(cmd: list[str], cwd: Path = ROOT) -> int:
 
 
 def main() -> int:
+    if run([sys.executable, "-m", "compileall", "-q", "."]):
+        return 1
+
     if run([sys.executable, "-m", "unittest", "discover", "-s", "tests", "-v"]):
+        return 1
+
+    if run([sys.executable, "package_consistency.py"]):
         return 1
 
     node = shutil.which("node")
@@ -28,7 +34,7 @@ def main() -> int:
     else:
         print("SKIP browser scanner test: node not available")
 
-    print("Northstar validation: PASS")
+    print("PCFlows/Northstar validation: PASS")
     return 0
 
 
