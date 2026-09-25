@@ -254,3 +254,29 @@ Scheduled autonomous loops:
 - weekly owned-site PCFlows educational guide task now active, but it will publish only after the registration/VAT launch gate is complete.
 
 No checkout activation, customer outreach, paid posting or owner-capital spend is permitted before the launch gate.
+
+
+## Demand-pack + autonomy build completion
+
+Built in this round:
+- `vertical_packs.py` with Lead Flow, Invoice & Payment Sync and AI Workflow Guardrails packs;
+- synthetic blueprint/context fixtures for all three;
+- `build_pack_report.py` to append pack-specific acceptance tests/context questions to the shared deterministic audit;
+- `pack_selector.py` to route safe business context automatically or fall back to the generic audit instead of guessing;
+- fulfillment now auto-selects the appropriate pack and records that decision in the delivery manifest;
+- `autonomous_lifecycle.py` for ownerless routine lead/payment/intake/delivery/refund state transitions;
+- `support_router.py` for routine customer questions;
+- `refund_policy.py` for deterministic full-refund cases and exception boundaries;
+- `content_queue.json` for restrained post-launch social content;
+- weekly owned-site guide automation after the legal launch gate;
+- daily Make.com opportunity research remains active.
+
+Autonomy target is now explicit: routine operations must proceed without Paul after one-time prerequisites.
+
+Remaining one-time prerequisites for truly autonomous external operation:
+1. Belgian enterprise/VAT completion.
+2. Connect/authorize the public PCFlows support mailbox for Gmail actions.
+3. Connect a social/prospecting channel where desired (Clay is available; Metricool is available for social publishing).
+4. Upwork/Contra need either a supported direct connector or an authorized cloud-browser/Work workflow because no direct action connector was found in current plugin discovery.
+
+Do not work around missing connectors with scraping, CAPTCHA bypass or rule-violating automation.
