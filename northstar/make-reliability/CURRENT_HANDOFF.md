@@ -381,3 +381,26 @@ Technical support now exists for:
 The website now includes a public Services & Pricing page with a local service chooser. Paid checkout remains disabled until the Belgian registration/VAT launch gate is complete.
 
 Current site-source QA after the package redesign: 15 checked public files, 0 structural/link/JS/checkout-url/image/SVG issues found.
+
+
+## Remediation proof / customer-satisfaction hardening — 2026-09-25
+
+PCFlows now uses a strict proof ladder:
+- detected;
+- statically cleared;
+- evidence-supported;
+- independently verified fixed.
+
+For runtime-dependent findings, disappearing from a revised blueprint is explicitly **not** enough to claim the problem is fixed.
+
+New components:
+- `fix_verification.py`: rule-specific runtime assertion contract;
+- `remediation_proof_report.py`: customer-safe remediation proof report;
+- `customer_claim_guard.py`: blocks unsupported absolute success/fix language from normal paid reports;
+- `tests/test_static_remediation_regression.py`: synthetic before/after coverage for every current static rule;
+- public `verification.html`: explains proof levels before purchase.
+
+Current important limitation:
+No direct Make.com connector was found in the available plugin directory. Therefore ordinary static re-scans can prove structural clearance, and supplied test artifacts can support remediation, but runtime-dependent issues are not called independently verified fixed until a connected synthetic execution path exists.
+
+Do not launch a done-for-you repair/fix guarantee until connected runtime verification is proven.
