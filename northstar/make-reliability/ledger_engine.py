@@ -77,7 +77,7 @@ def calculate(events: list[dict[str, Any]]) -> Totals:
     payments: dict[str, dict[str, Any]] = {}
     refunds_by_payment: dict[str, Decimal] = {}
     refund_present: set[str] = set()
-    all_refunds = Decimal("0")
+    business_refunds = Decimal("0")
     owner_capital = Decimal("0")
     expenses = Decimal("0")
     revenue_reinvested = Decimal("0")
@@ -99,7 +99,6 @@ def calculate(events: list[dict[str, Any]]) -> Totals:
                 amount = money(event.get("amount_eur", 0))
                 refunds_by_payment[payment_id] = refunds_by_payment.get(payment_id, Decimal("0")) + amount
                 refund_present.add(payment_id)
-                all_refunds += amount
         elif kind == "expense":
             status = str(event.get("status") or "confirmed").lower()
             if status not in {"confirmed", "paid", "settled"}:
@@ -138,17 +137,18 @@ def calculate(events: list[dict[str, Any]]) -> Totals:
         customer_class = str(payment.get("customer_class") or "external").lower()
         is_external = customer_class == "external"
 
+        refund_amount = refunds_by_payment.get(payment_id, Decimal("0"))
+        if refund_amount > amount:
+            raise LedgerError(f"Refunds exceed payment amount for {payment_id}")
+
         base_eligible = status in PAID_STATUSES and provider_verified and not is_test and is_external and amount > 0
         if not base_eligible:
             disqualified_count += 1
             continue
 
-        refund_amount = refunds_by_payment.get(payment_id, Decimal("0"))
-        if refund_amount > amount:
-            raise LedgerError(f"Refunds exceed payment amount for {payment_id}")
-
         collected_external += amount
         net_external += amount - refund_amount
+        business_refunds += refund_amount
 
         # Strict target policy: any completed refund disqualifies the entire
         # transaction from the EUR 1,000 gross-revenue target.
@@ -176,7 +176,7 @@ def calculate(events: list[dict[str, Any]]) -> Totals:
         verified_gross_revenue=eur(target_verified),
         revenue_reinvested=eur(revenue_reinvested),
         expenses=eur(expenses),
-        refunds=eur(all_refunds),
+        refunds=eur(business_refunds),
         net_revenue=eur(net_external),
         net_operating_result=eur(net_operating),
         target_reached=target_verified >= TARGET,
