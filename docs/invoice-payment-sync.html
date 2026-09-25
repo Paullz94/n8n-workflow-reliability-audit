@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Invoice & Payment Sync Reliability — PCFlows</title>
+<meta name="description" content="Review Make.com invoice and payment workflows for duplicate invoices, partial-payment errors, customer mismatches and cross-system reconciliation gaps.">
+<meta name="theme-color" content="#050505"><link rel="stylesheet" href="site.css">
+</head>
+<body>
+<header class="site-header"><div class="wrap site-nav"><a class="wordmark" href="./">PCFlows</a><nav class="nav-links"><a href="packages.html">Services</a><a href="method.html">Method</a><a class="nav-cta" href="scanner.html">Free preflight</a></nav></div></header>
+<main>
+<section class="hero"><div class="wrap hero-grid">
+<div><div class="kicker">Specialist mode · included in €149 audit</div><h1>Your CRM, invoice system and payment provider should agree.</h1><p class="lead">Invoice & Payment Sync reviews Make.com workflows where a retry, wrong match or partial failure can create incorrect financial/business state.</p><div class="actions"><a class="button primary" href="scanner.html">Start with free preflight</a><a class="button secondary" href="packages.html">Compare services</a></div></div>
+<div class="hero-proof">
+<div class="hero-proof-row"><span>Invoice creation</span><strong>Can the same source event create two invoices?</strong></div>
+<div class="hero-proof-row"><span>Customer matching</span><strong>Can two similar customers be confused?</strong></div>
+<div class="hero-proof-row"><span>Partial payment</span><strong>Can “payment received” become “fully paid” too early?</strong></div>
+<div class="hero-proof-row"><span>Reconciliation</span><strong>What happens when only one system updates?</strong></div>
+</div></div></section>
+
+<section class="section"><div class="wrap">
+<div class="section-head"><div class="kicker">Realistic failure patterns</div><h2>Small sync errors can become expensive accounting work.</h2></div>
+<div class="grid-3">
+<div class="panel"><h3>Duplicate invoice</h3><p>An invoice API commits successfully but the response times out. Make retries and creates a second invoice because there is no stable idempotency key.</p></div>
+<div class="panel"><h3>Partial payment marked paid</h3><p>A €2,000 invoice receives €500. The workflow checks only “payment event received” and closes the CRM deal as fully paid.</p></div>
+<div class="panel"><h3>Wrong customer</h3><p>Customer matching uses company name instead of a stable identifier and attaches an invoice/payment to the wrong account.</p></div>
+<div class="panel"><h3>Half-finished sync</h3><p>QuickBooks updates, then the CRM write fails. Finance and sales now see different truth.</p></div>
+<div class="panel"><h3>Refund ordering</h3><p>A refund/cancellation event arrives after a later state update and overwrites the newer business state.</p></div>
+<div class="panel"><h3>Sync loop</h3><p>CRM updates accounting, accounting triggers CRM, and the same change bounces between systems.</p></div>
+</div>
+</div></section>
+
+<section class="section"><div class="wrap grid-2">
+<div><div class="kicker">What PCFlows verifies</div><h2>Stable identity, exact state and recoverable disagreement.</h2></div>
+<div class="rule-list">
+<div class="rule-row"><div class="label">Replay</div><div class="value">Replay one synthetic invoice request and confirm exactly one intended invoice exists.</div></div>
+<div class="rule-row"><div class="label">Partial payment</div><div class="value">Apply a lower-than-total synthetic payment and confirm outstanding balance remains visible.</div></div>
+<div class="rule-row"><div class="label">Customer match</div><div class="value">Use similar customer names with distinct IDs and verify matching cannot resolve by name alone.</div></div>
+<div class="rule-row"><div class="label">Half-failure</div><div class="value">Force failure after the first system updates and verify reconciliation/recovery is explicit.</div></div>
+</div></div></section>
+</main>
+<footer class="footer"><div class="wrap footer-row"><div><strong style="color:var(--text)">PCFlows</strong><br>Independent technical service · Not affiliated with Make.com</div><div class="footer-links"><a href="packages.html">Services</a><a href="privacy.html">Privacy</a><a href="mailto:PCMotionstudios@gmail.com">Support</a></div></div></footer>
+</body></html>
