@@ -45,12 +45,14 @@ def evaluate_resolution_contract(
     *,
     still_present_after:bool,
     evidence:dict[str,Any]|None=None,
+    trusted_connected_evidence:bool=False,
 )->dict[str,Any]:
     rule=str(contract.get("rule") or "")
     status=fix_verification.resolution_status(
         rule=rule,
         still_present_after=still_present_after,
         evidence=evidence,
+        trusted_connected_evidence=trusted_connected_evidence,
     )
     return {
         **contract,
