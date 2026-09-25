@@ -61,7 +61,7 @@ def render_reply(route: SupportRoute) -> str:
         ),
         "scope": (
             "PCFlows uses fixed scopes: free local preflight; €79 one-focus check; €149 full one-scenario audit with one re-scan; "
-            "and €399 Portfolio / Release QA for up to three related scenarios. Specialist Lead Flow, Invoice/Payment and AI Guardrails "
+            "and €399 Portfolio / Release QA for up to three related scenarios. Specialist Lead Flow, Invoice/Payment, AI Guardrails and Client Onboarding "
             "modes are included within the €149 audit when context matches. Production implementation is not silently included."
         ),
         "privacy": (
