@@ -1,59 +1,87 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Prepare Audit Intake — PCFlows</title>
-<meta name="description" content="Create a small non-sensitive local intake file for a PCFlows Make.com Data Integrity Audit.">
-<meta name="theme-color" content="#081019"><link rel="icon" href="favicon.svg" type="image/svg+xml">
-<style>
-:root{--bg:#081019;--panel:#0d1722;--line:#223244;--text:#f5f7fa;--muted:#9caabd;--accent:#78e6c2;--accent2:#7bb8ff;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color-scheme:dark}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 75% -10%,rgba(123,184,255,.10),transparent 30%),var(--bg);color:var(--text)}a{color:inherit}
-.wrap{width:min(900px,calc(100% - 28px));margin:auto}header{border-bottom:1px solid rgba(255,255,255,.06)}nav{height:68px;display:flex;align-items:center;justify-content:space-between}.brand{font-weight:850;text-decoration:none}.nav{display:flex;gap:15px;color:var(--muted);font-size:13px}.nav a{text-decoration:none}
-main{padding:58px 0 80px}.eyebrow{color:var(--accent);font-size:12px;font-weight:850;letter-spacing:.12em;text-transform:uppercase}h1{font-size:clamp(40px,7vw,62px);line-height:1;letter-spacing:-.045em;margin:14px 0 18px}p{color:#afbdcb;line-height:1.65}.lead{font-size:18px;max-width:750px}
-.card{border:1px solid var(--line);background:var(--panel);border-radius:20px;padding:22px;margin:18px 0}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-label{display:block;font-weight:750;margin:16px 0 7px}input,textarea,select{width:100%;background:#09121b;border:1px solid #2c4054;border-radius:11px;color:var(--text);padding:12px;font:inherit;outline:none}input:focus,textarea:focus,select:focus{border-color:var(--accent)}textarea{min-height:110px;resize:vertical}.check{display:flex;gap:10px;align-items:center}.check input{width:auto}
-.button{border:0;border-radius:10px;padding:12px 16px;font-weight:800;cursor:pointer;background:var(--text);color:#081019}.muted{font-size:12px;color:#8190a0}.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.hint{font-size:12px;color:#7f8fa0;margin-top:5px}.safe{border-left:3px solid var(--accent);padding:14px 16px;background:rgba(120,230,194,.045);border-radius:0 12px 12px 0}
-@media(max-width:700px){.grid{grid-template-columns:1fr}.nav a:not(:last-child){display:none}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Prepare Audit Intake — PCFlows</title>
+  <meta name="description" content="Create a small non-sensitive local context file for a PCFlows Make.com reliability audit.">
+  <meta name="theme-color" content="#050505">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="site.css">
 </head>
 <body>
-<header><div class="wrap"><nav><a class="brand" href="./">PCFlows</a><div class="nav"><a href="method.html">Method</a><a href="sample-report.html">Sample report</a><a href="scanner.html">Free preflight</a></div></nav></div></header>
-<main><div class="wrap">
-<div class="eyebrow">Local · non-sensitive · no submit</div>
-<h1>Prepare your audit context.</h1>
-<p class="lead">The paid audit needs a little business context to prioritize static findings. This form creates a small JSON file on your device. Nothing is submitted to PCFlows from this page.</p>
+<header class="site-header">
+  <div class="wrap site-nav">
+    <a class="wordmark" href="./">PCFlows</a>
+    <nav class="nav-links">
+      <a href="method.html">Method</a>
+      <a href="sample-report.html">Sample report</a>
+      <a class="nav-cta" href="scanner.html">Free preflight</a>
+    </nav>
+  </div>
+</header>
 
-<div class="safe"><strong>Keep it abstract.</strong><p style="margin-bottom:0">Describe outcomes such as “create one invoice per order” or “update CRM once”. Do not paste customer records, credentials, API keys, URLs containing secrets or production payloads.</p></div>
+<main>
+  <div class="wrap tool-shell">
+    <div class="tool-intro">
+      <div class="kicker">Local · non-sensitive · no submit</div>
+      <h1>Prepare audit context.</h1>
+      <p class="lead">The paid audit needs a small amount of business context to prioritize static findings. This page creates a JSON file on your device. Nothing is submitted from this form.</p>
+    </div>
 
-<section class="card">
-<div class="grid">
-  <div><label for="scenario">Scenario name</label><input id="scenario" maxlength="160" placeholder="e.g. Order intake"><div class="hint">A simple label is enough.</div></div>
-  <div><label for="dup">Duplicate tolerance</label><select id="dup"><option value="unknown">Unknown</option><option value="none">None — duplicate effect is unacceptable</option><option value="limited">Limited — some repeats are tolerable</option></select><div class="hint">This affects retry/idempotency prioritization.</div></div>
-</div>
+    <div class="notice">
+      Keep descriptions abstract. “Create one invoice per order” is useful. Customer records, credentials, API keys and production payloads are not.
+    </div>
 
-<label for="goal">Business goal</label>
-<textarea id="goal" maxlength="500" placeholder="What must reliably happen when this scenario succeeds?"></textarea>
-<div class="hint">Example: “Every accepted order must update the CRM and downstream order system exactly once.”</div>
+    <section class="tool-box" style="margin-top:18px">
+      <div class="grid-2">
+        <div>
+          <label for="scenario">Scenario name</label>
+          <input id="scenario" maxlength="160" placeholder="e.g. Order intake">
+          <p class="small">A simple internal label is enough.</p>
+        </div>
+        <div>
+          <label for="dup">Duplicate tolerance</label>
+          <select id="dup">
+            <option value="unknown">Unknown</option>
+            <option value="none">None — duplicate effect is unacceptable</option>
+            <option value="limited">Limited — some repeats are tolerable</option>
+          </select>
+          <p class="small">Used only for retry/idempotency prioritization.</p>
+        </div>
+      </div>
 
-<label for="effects">Critical side effects</label>
-<textarea id="effects" placeholder="One per line, e.g.&#10;Create invoice&#10;Update CRM&#10;Send customer confirmation"></textarea>
-<div class="hint">List the external actions where omission, duplication or wrong ordering would matter.</div>
+      <label for="goal">Business goal</label>
+      <textarea id="goal" maxlength="500" style="min-height:110px;font-family:inherit" placeholder="What must reliably happen when this scenario succeeds?"></textarea>
+      <p class="small">Example: “Every accepted order must update the CRM and downstream order system exactly once.”</p>
 
-<label class="check"><input id="ordering" type="checkbox"> Event ordering matters for this scenario</label>
+      <label for="effects">Critical side effects</label>
+      <textarea id="effects" style="min-height:120px;font-family:inherit" placeholder="One per line, e.g.&#10;Create invoice&#10;Update CRM&#10;Send customer confirmation"></textarea>
+      <p class="small">List actions where omission, duplication or wrong ordering would matter.</p>
 
-<label for="recovery">Recovery expectation</label>
-<textarea id="recovery" maxlength="500" placeholder="What should happen after a transient or permanent downstream failure?"></textarea>
-<div class="hint">Example: “The failed order must remain visible and recoverable without creating duplicates.”</div>
+      <label style="display:flex;gap:10px;align-items:center">
+        <input id="ordering" type="checkbox" style="width:auto">
+        <span>Event ordering matters for this scenario</span>
+      </label>
 
-<div class="row" style="margin-top:20px"><button class="button" id="download" type="button">Download intake JSON</button><span class="muted" id="status">No data is sent.</span></div>
-</section>
+      <label for="recovery">Recovery expectation</label>
+      <textarea id="recovery" maxlength="500" style="min-height:110px;font-family:inherit" placeholder="What should happen after a transient or permanent downstream failure?"></textarea>
+      <p class="small">Example: “The failed order must remain visible and recoverable without creating duplicates.”</p>
 
-<section class="card">
-<div class="eyebrow">What the file contains</div>
-<p>Only the fields shown above. The paid report builder allowlists these values and ignores unexpected fields.</p>
-<p class="muted">Next step after payment: send this JSON together with one sanitized Make.com blueprint using the order-reference instructions provided by PCFlows.</p>
-</section>
-</div></main>
+      <div class="tool-actions">
+        <button class="button primary" id="download" type="button">Download intake JSON</button>
+        <span class="status" id="status">No data is sent.</span>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:18px">
+      <div class="kicker">What the file contains</div>
+      <p>Only the fields shown above. The paid report builder allowlists these values and ignores unexpected fields.</p>
+      <p class="small">After payment, this file is sent together with one sanitized Make.com blueprint using the order-reference instructions provided by PCFlows.</p>
+    </section>
+  </div>
+</main>
+
 <script>
 document.getElementById('download').addEventListener('click',()=>{
   const val=id=>document.getElementById(id).value.trim();
@@ -70,8 +98,10 @@ document.getElementById('download').addEventListener('click',()=>{
   };
   const blob=new Blob([JSON.stringify(obj,null,2)+'\n'],{type:'application/json'});
   const url=URL.createObjectURL(blob),a=document.createElement('a');
-  a.href=url;a.download='pcflows-audit-intake.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),0);
+  a.href=url;a.download='pcflows-audit-intake.json';document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),0);
   status.textContent='Downloaded locally.';
 });
 </script>
-</body></html>
+</body>
+</html>
