@@ -15,6 +15,8 @@
     /\bBearer\s+[A-Za-z0-9._~+/=-]{16,}/i,
     /\bsk-[A-Za-z0-9_-]{16,}\b/,
     /https:\/\/hooks\.slack\.com\/services\/[A-Za-z0-9/_-]+/i,
+    /https:\/\/hook(?:\.[a-z0-9-]+)?\.make\.com\/[A-Za-z0-9_-]{12,}/i,
+    /https:\/\/hook\.integromat\.com\/[A-Za-z0-9_-]{12,}/i,
     /(?:api[_-]?key|secret|token)\s*[:=]\s*[A-Za-z0-9._~+/=-]{12,}/i
   ];
 
