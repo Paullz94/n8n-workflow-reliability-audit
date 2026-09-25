@@ -56,6 +56,7 @@ def build_proof(
             rule=row["rule"],
             still_present_after=True,
             evidence=evidence,
+            trusted_connected_evidence=trusted_connected_evidence,
         )
         statuses.append({
             "rule":row["rule"],
