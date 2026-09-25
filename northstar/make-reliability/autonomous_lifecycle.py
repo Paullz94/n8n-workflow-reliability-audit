@@ -68,11 +68,20 @@ def decide(case: dict[str, Any]) -> Decision:
         return Decision("request_or_match_sanitized_intake", True, "Verified external payment can enter fulfillment.", "awaiting_files")
 
     if state == "files_received":
-        if case.get("secret_like") is True:
-            return Decision("stop_and_request_resanitization", True, "Secret gate hard-stops processing.", "awaiting_safe_input")
+        if case.get("cross_case_mismatch") is True:
+            return Decision("freeze_case_and_investigate", True, "Case binding mismatch must stop all outbound processing.", "privacy_hold")
+        if case.get("secret_like") is True or case.get("personal_data_like") is True:
+            return Decision("stop_and_request_resanitization", True, "Secret/customer-data gate hard-stops processing.", "awaiting_safe_input")
         if case.get("scope_fit") is not True:
             return Decision("cancel_or_refund_per_scope_policy", True, "Request is outside fixed scope before substantive delivery.", "refund_or_cancel")
         return Decision("run_audit_pipeline", True, "Safe in-scope files can be processed deterministically.", "qa_review")
+
+    if state == "verified_repair_requested":
+        if case.get("verified_repair_public_enabled") is not True:
+            return Decision("route_to_audit_or_diagnostic", True, "Verified Repair is not publicly enabled until runtime gates pass.", "audit_or_diagnostic")
+        if case.get("repair_eligible") is not True:
+            return Decision("decline_verified_repair_or_diagnose_first", True, "The requested repair is not bounded/testable enough for a verified outcome.", "audit_or_diagnostic")
+        return Decision("open_resolution_contract", True, "Bounded verified-repair request passed the deterministic intake gates.", "repair_contract")
 
     if state == "qa_review":
         if case.get("unsupported_claim_detected") is True:
