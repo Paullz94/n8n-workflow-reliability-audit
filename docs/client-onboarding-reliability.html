@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Client Onboarding Reliability — PCFlows</title>
+<meta name="description" content="Review Make.com client onboarding workflows for duplicate setup, missing tasks/folders, partial failure and broken human handoff.">
+<meta name="theme-color" content="#050505"><link rel="stylesheet" href="site.css">
+</head>
+<body>
+<header class="site-header"><div class="wrap site-nav"><a class="wordmark" href="./">PCFlows</a><nav class="nav-links"><a href="packages.html">Services</a><a href="method.html">Method</a><a class="nav-cta" href="scanner.html">Free preflight</a></nav></div></header>
+<main>
+<section class="hero"><div class="wrap hero-grid">
+<div><div class="kicker">Specialist mode · included in €149 audit</div><h1>“Welcome email sent” does not mean onboarding actually finished.</h1><p class="lead">Client Onboarding Reliability reviews Make.com flows that create CRM records, projects, tasks, folders, documents and welcome messages for new customers.</p><div class="actions"><a class="button primary" href="scanner.html">Start with free preflight</a><a class="button secondary" href="packages.html">Compare services</a></div></div>
+<div class="hero-proof">
+<div class="hero-proof-row"><span>Duplicate setup</span><strong>Can one customer create two projects or folders?</strong></div>
+<div class="hero-proof-row"><span>Partial state</span><strong>What if step 2 succeeds and step 3 fails?</strong></div>
+<div class="hero-proof-row"><span>Completeness</span><strong>Can one required onboarding step be silently skipped?</strong></div>
+<div class="hero-proof-row"><span>Handoff</span><strong>When does automation stop and the team take over?</strong></div>
+</div></div></section>
+
+<section class="section"><div class="wrap">
+<div class="section-head"><div class="kicker">Realistic failure patterns</div><h2>Half-finished onboarding is easy to miss.</h2></div>
+<div class="grid-3">
+<div class="panel"><h3>Project missing</h3><p>The CRM record and welcome email succeed, but project creation fails. The customer thinks onboarding started while the delivery team has no project.</p></div>
+<div class="panel"><h3>Duplicate folder/tasks</h3><p>The webhook is replayed after a timeout and creates a second folder, task set or project for the same customer.</p></div>
+<div class="panel"><h3>Welcome sent twice</h3><p>A retry repeats the customer-facing welcome message even though the first send actually succeeded.</p></div>
+<div class="panel"><h3>Required step silently skipped</h3><p>A filter excludes a valid customer before a required setup action, while the scenario still finishes cleanly.</p></div>
+<div class="panel"><h3>Wrong completion status</h3><p>The CRM gets “Onboarding complete” before all required downstream resources exist.</p></div>
+<div class="panel"><h3>Human overlap</h3><p>A team member takes ownership but scheduled automated setup/follow-up continues and duplicates manual work.</p></div>
+</div>
+</div></section>
+
+<section class="section"><div class="wrap grid-2">
+<div><div class="kicker">What PCFlows verifies</div><h2>Exactly-once setup and explicit completion.</h2></div>
+<div class="rule-list">
+<div class="rule-row"><div class="label">Replay</div><div class="value">Replay the same onboarding event and verify each intended setup resource exists once.</div></div>
+<div class="rule-row"><div class="label">Half-failure</div><div class="value">Force a downstream failure after the first setup action and verify partial state is recoverable.</div></div>
+<div class="rule-row"><div class="label">Required step</div><div class="value">Exercise a filter/route boundary and verify missing setup cannot be mistaken for completion.</div></div>
+<div class="rule-row"><div class="label">Handoff</div><div class="value">Move a synthetic customer to human ownership and verify later automation respects the boundary.</div></div>
+</div></div></section>
+</main>
+<footer class="footer"><div class="wrap footer-row"><div><strong style="color:var(--text)">PCFlows</strong><br>Independent technical service · Not affiliated with Make.com</div><div class="footer-links"><a href="packages.html">Services</a><a href="privacy.html">Privacy</a><a href="mailto:PCMotionstudios@gmail.com">Support</a></div></div></footer>
+</body></html>
