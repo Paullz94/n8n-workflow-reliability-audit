@@ -176,3 +176,12 @@ The latest branch contains substantially more tests than the last fully executed
 - [x] MCP toolbox identified as preferred least-scope test-tool path.
 - [x] Normal ChatGPT connection path exists; Work/Codex is not required for this prerequisite.
 - [ ] Make MCP/plugin actually connected to this ChatGPT environment.
+
+
+## Current full validation checkpoint
+- [x] Python compileall PASS.
+- [x] Full Python suite PASS: **242 tests**.
+- [x] Package catalog/order-contract consistency PASS.
+- [x] Browser scanner regression/privacy PASS.
+- [x] Overall `PCFlows/Northstar validation: PASS`.
+- Validation run: GitHub Actions #36190833559 on isolated snapshot of the canonical branch.
