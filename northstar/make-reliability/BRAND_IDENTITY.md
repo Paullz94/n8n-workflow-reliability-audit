@@ -48,5 +48,6 @@ Customer-facing copy should say:
 - Lead Flow Reliability
 - Invoice & Payment Sync
 - AI Workflow Guardrails
+- Client Onboarding Reliability
 
 Internal files may continue using Northstar where it refers to the validation project.
