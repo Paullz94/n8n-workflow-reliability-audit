@@ -183,3 +183,24 @@ Safe pre-launch engineering is now largely exhausted:
 The next material step depends on official registration data rather than more speculative coding.
 
 Until the enterprise number arrives, only minor documentation/polish or passive no-payment validation remains. Do not create artificial activity merely to appear busy.
+
+
+## Pre-launch acquisition queue — 2026-09-25
+
+A current public opportunity queue is prepared in:
+- `ACQUISITION_QUEUE_2026-09-25.md`;
+- `prospect_queue.json`;
+- `prospect_ranker.py`;
+- `FIRST_WAVE_PROPOSALS.md`.
+
+The structured queue is hard-gated with `launch_enabled=false`, so the ranker will not mark any prospect contactable before the registration/VAT launch gate.
+
+Current strongest **post-launch** public fits, subject to re-checking that they are still open:
+1. Upwork — B2B client onboarding automation: strong reliability/testing fit and USD 600 visible project budget.
+2. Upwork — Make.com AI news/video workflow: existing Make setup, explicit error handling + duplicate-post protection, USD 500.
+3. Upwork — reusable OpenAI/Make automation template: master architecture has leverage across multiple client deployments.
+4. Upwork — Dropbox/vendor routing: explicit duplicate-submission and failed-automation concerns, but very high proposal competition.
+
+Make Community buyer posts are retained as product-validation research only. Do not post or DM AI-generated commercial content there under the current community rules.
+
+No outreach has been sent and no customer has been contacted during the registration pause.
