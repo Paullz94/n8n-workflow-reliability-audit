@@ -21,6 +21,16 @@ class CustomerClaimGuardTests(unittest.TestCase):
             "Static analysis cannot prove the absence of defects."
         )
 
+    def test_allows_explicit_negative_fix_statement(self):
+        customer_claim_guard.assert_safe_report(
+            "PCFlows cannot say the issue is fixed until runtime verification passes."
+        )
+
+    def test_allows_not_production_ready_statement(self):
+        customer_claim_guard.assert_safe_report(
+            "This static review does not prove the scenario is production-ready."
+        )
+
 
 if __name__=="__main__":
     unittest.main()
