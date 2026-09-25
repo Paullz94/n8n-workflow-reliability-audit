@@ -12,7 +12,7 @@ Hello,
 
 Thanks for your interest in the PCFlows Make.com Data Integrity Audit.
 
-Paid checkout is temporarily paused while the Belgian business-registration setup is completed. In the meantime, you can already use the free local Reliability Preflight:
+Paid checkout is temporarily paused while the Belgian business-registration setup is completed. Planned launch pricing is €0 for the local Reliability Preflight, €79 for a Focused Risk Check, €149 for the full Data Integrity Audit, and €399 for Portfolio / Release QA covering up to three related scenarios. In the meantime, you can already use the free local Reliability Preflight:
 
 https://paullz94.github.io/n8n-workflow-reliability-audit/scanner.html
 
@@ -30,7 +30,7 @@ Subject: PCFlows audit files — [STRIPE SESSION ID]
 
 Hello,
 
-Your PCFlows audit order is ready for intake.
+Your PCFlows order is ready for intake.
 
 Please send:
 1. one sanitized Make.com scenario blueprint JSON;
