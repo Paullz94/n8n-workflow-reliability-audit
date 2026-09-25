@@ -26,7 +26,14 @@
   <p>If you contact PCFlows or send audit files after payment, PCFlows may process your email address, Stripe order reference, sanitized blueprint, intake context and support correspondence to deliver the service, perform the included re-scan, keep required business records and handle support/refunds.</p>
 
   <h2>Data minimization</h2>
-  <div class="notice">Do not send production credentials, passwords, API keys, private webhook URLs, customer records or unnecessary personal data. A possible secret-like finding stops paid processing until a sanitized copy is supplied.</div>
+  <div class="notice">Do not send production credentials, passwords, API keys, private webhook URLs, customer records or unnecessary personal data. A possible secret-like or obvious literal customer-data finding can stop paid processing until a sanitized copy is supplied.</div>
+
+  <h2>Case isolation and AI use</h2>
+  <p>Paid processing is designed around a separate pseudonymous case scope per order. The raw blueprint is not included in the AI review packet or customer delivery ZIP. AI-assisted review receives only allowlisted business context plus deterministic finding metadata; it is not intended to search across other customer cases.</p>
+  <p>PCFlows uses deterministic gates around scope, payment, authorization, verification and delivery rather than relying on an AI model to remember every safety rule. Automated detection is an additional safeguard, not a guarantee that every possible form of personal data can be recognized automatically.</p>
+
+  <h2>Retention direction</h2>
+  <p>Technical customer artifacts should be kept only for the active service and re-scan window where operationally necessary, then minimized/deleted according to the final retention process. Billing and business records are handled separately where they must be retained for legal/accounting purposes.</p>
 
   <h2>Independent service</h2>
   <p>PCFlows is independent and is not affiliated with or endorsed by Make.com.</p>
