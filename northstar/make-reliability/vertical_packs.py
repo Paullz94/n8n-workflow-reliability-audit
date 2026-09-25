@@ -163,6 +163,53 @@ PACKS: dict[str, Pack] = {
             "What event freezes automation after human takeover?",
         ),
     ),
+    "client_onboarding": Pack(
+        id="client_onboarding",
+        name="Client Onboarding Reliability Audit",
+        buyer_problem="A new customer can be created in some systems but missing from others, receive duplicate welcome actions, or be left half-onboarded after a downstream failure.",
+        priority_rules=(
+            "retrying-write-idempotency-review",
+            "http-write-idempotency-review",
+            "concurrency-review",
+            "filtered-write-silent-skip-review",
+            "write-without-error-handler",
+            "write-skip-handler-data-loss-review",
+            "write-resume-handler-silent-success-review",
+            "incomplete-executions-disabled-review",
+        ),
+        acceptance_tests=(
+            {
+                "id":"onboarding_duplicate_replay",
+                "problem":"Client/project/folder/task setup is created twice",
+                "test":"Replay the same synthetic onboarding event with the same customer/business key.",
+                "pass":"Each intended onboarding resource exists exactly once and no duplicate welcome action is emitted.",
+            },
+            {
+                "id":"onboarding_partial_failure",
+                "problem":"Onboarding stops after only some systems were updated",
+                "test":"Force a safe downstream failure after the first state-changing onboarding step.",
+                "pass":"Partial onboarding state is visible and has an explicit recovery or reconciliation path.",
+            },
+            {
+                "id":"onboarding_required_step",
+                "problem":"A required onboarding step is silently skipped",
+                "test":"Use a synthetic input that exercises a filter/route boundary before a required setup action.",
+                "pass":"The missing required step is observable and cannot be mistaken for completed onboarding.",
+            },
+            {
+                "id":"onboarding_handoff",
+                "problem":"Automation and human ownership overlap",
+                "test":"Move a synthetic customer into the documented human-owned/handoff state.",
+                "pass":"Later automated actions respect the handoff boundary and do not duplicate manual work.",
+            },
+        ),
+        context_prompts=(
+            "Which onboarding resources must exist before the customer is considered ready?",
+            "Which step is the authoritative completion state?",
+            "Which onboarding actions must happen exactly once?",
+            "When does ownership move from automation to a human/team?",
+        ),
+    ),
 }
 
 
