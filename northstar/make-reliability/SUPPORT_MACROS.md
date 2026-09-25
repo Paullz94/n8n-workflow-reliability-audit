@@ -128,7 +128,7 @@ Hello,
 I received the revised sanitized blueprint for the included re-scan.
 
 The comparison will classify deterministic findings as:
-- resolved;
+- statically cleared;
 - remaining;
 - new.
 
@@ -146,11 +146,11 @@ Hello,
 Your included remediation re-scan is attached.
 
 Please review:
-- Resolved findings;
+- Statically cleared findings;
 - Remaining findings;
 - New findings.
 
-Use the original synthetic verification plan for any important resolved item before treating the production risk as closed.
+A statically cleared finding means the revised blueprint no longer matches that deterministic rule. Runtime-dependent findings are not independently called fixed unless their required synthetic execution checks have been observed and passed.
 
 This completes the included re-scan for this order.
 
