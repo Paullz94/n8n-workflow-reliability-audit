@@ -24,8 +24,12 @@ def load_object(path: Path, label: str) -> dict[str, Any]:
     return value
 
 
-def key(f: audit_make.Finding) -> tuple[str, str | None, str | None]:
-    return (f.rule, f.module, f.path)
+def key(f: audit_make.Finding) -> tuple[str, str, str | None]:
+    # Module IDs are normally more stable than list positions when a customer
+    # inserts or reorders modules during remediation. Fall back to path only
+    # when an exported finding has no module id.
+    anchor = f"id:{f.module_id}" if f.module_id is not None else f"path:{f.path or ''}"
+    return (f.rule, anchor, f.module)
 
 
 def compare(before: dict[str, Any], after: dict[str, Any]) -> dict[str, Any]:
