@@ -510,3 +510,23 @@ Latest isolated full validation after these changes:
 - package consistency PASS;
 - browser scanner regression/privacy PASS;
 - overall `PCFlows/Northstar validation: PASS`.
+
+
+## Realistic repair and case-isolation hardening — 2026-09-25
+
+Added:
+- repair_scope_gate.py and verified_repair_intake.py: unbounded, unsafe, externally controlled, destructive-only or unverifiable repair requests cannot be accepted as Verified Repair;
+- customer_data_guard.py: high-risk literal customer/sensitive values can hard-stop processing before AI/delivery;
+- case_isolation.py: every paid order receives a pseudonymous case scope and cross-case binding is rejected;
+- incident_containment.py: fail-closed handling for privacy mismatch, unauthorized writes, rollback failure and unsupported AI output;
+- customer data containment/retention policies: no shared real-customer examples, no cross-case retrieval, and minimal technical-artifact retention.
+
+Paid fulfillment and AI review are now case-scoped. The autonomous inbox operator is also one-thread/one-case scoped and must stop rather than guess if the current case cannot be determined.
+
+Latest isolated validation after these changes:
+- GitHub Actions run 36193858480;
+- 275 Python tests PASS;
+- compileall PASS;
+- package consistency PASS;
+- browser scanner regression/privacy PASS;
+- overall PCFlows/Northstar validation PASS.
