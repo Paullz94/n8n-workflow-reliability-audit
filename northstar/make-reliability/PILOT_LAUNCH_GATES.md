@@ -60,6 +60,8 @@ Marketplace accounts are not required for the initial direct PCFlows pilot.
 - [x] Stripe account is connected and live-capable.
 - [x] EUR 149 Stripe product/one-time price/Payment Link exist.
 - [x] PaymentIntent/Refund normalization is implemented against Stripe's real object schema.
+- [x] Dry-run provider reconciliation exists and preserves the append-only journal.
+- [x] Reconciliation refuses untrusted snapshots, ignores non-final refunds and hard-stops on conflicts.
 - [x] Checkout is deliberately disabled during the Belgian registration pause.
 - [ ] Belgian enterprise number received and verified.
 - [ ] VAT identification / small-enterprise regime completed as legally available before paid launch.
@@ -73,6 +75,7 @@ Marketplace accounts are not required for the initial direct PCFlows pilot.
 - [x] Stripe Checkout Session ID is the stable order/fulfillment reference.
 - [x] Post-payment redirect and email handoff are prepared without a custom backend.
 - [x] Qualification fields are structured.
+- [x] Checkout is prepared to collect scenario name, buying-as classification and billing address.
 - [x] Support scope is bounded in the pilot definition.
 - [x] Revenue measurement logic is deterministic.
 - [ ] Checkout -> intake -> delivery is live for real paid customers (checkout intentionally paused pending registration).
@@ -84,6 +87,7 @@ Marketplace accounts are not required for the initial direct PCFlows pilot.
 - Last full local Northstar gate before the latest hardening: 31 Python tests PASS + browser scanner regression/privacy PASS.
 - Eight additional targeted regression tests were added for fulfillment, Make error-handler semantics and report evidence.
 - New fulfillment logic was independently exercised in an isolated test harness (3/3 PASS).
+- Five Stripe reconciliation regression tests were independently exercised after implementation (5/5 PASS).
 - Existing public repository GitHub Action remains green, but it tests the pre-existing public n8n scanner rather than the isolated Northstar suite.
 
 Do not misrepresent the root CI result as Northstar test coverage.
@@ -102,4 +106,4 @@ As of 2026-09-25:
 
 The live Stripe Payment Link remains inactive until the registration/tax gate is complete.
 
-During the pause, Northstar may continue product hardening, the free local scanner, passive no-payment interest, documentation and platform-compliant market research.
+During the pause, Northstar may continue only useful EUR 0 work. Major safe technical launch preparation is now complete; avoid speculative feature expansion until the enterprise/VAT details or real customer evidence create a concrete need.
