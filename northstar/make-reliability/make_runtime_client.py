@@ -69,6 +69,31 @@ def _require_sandbox_write(scenario_id:int) -> None:
         raise MakeRuntimeError("scenario id is not allowlisted for PCFlows sandbox writes")
 
 
+def _production_scenario_ids() -> set[int]:
+    raw=os.environ.get("PCFLOWS_MAKE_PRODUCTION_SCENARIO_IDS","")
+    out=set()
+    for part in raw.split(","):
+        part=part.strip()
+        if not part:
+            continue
+        try:
+            out.add(int(part))
+        except ValueError as exc:
+            raise MakeRuntimeError("PCFLOWS_MAKE_PRODUCTION_SCENARIO_IDS must contain integers") from exc
+    return out
+
+
+def _require_production_write(scenario_id:int) -> None:
+    if os.environ.get("PCFLOWS_MAKE_PRODUCTION_WRITE_ENABLED","").strip().lower() not in {"1","true","yes"}:
+        raise MakeRuntimeError("Make production writes are disabled")
+    case_id=os.environ.get("PCFLOWS_REPAIR_CASE_ID","").strip()
+    authorization_id=os.environ.get("PCFLOWS_CUSTOMER_AUTHORIZATION_ID","").strip()
+    if not case_id or not authorization_id:
+        raise MakeRuntimeError("production write requires repair case and customer authorization ids")
+    if int(scenario_id) not in _production_scenario_ids():
+        raise MakeRuntimeError("scenario id is not allowlisted for PCFlows production writes")
+
+
 class MakeRuntimeClient:
     def __init__(self, config:MakeRuntimeConfig):
         self.config=config
@@ -153,6 +178,48 @@ class MakeRuntimeClient:
         original_blueprint:dict[str,Any],
     )->Any:
         _require_sandbox_write(scenario_id)
+        if not isinstance(original_blueprint,dict):
+            raise MakeRuntimeError("original_blueprint must be an object")
+        return self._request(
+            "PATCH",
+            f"/scenarios/{int(scenario_id)}",
+            {"blueprint":json.dumps(original_blueprint,separators=(",",":"))},
+        )
+
+
+    def update_production_blueprint(
+        self,
+        scenario_id:int,
+        revised_blueprint:dict[str,Any],
+    )->dict[str,Any]:
+        _require_production_write(scenario_id)
+        if not isinstance(revised_blueprint,dict):
+            raise MakeRuntimeError("revised_blueprint must be an object")
+
+        original=self.get_blueprint(scenario_id)
+        original_json=json.dumps(original,sort_keys=True,separators=(",",":"))
+        original_sha256=hashlib.sha256(original_json.encode("utf-8")).hexdigest()
+
+        result=self._request(
+            "PATCH",
+            f"/scenarios/{int(scenario_id)}",
+            {"blueprint":json.dumps(revised_blueprint,separators=(",",":"))},
+        )
+        return {
+            "scenario_id":int(scenario_id),
+            "repair_case_id":os.environ["PCFLOWS_REPAIR_CASE_ID"].strip(),
+            "customer_authorization_id":os.environ["PCFLOWS_CUSTOMER_AUTHORIZATION_ID"].strip(),
+            "original_blueprint":original,
+            "original_sha256":original_sha256,
+            "update_response":result,
+        }
+
+    def rollback_production_blueprint(
+        self,
+        scenario_id:int,
+        original_blueprint:dict[str,Any],
+    )->Any:
+        _require_production_write(scenario_id)
         if not isinstance(original_blueprint,dict):
             raise MakeRuntimeError("original_blueprint must be an object")
         return self._request(
