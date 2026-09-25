@@ -101,3 +101,46 @@ A real payment or marketplace account must be legitimately activated before Nort
 Stripe integration is available in the ChatGPT plugin ecosystem but is not currently connected. Account connection/KYC/business/payout/tax attestations require Paul.
 
 Until that gate is satisfied, do not fabricate listings, accounts, customers or payments and do not spend owner capital.
+
+
+## Registration / launch status — 2026-09-25
+
+Paul submitted the Belgian sole-proprietor / secondary-occupation onboarding through Xerius with a planned start date of **2026-10-01**.
+
+Current status visible in Xerius:
+- self-employed affiliation: approved;
+- enterprise number: pending / in processing;
+- VAT activation/small-business regime: not yet completed because the enterprise number is still pending.
+
+Do not record an owner-capital expense merely from the quoted KBO fee; book it only once payment is confirmed.
+
+## Stripe safety state
+
+A live Stripe account is connected and the PCFlows EUR 149 product/price exist.
+
+The live Payment Link is intentionally **inactive** while business registration/VAT setup is incomplete. The public website does not expose a live payment CTA during this wait.
+
+## Public no-payment validation state
+
+GitHub Pages is live at:
+https://paullz94.github.io/n8n-workflow-reliability-audit/
+
+Public zero-payment assets now include:
+- landing page;
+- free local Make Reliability Preflight;
+- local-only audit-intake JSON generator;
+- privacy/service information page;
+- support email;
+- no-payment "notify me when it opens" email CTA;
+- sitemap/robots for organic discovery.
+
+The free scanner's core path remains local-only: no blueprint upload is required for the static scan.
+
+## Immediate next non-delegable gate
+
+Wait for the Xerius enterprise number / registration confirmation. Once received:
+1. verify official start date and KBO details;
+2. complete VAT identification / small-enterprise exemption route as legally available;
+3. add official business details to the public site;
+4. re-enable Stripe checkout only after the registration/tax gate is complete;
+5. then resume small, platform-native paid acquisition.
