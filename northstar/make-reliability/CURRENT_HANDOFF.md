@@ -347,3 +347,36 @@ Prefer explicit job-post demand, inbound interest and marketplace-native proposa
 ### Work mode
 
 ChatGPT Work is **not required** for the current PCFlows operating design. Current work can continue through ordinary ChatGPT plus GitHub, Gmail, Stripe, Clay, web research and scheduled tasks. This avoids consuming the shared Work/Codex usage allowance merely for browser automation.
+
+
+## Public brand and package architecture — 2026-09-25
+
+Public brand/trade name:
+- **PCFlows**
+
+Internal-only names:
+- Project Northstar Ledger / Northstar = internal autonomous revenue-validation codename;
+- PCMotionStudios = legacy/admin namespace retained mainly in the support email address.
+
+Do not expose Northstar as the business name.
+
+Fixed launch package ladder:
+- Reliability Preflight — EUR 0;
+- Focused Risk Check — EUR 79;
+- Data Integrity Audit — EUR 149;
+- Portfolio / Release QA — EUR 399 for up to 3 related scenarios.
+
+Specialist modes inside the EUR149 audit, with no separate surcharge:
+- Lead Flow Reliability;
+- Invoice & Payment Sync;
+- AI Workflow Guardrails.
+
+Technical support now exists for:
+- focused single-risk reports;
+- automatic vertical pack selection;
+- up-to-three-scenario portfolio QA;
+- combined before/after portfolio re-scan.
+
+The website now includes a public Services & Pricing page with a local service chooser. Paid checkout remains disabled until the Belgian registration/VAT launch gate is complete.
+
+Current site-source QA after the package redesign: 15 checked public files, 0 structural/link/JS/checkout-url/image/SVG issues found.
