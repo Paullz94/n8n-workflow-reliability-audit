@@ -45,6 +45,25 @@ class QualificationTests(unittest.TestCase):
         self.assertEqual(result["route"], "free_preflight_sufficient")
         self.assertFalse(result["paid_candidate"])
 
+    def test_clean_static_flow_with_real_runtime_symptom_is_still_paid_candidate(self):
+        context = self.context()
+        context["runtime_symptom"] = "Scenario finishes green but one accepted order never reaches the CRM."
+        context["expected_vs_actual"] = "Expected one CRM update; actual result is no CRM update."
+        context["reproducible"] = True
+        result = qualify_audit.qualify({
+            "flow": [{"id": 1, "module": "json:ParseJSON", "mapper": {}}]
+        }, context)
+        self.assertEqual(result["route"], "paid_audit_candidate")
+        self.assertTrue(result["paid_candidate"])
+        self.assertTrue(result["reported_runtime_problem"])
+
+    def test_free_result_is_not_a_hard_rejection(self):
+        result = qualify_audit.qualify({
+            "flow": [{"id": 1, "module": "json:ParseJSON", "mapper": {}}]
+        }, self.context())
+        self.assertEqual(result["route"], "free_preflight_sufficient")
+        self.assertFalse(result["hard_reject"])
+
     def test_business_critical_context_can_justify_review(self):
         context = self.context()
         context["critical_side_effects"] = ["Trigger customer-facing approval decision"]
