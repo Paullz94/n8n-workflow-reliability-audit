@@ -111,6 +111,10 @@ class PackageFulfillmentTests(unittest.TestCase):
             )
             self.assertEqual(r["focus"],"recovery")
 
+    def test_claim_guard_is_wired_into_package_fulfillment(self):
+        source=__import__("inspect").getsource(package_fulfillment)
+        self.assertGreaterEqual(source.count("customer_claim_guard.assert_safe_report"),2)
+
 
 if __name__=="__main__":
     unittest.main()
