@@ -18,11 +18,21 @@ UNSUPPORTED_PATTERNS = (
 )
 
 
+NEGATION_RE = re.compile(r"\b(?:not|never|cannot|can't|do not|does not|not yet|must not|should not)\b", re.I)
+
+
+def _is_negated(text: str, start: int) -> bool:
+    prefix=text[max(0,start-48):start]
+    return bool(NEGATION_RE.search(prefix))
+
+
 def find_unsupported_claims(text: str) -> list[str]:
+    value=text or ""
     hits=[]
     for pattern in UNSUPPORTED_PATTERNS:
-        match=pattern.search(text or "")
-        if match:
+        for match in pattern.finditer(value):
+            if _is_negated(value,match.start()):
+                continue
             hits.append(match.group(0))
     return hits
 
