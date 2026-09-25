@@ -4,108 +4,111 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Free Make.com Reliability Preflight — PCFlows</title>
-  <meta name="description" content="Run a privacy-first local reliability preflight on a sanitized Make.com scenario blueprint.">
-  <meta name="theme-color" content="#081019">
+  <meta name="description" content="Run a deterministic local reliability preflight on a sanitized Make.com scenario blueprint.">
+  <meta name="theme-color" content="#050505">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <style>
-    :root{--bg:#081019;--panel:#0d1722;--line:#223244;--text:#f5f7fa;--muted:#9caabd;--accent:#78e6c2;--accent2:#7bb8ff;--warn:#f4c96b;--danger:#ff8b81;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color-scheme:dark}
-    *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 75% -10%,rgba(123,184,255,.12),transparent 30%),var(--bg);color:var(--text)}
-    a{color:inherit}.wrap{width:min(1050px,calc(100% - 28px));margin:auto}
-    header{border-bottom:1px solid rgba(255,255,255,.06)}nav{height:68px;display:flex;align-items:center;justify-content:space-between}
-    .brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:850}.mark{width:30px;height:30px;border-radius:9px;border:1px solid rgba(120,230,194,.45);display:grid;place-items:center;color:var(--accent);font-size:11px;background:rgba(120,230,194,.07)}
-    .nav{display:flex;gap:16px;font-size:13px;color:var(--muted)}.nav a{text-decoration:none}.nav a:hover{color:var(--text)}
-    main{padding:60px 0 80px}.eyebrow{color:var(--accent);font-size:12px;font-weight:850;letter-spacing:.12em;text-transform:uppercase}
-    h1{font-size:clamp(40px,7vw,64px);line-height:1;letter-spacing:-.045em;margin:14px 0 18px}.lead{font-size:18px;color:#afbdcb;line-height:1.65;max-width:760px}
-    .privacybar{display:flex;gap:10px;flex-wrap:wrap;margin:24px 0}.pill{padding:7px 10px;border:1px solid #2a3c4e;border-radius:999px;font-size:11px;color:#aebccc;background:rgba(255,255,255,.018)}
-    .card{border:1px solid var(--line);background:var(--panel);border-radius:20px;padding:20px;margin:18px 0}
-    .drop{border:1px dashed #365069;border-radius:16px;padding:18px;background:#09121b;transition:.18s}.drop.active{border-color:var(--accent);background:rgba(120,230,194,.04)}
-    textarea{width:100%;min-height:260px;resize:vertical;background:transparent;border:0;outline:0;color:#eaf0f6;padding:0;font:13px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace}
-    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.button,button{border:1px solid transparent;border-radius:10px;padding:11px 15px;font-weight:780;cursor:pointer;font:inherit;text-decoration:none}.primary{background:var(--text);color:#081019}.secondary{background:#14202c;color:var(--text);border-color:#293c4f}.ghost{background:transparent;color:#aab8c7;border-color:#26384a}.button input{display:none}
-    .status{margin-left:auto;color:#7f8fa0;font-size:12px}.hidden{display:none!important}
-    .summary{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px;margin:18px 0}.metric{background:#09121b;border:1px solid #243547;border-radius:13px;padding:13px}.metric b{display:block;font-size:27px}.metric span{font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:#8292a4}
-    .finding{border-left:3px solid #6e7681;padding:14px 15px;margin:10px 0;background:#09121b;border-radius:0 12px 12px 0}.finding[data-severity="critical"]{border-color:#ff5f57}.finding[data-severity="high"]{border-color:var(--danger)}.finding[data-severity="medium"]{border-color:var(--warn)}.finding[data-severity="low"]{border-color:var(--accent2)}
-    .finding h3{margin:0 0 6px;font-size:14px}.finding p{margin:4px 0;color:#afbdcb;line-height:1.55;font-size:13px}.meta{font:11px ui-monospace,SFMono-Regular,Menlo,monospace;color:#6f8193;word-break:break-word}
-    .result-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}.result-note{max-width:580px;color:#7f8fa0;font-size:12px;line-height:1.5}
-    .scope{font-size:13px;color:#8796a7;line-height:1.65}.next{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}.next .card{margin:0}
-    @media(max-width:700px){.summary{grid-template-columns:repeat(2,minmax(0,1fr))}.status{width:100%;margin-left:0}.next{grid-template-columns:1fr}.nav a:not(:last-child){display:none}}
-  </style>
+  <link rel="stylesheet" href="site.css">
 </head>
 <body>
-<header><div class="wrap"><nav>
-  <a class="brand" href="./"><span class="mark">PC</span><span>PCFlows</span></a>
-  <div class="nav"><a href="./">Home</a><a href="method.html">Method</a><a href="sample-report.html">Sample report</a><a href="intake.html">Prepare intake</a></div>
-</nav></div></header>
-
-<main><div class="wrap">
-  <div class="eyebrow">Free · deterministic · local</div>
-  <h1>Reliability Preflight</h1>
-  <p class="lead">Load a sanitized Make.com blueprint and get repeatable static reliability findings. The core scan runs entirely in your browser — no Make login and no blueprint upload.</p>
-
-  <div class="privacybar">
-    <span class="pill">No network request in the scan path</span>
-    <span class="pill">No Make API token</span>
-    <span class="pill">No sign-up</span>
-    <span class="pill">Downloadable JSON + Markdown</span>
+<header class="site-header">
+  <div class="wrap site-nav">
+    <a class="wordmark" href="./">PCFlows</a>
+    <nav class="nav-links">
+      <a href="method.html">Method</a>
+      <a href="sample-report.html">Sample report</a>
+      <a class="nav-cta" href="intake.html">Prepare intake</a>
+    </nav>
   </div>
+</header>
 
-  <section class="card">
-    <div id="drop" class="drop">
-      <textarea id="blueprint" spellcheck="false" placeholder='Drop a sanitized .json blueprint here, choose a file, paste JSON, or load the synthetic demo.'></textarea>
+<main>
+  <div class="wrap tool-shell">
+    <div class="tool-intro">
+      <div class="kicker">Free · local · deterministic</div>
+      <h1>Reliability Preflight</h1>
+      <p class="lead">Paste or load a sanitized Make.com blueprint. The core scan runs in this browser and does not upload your blueprint to PCFlows.</p>
     </div>
-    <div class="row" style="margin-top:13px">
-      <label class="button secondary" for="file">Choose JSON<input id="file" type="file" accept="application/json,.json"></label>
-      <button class="ghost" id="demo" type="button">Load synthetic demo</button>
-      <button class="primary" id="scan" type="button">Run local scan</button>
-      <button class="ghost" id="clear" type="button">Clear</button>
-      <span class="status" id="status">Nothing leaves this page during the core scan.</span>
-    </div>
-  </section>
 
-  <section class="card hidden" id="results">
-    <div class="result-head">
-      <div><div class="eyebrow">Static evidence</div><h2 style="margin:7px 0 0">Reliability findings</h2></div>
-      <div class="result-note">PCFlows deliberately does not collapse the result into a single “health score”. A static blueprint has blind spots; severity and evidence are more useful than false precision.</div>
+    <div class="rule-list" style="margin-bottom:24px">
+      <div class="rule-row"><div class="label">Privacy</div><div class="value">No Make login, no API token and no network request in the core scan path.</div></div>
+      <div class="rule-row"><div class="label">Input</div><div class="value">Remove passwords, API keys, tokens, private Make webhook URLs, customer records and unnecessary personal data.</div></div>
+      <div class="rule-row"><div class="label">Output</div><div class="value">Severity + evidence per finding, with downloadable JSON and Markdown.</div></div>
     </div>
-    <div class="summary" id="summary"></div>
-    <div id="findings"></div>
-    <div class="row" style="margin-top:17px">
-      <button class="secondary" id="downloadJson" type="button">Download JSON</button>
-      <button class="secondary" id="downloadMd" type="button">Download Markdown</button>
-      <a class="button ghost" href="sample-report.html">See the deeper paid report</a>
+
+    <section class="tool-box">
+      <textarea id="blueprint" spellcheck="false" placeholder='Paste a sanitized Make.com blueprint here, drop a .json file onto this box, or load the synthetic demo.'></textarea>
+      <div class="tool-actions">
+        <label class="button secondary" for="file" style="margin:0">Choose JSON<input id="file" type="file" accept="application/json,.json" hidden></label>
+        <button class="button secondary" id="demo" type="button">Load synthetic demo</button>
+        <button class="button primary" id="scan" type="button">Run local scan</button>
+        <button class="button secondary" id="clear" type="button">Clear</button>
+        <span class="status" id="status">Nothing leaves this page during the core scan.</span>
+      </div>
+    </section>
+
+    <section class="card hidden" id="results" style="margin-top:18px">
+      <div class="grid-2" style="align-items:end">
+        <div>
+          <div class="kicker">Static evidence</div>
+          <h2 style="font-size:34px;margin-bottom:0">Reliability findings</h2>
+        </div>
+        <p class="small">PCFlows does not turn a blueprint into a fake precision score. Static analysis has blind spots, so the result keeps the evidence visible.</p>
+      </div>
+      <div class="summary-grid" id="summary"></div>
+      <div id="findings"></div>
+      <div class="tool-actions">
+        <button class="button secondary" id="downloadJson" type="button">Download JSON</button>
+        <button class="button secondary" id="downloadMd" type="button">Download Markdown</button>
+        <a class="button secondary" href="sample-report.html">See paid-report example</a>
+      </div>
+    </section>
+
+    <section class="card hidden" id="qualification" style="margin-top:18px"></section>
+
+    <div class="grid-2" style="margin-top:18px">
+      <div class="card">
+        <div class="kicker">Before sharing</div>
+        <h3 style="margin-top:14px">Sanitize the blueprint.</h3>
+        <p>A possible secret-like finding stops paid processing. Remove credentials and private webhook URLs before sending a file to PCFlows.</p>
+      </div>
+      <div class="card">
+        <div class="kicker">Need deeper prioritization?</div>
+        <h3 style="margin-top:14px">Add non-sensitive business context.</h3>
+        <p>The local intake generator describes the scenario goal, critical side effects, ordering and recovery expectations.</p>
+        <p><a href="intake.html">Prepare audit intake →</a></p>
+      </div>
     </div>
-  </section>
 
-  <section class="card hidden" id="qualification"></section>
-
-  <div class="next">
-    <section class="card"><div class="eyebrow">Before sharing anything</div><h3>Sanitize the blueprint</h3><p class="scope">Remove passwords, API keys, tokens, private Make webhook URLs, private webhook secrets, customer records and unnecessary personal data. A secret-like finding in paid fulfillment hard-stops processing.</p></section>
-    <section class="card"><div class="eyebrow">Need context-aware prioritization?</div><h3>Prepare the audit intake</h3><p class="scope">The local intake generator creates only a small non-sensitive JSON file describing the scenario goal, critical side effects, ordering and recovery expectations.</p><p><a class="button secondary" href="intake.html">Prepare intake →</a></p></section>
+    <div class="notice" style="margin-top:18px">
+      <strong>Scope limitation.</strong> Static analysis cannot prove runtime correctness, connection health, credential validity, third-party availability, complete business logic or the absence of defects.
+    </div>
   </div>
-
-  <section class="card scope">
-    <strong>Scope limitation.</strong> This is deterministic static analysis. It cannot prove runtime correctness, connection health, credential validity, third-party availability, live data quality, complete business logic or the absence of defects.
-  </section>
-</div></main>
+</main>
 
 <script src="scanner-core.js"></script>
 <script>
 (() => {
   const $ = id => document.getElementById(id);
-  const textarea = $('blueprint'), file = $('file'), status = $('status'), results = $('results'), drop = $('drop');
+  const textarea = $('blueprint'), file = $('file'), status = $('status'), results = $('results');
   let current = null, sourceName = 'pasted blueprint';
 
   async function loadFile(selected){
     if (!selected) return;
-    if (selected.size > 5 * 1024 * 1024) { status.textContent='File is too large for this local preflight (max 5 MB).'; return; }
+    if (selected.size > 5 * 1024 * 1024) {
+      status.textContent = 'File too large for this local preflight (max 5 MB).';
+      return;
+    }
     sourceName = selected.name;
     textarea.value = await selected.text();
     status.textContent = 'Loaded locally: ' + selected.name;
   }
 
   file.addEventListener('change', () => loadFile(file.files && file.files[0]));
-  ['dragenter','dragover'].forEach(evt => drop.addEventListener(evt, e => { e.preventDefault(); drop.classList.add('active'); }));
-  ['dragleave','drop'].forEach(evt => drop.addEventListener(evt, e => { e.preventDefault(); drop.classList.remove('active'); }));
-  drop.addEventListener('drop', e => loadFile(e.dataTransfer.files && e.dataTransfer.files[0]));
+
+  const shell = document.querySelector('.tool-box');
+  ['dragenter','dragover'].forEach(evt => shell.addEventListener(evt, e => { e.preventDefault(); shell.style.borderColor='#444'; }));
+  ['dragleave','drop'].forEach(evt => shell.addEventListener(evt, e => { e.preventDefault(); shell.style.borderColor=''; }));
+  shell.addEventListener('drop', e => loadFile(e.dataTransfer.files && e.dataTransfer.files[0]));
 
   $('demo').addEventListener('click', () => {
     sourceName='synthetic PCFlows demo';
@@ -123,7 +126,8 @@
   });
 
   $('clear').addEventListener('click', () => {
-    textarea.value=''; file.value=''; sourceName='pasted blueprint'; current=null; results.classList.add('hidden'); $('qualification').classList.add('hidden');
+    textarea.value=''; file.value=''; sourceName='pasted blueprint'; current=null;
+    results.classList.add('hidden'); $('qualification').classList.add('hidden');
     status.textContent='Nothing leaves this page during the core scan.';
   });
 
@@ -136,17 +140,23 @@
       status.textContent='Scan complete. Processed in this browser.';
       results.scrollIntoView({behavior:'smooth',block:'start'});
     } catch (error) {
-      current=null; results.classList.add('hidden'); status.textContent='Invalid JSON: ' + error.message;
+      current=null; results.classList.add('hidden'); $('qualification').classList.add('hidden');
+      status.textContent='Invalid JSON: ' + error.message;
     }
   });
 
   function esc(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
   function render(report){
-    $('summary').innerHTML=['critical','high','medium','low','info'].map(level=>'<div class="metric"><b>'+report.summary[level]+'</b><span>'+level+'</span></div>').join('');
-    $('findings').innerHTML=report.findings.length?report.findings.map(f=>{
+    $('summary').innerHTML=['critical','high','medium','low','info'].map(level =>
+      '<div class="metric"><b>'+report.summary[level]+'</b><span>'+level+'</span></div>'
+    ).join('');
+
+    $('findings').innerHTML=report.findings.length ? report.findings.map(f => {
       const meta=[f.module,f.module_id!==null?'id '+f.module_id:null,f.path].filter(Boolean).join(' · ');
       return '<article class="finding" data-severity="'+esc(f.severity)+'"><h3>'+esc(f.severity.toUpperCase())+' · '+esc(f.rule)+'</h3><p>'+esc(f.message)+'</p>'+(meta?'<div class="meta">'+esc(meta)+'</div>':'')+'</article>';
-    }).join(''):'<p class="scope">No static reliability findings detected by the current rule set. That is not proof of runtime correctness.</p>';
+    }).join('') : '<p class="muted">No static reliability findings detected by the current rule set. That is not proof of runtime correctness.</p>';
+
     results.classList.remove('hidden');
     renderQualification(report);
   }
@@ -161,16 +171,25 @@
       'incomplete-executions-disabled-review','data-loss-enabled',
       'write-commit-partial-state-review','rollback-limited-by-autocommit-review'
     ]);
+
     if(rules.has('possible-secret-in-blueprint')){
-      q.innerHTML='<div class="eyebrow">Stop here</div><h3>Sanitize this blueprint again before sharing it.</h3><p class="scope">The preflight detected a possible secret-like literal. Do not send this file for a paid audit. Remove the sensitive value, rotate it if necessary, and export a clean copy.</p>';
+      q.innerHTML='<div class="kicker">Stop here</div><h3 style="margin-top:14px">Sanitize this blueprint again.</h3><p>A possible secret-like literal was detected. Do not send this file for a paid audit. Remove the sensitive value, rotate it if necessary, and export a clean copy.</p>';
     } else if(report.findings.some(f=>highValue.has(f.rule))){
-      q.innerHTML='<div class="eyebrow">Good paid-audit candidate</div><h3>These findings may benefit from business-context prioritization.</h3><p class="scope">The free scan found reliability/data-integrity signals where business context matters. Prepare the small local intake file to describe the scenario goal, critical side effects, ordering and recovery expectations.</p><p><a class="button secondary" href="intake.html">Prepare audit intake →</a> <a class="button ghost" href="sample-report.html">See sample paid report</a></p>';
+      q.innerHTML='<div class="kicker">Possible paid-audit fit</div><h3 style="margin-top:14px">Business context could materially change the priority.</h3><p>The free scan found reliability/data-integrity signals where the scenario goal and critical side effects matter.</p><p><a href="intake.html">Prepare the local audit intake →</a></p>';
     } else {
-      q.innerHTML='<div class="eyebrow">Free result may be enough</div><h3>No strong paid-audit signal from the current static evidence.</h3><p class="scope">PCFlows does not try to sell a deeper review when the free preflight has little to prioritize. Keep the report, test the scenario with safe synthetic data, and return if you have runtime symptoms or business-critical concerns.</p>';
+      q.innerHTML='<div class="kicker">Free result may be enough</div><h3 style="margin-top:14px">No strong paid-audit signal in the current static evidence.</h3><p>Keep the result and test with synthetic data. PCFlows should not push a paid review when the free scan has little additional context to prioritize.</p>';
     }
     q.classList.remove('hidden');
   }
-  function download(name,type,text){const blob=new Blob([text],{type});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),0);}
+
+  function download(name,type,text){
+    const blob=new Blob([text],{type});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),0);
+  }
+
   $('downloadJson').addEventListener('click',()=>{if(current)download('pcflows-preflight.json','application/json',JSON.stringify(current,null,2)+'\n');});
   $('downloadMd').addEventListener('click',()=>{if(current)download('pcflows-preflight.md','text/markdown',NorthstarScanner.renderMarkdown(current.source,current.findings));});
 })();
