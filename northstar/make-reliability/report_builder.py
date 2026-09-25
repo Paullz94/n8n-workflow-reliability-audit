@@ -148,6 +148,8 @@ ALLOWED_CONTEXT = {
     "duplicate_tolerance",
     "ordering_required",
     "recovery_expectation",
+    "requested_scope",
+    "requested_focus",
 }
 
 
@@ -205,7 +207,7 @@ def render_report(source: str, findings: list[audit_make.Finding], context: dict
     scenario_name = context.get("scenario_name") or source
 
     lines = [
-        "# Northstar Make Data Integrity Audit",
+        "# PCFlows Data Integrity Audit",
         "",
         f"Scenario: **{scenario_name}**",
         "",
