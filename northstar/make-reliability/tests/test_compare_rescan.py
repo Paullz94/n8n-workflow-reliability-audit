@@ -53,6 +53,22 @@ class ReScanCompareTests(unittest.TestCase):
         md = compare_rescan.render_markdown(result)
         self.assertIn("does not prove", md)
 
+    def test_module_reorder_does_not_create_false_new_and_resolved(self):
+        before = {"flow": [
+            {"id": 10, "module": "crm:updateContact", "mapper": {}},
+        ]}
+        after = {"flow": [
+            {"id": 99, "module": "json:ParseJSON", "mapper": {}},
+            {"id": 10, "module": "crm:updateContact", "mapper": {}},
+        ]}
+        result = compare_rescan.compare(before, after)
+        rules_remaining = {x["rule"] for x in result["remaining"]}
+        self.assertIn("write-without-error-handler", rules_remaining)
+        self.assertEqual(
+            [x for x in result["new"] if x["rule"] == "write-without-error-handler"],
+            [],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
