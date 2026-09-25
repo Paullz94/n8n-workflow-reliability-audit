@@ -114,6 +114,34 @@ class RuntimeTestContractTests(unittest.TestCase):
         })
         self.assertTrue(all(r.values()))
 
+    def test_customer_match_contract(self):
+        r=runtime_test_contract.assert_customer_match({
+            "expected_customer_id":"C-1",
+            "matched_customer_id":"C-1",
+        })
+        self.assertTrue(all(r.values()))
+
+    def test_ambiguous_ai_routes_to_review_without_write(self):
+        r=runtime_test_contract.assert_ambiguous_review({
+            "ambiguous_input":True,
+            "routed_to_review":True,
+            "write_performed":False,
+        })
+        self.assertTrue(all(r.values()))
+
+    def test_concurrent_pair_requires_same_final_state_and_single_effect(self):
+        a={"business_key":"L-1","final_state":"owner:A","side_effect_ids":["lead_1"]}
+        b={"business_key":"L-1","final_state":"owner:A","side_effect_ids":["lead_1"]}
+        r=runtime_test_contract.assert_concurrent_pair(a,b)
+        self.assertTrue(r["final_state_deterministic"])
+        self.assertTrue(r["duplicate_side_effects_zero"])
+
+    def test_concurrent_pair_rejects_divergent_state(self):
+        a={"business_key":"L-1","final_state":"owner:A","side_effect_ids":["lead_1"]}
+        b={"business_key":"L-1","final_state":"owner:B","side_effect_ids":["lead_1"]}
+        r=runtime_test_contract.assert_concurrent_pair(a,b)
+        self.assertFalse(r["final_state_deterministic"])
+
 
 if __name__=="__main__":
     unittest.main()
