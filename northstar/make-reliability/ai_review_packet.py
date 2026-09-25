@@ -20,6 +20,8 @@ from pathlib import Path
 from typing import Any
 
 import audit_make
+import case_isolation
+import customer_data_guard
 import report_builder
 
 
@@ -40,8 +42,17 @@ def load_object(path: Path, label: str) -> dict[str, Any]:
 def make_packet(
     blueprint: dict[str, Any],
     raw_context: dict[str, Any],
+    *,
+    case_scope_id: str | None = None,
 ) -> dict[str, Any]:
     context = report_builder.sanitize_context(raw_context)
+    try:
+        customer_data_guard.assert_no_sensitive_literals(blueprint,"blueprint")
+        customer_data_guard.assert_no_sensitive_literals(context,"context")
+    except customer_data_guard.SensitiveDataError as exc:
+        raise PacketError(str(exc)) from exc
+    if case_scope_id is not None:
+        case_isolation.assert_case_scope_id(case_scope_id)
     findings = audit_make.scan_blueprint(blueprint)
 
     if any(f.rule == "possible-secret-in-blueprint" for f in findings):
@@ -68,7 +79,7 @@ def make_packet(
             "official_reference": report_builder.RULE_REFERENCES.get(f.rule),
         })
 
-    return {
+    packet = {
         "schema": "pcflows.ai-review-packet.v1",
         "purpose": "bounded interpretation of deterministic Make.com reliability findings",
         "context": context,
@@ -97,6 +108,9 @@ def make_packet(
             },
         },
     }
+    if case_scope_id is not None:
+        packet["case_scope_id"] = case_scope_id
+    return packet
 
 
 def main() -> int:
