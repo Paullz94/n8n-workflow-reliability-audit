@@ -1,67 +1,83 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Method — PCFlows Make.com Reliability Audits</title>
-<meta name="description" content="How PCFlows performs evidence-first Make.com reliability and data-integrity reviews.">
-<meta name="theme-color" content="#081019">
-<style>
-:root{--bg:#081019;--panel:#0d1722;--line:#223244;--text:#f5f7fa;--muted:#9caabd;--accent:#78e6c2;--accent2:#7bb8ff;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color-scheme:dark}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 75% -10%,rgba(123,184,255,.10),transparent 30%),var(--bg);color:var(--text)}
-a{color:var(--accent2)}main{max-width:920px;margin:auto;padding:42px 20px 80px}h1{font-size:clamp(42px,7vw,64px);line-height:1;letter-spacing:-.045em;margin:14px 0 20px}h2{margin-top:42px;letter-spacing:-.02em}p,li{color:#aebccc;line-height:1.7}.eyebrow{color:var(--accent);font-size:12px;font-weight:850;text-transform:uppercase;letter-spacing:.12em}.card{border:1px solid var(--line);background:var(--panel);border-radius:18px;padding:20px;margin:16px 0}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.tag{display:inline-block;border:1px solid #2d4154;border-radius:999px;padding:6px 9px;font-size:11px;color:#afbdcb;margin:3px}.rule{border-top:1px solid rgba(255,255,255,.07);padding:15px 0}.rule:first-child{border-top:0}.rule strong{display:block;margin-bottom:5px}.small{font-size:12px;color:#7f8fa0}@media(max-width:700px){.grid{grid-template-columns:1fr}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Method — PCFlows Make.com Reliability Audits</title>
+  <meta name="description" content="How PCFlows performs evidence-first Make.com reliability and data-integrity reviews.">
+  <meta name="theme-color" content="#050505">
+  <link rel="stylesheet" href="site.css">
 </head>
-<body><main>
-<p><a href="./">← PCFlows</a></p>
-<div class="eyebrow">Evidence-first methodology</div>
-<h1>What the audit knows — and what it does not.</h1>
-<p>PCFlows starts with deterministic analysis of a sanitized Make.com blueprint. The goal is not to award a vague health score. The goal is to identify concrete reliability conditions, explain why they may matter to business data, and define the smallest safe way to verify them.</p>
+<body>
+<header class="site-header">
+  <div class="wrap site-nav">
+    <a class="wordmark" href="./">PCFlows</a>
+    <nav class="nav-links">
+      <a href="guides/make-error-handlers-reliability.html">Guide</a>
+      <a href="sample-report.html">Sample report</a>
+      <a class="nav-cta" href="scanner.html">Free preflight</a>
+    </nav>
+  </div>
+</header>
 
-<div class="grid">
-  <div class="card"><div class="eyebrow">1 · Evidence</div><h2 style="margin-top:10px">Read the blueprint</h2><p>PCFlows inspects exported structure, scenario settings, module types, error routes and selected non-sensitive metadata. It does not need production credentials.</p></div>
-  <div class="card"><div class="eyebrow">2 · Interpret</div><h2 style="margin-top:10px">Apply Make semantics</h2><p>Rules are tied to documented Make behavior where possible. A finding is a review signal, not proof that production is broken.</p></div>
-  <div class="card"><div class="eyebrow">3 · Prioritize</div><h2 style="margin-top:10px">Use business context</h2><p>The paid audit uses a small allowlisted context file: scenario goal, critical side effects, duplicate tolerance, ordering and recovery expectations.</p></div>
-  <div class="card"><div class="eyebrow">4 · Verify</div><h2 style="margin-top:10px">Design safe tests</h2><p>Each important finding gets a concrete verification step using sanitized or synthetic test events rather than production secrets.</p></div>
-</div>
+<main>
+  <div class="wrap article">
+    <div class="article-top">
+      <div class="kicker">Evidence-first methodology</div>
+      <h1>What the audit knows — and what it does not.</h1>
+      <p class="lead">PCFlows starts with deterministic analysis of a sanitized Make.com blueprint. The goal is not to award a vague health score. The goal is to identify concrete reliability conditions and define a safe way to verify them.</p>
+    </div>
 
-<h2>Reliability signals currently reviewed</h2>
-<div class="card">
-  <div class="rule"><strong>Retry & idempotency</strong><span>Can retrying a write repeat an external side effect?</span></div>
-  <div class="rule"><strong>Skip / Ignore handlers</strong><span>Can a failed bundle be dropped while the scenario continues?</span></div>
-  <div class="rule"><strong>Resume handlers</strong><span>Can substitute output make downstream processing look healthier than the failed write really was?</span></div>
-  <div class="rule"><strong>Commit / Rollback boundaries</strong><span>Can an error leave intentional partial state, or is rollback limited by earlier commits?</span></div>
-  <div class="rule"><strong>Concurrency & ordering</strong><span>Can overlapping runs race on the same business record?</span></div>
-  <div class="rule"><strong>Incomplete executions & data loss</strong><span>Is failed work recoverable according to the exported scenario settings?</span></div>
-  <div class="rule"><strong>Silent filter skips</strong><span>Can the scenario finish without the expected business-side write ever occurring?</span></div>
-  <div class="rule"><strong>Observability</strong><span>Do privacy/confidentiality settings reduce the evidence available during incident diagnosis?</span></div>
-</div>
+    <div class="grid-2">
+      <div class="card"><div class="number">01</div><h3>Read the blueprint</h3><p>Inspect exported structure, scenario settings, module types and error routes. Production credentials are not required.</p></div>
+      <div class="card"><div class="number">02</div><h3>Apply Make semantics</h3><p>Rules are tied to documented Make behavior where possible. A finding is a review signal, not proof that production is broken.</p></div>
+      <div class="card"><div class="number">03</div><h3>Prioritize with context</h3><p>The paid audit uses only a small allowlisted context file: scenario goal, critical side effects, duplicate tolerance, ordering and recovery expectations.</p></div>
+      <div class="card"><div class="number">04</div><h3>Verify safely</h3><p>Important findings receive concrete verification steps using sanitized or synthetic test events.</p></div>
+    </div>
 
-<h2>Deterministic first, AI second</h2>
-<p>The free preflight is deterministic. For the paid audit, AI-assisted reasoning may be used only on a privacy-bounded packet containing the deterministic findings and allowlisted business context. It does not receive the raw blueprint through this review packet.</p>
-<p>AI may help prioritize, explain ambiguity and propose safe verification. It is not allowed to invent runtime incidents, credentials, logs or unsupported customer impact.</p>
+    <h2>Signals currently reviewed</h2>
+    <div class="rule-list">
+      <div class="rule-row"><div class="label">Retry</div><div class="value">Can repeating a write repeat the external side effect?</div></div>
+      <div class="rule-row"><div class="label">Skip / Ignore</div><div class="value">Can a failed bundle disappear while later work continues?</div></div>
+      <div class="rule-row"><div class="label">Resume</div><div class="value">Can substitute output make downstream processing look healthier than the failed write really was?</div></div>
+      <div class="rule-row"><div class="label">Commit / Rollback</div><div class="value">Can an error leave partial state, or is rollback limited by work already committed?</div></div>
+      <div class="rule-row"><div class="label">Concurrency</div><div class="value">Can overlapping runs race on the same business record?</div></div>
+      <div class="rule-row"><div class="label">Recovery</div><div class="value">Is failed work visible and recoverable under the exported scenario settings?</div></div>
+      <div class="rule-row"><div class="label">Filters</div><div class="value">Can a filtered-out bundle look like technical success while the expected business write never happened?</div></div>
+      <div class="rule-row"><div class="label">Observability</div><div class="value">Do confidentiality settings reduce the evidence available during incident diagnosis?</div></div>
+    </div>
 
-<h2>Official Make references</h2>
-<p>Higher-consequence rules are grounded against Make documentation and blueprint conventions, including:</p>
-<p>
-  <span class="tag"><a href="https://help.make.com/skip-error-handler">Skip</a></span>
-  <span class="tag"><a href="https://help.make.com/resume-error-handler">Resume</a></span>
-  <span class="tag"><a href="https://help.make.com/commit-error-handler">Commit</a></span>
-  <span class="tag"><a href="https://help.make.com/rollback-error-handler">Rollback</a></span>
-  <span class="tag"><a href="https://help.make.com/incomplete-executions">Incomplete executions</a></span>
-  <span class="tag"><a href="https://help.make.com/webhooks">Webhooks / ordering</a></span>
-</p>
+    <h2>Deterministic first. AI second.</h2>
+    <p>The free preflight is deterministic. For the paid audit, AI-assisted reasoning may be used only on a privacy-bounded packet containing deterministic findings and allowlisted business context. That review packet does not contain the raw blueprint.</p>
+    <p>AI may help prioritize, explain ambiguity and suggest safe verification. It is not allowed to invent runtime incidents, credentials, logs or unsupported customer impact.</p>
 
-<h2>Static-analysis limits</h2>
-<div class="card">
-<ul>
-<li>No static blueprint can prove that credentials are valid.</li>
-<li>It cannot prove that a third-party API is currently healthy.</li>
-<li>It cannot know whether business intent is correct unless the customer provides context.</li>
-<li>It cannot prove that every defect has been found.</li>
-<li>It is not a security, legal, accounting or compliance certification.</li>
-</ul>
-</div>
+    <h2>Official Make references</h2>
+    <div class="rule-list">
+      <div class="rule-row"><div class="label">Skip</div><div class="value"><a href="https://help.make.com/skip-error-handler">Make documentation</a></div></div>
+      <div class="rule-row"><div class="label">Resume</div><div class="value"><a href="https://help.make.com/resume-error-handler">Make documentation</a></div></div>
+      <div class="rule-row"><div class="label">Commit</div><div class="value"><a href="https://help.make.com/commit-error-handler">Make documentation</a></div></div>
+      <div class="rule-row"><div class="label">Rollback</div><div class="value"><a href="https://help.make.com/rollback-error-handler">Make documentation</a></div></div>
+      <div class="rule-row"><div class="label">Incomplete executions</div><div class="value"><a href="https://help.make.com/incomplete-executions">Make documentation</a></div></div>
+      <div class="rule-row"><div class="label">Webhook ordering</div><div class="value"><a href="https://help.make.com/webhooks">Make documentation</a></div></div>
+    </div>
 
-<p><a href="scanner.html">Run the free local preflight →</a> · <a href="sample-report.html">View a synthetic sample report →</a> · <a href="guides/make-error-handlers-reliability.html">Read the Make error-handler reliability guide →</a></p>
-<p class="small">PCFlows is an independent technical service and is not affiliated with or endorsed by Make.com.</p>
-</main></body></html>
+    <h2>Static-analysis limits</h2>
+    <div class="card">
+      <ul class="clean-list">
+        <li>No blueprint can prove that credentials are valid.</li>
+        <li>It cannot prove that a third-party API is currently healthy.</li>
+        <li>It cannot know complete business intent without customer context.</li>
+        <li>It cannot prove that every defect has been found.</li>
+        <li>It is not a security, legal, accounting or compliance certification.</li>
+      </ul>
+    </div>
+
+    <div class="actions">
+      <a class="button primary" href="scanner.html">Run free preflight</a>
+      <a class="button secondary" href="sample-report.html">View sample report</a>
+      <a class="button secondary" href="guides/make-error-handlers-reliability.html">Read reliability guide</a>
+    </div>
+  </div>
+</main>
+</body>
+</html>
