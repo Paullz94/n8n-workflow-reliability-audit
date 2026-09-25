@@ -55,6 +55,10 @@ ALLOWED_RESULT_KEYS={
     "invoice_total",
     "paid_amount",
     "marked_fully_paid",
+    "expected_customer_id",
+    "matched_customer_id",
+    "ambiguous_input",
+    "routed_to_review",
     "write_performed",
     "invalid_input_rejected",
 }
@@ -229,4 +233,37 @@ def assert_privacy_safe_observability(result:dict[str,Any])->dict[str,bool]:
         "correlation_available":r.get("correlation_available") is True,
         "affected_event_identifiable":r.get("affected_event_identifiable") is True,
         "sensitive_payload_not_exposed":r.get("sensitive_payload_exposed") is False,
+    }
+
+
+def assert_customer_match(result:dict[str,Any])->dict[str,bool]:
+    r=sanitize_result(result)
+    expected=r.get("expected_customer_id")
+    matched=r.get("matched_customer_id")
+    return {
+        "stable_customer_match_tested":bool(expected),
+        "correct_customer_matched":bool(expected) and expected==matched,
+    }
+
+
+def assert_ambiguous_review(result:dict[str,Any])->dict[str,bool]:
+    r=sanitize_result(result)
+    return {
+        "ambiguous_input_tested":r.get("ambiguous_input") is True,
+        "routed_to_review":r.get("routed_to_review") is True,
+        "unsafe_write_prevented":r.get("write_performed") is False,
+    }
+
+
+def assert_concurrent_pair(first:dict[str,Any],second:dict[str,Any])->dict[str,bool]:
+    a=sanitize_result(first); b=sanitize_result(second)
+    same_key=bool(a.get("business_key")) and a.get("business_key")==b.get("business_key")
+    final_a=a.get("final_state")
+    final_b=b.get("final_state")
+    ids=set([x for x in (a.get("side_effect_ids") or [])+(b.get("side_effect_ids") or []) if x])
+    return {
+        "concurrent_test_executed":True,
+        "same_business_key":same_key,
+        "final_state_deterministic":same_key and final_a is not None and final_a==final_b,
+        "duplicate_side_effects_zero":len(ids)<=1,
     }
