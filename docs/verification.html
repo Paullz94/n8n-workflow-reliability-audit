@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How PCFlows Verifies Remediation</title>
+<meta name="description" content="PCFlows does not call a Make.com reliability issue fixed just because a static warning disappears. See the remediation proof standard.">
+<meta name="theme-color" content="#050505"><link rel="stylesheet" href="site.css">
+</head>
+<body>
+<header class="site-header"><div class="wrap site-nav"><a class="wordmark" href="./">PCFlows</a><nav class="nav-links"><a href="packages.html">Services</a><a href="method.html">Method</a><a class="nav-cta" href="scanner.html">Free preflight</a></nav></div></header>
+<main>
+<section class="hero"><div class="wrap">
+<div class="kicker">Remediation proof</div>
+<h1>“The warning disappeared” is not the same as “the issue is fixed.”</h1>
+<p class="lead">PCFlows separates structural evidence from runtime proof so a re-scan cannot overstate what it actually knows.</p>
+</div></section>
+
+<section class="section"><div class="wrap">
+<div class="section-head"><div class="kicker">Proof levels</div><h2>Four different statements. Four different meanings.</h2></div>
+<div class="grid-4">
+<div class="panel"><div class="number">01</div><h3>Detected</h3><p>The original sanitized blueprint matches a deterministic review rule.</p></div>
+<div class="panel"><div class="number">02</div><h3>Statically cleared</h3><p>The revised blueprint no longer matches that static rule. This proves a structural change, not live behavior.</p></div>
+<div class="panel"><div class="number">03</div><h3>Evidence supported</h3><p>Sanitized/customer test evidence supports the remediation, but PCFlows did not independently execute the test.</p></div>
+<div class="panel"><div class="number">04</div><h3>Verified fixed</h3><p>Reserved for a cleared static signal plus all rule-specific assertions passing in a connected synthetic test run PCFlows can independently observe.</p></div>
+</div>
+</div></section>
+
+<section class="section"><div class="wrap grid-2">
+<div><div class="kicker">Example</div><h2>A duplicate-write risk needs a replay test.</h2><p class="lead">Adding a guard to the blueprint is useful evidence, but the important business question is still whether replaying the same event can create the side effect twice.</p></div>
+<div class="rule-list">
+<div class="rule-row"><div class="label">Detect</div><div class="value">A write can be retried or repeated.</div></div>
+<div class="rule-row"><div class="label">Change</div><div class="value">Add destination-appropriate idempotency / stable-key protection.</div></div>
+<div class="rule-row"><div class="label">Re-scan</div><div class="value">Confirm the relevant structural finding is statically cleared where the blueprint exposes that change.</div></div>
+<div class="rule-row"><div class="label">Runtime</div><div class="value">Replay the same synthetic business event and confirm exactly one intended side effect exists.</div></div>
+</div>
+</div></section>
+
+<section class="section"><div class="wrap">
+<div class="section-head"><div class="kicker">Current boundary</div><h2>PCFlows will not sell a guarantee it cannot independently prove.</h2></div>
+<div class="notice">The current product is audit + remediation guidance + verification plan + re-scan. Runtime-dependent findings are not called independently “verified fixed” unless PCFlows has a connected test path that can observe the required synthetic execution evidence.</div>
+<p class="lead" style="margin-top:24px">This matters for retries, concurrency, partial failure, payment state, human handoff and similar problems whose truth depends on what external systems actually did — not only on what the blueprint looks like.</p>
+<div class="actions"><a class="button primary" href="scanner.html">Run free preflight</a><a class="button secondary" href="sample-report.html">View sample audit</a></div>
+</div></section>
+</main>
+<footer class="footer"><div class="wrap footer-row"><div><strong style="color:var(--text)">PCFlows</strong><br>Independent technical service · Not affiliated with Make.com</div><div class="footer-links"><a href="packages.html">Services</a><a href="privacy.html">Privacy</a><a href="mailto:PCMotionstudios@gmail.com">Support</a></div></div></footer>
+</body></html>
