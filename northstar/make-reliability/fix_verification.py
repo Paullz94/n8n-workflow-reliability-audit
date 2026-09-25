@@ -129,7 +129,12 @@ def validate_registry_coverage() -> None:
         )
 
 
-def validate_runtime_evidence(rule: str, evidence: dict[str, Any] | None) -> dict[str, Any]:
+def validate_runtime_evidence(
+    rule: str,
+    evidence: dict[str, Any] | None,
+    *,
+    trusted_connected_evidence: bool = False,
+) -> dict[str, Any]:
     spec=RULE_VERIFICATION_SPECS[rule]
     if spec.mode!="runtime_required":
         return {"complete":True,"trusted":True,"missing":[],"source":"static_only"}
@@ -144,7 +149,16 @@ def validate_runtime_evidence(rule: str, evidence: dict[str, Any] | None) -> dic
 
     missing=[key for key in spec.required_assertions if assertions.get(key) is not True]
     complete=not missing
-    trusted=source in TRUSTED_RUNTIME_SOURCES
+    execution_ids=evidence.get("execution_ids")
+    connected_provenance=(
+        trusted_connected_evidence is True
+        and source in TRUSTED_RUNTIME_SOURCES
+        and evidence.get("provider")=="make"
+        and evidence.get("observed_by_pcflows") is True
+        and isinstance(execution_ids,list)
+        and bool([x for x in execution_ids if x])
+    )
+    trusted=connected_provenance
     supporting=source in SUPPORTING_RUNTIME_SOURCES
 
     return {
@@ -153,6 +167,7 @@ def validate_runtime_evidence(rule: str, evidence: dict[str, Any] | None) -> dic
         "supporting":supporting,
         "missing":missing,
         "source":source or None,
+        "connected_provenance":connected_provenance,
     }
 
 
@@ -161,13 +176,17 @@ def resolution_status(
     rule: str,
     still_present_after: bool,
     evidence: dict[str, Any] | None = None,
+    trusted_connected_evidence: bool = False,
 ) -> dict[str, Any]:
     if rule not in RULE_VERIFICATION_SPECS:
         raise VerificationError(f"unknown verification rule: {rule}")
     spec=RULE_VERIFICATION_SPECS[rule]
 
     if still_present_after:
-        ev=validate_runtime_evidence(rule,evidence)
+        ev=validate_runtime_evidence(
+            rule,evidence,
+            trusted_connected_evidence=trusted_connected_evidence,
+        )
         if spec.mode=="runtime_required" and ev["complete"] and (ev["trusted"] or ev.get("supporting")):
             return {
                 "status":"verified_mitigated_not_statically_cleared",
@@ -190,7 +209,10 @@ def resolution_status(
             "evidence":{"complete":True,"trusted":True,"source":"static_only","missing":[]},
         }
 
-    ev=validate_runtime_evidence(rule,evidence)
+    ev=validate_runtime_evidence(
+        rule,evidence,
+        trusted_connected_evidence=trusted_connected_evidence,
+    )
     if ev["complete"] and ev["trusted"]:
         return {
             "status":"verified_fixed",
