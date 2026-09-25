@@ -28,6 +28,9 @@ jobs:
       - name: Run unit tests
         run: python -m unittest discover -s tests -v
 
+      - name: Verify hardened workflow passes high-severity gate
+        run: python audit.py examples/hardened_order_intake.json --fail-on high --output /tmp/hardened.audit.md
+
       - name: Verify redacted report generation
         shell: bash
         run: |
@@ -36,4 +39,3 @@ jobs:
             --json-output /tmp/unsafe-order.audit.json
           ! grep -q "DEMO_ONLY_NOT_A_REAL_SECRET" /tmp/unsafe-order.audit.md
           ! grep -q "DEMO_ONLY_NOT_A_REAL_SECRET" /tmp/unsafe-order.audit.json
-
