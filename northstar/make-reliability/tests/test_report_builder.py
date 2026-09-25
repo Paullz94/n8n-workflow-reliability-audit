@@ -63,6 +63,18 @@ class ReportBuilderTests(unittest.TestCase):
         self.assertIn("DETECT", report)
         self.assertIn("RECOVER", report)
 
+    def test_official_make_reference_is_included_when_available(self):
+        finding = audit_make.Finding(
+            "write-skip-handler-data-loss-review",
+            "high",
+            "Skip handler review",
+            1,
+            "crm:updateContact",
+            "flow[0]",
+        )
+        report = report_builder.render_report("demo.json", [finding], {"scenario_name": "Demo"})
+        self.assertIn("https://help.make.com/skip-error-handler", report)
+
 
 if __name__ == "__main__":
     unittest.main()
