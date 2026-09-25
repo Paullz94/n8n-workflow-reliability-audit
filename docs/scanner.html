@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Free Make.com Reliability Preflight — PCFlows</title>
+  <meta name="description" content="Run a privacy-first local reliability preflight on a sanitized Make.com scenario blueprint.">
+  <style>
+    :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color-scheme:dark;background:#0c1117;color:#eef2f6}
+    *{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#111927,#0c1117 45%);color:#eef2f6}
+    main{max-width:980px;margin:auto;padding:32px 18px 72px}a{color:#eef2f6}
+    .top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:32px}.brand{font-weight:800}.nav{font-size:14px;color:#9ba7b4}
+    h1{font-size:clamp(34px,7vw,58px);line-height:1.05;margin:10px 0 14px}.lead{max-width:760px;color:#b8c2cc;line-height:1.6;font-size:18px}
+    .pill{display:inline-block;border:1px solid #364352;background:#121b26;border-radius:999px;padding:7px 10px;font-size:12px;color:#d5dce3}
+    .card{border:1px solid #2b3540;background:#101721;border-radius:18px;padding:20px;margin:18px 0}
+    textarea{width:100%;min-height:250px;resize:vertical;background:#090d12;border:1px solid #30363d;border-radius:12px;color:#e6edf3;padding:14px;font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace}
+    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.button,button{border:0;border-radius:10px;padding:11px 15px;font-weight:750;cursor:pointer}.primary{background:#eef2f6;color:#0c1117}.secondary{background:#21262d;color:#eef2f6;border:1px solid #30363d}.button input{display:none}
+    .status{font-size:13px;color:#8b949e;margin-left:auto}.hidden{display:none!important}
+    .summary{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:14px 0}.metric{background:#090d12;border:1px solid #282f38;border-radius:12px;padding:12px}.metric b{display:block;font-size:24px}.metric span{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#8b949e}
+    .finding{border-left:3px solid #6e7681;padding:12px 14px;margin:10px 0;background:#0b1016;border-radius:0 10px 10px 0}.finding[data-severity="critical"]{border-color:#f85149}.finding[data-severity="high"]{border-color:#db6d28}.finding[data-severity="medium"]{border-color:#d29922}.finding[data-severity="low"]{border-color:#58a6ff}.finding h3{margin:0 0 5px;font-size:15px}.finding p{margin:4px 0;color:#b4bec8;line-height:1.5}.meta{font:12px ui-monospace,SFMono-Regular,Menlo,monospace;color:#768390;word-break:break-word}
+    .scope{font-size:13px;color:#8b949e;line-height:1.6}@media(max-width:700px){.summary{grid-template-columns:repeat(2,minmax(0,1fr))}.status{width:100%;margin-left:0}}
+  </style>
+</head>
+<body>
+<main>
+  <div class="top"><div class="brand">PCFlows</div><div class="nav"><a href="./">Home</a> · <a href="intake.html">Prepare intake</a></div></div>
+  <span class="pill">Free · local-only core scan</span>
+  <h1>Make.com Reliability Preflight</h1>
+  <p class="lead">Paste or choose a sanitized Make.com blueprint. The core scan runs in your browser and does not upload the blueprint to PCFlows.</p>
+
+  <section class="card">
+    <label for="blueprint"><strong>Blueprint JSON</strong></label>
+    <textarea id="blueprint" spellcheck="false" placeholder='Paste an exported Make.com scenario blueprint here, or choose a local .json file.'></textarea>
+    <div class="row" style="margin-top:12px">
+      <label class="button secondary" for="file">Choose JSON<input id="file" type="file" accept="application/json,.json"></label>
+      <button class="primary" id="scan" type="button">Run local scan</button>
+      <button class="secondary" id="clear" type="button">Clear</button>
+      <span class="status" id="status">Nothing leaves this page during the core scan.</span>
+    </div>
+  </section>
+
+  <section class="card hidden" id="results">
+    <div class="row"><div><div class="pill">Static result</div><h2>Reliability findings</h2></div><span class="status" id="source"></span></div>
+    <div class="summary" id="summary"></div>
+    <div id="findings"></div>
+    <div class="row" style="margin-top:16px">
+      <button class="secondary" id="downloadJson" type="button">Download JSON</button>
+      <button class="secondary" id="downloadMd" type="button">Download Markdown</button>
+    </div>
+  </section>
+
+  <section class="card scope">
+    <strong>Scope.</strong> This is deterministic static analysis only. It cannot prove runtime correctness, credential validity, third-party availability, business semantics, data quality, or the absence of defects. Remove secrets, passwords, API keys and personal data before using or sharing a blueprint.
+  </section>
+</main>
+<script src="scanner-core.js"></script>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const textarea = $('blueprint'), file = $('file'), status = $('status'), results = $('results');
+  let current = null, sourceName = 'pasted blueprint';
+
+  file.addEventListener('change', async () => {
+    const selected = file.files && file.files[0];
+    if (!selected) return;
+    sourceName = selected.name;
+    textarea.value = await selected.text();
+    status.textContent = 'Loaded locally: ' + selected.name;
+  });
+
+  $('clear').addEventListener('click', () => {
+    textarea.value=''; file.value=''; sourceName='pasted blueprint'; current=null; results.classList.add('hidden');
+    status.textContent='Nothing leaves this page during the core scan.';
+  });
+
+  $('scan').addEventListener('click', () => {
+    try {
+      const parsed = JSON.parse(textarea.value);
+      const findings = NorthstarScanner.scanBlueprint(parsed);
+      current = {source:sourceName, summary:NorthstarScanner.summarize(findings), findings};
+      render(current);
+      status.textContent='Scan complete. Processed in this browser.';
+    } catch (error) {
+      current=null; results.classList.add('hidden'); status.textContent='Invalid JSON: ' + error.message;
+    }
+  });
+
+  function esc(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+  function render(report){
+    $('source').textContent=report.source;
+    $('summary').innerHTML=['critical','high','medium','low','info'].map(level=>'<div class="metric"><b>'+report.summary[level]+'</b><span>'+level+'</span></div>').join('');
+    $('findings').innerHTML=report.findings.length?report.findings.map(f=>{
+      const meta=[f.module,f.module_id!==null?'id '+f.module_id:null,f.path].filter(Boolean).join(' · ');
+      return '<article class="finding" data-severity="'+esc(f.severity)+'"><h3>'+esc(f.severity.toUpperCase())+' · '+esc(f.rule)+'</h3><p>'+esc(f.message)+'</p>'+(meta?'<div class="meta">'+esc(meta)+'</div>':'')+'</article>';
+    }).join(''):'<p class="scope">No static reliability findings detected by the current rule set.</p>';
+    results.classList.remove('hidden');
+  }
+  function download(name,type,text){const blob=new Blob([text],{type});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),0);}
+  $('downloadJson').addEventListener('click',()=>{if(current)download('pcflows-preflight.json','application/json',JSON.stringify(current,null,2)+'\n');});
+  $('downloadMd').addEventListener('click',()=>{if(current)download('pcflows-preflight.md','text/markdown',NorthstarScanner.renderMarkdown(current.source,current.findings));});
+})();
+</script>
+</body>
+</html>
