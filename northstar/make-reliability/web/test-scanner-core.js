@@ -21,6 +21,8 @@ const secret = scanner.scanBlueprint({ flow: [{ id: 1, module: 'http:ActionSendD
 const secretFinding = secret.find(f => f.rule === 'possible-secret-in-blueprint');
 assert.ok(secretFinding);
 assert.ok(!secretFinding.message.includes('abcdefghijklmnopqrstuvwxyz'));
+const makeHook = scanner.scanBlueprint({ flow: [{ id: 1, module: 'http:ActionSendData', mapper: { url: 'https://hook.eu1.make.com/abcdefghijklmnopqrstuvwxyz123456' } }] });
+assert.ok(makeHook.some(f => f.rule === 'possible-secret-in-blueprint'));
 
 const index = fs.readFileSync('./index.html', 'utf8');
 assert.ok(index.includes('Local-only core scan'));
