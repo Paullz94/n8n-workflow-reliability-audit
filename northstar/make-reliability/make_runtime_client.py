@@ -10,6 +10,7 @@ Security model:
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import re
@@ -45,6 +46,27 @@ class MakeRuntimeConfig:
                 f"missing Make API token in environment variable {self.token_env}"
             )
         return value
+
+
+def _allowed_scenario_ids() -> set[int]:
+    raw=os.environ.get("PCFLOWS_MAKE_ALLOWED_SCENARIO_IDS","")
+    out=set()
+    for part in raw.split(","):
+        part=part.strip()
+        if not part:
+            continue
+        try:
+            out.add(int(part))
+        except ValueError as exc:
+            raise MakeRuntimeError("PCFLOWS_MAKE_ALLOWED_SCENARIO_IDS must contain integers") from exc
+    return out
+
+
+def _require_sandbox_write(scenario_id:int) -> None:
+    if os.environ.get("PCFLOWS_MAKE_WRITE_MODE","").strip().lower()!="sandbox":
+        raise MakeRuntimeError("Make scenario writes are disabled unless PCFLOWS_MAKE_WRITE_MODE=sandbox")
+    if int(scenario_id) not in _allowed_scenario_ids():
+        raise MakeRuntimeError("scenario id is not allowlisted for PCFlows sandbox writes")
 
 
 class MakeRuntimeClient:
@@ -85,6 +107,59 @@ class MakeRuntimeClient:
         if not isinstance(result,dict):
             raise MakeRuntimeError("unexpected scenario response")
         return result
+
+    def get_blueprint(self, scenario_id:int)->dict[str,Any]:
+        result=self._request("GET",f"/scenarios/{int(scenario_id)}/blueprint")
+        if not isinstance(result,dict):
+            raise MakeRuntimeError("unexpected blueprint response")
+        value=result.get("blueprint",result.get("response",result))
+        if isinstance(value,str):
+            try:
+                value=json.loads(value)
+            except json.JSONDecodeError as exc:
+                raise MakeRuntimeError("Make blueprint response contains invalid JSON") from exc
+        if not isinstance(value,dict):
+            raise MakeRuntimeError("Make blueprint response did not contain a blueprint object")
+        return value
+
+    def update_sandbox_blueprint(
+        self,
+        scenario_id:int,
+        revised_blueprint:dict[str,Any],
+    )->dict[str,Any]:
+        _require_sandbox_write(scenario_id)
+        if not isinstance(revised_blueprint,dict):
+            raise MakeRuntimeError("revised_blueprint must be an object")
+
+        original=self.get_blueprint(scenario_id)
+        original_json=json.dumps(original,sort_keys=True,separators=(",",":"))
+        original_sha256=hashlib.sha256(original_json.encode("utf-8")).hexdigest()
+
+        result=self._request(
+            "PATCH",
+            f"/scenarios/{int(scenario_id)}",
+            {"blueprint":json.dumps(revised_blueprint,separators=(",",":"))},
+        )
+        return {
+            "scenario_id":int(scenario_id),
+            "original_blueprint":original,
+            "original_sha256":original_sha256,
+            "update_response":result,
+        }
+
+    def rollback_sandbox_blueprint(
+        self,
+        scenario_id:int,
+        original_blueprint:dict[str,Any],
+    )->Any:
+        _require_sandbox_write(scenario_id)
+        if not isinstance(original_blueprint,dict):
+            raise MakeRuntimeError("original_blueprint must be an object")
+        return self._request(
+            "PATCH",
+            f"/scenarios/{int(scenario_id)}",
+            {"blueprint":json.dumps(original_blueprint,separators=(",",":"))},
+        )
 
     def run_scenario(
         self,
