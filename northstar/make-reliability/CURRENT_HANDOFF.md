@@ -478,3 +478,35 @@ This replaces the earlier failed 241-test checkpoint. The three prior failures w
 - whole-word pack routing prevents `ai` matching inside `daily`;
 - AI/finance cross-domain ambiguity stays generic;
 - pack-report wording test was made semantic/case-insensitive.
+
+
+## Realistic repair + customer-data isolation hardening — 2026-09-25
+
+New safeguards:
+- `repair_scope_gate.py`: rejects absolute/unbounded/unsafe/unverifiable repair promises;
+- `verified_repair_intake.py`: combines realistic scope qualification with technical verifiability before a future repair can be accepted;
+- `customer_data_guard.py`: blocks several high-risk literal customer/sensitive data classes before AI/delivery;
+- `case_isolation.py`: every paid order gets a pseudonymous case scope; cross-case document binding is rejected;
+- `incident_containment.py`: fail-closed behavior for sensitive-data detection, case-mismatch, unauthorized write, rollback failure and AI-policy violation;
+- `CUSTOMER_DATA_AI_CONTAINMENT.md` and `CUSTOMER_DATA_RETENTION.md`: no shared customer-document memory/vector store, no cross-customer prompt reuse, minimal technical-artifact retention, separate legal/billing records.
+
+Paid fulfillment now:
+- derives `case_scope_id` from the Stripe Checkout Session reference;
+- stamps manifests/context/findings/AI packets with the current case scope;
+- hard-stops on detected literal email/phone/IBAN/payment-card/JWT-like data;
+- still excludes the raw blueprint from the AI review packet and customer ZIP.
+
+Autonomous inbox operator now:
+- processes one customer thread/case at a time;
+- must never use another customer's content as context;
+- stops and labels Needs Review if case binding is ambiguous;
+- refuses absolute/unrealistic repair promises;
+- treats confirmed cross-customer exposure and production rollback failure as escalation cases after automatic containment.
+
+Latest isolated full validation after these changes:
+- GitHub Actions run: 36193858480;
+- **275 Python tests PASS**;
+- compileall PASS;
+- package consistency PASS;
+- browser scanner regression/privacy PASS;
+- overall `PCFlows/Northstar validation: PASS`.
