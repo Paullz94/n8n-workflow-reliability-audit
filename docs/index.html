@@ -3,250 +3,207 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>PCFlows — Reliability audits for Make.com automations</title>
-  <meta name="description" content="Privacy-first reliability and data-integrity audits for Make.com scenarios. Catch duplicate writes, silent skips, retry risks and recovery gaps before they become bad business data.">
-  <meta property="og:title" content="PCFlows — Make.com Reliability & Data Integrity">
-  <meta property="og:description" content="Evidence-first reliability audits for Make.com automations. No production credentials required.">
-  <meta name="theme-color" content="#081019">
+  <title>PCFlows — Make.com Reliability & Data Integrity</title>
+  <meta name="description" content="Privacy-first reliability audits for Make.com scenarios. Find duplicate effects, silent skips, retry risks and recovery gaps before they become bad business data.">
+  <meta name="theme-color" content="#050505">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <style>
-    :root{
-      --bg:#081019;--panel:#0d1722;--panel2:#101d2a;--line:#223244;
-      --text:#f5f7fa;--muted:#9caabd;--accent:#78e6c2;--accent2:#7bb8ff;
-      --warn:#f4c96b;--danger:#ff8b81;--shadow:0 24px 70px rgba(0,0,0,.28);
-      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-      color-scheme:dark;
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;background:
-      radial-gradient(circle at 75% -10%,rgba(123,184,255,.14),transparent 30%),
-      radial-gradient(circle at 20% 10%,rgba(120,230,194,.10),transparent 27%),
-      var(--bg);color:var(--text)}
-    a{color:inherit}
-    .wrap{width:min(1120px,calc(100% - 36px));margin:auto}
-    header{position:sticky;top:0;z-index:10;background:rgba(8,16,25,.78);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.06)}
-    nav{height:70px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-    .brand{display:flex;align-items:center;gap:11px;text-decoration:none;font-weight:850;letter-spacing:-.02em}
-    .mark{width:31px;height:31px;border-radius:9px;border:1px solid rgba(120,230,194,.45);display:grid;place-items:center;background:linear-gradient(145deg,rgba(120,230,194,.18),rgba(123,184,255,.12));font-size:12px;color:var(--accent)}
-    .navlinks{display:flex;align-items:center;gap:22px;color:var(--muted);font-size:14px}
-    .navlinks a{text-decoration:none}
-    .navlinks a:hover{color:var(--text)}
-    .hero{padding:96px 0 64px}
-    .hero-grid{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(320px,.82fr);gap:54px;align-items:center}
-    .eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--accent);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
-    .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 18px rgba(120,230,194,.7)}
-    h1{font-size:clamp(46px,7vw,76px);line-height:.98;letter-spacing:-.055em;margin:18px 0 22px;max-width:830px}
-    .lead{font-size:19px;line-height:1.65;color:#bdc8d5;max-width:760px;margin:0 0 28px}
-    .actions{display:flex;gap:12px;flex-wrap:wrap}
-    .button{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 17px;border-radius:11px;text-decoration:none;font-weight:800;font-size:14px;border:1px solid transparent}
-    .button.primary{background:var(--text);color:#081019}
-    .button.secondary{border-color:var(--line);background:rgba(255,255,255,.025);color:var(--text)}
-    .button.disabled{background:#15212d;color:#8190a0;border-color:#223244;cursor:default}
-    .micro{margin-top:16px;color:#7f8fa0;font-size:12px}
-    .signal-card{border:1px solid var(--line);background:linear-gradient(180deg,rgba(16,29,42,.98),rgba(10,20,30,.96));border-radius:22px;padding:22px;box-shadow:var(--shadow)}
-    .signal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
-    .signal-title{font-weight:800}.badge{padding:6px 9px;border:1px solid #2d4154;border-radius:999px;font-size:11px;color:#aab8c7}
-    .finding{padding:14px 0;border-top:1px solid rgba(255,255,255,.07);display:grid;grid-template-columns:74px 1fr;gap:12px}
-    .severity{font-size:11px;font-weight:850;letter-spacing:.08em}
-    .severity.high{color:var(--danger)}.severity.medium{color:var(--warn)}.severity.low{color:var(--accent2)}
-    .finding strong{font-size:14px}.finding p{margin:4px 0 0;color:#8998a9;font-size:12px;line-height:1.5}
-    .trust{padding:18px 0 66px}
-    .trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-    .trust-item{padding:17px;border:1px solid rgba(255,255,255,.07);border-radius:14px;background:rgba(255,255,255,.018)}
-    .trust-item strong{display:block;font-size:13px}.trust-item span{display:block;margin-top:5px;color:#8190a0;font-size:12px;line-height:1.45}
-    section{padding:72px 0}
-    .section-kicker{color:var(--accent);font-size:12px;font-weight:850;text-transform:uppercase;letter-spacing:.12em}
-    h2{font-size:clamp(32px,5vw,48px);letter-spacing:-.04em;line-height:1.05;margin:10px 0 16px}
-    .section-lead{max-width:760px;color:#9dacbd;line-height:1.65;font-size:17px}
-    .risk-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:30px}
-    .card{border:1px solid var(--line);background:var(--panel);border-radius:18px;padding:21px}
-    .icon{width:34px;height:34px;border-radius:10px;background:rgba(120,230,194,.08);border:1px solid rgba(120,230,194,.18);display:grid;place-items:center;color:var(--accent);font-weight:900;font-size:13px}
-    .card h3{margin:16px 0 8px;font-size:17px}.card p{margin:0;color:#8f9fb0;font-size:14px;line-height:1.6}
-    .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:34px;border:1px solid var(--line);border-radius:20px;overflow:hidden}
-    .step{padding:24px;min-height:200px;background:var(--panel)}
-    .step+.step{border-left:1px solid var(--line)}
-    .num{color:var(--accent);font-size:12px;font-weight:900;letter-spacing:.1em}.step h3{margin:34px 0 9px}.step p{color:#8e9eaf;font-size:14px;line-height:1.6}
-    .compare{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:32px}
-    .offer{border:1px solid var(--line);border-radius:22px;padding:26px;background:var(--panel);position:relative;overflow:hidden}
-    .offer.paid{background:linear-gradient(155deg,rgba(120,230,194,.08),rgba(13,23,34,1) 42%)}
-    .offer h3{font-size:22px;margin:12px 0 4px}.price{font-size:38px;font-weight:900;letter-spacing:-.04em;margin:10px 0}
-    .offer ul{padding-left:20px;color:#9baabd;line-height:1.75}.offer li+li{margin-top:4px}
-    .small{font-size:12px;color:#7f8fa0;line-height:1.55}
-    .evidence{display:grid;grid-template-columns:.85fr 1.15fr;gap:22px;margin-top:32px;align-items:stretch}
-    .evidence .card{height:100%}
-    .row{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:13px 0;border-top:1px solid rgba(255,255,255,.06)}
-    .row:first-of-type{border-top:0}.row-label{font-size:11px;font-weight:850;letter-spacing:.08em;text-transform:uppercase;color:#75879a}.row-value{font-size:14px;line-height:1.6;color:#bcc8d4}
-    .who{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px}
-    .footer{padding:44px 0 60px;border-top:1px solid rgba(255,255,255,.07);color:#8190a0;font-size:13px}
-    .footer-grid{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.footer a{color:#9dacbd;text-decoration:none}.footer-links{display:flex;gap:16px;flex-wrap:wrap}
-    @media(max-width:900px){.hero-grid,.evidence{grid-template-columns:1fr}.risk-grid{grid-template-columns:repeat(2,1fr)}.steps{grid-template-columns:repeat(2,1fr)}.step:nth-child(3){border-left:0;border-top:1px solid var(--line)}.step:nth-child(4){border-top:1px solid var(--line)}.trust-grid{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:620px){.wrap{width:min(100% - 24px,1120px)}.navlinks a:not(.keep){display:none}.hero{padding-top:64px}.risk-grid,.compare,.who,.trust-grid,.steps{grid-template-columns:1fr}.step+.step{border-left:0;border-top:1px solid var(--line)}h1{font-size:45px}.signal-card{padding:17px}.finding{grid-template-columns:64px 1fr}.row{grid-template-columns:1fr;gap:5px}}
-  </style>
+  <link rel="stylesheet" href="site.css">
 </head>
 <body>
-<header>
-  <div class="wrap">
-    <nav>
-      <a class="brand" href="./"><span class="mark">PC</span><span>PCFlows</span></a>
-      <div class="navlinks">
-        <a href="#how">How it works</a>
-        <a href="#audit">Audit</a>
-        <a href="method.html">Method</a><a href="sample-report.html">Sample report</a>
-        <a class="keep" href="scanner.html">Free preflight</a>
-      </div>
+<header class="site-header">
+  <div class="wrap site-nav">
+    <a class="wordmark" href="./">PCFlows</a>
+    <nav class="nav-links">
+      <a href="method.html">Method</a>
+      <a href="guides/make-error-handlers-reliability.html">Guide</a>
+      <a href="sample-report.html">Sample report</a>
+      <a class="nav-cta" href="scanner.html">Free preflight</a>
     </nav>
   </div>
 </header>
 
 <main>
-  <div class="wrap hero">
-    <div class="hero-grid">
+  <section class="hero">
+    <div class="wrap hero-grid">
       <div>
-        <div class="eyebrow"><span class="dot"></span>Make.com reliability & data integrity</div>
-        <h1>A green run can still leave bad data behind.</h1>
-        <p class="lead">PCFlows reviews sanitized Make.com scenarios for duplicate effects, silent skips, unsafe retries, race conditions and recovery gaps — without asking for production credentials.</p>
+        <div class="kicker">Make.com reliability & data integrity</div>
+        <h1>Make can say “success” while your business data is still wrong.</h1>
+        <p class="lead">PCFlows reviews sanitized Make.com scenarios for duplicate writes, silent skips, unsafe retries, ordering problems and recovery gaps — without requiring production credentials.</p>
         <div class="actions">
-          <a class="button primary" href="scanner.html">Run the free local preflight →</a>
+          <a class="button primary" href="scanner.html">Run free local preflight</a>
           <a class="button secondary" href="sample-report.html">View sample audit</a>
         </div>
-        <p class="micro">Core preflight runs locally in your browser · No Make login · No production API token</p>
+        <p class="small">No account · No Make API token · Core scan stays in your browser</p>
       </div>
-      <aside class="signal-card" aria-label="Example findings">
-        <div class="signal-head"><span class="signal-title">Example reliability signals</span><span class="badge">Synthetic</span></div>
-        <div class="finding"><span class="severity high">HIGH</span><div><strong>Write has no recovery route</strong><p>A downstream failure can leave systems out of sync.</p></div></div>
-        <div class="finding"><span class="severity high">HIGH</span><div><strong>Resume can hide a failed write</strong><p>Substitute output can let the workflow continue after the business action failed.</p></div></div>
-        <div class="finding"><span class="severity medium">MEDIUM</span><div><strong>Retry needs idempotency review</strong><p>The same external side effect may happen twice.</p></div></div>
-        <div class="finding"><span class="severity low">LOW</span><div><strong>Observability trade-off</strong><p>Privacy settings can make incident diagnosis harder.</p></div></div>
-      </aside>
-    </div>
-  </div>
 
-  <div class="wrap trust">
-    <div class="trust-grid">
-      <div class="trust-item"><strong>Privacy-first</strong><span>The free core scan stays in the browser.</span></div>
-      <div class="trust-item"><strong>Evidence-first</strong><span>Findings point to concrete blueprint behavior, not a generic AI opinion.</span></div>
-      <div class="trust-item"><strong>Make-specific</strong><span>Rules target Make failure, retry and recovery semantics.</span></div>
-      <div class="trust-item"><strong>Bounded scope</strong><span>No production access, credential handling or open-ended retainer required.</span></div>
-    </div>
-  </div>
-
-  <section>
-    <div class="wrap">
-      <div class="section-kicker">What PCFlows looks for</div>
-      <h2>Failures that matter to the business, not just the editor.</h2>
-      <p class="section-lead">The audit is deliberately narrower than a generic blueprint linter. It focuses on whether failure and recovery behavior can create missing, duplicated or misleading business outcomes.</p>
-      <div class="risk-grid">
-        <div class="card"><div class="icon">×2</div><h3>Duplicate effects</h3><p>Retries, repeated webhooks and non-idempotent writes that can create the same side effect twice.</p></div>
-        <div class="card"><div class="icon">Ø</div><h3>Silent skips</h3><p>Filters and handlers that let a run appear healthy while expected business work never happened.</p></div>
-        <div class="card"><div class="icon">↺</div><h3>Recovery gaps</h3><p>Missing error routes, incomplete-execution settings and rollback boundaries that complicate recovery.</p></div>
-        <div class="card"><div class="icon">⇄</div><h3>Race conditions</h3><p>Parallel runs and ordering assumptions that can overwrite or reorder state unexpectedly.</p></div>
+      <div class="hero-proof" aria-label="What PCFlows checks">
+        <div class="hero-proof-row"><span>Retry / idempotency</span><strong>Can the same side effect happen twice?</strong></div>
+        <div class="hero-proof-row"><span>Silent skips</span><strong>Can a run look healthy while work is missing?</strong></div>
+        <div class="hero-proof-row"><span>Concurrency</span><strong>Can two runs race on the same record?</strong></div>
+        <div class="hero-proof-row"><span>Recovery</span><strong>What remains after a downstream failure?</strong></div>
       </div>
     </div>
   </section>
 
-  <section id="how">
+  <section class="section">
     <div class="wrap">
-      <div class="section-kicker">How it works</div>
-      <h2>From blueprint to prioritized action plan.</h2>
-      <div class="steps">
-        <div class="step"><div class="num">01</div><h3>Export & sanitize</h3><p>Export the Make.com blueprint and remove secrets, credentials and unnecessary personal data.</p></div>
-        <div class="step"><div class="num">02</div><h3>Run local preflight</h3><p>Use the free browser scanner to catch deterministic structural reliability signals before sharing anything.</p></div>
-        <div class="step"><div class="num">03</div><h3>Get the audit</h3><p>The paid audit turns evidence plus non-sensitive business context into prioritized prevent, detect and recover work.</p></div>
-        <div class="step"><div class="num">04</div><h3>Verify & re-scan</h3><p>Use the verification checklist, apply fixes, then use the included re-scan to compare the remediated blueprint.</p></div>
+      <div class="section-head">
+        <div class="kicker">Why this exists</div>
+        <h2>Reliability is not the same as “the scenario ran”.</h2>
+        <p class="lead">A workflow can complete without a red error and still duplicate a write, skip an important record, continue after a failed side effect or leave two systems out of sync.</p>
       </div>
-    </div>
-  </section>
 
-  <section id="audit">
-    <div class="wrap">
-      <div class="section-kicker">Free vs paid</div>
-      <h2>Use the free scanner first. Pay only for the deeper review.</h2>
-      <div class="compare">
-        <div class="offer">
-          <span class="badge">Free</span>
-          <h3>Reliability Preflight</h3>
-          <div class="price">€0</div>
-          <ul>
-            <li>Runs locally in the browser</li>
-            <li>Static Make.com blueprint checks</li>
-            <li>Severity + evidence per finding</li>
-            <li>JSON and Markdown export</li>
-            <li>No Make API connection</li>
-          </ul>
-          <a class="button primary" href="scanner.html">Run free preflight</a>
+      <div class="grid-4">
+        <div class="panel">
+          <div class="number">01</div>
+          <h3>Duplicate effects</h3>
+          <p>Retries and repeated events can create the same external action more than once.</p>
         </div>
-        <div class="offer paid">
-          <span class="badge">Fixed-scope pilot</span>
-          <h3>Data Integrity Audit</h3>
+        <div class="panel">
+          <div class="number">02</div>
+          <h3>Silent skips</h3>
+          <p>Filters and handlers can let the scenario continue while expected business work never happened.</p>
+        </div>
+        <div class="panel">
+          <div class="number">03</div>
+          <h3>Partial state</h3>
+          <p>A later failure can leave earlier systems updated and downstream systems untouched.</p>
+        </div>
+        <div class="panel">
+          <div class="number">04</div>
+          <h3>Race conditions</h3>
+          <p>Concurrent runs can overwrite or reorder state when the same business key is involved.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="kicker">How it works</div>
+        <h2>Evidence first. Interpretation second.</h2>
+      </div>
+
+      <div class="rule-list">
+        <div class="rule-row">
+          <div class="label">Step 1</div>
+          <div class="value"><strong>Export and sanitize.</strong> Remove credentials, private webhook URLs, API keys and unnecessary personal data.</div>
+        </div>
+        <div class="rule-row">
+          <div class="label">Step 2</div>
+          <div class="value"><strong>Run the free local preflight.</strong> Deterministic checks inspect the blueprint structure in your browser.</div>
+        </div>
+        <div class="rule-row">
+          <div class="label">Step 3</div>
+          <div class="value"><strong>Use business context to prioritize.</strong> The paid audit maps findings to prevent, detect and recover actions.</div>
+        </div>
+        <div class="rule-row">
+          <div class="label">Step 4</div>
+          <div class="value"><strong>Verify and re-scan.</strong> After remediation, the included re-scan separates resolved, remaining and new findings.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="audit">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="kicker">Free first</div>
+        <h2>Use the free scan before paying for anything.</h2>
+        <p class="lead">If the static evidence does not justify a deeper review, PCFlows should tell you that instead of forcing a paid audit.</p>
+      </div>
+
+      <div class="offer-grid">
+        <article class="offer">
+          <span class="tag">Free</span>
+          <h3 style="margin-top:18px">Reliability Preflight</h3>
+          <div class="price">€0</div>
+          <ul class="clean-list">
+            <li>Runs locally in the browser</li>
+            <li>Make-specific static checks</li>
+            <li>Severity and evidence per finding</li>
+            <li>JSON and Markdown export</li>
+            <li>No sign-up or Make API connection</li>
+          </ul>
+          <div class="actions"><a class="button primary" href="scanner.html">Run free preflight</a></div>
+        </article>
+
+        <article class="offer featured">
+          <span class="tag">Fixed-scope pilot</span>
+          <h3 style="margin-top:18px">Data Integrity Audit</h3>
           <div class="price">€149</div>
-          <ul>
-            <li>Everything in the preflight</li>
+          <ul class="clean-list">
+            <li>One sanitized Make.com blueprint</li>
             <li>Business-impact prioritization</li>
             <li>Prevent / detect / recover plan</li>
             <li>Verification checklist</li>
             <li>One asynchronous re-scan</li>
           </ul>
-          <span class="button disabled">Checkout opens after registration</span>
-          <a class="button secondary" href="mailto:PCMotionstudios@gmail.com?subject=PCFlows%20audit%20interest">Notify me when it opens</a>
-          <p class="small">Paid checkout is intentionally paused while Belgian business registration is being completed.</p>
-        </div>
+          <div class="actions">
+            <span class="button disabled">Checkout opens after registration</span>
+            <a class="button secondary" href="mailto:PCMotionstudios@gmail.com?subject=PCFlows%20audit%20interest">Notify me</a>
+          </div>
+        </article>
       </div>
     </div>
   </section>
 
-  <section>
-    <div class="wrap">
-      <div class="section-kicker">Evidence, not a mystery score</div>
-      <h2>Every important finding should answer four questions.</h2>
-      <div class="evidence">
-        <div class="card">
-          <h3>Example: retrying external write</h3>
-          <p class="section-lead" style="font-size:14px">A retry is not automatically bad. The audit asks whether repeating that specific side effect is safe.</p>
-          <p><span class="severity medium">MEDIUM · PREVENT</span></p>
-        </div>
-        <div class="card">
-          <div class="row"><div class="row-label">Evidence</div><div class="row-value">The write-like module has automatic retry behavior.</div></div>
-          <div class="row"><div class="row-label">Why it matters</div><div class="row-value">The first attempt may have committed before the failure became visible, so retrying can duplicate the side effect.</div></div>
-          <div class="row"><div class="row-label">Next step</div><div class="row-value">Use an idempotency key, upsert/deduplication guard or equivalent destination-specific protection.</div></div>
-          <div class="row"><div class="row-label">Verify</div><div class="row-value">Replay the same synthetic business event and confirm only one intended effect remains.</div></div>
-        </div>
+  <section class="section">
+    <div class="wrap grid-2">
+      <div>
+        <div class="kicker">Not a generic score</div>
+        <h2>Every important finding should answer four questions.</h2>
+        <p class="lead">What did the blueprint show? Why could that matter? What should change? How do you safely verify the change?</p>
+      </div>
+      <div class="rule-list">
+        <div class="rule-row"><div class="label">Evidence</div><div class="value">A write-like module has automatic retry behavior.</div></div>
+        <div class="rule-row"><div class="label">Risk</div><div class="value">The first attempt may have committed even if its response looked like a failure.</div></div>
+        <div class="rule-row"><div class="label">Action</div><div class="value">Use an idempotency key, upsert or destination-specific duplicate guard.</div></div>
+        <div class="rule-row"><div class="label">Verify</div><div class="value">Replay the same synthetic event and confirm only one intended side effect exists.</div></div>
       </div>
     </div>
   </section>
 
-  <section>
+  <section class="section">
     <div class="wrap">
-      <div class="section-kicker">Who it's for</div>
-      <h2>Best fit when Make.com is doing real business work.</h2>
-      <div class="who">
-        <div class="card"><h3>Automation agencies</h3><p>Pre-handoff quality checks and a clearer reliability story for client workflows.</p></div>
-        <div class="card"><h3>Operations teams</h3><p>CRM, order, lead, document and back-office automations where missing or duplicated work has a real cost.</p></div>
-        <div class="card"><h3>Freelancers & builders</h3><p>A second pair of eyes before a scenario is handed over or after an inherited workflow starts behaving strangely.</p></div>
+      <div class="section-head">
+        <div class="kicker">Best fit</div>
+        <h2>For workflows where wrong data actually matters.</h2>
+      </div>
+      <div class="grid-3">
+        <div class="panel"><h3>Automation agencies</h3><p>Independent QA before handoff or before a reusable client template is rolled out again.</p></div>
+        <div class="panel"><h3>Operations teams</h3><p>CRM, onboarding, order, document and back-office automations with real business side effects.</p></div>
+        <div class="panel"><h3>Freelancers & builders</h3><p>A second pair of eyes on inherited scenarios or workflows that behave strangely under failure.</p></div>
       </div>
     </div>
   </section>
 
-  <section>
-    <div class="wrap">
-      <div class="section-kicker">Boundaries</div>
-      <h2>What PCFlows does not pretend to prove.</h2>
-      <p class="section-lead">A blueprint is structural evidence, not a live production system. PCFlows does not claim that a clean static audit proves runtime correctness, valid credentials, healthy third-party APIs, complete business logic or legal/security compliance.</p>
-      <p><a class="button secondary" href="terms.html">Read service terms</a><a class="button secondary" href="privacy.html">Privacy & service information</a></p>
+  <section class="section">
+    <div class="wrap grid-2">
+      <div>
+        <div class="kicker">Boundaries</div>
+        <h2>What PCFlows does not pretend to prove.</h2>
+      </div>
+      <div>
+        <p class="lead">A blueprint is structural evidence, not a live production system. A clean static result does not prove correct credentials, healthy third-party APIs, complete business logic, security compliance or the absence of defects.</p>
+        <div class="actions">
+          <a class="button secondary" href="method.html">Read the method</a>
+          <a class="button secondary" href="terms.html">Service terms</a>
+        </div>
+      </div>
     </div>
   </section>
 </main>
 
 <footer class="footer">
-  <div class="wrap footer-grid">
-    <div><strong style="color:#dce5ee">PCFlows</strong><br><span>Independent technical service · Not affiliated with Make.com</span></div>
+  <div class="wrap footer-row">
+    <div><strong style="color:var(--text)">PCFlows</strong><br>Independent technical service · Not affiliated with Make.com</div>
     <div class="footer-links">
-      <a href="scanner.html">Free scanner</a>
+      <a href="scanner.html">Scanner</a>
       <a href="method.html">Method</a>
-      <a href="sample-report.html">Sample report</a>
+      <a href="sample-report.html">Sample</a>
       <a href="faq.html">FAQ</a>
-      <a href="terms.html">Terms</a>
-      <a href="guides/make-error-handlers-reliability.html">Reliability guide</a>
       <a href="privacy.html">Privacy</a>
       <a href="mailto:PCMotionstudios@gmail.com">Support</a>
     </div>
