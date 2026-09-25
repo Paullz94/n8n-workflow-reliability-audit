@@ -17,7 +17,7 @@ class VerticalPackTests(unittest.TestCase):
     def test_all_priority_packs_exist(self):
         self.assertEqual(
             set(vertical_packs.PACKS),
-            {"lead_flow", "invoice_payment", "ai_guardrails"},
+            {"lead_flow", "invoice_payment", "ai_guardrails", "client_onboarding"},
         )
 
     def test_lead_pack_contains_duplicate_and_handoff_tests(self):
@@ -37,6 +37,12 @@ class VerticalPackTests(unittest.TestCase):
         ids = {x["id"] for x in plan["acceptance_tests"]}
         self.assertIn("ai_malformed_output", ids)
         self.assertIn("ai_human_handoff", ids)
+
+    def test_onboarding_pack_contains_partial_and_handoff_tests(self):
+        plan = vertical_packs.build_pack_plan("client_onboarding", self.findings(), {"scenario_name":"Client onboarding"})
+        ids = {x["id"] for x in plan["acceptance_tests"]}
+        self.assertIn("onboarding_partial_failure", ids)
+        self.assertIn("onboarding_handoff", ids)
 
     def test_unknown_pack_rejected(self):
         with self.assertRaises(ValueError):
