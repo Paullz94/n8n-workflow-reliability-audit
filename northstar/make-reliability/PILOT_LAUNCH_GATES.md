@@ -7,10 +7,12 @@ Updated: 2026-09-25
 - [x] Static Make blueprint parser exists.
 - [x] Nested routes/error paths supported.
 - [x] Retry/idempotency checks exist.
+- [x] Skip/Ignore, Resume, Commit and Rollback/autocommit reliability semantics are reviewed.
 - [x] Concurrency, incomplete-execution, data-loss and observability checks exist.
+- [x] Higher-consequence rules are mapped to official Make documentation in `RULE_EVIDENCE.md`.
 - [x] Synthetic scenario produces meaningful findings.
 - [x] Deterministic paid-report builder exists.
-- [x] Paid report adds prevent/detect/recover guidance and verification steps.
+- [x] Paid report adds prevent/detect/recover guidance, verification steps and Make references where available.
 - [x] Static-analysis limitations are explicit.
 
 ## Gate B — privacy / input safety
@@ -22,8 +24,8 @@ Updated: 2026-09-25
 - [x] Context is allowlisted/bounded.
 - [x] Intake schema explicitly excludes arbitrary extra fields.
 - [x] Public GitHub Pages deployment activated.
-
-The unchecked deployment item is not a product blocker for continued offline validation.
+- [x] Paid fulfillment hard-stops on a possible-secret finding.
+- [x] Delivery ZIP deliberately excludes the customer's raw blueprint.
 
 ## Gate C — commercial evidence
 
@@ -44,7 +46,9 @@ The unchecked deployment item is not a product blocker for continued offline val
 - [x] Contra bulk/systematic outreach restrictions checked.
 - [x] Human-realistic pace codified.
 - [x] Multi-channel requirement codified.
-- [ ] Legitimate marketplace profiles/KYC available where required.
+- [ ] Legitimate marketplace profiles/KYC available where a marketplace is later used.
+
+Marketplace accounts are not required for the initial direct PCFlows pilot.
 
 ## Gate E — money
 
@@ -53,29 +57,49 @@ The unchecked deployment item is not a product blocker for continued offline val
 - [x] Strict provider-verified ledger exists.
 - [x] Owner/test/pending/refunded target exclusions tested.
 - [x] Reinvestment/expenses/refunds/net result separated.
-- [x] Stripe account connected and live-capable.\n- [ ] Belgian enterprise number / VAT setup completed before paid launch.
-- [ ] Provider import/webhook normalization implemented against the chosen provider's real schema.
+- [x] Stripe account is connected and live-capable.
+- [x] EUR 149 Stripe product/one-time price/Payment Link exist.
+- [x] PaymentIntent/Refund normalization is implemented against Stripe's real object schema.
+- [x] Checkout is deliberately disabled during the Belgian registration pause.
+- [ ] Belgian enterprise number received and verified.
+- [ ] VAT identification / small-enterprise regime completed as legally available before paid launch.
 
 ## Gate F — operating autonomy
 
-- [x] Free scan can be self-service.
+- [x] Free scan is self-service.
+- [x] Local non-sensitive intake generator is self-service.
 - [x] Paid report generation is deterministic.
+- [x] Paid delivery bundle generation is deterministic.
+- [x] Stripe Checkout Session ID is the stable order/fulfillment reference.
+- [x] Post-payment redirect and email handoff are prepared without a custom backend.
 - [x] Qualification fields are structured.
 - [x] Support scope is bounded in the pilot definition.
 - [x] Revenue measurement logic is deterministic.
-- [ ] Checkout -> intake -> delivery wiring is live for paid customers (checkout intentionally paused pending registration).
-- [ ] Re-scan entitlement/delivery is automated.
+- [ ] Checkout -> intake -> delivery is live for real paid customers (checkout intentionally paused pending registration).
+- [ ] Included re-scan lifecycle has been exercised with a real customer.
 - [ ] Real support burden measured from pilot customers.
+
+## Validation state
+
+- Last full local Northstar gate before the latest hardening: 31 Python tests PASS + browser scanner regression/privacy PASS.
+- Eight additional targeted regression tests were added for fulfillment, Make error-handler semantics and report evidence.
+- New fulfillment logic was independently exercised in an isolated test harness (3/3 PASS).
+- Existing public repository GitHub Action remains green, but it tests the pre-existing public n8n scanner rather than the isolated Northstar suite.
+
+Do not misrepresent the root CI result as Northstar test coverage.
 
 ## Current decision
 
-**Continue EUR 0 technical/launch preparation. Do not inject owner capital.**
-
-The first genuinely non-delegable gate is expected to be legitimate payment/marketplace account activation (identity, business, payout, tax/KYC as applicable), not further product coding.
-
+**Continue EUR 0 technical/launch preparation. Do not inject additional owner capital.**
 
 ## Registration pause
 
-As of 2026-09-25, Xerius has accepted the self-employed affiliation and the enterprise number is still being processed. The live Stripe Payment Link is disabled until the business-registration/VAT gate is completed.
+As of 2026-09-25:
+- Xerius self-employed affiliation: approved;
+- Belgian enterprise number: still in processing;
+- planned start date: 2026-10-01;
+- VAT activation/small-enterprise route: not yet completed.
 
-During the pause, Northstar may continue free market validation through the public local scanner, no-payment interest CTA, documentation, buyer research and product hardening.
+The live Stripe Payment Link remains inactive until the registration/tax gate is complete.
+
+During the pause, Northstar may continue product hardening, the free local scanner, passive no-payment interest, documentation and platform-compliant market research.
