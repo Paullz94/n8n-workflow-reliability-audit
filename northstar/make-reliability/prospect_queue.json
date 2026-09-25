@@ -1,6 +1,6 @@
 {
   "schema": "pcflows.prospect-queue.v1",
-  "updated": "2026-09-25",
+  "updated": "2026-09-26",
   "launch_enabled": false,
   "launch_gate": "Belgian enterprise number + VAT route + site identity + Stripe reactivation",
   "scoring_note": "Internal triage only; score is not a prediction of conversion probability.",
@@ -164,6 +164,38 @@
       "competition_penalty": 2,
       "proof_gap_penalty": 1,
       "notes": "Future agency partnership archetype; delivery/testing/error handling/documentation demand."
+    },
+    {
+      "id": "upwork_make_qa_troubleshooting",
+      "title": "Make.com Automation Specialist — QA & Troubleshooting",
+      "channel": "upwork",
+      "url": "https://www.upwork.com/freelance-jobs/apply/Make-com-Automation-Specialist-Troubleshooting_~022098474011690711653/",
+      "observed_date": "2026-09-26",
+      "status": "watch_open",
+      "contact_after_launch": true,
+      "problem_fit": 3,
+      "audit_first_fit": 3,
+      "budget_signal": 2,
+      "freshness": 3,
+      "competition_penalty": 1,
+      "proof_gap_penalty": 1,
+      "notes": "Direct current-offer fit: review/test existing Make scenarios, validate mappings/webhooks/APIs, identify reliability issues and recommend fixes. Hourly 1-3 month engagement; 15-20 proposals and 6 interviewing at re-check."
+    },
+    {
+      "id": "upwork_capacidesk_paid_qualification",
+      "title": "Automation Specialist Paid Qualification — Reliability / Idempotency",
+      "channel": "upwork",
+      "url": "https://www.upwork.com/freelance-jobs/apply/Automation-Specialist-for-Paid-Qualification-Project-n8n-Make-CRM-API-Integrations_~022101749575310645866/",
+      "observed_date": "2026-09-26",
+      "status": "research_only_scope_mismatch",
+      "contact_after_launch": false,
+      "problem_fit": 3,
+      "audit_first_fit": 1,
+      "budget_signal": 2,
+      "freshness": 2,
+      "competition_penalty": 1,
+      "proof_gap_penalty": 1,
+      "notes": "Strong white-label demand signal: duplicate prevention/idempotency, temporary failure retries, logging and failure alerts are explicit evaluation criteria. Current task requires implementation/build, so do not pitch the audit product as a substitute unless the buyer explicitly accepts a QA-only milestone."
     }
   ]
 }
