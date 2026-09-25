@@ -1,56 +1,52 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Audit next steps — PCFlows</title>
   <meta name="robots" content="noindex">
-  <style>
-    :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color-scheme:dark;background:#0c1117;color:#eef2f6}
-    *{box-sizing:border-box}body{margin:0;background:#0c1117;color:#eef2f6}main{max-width:760px;margin:auto;padding:44px 20px 72px}
-    a{color:#eef2f6}h1{font-size:clamp(34px,7vw,54px)}p,li{color:#b8c2cc;line-height:1.7}
-    .card{border:1px solid #2b3540;background:#101721;border-radius:18px;padding:20px;margin:18px 0}
-    .button{display:inline-block;padding:12px 16px;border-radius:10px;background:#eef2f6;color:#0c1117;text-decoration:none;font-weight:800}
-    code{word-break:break-all;color:#eef2f6}.muted{font-size:13px;color:#8b949e}
-  </style>
+  <meta name="theme-color" content="#050505"><link rel="stylesheet" href="site.css">
 </head>
 <body>
-<main>
-  <p><a href="./">← PCFlows</a></p>
-  <h1>Audit next steps</h1>
-  <p id="status">This page is prepared for the paid pilot. Checkout is currently paused while PCFlows completes business registration.</p>
+<header class="site-header"><div class="wrap site-nav"><a class="wordmark" href="./">PCFlows</a><nav class="nav-links"><a href="method.html">Method</a><a href="sample-report.html">Sample report</a><a class="nav-cta" href="scanner.html">Free preflight</a></nav></div></header>
+<main><div class="wrap article">
+  <div class="article-top">
+    <div class="kicker">Order handoff</div>
+    <h1>Audit next steps.</h1>
+    <p class="lead" id="status">Checkout is currently paused while PCFlows completes business registration.</p>
+  </div>
 
   <section class="card">
-    <h2>Prepare your files</h2>
-    <ol>
-      <li>Export and sanitize the Make.com blueprint.</li>
-      <li>Run the free local preflight first.</li>
-      <li>Prepare the small non-sensitive intake JSON.</li>
-      <li>After a valid payment, email only the sanitized blueprint and intake JSON to PCFlows.</li>
+    <h3>Prepare two files</h3>
+    <ol class="clean-list">
+      <li>One sanitized Make.com blueprint JSON.</li>
+      <li>One PCFlows intake JSON generated locally on the intake page.</li>
     </ol>
-    <p><a class="button" href="scanner.html">Run free preflight</a></p>
-    <p><a href="intake.html">Prepare intake JSON</a></p>
+    <div class="actions">
+      <a class="button primary" href="scanner.html">Run free preflight</a>
+      <a class="button secondary" href="intake.html">Prepare intake</a>
+    </div>
   </section>
 
-  <section class="card" id="orderCard" hidden>
-    <h2>Your Stripe order reference</h2>
-    <p><code id="sessionId"></code></p>
-    <p class="muted">Keep this reference in the email subject so PCFlows can match your files to the payment without asking for sensitive payment details.</p>
-    <p><a class="button" id="emailLink" href="#">Email sanitized files</a></p>
+  <section class="card hidden" id="orderCard">
+    <div class="kicker">Stripe order reference</div>
+    <h3 id="sessionId" style="margin-top:14px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;word-break:break-all"></h3>
+    <p>Keep this reference in your email subject so PCFlows can match the files to the payment without requesting sensitive payment data.</p>
+    <div class="actions"><a class="button primary" id="emailLink" href="#">Email sanitized files</a></div>
   </section>
 
-  <section class="card">
-    <strong>Never send:</strong>
-    <p>Production credentials, passwords, API keys, private webhook secrets, customer records or other sensitive payload data.</p>
-  </section>
-</main>
+  <div class="notice" style="margin-top:18px">
+    Never send production credentials, passwords, API keys, private Make webhook URLs, customer records or other sensitive payload data.
+  </div>
+</div></main>
 <script>
 (() => {
   const params = new URLSearchParams(location.search);
   const sessionId = params.get('session_id');
   if (!sessionId || !/^cs_[A-Za-z0-9_]+$/.test(sessionId)) return;
-  document.getElementById('orderCard').hidden = false;
+
+  document.getElementById('orderCard').classList.remove('hidden');
   document.getElementById('sessionId').textContent = sessionId;
+
   const subject = 'PCFlows audit files - ' + sessionId;
   const body = [
     'Hello PCFlows,',
@@ -61,12 +57,14 @@
     '',
     'Stripe order reference: ' + sessionId,
     '',
-    'I confirm that I removed production credentials, passwords, API keys, private webhook secrets and personal/customer data from the blueprint.'
+    'I confirm that I removed production credentials, passwords, API keys, private Make webhook URLs and personal/customer data from the blueprint.'
   ].join('\n');
+
   document.getElementById('emailLink').href =
     'mailto:PCMotionstudios@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-  document.getElementById('status').textContent = 'Payment completed. Use the Stripe order reference below when sending your sanitized audit files.';
+
+  document.getElementById('status').textContent =
+    'Payment completed. Use the Stripe order reference below when sending your sanitized audit files.';
 })();
 </script>
-</body>
-</html>
+</body></html>
