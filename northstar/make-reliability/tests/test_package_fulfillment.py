@@ -98,6 +98,19 @@ class PackageFulfillmentTests(unittest.TestCase):
             self.assertEqual(r["package_id"],"data_integrity_audit")
             self.assertTrue(pathlib.Path(r["zip"]).exists())
 
+    def test_focused_delivery_can_take_focus_from_safe_context(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=pathlib.Path(tmp); bp,ctx=self.write_pair(root); out=root/"out"
+            raw=json.loads(ctx.read_text())
+            raw["requested_scope"]="focused"
+            raw["requested_focus"]="recovery"
+            ctx.write_text(json.dumps(raw),encoding="utf-8")
+            r=package_fulfillment.build_focused_delivery(
+                order=self.order("focused_risk_check",7900),
+                blueprint_path=bp,context_path=ctx,focus=None,out_dir=out
+            )
+            self.assertEqual(r["focus"],"recovery")
+
 
 if __name__=="__main__":
     unittest.main()
