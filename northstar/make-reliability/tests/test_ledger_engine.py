@@ -19,6 +19,15 @@ class LedgerEngineTests(unittest.TestCase):
         self.assertEqual(totals.verified_gross_revenue, 0.0)
         self.assertEqual(totals.eligible_payment_count, 0)
 
+    def test_test_payment_refund_does_not_pollute_business_refunds(self):
+        events = [
+            {"id": "p1", "kind": "payment", "amount_eur": 49, "status": "succeeded", "provider_verified": True, "customer_class": "external", "test": True},
+            {"id": "r1", "kind": "refund", "payment_id": "p1", "amount_eur": 49, "status": "succeeded"},
+        ]
+        totals = ledger_engine.calculate(events)
+        self.assertEqual(totals.refunds, 0.0)
+        self.assertEqual(totals.net_revenue, 0.0)
+
     def test_real_external_verified_payment_counts(self):
         totals = ledger_engine.calculate([
             {"id": "p1", "kind": "payment", "amount_eur": 149, "status": "succeeded", "provider_verified": True, "customer_class": "external"}
