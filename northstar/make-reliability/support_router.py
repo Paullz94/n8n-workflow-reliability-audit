@@ -56,13 +56,13 @@ def route_message(subject: str, body: str) -> SupportRoute:
 def render_reply(route: SupportRoute) -> str:
     replies = {
         "pricing": (
-            "The planned fixed-scope PCFlows Data Integrity Audit is €149 for one sanitized Make.com blueprint, "
-            "prioritized findings, remediation/verification guidance and one asynchronous re-scan."
+            "PCFlows uses fixed launch pricing: €0 Reliability Preflight, €79 Focused Risk Check, €149 Data Integrity Audit, "
+            "and €399 Portfolio / Release QA for up to three related scenarios. Paid checkout is currently paused until registration is complete."
         ),
         "scope": (
-            "The fixed scope covers one sanitized Make.com blueprint, deterministic reliability/data-integrity findings, "
-            "business-impact prioritization, a prevent/detect/recover plan, verification steps and one re-scan. "
-            "Production implementation is not silently included."
+            "PCFlows uses fixed scopes: free local preflight; €79 one-focus check; €149 full one-scenario audit with one re-scan; "
+            "and €399 Portfolio / Release QA for up to three related scenarios. Specialist Lead Flow, Invoice/Payment and AI Guardrails "
+            "modes are included within the €149 audit when context matches. Production implementation is not silently included."
         ),
         "privacy": (
             "Please do not send production credentials, passwords, API keys, private Make webhook URLs, customer records "
