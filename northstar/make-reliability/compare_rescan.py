@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any
 
 import audit_make
+import fix_verification
 
 
 class CompareError(ValueError):
@@ -46,25 +47,43 @@ def compare(before: dict[str, Any], after: dict[str, Any]) -> dict[str, Any]:
     remaining_keys = sorted(set(before_map) & set(after_map))
     new_keys = sorted(set(after_map) - set(before_map))
 
-    def rows(keys, source):
-        return [
-            {
-                "rule": source[k].rule,
-                "severity": source[k].severity,
-                "message": source[k].message,
-                "module_id": source[k].module_id,
-                "module": source[k].module,
-                "path": source[k].path,
+    def rows(keys, source, state):
+        out=[]
+        for k in keys:
+            f=source[k]
+            row={
+                "rule": f.rule,
+                "severity": f.severity,
+                "message": f.message,
+                "module_id": f.module_id,
+                "module": f.module,
+                "path": f.path,
             }
-            for k in keys
-        ]
+            if state=="resolved":
+                row["verification"]=fix_verification.resolution_status(
+                    rule=f.rule,
+                    still_present_after=False,
+                )
+            elif state=="remaining":
+                row["verification"]=fix_verification.resolution_status(
+                    rule=f.rule,
+                    still_present_after=True,
+                )
+            else:
+                row["verification"]={
+                    "status":"new_detected",
+                    "verified_fixed":False,
+                    "customer_language":"This static review signal is new in the revised blueprint.",
+                }
+            out.append(row)
+        return out
 
     return {
         "before_summary": audit_make.summary(before_findings),
         "after_summary": audit_make.summary(after_findings),
-        "resolved": rows(resolved_keys, before_map),
-        "remaining": rows(remaining_keys, after_map),
-        "new": rows(new_keys, after_map),
+        "resolved": rows(resolved_keys, before_map, "resolved"),
+        "remaining": rows(remaining_keys, after_map, "remaining"),
+        "new": rows(new_keys, after_map, "new"),
         "counts": {
             "resolved": len(resolved_keys),
             "remaining": len(remaining_keys),
@@ -78,14 +97,14 @@ def render_markdown(result: dict[str, Any]) -> str:
     lines = [
         "# PCFlows Remediation Re-scan",
         "",
-        f"Resolved findings: **{c['resolved']}**",
+        f"Statically cleared findings: **{c['resolved']}**",
         f"Remaining findings: **{c['remaining']}**",
         f"New findings: **{c['new']}**",
         "",
     ]
 
     for title, key_name in (
-        ("Resolved", "resolved"),
+        ("Statically cleared", "resolved"),
         ("Remaining", "remaining"),
         ("New", "new"),
     ):
@@ -100,12 +119,15 @@ def render_markdown(result: dict[str, Any]) -> str:
                 f"- **{row['severity'].upper()} · {row['rule']}**{where}",
                 f"  - {row['message']}",
             ]
+            verification=row.get("verification") or {}
+            if verification.get("customer_language"):
+                lines += [f"  - Proof status: {verification['customer_language']}"]
         lines.append("")
 
     lines += [
         "## Interpretation",
         "",
-        "A resolved static finding means the revised blueprint no longer matches that deterministic rule. It does not prove the runtime issue is fully fixed. Use the original verification checklist with safe synthetic data.",
+        "A statically cleared finding means only that the revised blueprint no longer matches that deterministic rule. Runtime-dependent findings remain unverified until their rule-specific synthetic execution checks pass. PCFlows must not call them fixed before that proof exists.",
         "",
     ]
     return "\n".join(lines)
