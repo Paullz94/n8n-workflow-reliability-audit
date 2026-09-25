@@ -72,6 +72,7 @@ https://economie.fgov.be/nl/themas/verkoop/vormen-van-verkoop/verkoop-internet-e
 ## Reopen checkout only when
 
 - [ ] Enterprise number confirmed.
+- [ ] Official economic-activity start date reached (currently planned **2026-10-01**); no paid orders before that effective date.
 - [ ] VAT regime/effective date confirmed.
 - [ ] Website carries required business identity/contact information.
 - [ ] Consumer withdrawal/start-of-service wording is configured if B2C sales are accepted.
