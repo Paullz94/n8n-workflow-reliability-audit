@@ -62,6 +62,25 @@ class AIReviewPacketTests(unittest.TestCase):
         hit = next(x for x in packet["findings"] if x["rule"] == "write-skip-handler-data-loss-review")
         self.assertEqual(hit["official_reference"], "https://help.make.com/skip-error-handler")
 
+    def test_personal_email_literal_blocks_packet(self):
+        bp={"flow":[{"id":1,"module":"crm:updateContact","mapper":{"email":"person@private-domain.be"}}]}
+        with self.assertRaises(ai_review_packet.PacketError):
+            ai_review_packet.make_packet(
+                bp,
+                {"scenario_name":"Demo","business_goal":"Update CRM"},
+            )
+
+    def test_case_scope_id_is_carried_without_order_reference(self):
+        import case_isolation
+        case_id=case_isolation.case_scope_id("cs_live_customer_123")
+        packet=ai_review_packet.make_packet(
+            {"flow":[{"id":1,"module":"json:ParseJSON","mapper":{}}]},
+            {"scenario_name":"Demo","business_goal":"Parse safely"},
+            case_scope_id=case_id,
+        )
+        self.assertEqual(packet["case_scope_id"],case_id)
+        self.assertNotIn("cs_live_customer_123",__import__("json").dumps(packet))
+
 
 if __name__ == "__main__":
     unittest.main()
