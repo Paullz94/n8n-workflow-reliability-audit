@@ -22,7 +22,9 @@ from typing import Any
 import ai_review_packet
 import audit_make
 import build_pack_report
+import case_isolation
 import customer_claim_guard
+import customer_data_guard
 import pack_selector
 import report_builder
 
@@ -82,6 +84,12 @@ def build_delivery(
     raw_context = load_json_object(context_path, "context")
     context = report_builder.sanitize_context(raw_context)
     validate_context(context)
+    case_scope_id = case_isolation.case_scope_id(order_ref)
+    try:
+        customer_data_guard.assert_no_sensitive_literals(blueprint,"blueprint")
+        customer_data_guard.assert_no_sensitive_literals(context,"context")
+    except customer_data_guard.SensitiveDataError as exc:
+        raise FulfillmentError(str(exc)) from exc
 
     findings = audit_make.scan_blueprint(blueprint)
     if has_secret_finding(findings):
@@ -116,16 +124,23 @@ def build_delivery(
     report_path.write_text(report, encoding="utf-8")
     findings_payload = {
         "order_ref": order_ref,
+        "case_scope_id": case_scope_id,
         "summary": audit_make.summary(findings),
         "findings": [asdict(f) for f in findings],
     }
     findings_path.write_text(json.dumps(findings_payload, indent=2) + "\n", encoding="utf-8")
-    context_path_out.write_text(json.dumps(context, indent=2) + "\n", encoding="utf-8")
-    ai_packet = ai_review_packet.make_packet(blueprint, raw_context)
+    context_payload = {"case_scope_id":case_scope_id, **context}
+    context_path_out.write_text(json.dumps(context_payload, indent=2) + "\n", encoding="utf-8")
+    ai_packet = ai_review_packet.make_packet(
+        blueprint,
+        raw_context,
+        case_scope_id=case_scope_id,
+    )
     ai_packet_path.write_text(json.dumps(ai_packet, indent=2) + "\n", encoding="utf-8")
 
     manifest = {
         "order_ref": order_ref,
+        "case_scope_id": case_scope_id,
         "blueprint_source_name": blueprint_path.name,
         "blueprint_sha256": sha256_file(blueprint_path),
         "context_source_name": context_path.name,
@@ -141,6 +156,8 @@ def build_delivery(
         },
         "privacy": {
             "raw_blueprint_included": False,
+            "case_isolation_enabled": True,
+            "literal_customer_data_guard_enabled": True,
             "ai_review_packet_included_in_customer_zip": False,
             "production_credentials_required": False,
         },
@@ -154,6 +171,7 @@ def build_delivery(
 
     return {
         "order_ref": order_ref,
+        "case_scope_id": case_scope_id,
         "report": str(report_path),
         "findings": str(findings_path),
         "manifest": str(manifest_path),
