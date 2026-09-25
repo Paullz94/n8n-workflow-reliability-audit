@@ -61,6 +61,39 @@ class AuditMakeTests(unittest.TestCase):
         rules = {f.rule for f in audit_make.scan_blueprint(bp)}
         self.assertIn("exported-designer-message", rules)
 
+    def test_api_blueprint_wrapper_is_supported(self):
+        bp = {"blueprint": {"flow": [{"id": 1, "module": "crm:updateContact", "mapper": {}}]}}
+        rules = {f.rule for f in audit_make.scan_blueprint(bp)}
+        self.assertIn("write-without-error-handler", rules)
+
+    def test_string_blueprint_wrapper_is_supported(self):
+        bp = {"blueprint": '{"flow":[{"id":1,"module":"crm:updateContact","mapper":{}}]}'}
+        rules = {f.rule for f in audit_make.scan_blueprint(bp)}
+        self.assertIn("write-without-error-handler", rules)
+
+    def test_retrying_write_is_reviewed(self):
+        bp = {"flow": [{
+            "id": 1, "module": "crm:updateContact", "mapper": {},
+            "onerror": [{"id": 2, "module": "builtin:Break", "mapper": {"retry": True, "count": "3"}}]
+        }]}
+        rules = {f.rule for f in audit_make.scan_blueprint(bp)}
+        self.assertIn("retrying-write-idempotency-review", rules)
+        self.assertNotIn("write-without-error-handler", rules)
+
+    def test_scenario_safety_settings_are_reviewed(self):
+        bp = {
+            "flow": [{"id": 1, "module": "crm:updateContact", "mapper": {}}],
+            "metadata": {
+                "instant": True,
+                "scenario": {"sequential": False, "dlq": False, "dataloss": True, "confidential": True},
+            },
+        }
+        by_rule = {f.rule: f.severity for f in audit_make.scan_blueprint(bp)}
+        self.assertEqual(by_rule["concurrency-review"], "medium")
+        self.assertEqual(by_rule["incomplete-executions-disabled-review"], "medium")
+        self.assertEqual(by_rule["data-loss-enabled"], "high")
+        self.assertEqual(by_rule["confidential-observability-review"], "low")
+
 
 if __name__ == "__main__":
     unittest.main()
