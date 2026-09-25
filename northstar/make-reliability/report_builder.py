@@ -150,6 +150,9 @@ ALLOWED_CONTEXT = {
     "recovery_expectation",
     "requested_scope",
     "requested_focus",
+    "runtime_symptom",
+    "expected_vs_actual",
+    "reproducible",
 }
 
 
@@ -163,7 +166,7 @@ def sanitize_context(raw: dict[str, Any] | None) -> dict[str, Any]:
             clean[key] = value.strip()[:500]
         elif key == "critical_side_effects" and isinstance(value, list):
             clean[key] = [str(v).strip()[:160] for v in value[:10] if str(v).strip()]
-        elif key == "ordering_required" and isinstance(value, bool):
+        elif key in {"ordering_required", "reproducible"} and isinstance(value, bool):
             clean[key] = value
     return clean
 
