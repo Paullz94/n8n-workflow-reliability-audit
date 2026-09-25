@@ -154,3 +154,25 @@ Potential output:
 - verification steps.
 
 Gate: build only after real paid customers show that static blueprint analysis alone leaves repeated high-value questions unanswered.
+
+
+## Website design direction — 2026-09-25
+
+The public PCFlows site was re-reviewed against current adjacent products.
+
+Observed hierarchy lessons:
+- ScenarioTrace leads with one concrete reliability pain, then explains the analyzer and only later expands into roadmap/details.
+- MakeIntegration puts the free tool immediately at the center of the experience, with simple utility-first navigation.
+- Make.com itself uses large typography, simple calls to action, generous spacing and strong hierarchy rather than dense dashboard chrome.
+
+PCFlows response:
+- return to an almost-black visual base instead of blue/gradient-heavy panels;
+- use large typography, thin neutral borders and restrained whitespace;
+- keep the free scanner highly visible;
+- keep the commercial offer secondary until registration is complete;
+- use real product text/output as proof instead of decorative illustrations;
+- **do not add AI-generated illustrations, faux product art or generated decorative icons unless Paul explicitly asks for them**;
+- avoid generic SaaS icon grids when simple numbered/text sections communicate the point more cleanly;
+- maintain one shared `site.css` visual system across public pages.
+
+The goal is a restrained developer-tool / reliability-product aesthetic, not a generic AI landing page.
