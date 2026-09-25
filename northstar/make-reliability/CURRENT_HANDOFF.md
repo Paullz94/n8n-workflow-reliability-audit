@@ -2,145 +2,150 @@
 
 Updated: 2026-09-25
 
-## Canonical repository / branch
+## Canonical repository / branches
 
 Repository: `Paullz94/n8n-workflow-reliability-audit`
 
-Canonical Northstar branch:
+Canonical product branch:
 `northstar/make-reliability-20260925`
 
-Do not modify the pre-existing n8n files/workstream. All Northstar work belongs under `northstar/` on the isolated branch.
+Public PCFlows site branch:
+`pcflows-site-20260925`
+
+Draft review PR:
+`#2 — northstar: isolated Make reliability/data-integrity pilot`
+
+Do not modify the pre-existing n8n implementation. Product code/history remains isolated under `northstar/`; the public site is isolated on its own site branch.
 
 ## Goal
 
-EUR 1,000 payment-provider-verified gross revenue from genuine external customers.
+Reach EUR 1,000 payment-provider-verified gross revenue from genuine external customers.
 
 Hard defaults:
-- EUR 0 owner capital;
-- EUR 500 reserve stays uninjected;
+- EUR 0 owner capital except explicitly approved unavoidable setup cost;
+- EUR 500 reserve stays uninjected except an approved exact necessity;
 - business revenue is reinvested before owner capital;
 - no owner/test/pending/unverified/refunded/fictitious payment counts.
 
 ## Current product
 
 Primary wedge:
-**Make.com Reliability & Data Integrity Audit**
+**PCFlows — Make.com Reliability & Data Integrity Audit**
 
-Free acquisition asset:
-- local Python scanner;
-- privacy-first browser scanner.
+Public free layer:
+- privacy-first local browser preflight;
+- local non-sensitive audit-intake generator;
+- synthetic sample report;
+- FAQ/privacy/service information.
 
-Primary paid pilot hypothesis:
+Primary paid pilot:
 - EUR 149;
 - one sanitized blueprint;
-- deterministic report + bounded review;
-- one re-scan.
+- deterministic scan + prioritized prevent/detect/recover report;
+- bounded review;
+- one asynchronous re-scan.
 
 ## Built
 
-- multi-channel operating charter;
-- platform-specific acquisition guardrails;
+- multi-channel operating charter and channel guardrails;
 - Make static reliability analyzer;
 - nested route/error parsing;
 - retry/idempotency checks;
+- Skip/Ignore, Resume, Commit, Rollback/autocommit review rules;
 - concurrency/recovery/observability checks;
-- local browser scanner with no scan-path network calls;
-- deterministic prevent/detect/recover paid report builder;
-- allowlisted intake schema/context;
+- official Make rule-evidence map;
+- privacy-first browser scanner;
+- deterministic paid report builder;
+- local intake generator and JSON schema;
 - synthetic blueprint/preflight/paid-audit examples;
+- privacy-bounded `fulfill_order.py` delivery packager;
+- SHA-256 delivery manifest;
+- hard stop on possible secret-like input;
+- raw blueprint excluded from delivery ZIP;
 - strict financial ledger;
 - Stripe PaymentIntent/Refund normalizer;
+- Stripe EUR 149 product/price/Payment Link;
+- Checkout Session ID post-payment correlation flow;
+- public site, scanner, FAQ, sample report, privacy page and thank-you flow;
 - one-command validation runner;
-- launch gates, FAQ and launch assets.
-
-## Current validation
-
-Last local validation on 2026-09-25:
-- 31 Python tests PASS;
-- browser scanner regression/privacy test PASS.
+- launch gates and operational runbooks.
 
 ## Current financial state
 
 - owner reserve uninjected: EUR 500;
-- owner capital injected: EUR 0;
 - verified gross revenue: EUR 0;
 - business-generated cash: EUR 0;
 - revenue reinvested: EUR 0;
-- expenses: EUR 0;
 - refunds: EUR 0;
-- net revenue: EUR 0;
-- net operating result: EUR 0.
+- net revenue: EUR 0.
 
-No revenue claim may be changed without provider evidence.
+The KBO setup fee should be entered as an owner-funded expense only once payment evidence is actually available; do not infer it from a quote.
 
-## Market conclusion
+No revenue claim changes without provider evidence.
 
-Demand exists across multiple independent sources (Make ecosystem, Upwork, Fiverr, Contra, adjacent Zapier market), but generic Make blueprint linting has direct low-cost competitors.
+## Stripe state
 
-Therefore the differentiation is:
-- privacy-first/local;
-- data integrity;
+Stripe is connected and live-capable.
+
+Live product:
+`PCFlows — Make.com Data Integrity Audit`
+
+Price:
+EUR 149 one-time.
+
+Payment Link exists but is deliberately **inactive**.
+
+Prepared checkout behavior:
+- required non-sensitive `Scenario name` field;
+- warning not to submit production credentials/secrets;
+- post-payment redirect includes `{CHECKOUT_SESSION_ID}`;
+- thank-you page uses the Checkout Session ID as the order reference for the customer's file-delivery email.
+
+Do not reactivate checkout before the Belgian registration/VAT gate is complete.
+
+## Registration status
+
+Paul submitted the Belgian sole-proprietor / secondary-occupation onboarding through Xerius with planned start date **2026-10-01**.
+
+Current status:
+- self-employed affiliation: approved;
+- enterprise number: pending / in processing;
+- VAT identification/small-business regime: pending enterprise number.
+
+## Market / positioning conclusion
+
+Demand exists across multiple independent sources (Make ecosystem, Upwork, Fiverr, Contra, adjacent Zapier market). Generic Make blueprint linting already has low-cost competitors.
+
+PCFlows therefore differentiates on:
+- privacy-first/local scanning;
+- business-data integrity;
 - retry/idempotency;
-- silent-success/skip;
-- recovery;
-- remediation verification.
+- silent-success/Skip/Resume risks;
+- recovery and rollback boundaries;
+- remediation verification;
+- evidence tied to Make documentation.
 
 ## Channel conclusion
 
-- Make Community: autonomous research only under current no-AI/no-automated-content rule.
+- GitHub/PCFlows site: active passive technical trust/discovery asset.
+- Make Community: autonomous research only under its current no-AI/no-automated-content rule.
 - Upwork: future legitimate platform-contained activity only.
 - Fiverr: future legitimate platform-contained activity only.
 - Contra: no bulk/systematic outreach.
-- GitHub: current directly controlled public technical asset.
-- direct checkout: Stripe is preferred but not connected.
+- Zapier: adjacent expansion only after Make willingness-to-pay validation.
 
-## First non-delegable blocker
+Do not launch simultaneously across many sites. Add channels one at a time after checkout/delivery/support are proven.
 
-A real payment or marketplace account must be legitimately activated before Northstar can accept genuine external payment or publish under Paul's identity.
+## Immediate non-delegable gate
 
-Stripe integration is available in the ChatGPT plugin ecosystem but is not currently connected. Account connection/KYC/business/payout/tax attestations require Paul.
+Wait for Xerius to issue the enterprise number / registration confirmation.
 
-Until that gate is satisfied, do not fabricate listings, accounts, customers or payments and do not spend owner capital.
+When received:
+1. verify KBO record and official start date;
+2. complete the VAT-identification/small-enterprise route that is legally available;
+3. add official business details to the public site and Stripe;
+4. perform a safe checkout test that does **not** count toward revenue;
+5. reactivate live checkout only after those checks;
+6. begin small, platform-native acquisition.
 
-
-## Registration / launch status — 2026-09-25
-
-Paul submitted the Belgian sole-proprietor / secondary-occupation onboarding through Xerius with a planned start date of **2026-10-01**.
-
-Current status visible in Xerius:
-- self-employed affiliation: approved;
-- enterprise number: pending / in processing;
-- VAT activation/small-business regime: not yet completed because the enterprise number is still pending.
-
-Do not record an owner-capital expense merely from the quoted KBO fee; book it only once payment is confirmed.
-
-## Stripe safety state
-
-A live Stripe account is connected and the PCFlows EUR 149 product/price exist.
-
-The live Payment Link is intentionally **inactive** while business registration/VAT setup is incomplete. The public website does not expose a live payment CTA during this wait.
-
-## Public no-payment validation state
-
-GitHub Pages is live at:
-https://paullz94.github.io/n8n-workflow-reliability-audit/
-
-Public zero-payment assets now include:
-- landing page;
-- free local Make Reliability Preflight;
-- local-only audit-intake JSON generator;
-- privacy/service information page;
-- support email;
-- no-payment "notify me when it opens" email CTA;
-- sitemap/robots for organic discovery.
-
-The free scanner's core path remains local-only: no blueprint upload is required for the static scan.
-
-## Immediate next non-delegable gate
-
-Wait for the Xerius enterprise number / registration confirmation. Once received:
-1. verify official start date and KBO details;
-2. complete VAT identification / small-enterprise exemption route as legally available;
-3. add official business details to the public site;
-4. re-enable Stripe checkout only after the registration/tax gate is complete;
-5. then resume small, platform-native paid acquisition.
+Until then, continue only EUR 0 product hardening and no-payment validation.
