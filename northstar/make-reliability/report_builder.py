@@ -48,6 +48,36 @@ GUIDANCE: dict[str, Guidance] = {
         "Add an idempotency key, upsert/deduplication guard, or pre-write existence check appropriate to the destination semantics.",
         "Replay the same synthetic business event twice and confirm only the intended final state/side effect exists.",
     ),
+    "write-skip-handler-data-loss-review": Guidance(
+        "detect",
+        "A failed write can be dropped while Make continues with later bundles and can report the run as successful.",
+        "Use Skip only when losing the failed business event is explicitly acceptable; otherwise route it to retry, recovery, quarantine or an operator-visible failure path.",
+        "Force a safe synthetic write failure and confirm the missing business action is visible rather than silently discarded.",
+    ),
+    "write-resume-handler-silent-success-review": Guidance(
+        "detect",
+        "Resume can substitute output for a failed write and allow downstream steps to continue as though useful output existed.",
+        "Document the fallback contract and prevent downstream success from being interpreted as proof that the external write occurred.",
+        "Force the write to fail and verify downstream systems cannot mistake substitute output for a completed side effect.",
+    ),
+    "write-commit-partial-state-review": Guidance(
+        "recover",
+        "Commit intentionally preserves earlier transactional changes and stops the run, which can leave a partial but intentional state.",
+        "Document the reconciliation path for work committed before the failure and ensure operators can distinguish complete from partial processing.",
+        "Trigger a synthetic failure after an earlier transaction and verify the partial state is detectable and recoverable.",
+    ),
+    "auto-commit-recovery-review": Guidance(
+        "recover",
+        "Auto-commit can make earlier transactional changes irreversible before later modules finish.",
+        "Confirm that incremental commits are required and define compensating/reconciliation behavior for later failures.",
+        "Trigger a later synthetic failure and verify earlier committed state is either acceptable or explicitly compensated.",
+    ),
+    "rollback-limited-by-autocommit-review": Guidance(
+        "recover",
+        "Rollback cannot undo transactional changes that Make already committed earlier when auto-commit is enabled.",
+        "If full transactional rollback is intended, review the scenario's auto-commit setting and the transaction capabilities of the affected modules.",
+        "Create a safe test where an early transaction succeeds and a later module fails; verify the actual rollback boundary matches the design.",
+    ),
     "http-write-idempotency-review": Guidance(
         "prevent",
         "POST/PUT/PATCH/DELETE requests can change remote state and may be unsafe to repeat without endpoint-specific duplicate protection.",
