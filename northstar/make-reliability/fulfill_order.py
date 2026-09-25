@@ -21,6 +21,8 @@ from typing import Any
 
 import ai_review_packet
 import audit_make
+import build_pack_report
+import pack_selector
 import report_builder
 
 ORDER_REF_RE = re.compile(r"^cs_[A-Za-z0-9_]+$")
@@ -96,7 +98,16 @@ def build_delivery(
     manifest_path = out_dir / "pcflows-manifest.json"
     ai_packet_path = out_dir / "pcflows-ai-review-packet.json"
 
-    report = report_builder.render_report(blueprint_path.name, findings, context)
+    selection = pack_selector.select_pack(raw_context)
+    if selection.get("pack_id"):
+        report = build_pack_report.render_pack_report(
+            selection["pack_id"],
+            blueprint_path.name,
+            blueprint,
+            raw_context,
+        )
+    else:
+        report = report_builder.render_report(blueprint_path.name, findings, context)
     report_path.write_text(report, encoding="utf-8")
     findings_payload = {
         "order_ref": order_ref,
@@ -114,6 +125,7 @@ def build_delivery(
         "blueprint_sha256": sha256_file(blueprint_path),
         "context_source_name": context_path.name,
         "context_sha256": sha256_file(context_path),
+        "pack_selection": selection,
         "delivery_files": {
             report_path.name: sha256_file(report_path),
             findings_path.name: sha256_file(findings_path),
@@ -143,6 +155,7 @@ def build_delivery(
         "ai_review_packet": str(ai_packet_path),
         "zip": str(zip_path),
         "finding_summary": audit_make.summary(findings),
+        "pack_selection": selection,
     }
 
 
