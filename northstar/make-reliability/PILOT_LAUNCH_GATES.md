@@ -157,19 +157,18 @@ Commercial rule: the current packages sell audit, remediation guidance, verifica
 - [ ] Safe update/deployment flow verified.
 - [ ] Automatic rollback after failed verification exercised.
 - [ ] At least one end-to-end synthetic repair reaches closed_verified in a real Make test environment.
-- [ ] Repair failure/refund policy finalized.
+- [x] Internal Verified Repair failure/refund policy finalized; final statutory/public wording remains a launch-time legal check.
 - [ ] Only after every gate above: consider public Verified Repair checkout.
 
-## Validation caveat after latest hardening
+## Validation command
 
-The Northstar validation command now runs:
+The Northstar validation command runs:
 - Python compileall;
 - full unittest discovery;
 - package catalog/order-contract consistency;
-- browser scanner regression when Node is available.
+- browser scanner regression/privacy when Node is available.
 
-The latest branch contains substantially more tests than the last fully executed 31-test checkpoint. A direct local clone/run could not be executed from the current ChatGPT container because outbound DNS to GitHub is unavailable. Do **not** claim that the complete current suite has passed until it is executed by an environment that has the branch checkout. Static/source-level guards and individual connector-side checks were still performed during this hardening round.
-
+The current complete suite has been executed successfully; see the full validation checkpoint below.
 
 ### Make MCP integration update
 - [x] Official Make ChatGPT plugin/MCP availability verified against current Make documentation.
