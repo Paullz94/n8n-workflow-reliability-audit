@@ -310,7 +310,8 @@ Routine support no longer depends on Paul's personal Gmail account. The next leg
 Implemented:
 - Lead Flow Reliability;
 - Invoice & Payment Sync;
-- AI Workflow Guardrails.
+- AI Workflow Guardrails;
+- Client Onboarding Reliability.
 
 Each pack now has:
 - synthetic blueprint/context fixtures;
