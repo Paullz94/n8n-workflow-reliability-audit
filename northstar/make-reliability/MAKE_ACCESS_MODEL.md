@@ -127,3 +127,66 @@ After the service identity exists, customer onboarding can be autonomous:
 - Never run destructive verification against real customer records when a synthetic test is possible.
 - Never call a repair complete until every resolution contract is closed_verified.
 - Do not keep access longer than needed for the defined service.
+
+
+## Preferred ChatGPT integration — official Make MCP
+
+Research update: 2026-09-25
+
+Make now provides an official Make plugin / MCP integration for ChatGPT.
+
+Make states that the ChatGPT integration can:
+- describe/build Make automations;
+- run scenarios;
+- review output;
+- search/manage automations and execution history;
+- continue using connections and governance stored inside Make.
+
+Official sources:
+- https://help.make.com/official-make-plugin-for-chatgpt-is-now-available
+- https://help.make.com/connect-to-chatgpt
+- https://help.make.com/make-mcp-server
+
+### Preferred PCFlows architecture
+
+Use the official Make MCP path before inventing a custom hosted bridge.
+
+There are two relevant Make MCP options:
+
+1. **Make MCP server**
+   - broad account management/run access;
+   - quickest connection;
+   - less granular scenario restriction.
+
+2. **MCP toolbox**
+   - exposes a specific selected set of active, on-demand scenarios as tools;
+   - unique URL and key;
+   - multiple keys;
+   - read-only/read-write annotations;
+   - preferable for tightly controlled PCFlows test tools.
+
+Official toolbox source:
+https://help.make.com/mcp-toolboxes
+
+### ChatGPT connection without Work
+
+Make documents connecting an MCP toolbox directly to normal ChatGPT:
+- ChatGPT web -> Settings -> Plugins -> Developer mode;
+- add custom MCP server;
+- use the Make toolbox URL plus toolbox key;
+- stateless Streamable HTTP is recommended.
+
+This does not require ChatGPT Work as the browser operator.
+
+### Current recommendation
+
+For PCFlows Verified Repair:
+- use the official Make plugin/MCP server for Make account/scenario management where the necessary tools/scopes are exposed;
+- use a dedicated **PCFlows Verification Toolbox** for narrowly scoped synthetic acceptance-test scenarios;
+- keep production writes additionally protected by PCFlows case/customer authorization and allowlists.
+
+### Current status
+
+The official Make plugin/MCP connection exists as a supported product, but it is **not connected to this ChatGPT session yet**.
+
+Plugin directory search through the currently connected plugin-management interface did not surface Make even though Make's current official documentation says it is available. The documented custom-MCP toolbox route is therefore the deterministic fallback connection path.
