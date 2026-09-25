@@ -174,7 +174,22 @@
     if(rules.has('possible-secret-in-blueprint')){
       q.innerHTML='<div class="kicker">Stop here</div><h3 style="margin-top:14px">Sanitize this blueprint again.</h3><p>A possible secret-like literal was detected. Do not send this file for a paid audit. Remove the sensitive value, rotate it if necessary, and export a clean copy.</p>';
     } else if(report.findings.some(f=>highValue.has(f.rule))){
-      q.innerHTML='<div class="kicker">Possible paid-audit fit</div><h3 style="margin-top:14px">Business context could materially change the priority.</h3><p>The free scan found reliability/data-integrity signals where the scenario goal and critical side effects matter.</p><p><a href="intake.html">Prepare the local audit intake →</a></p>';
+      const focusRules={
+        duplicates:new Set(['retrying-write-idempotency-review','http-write-idempotency-review']),
+        silent_skips:new Set(['filtered-write-silent-skip-review','write-skip-handler-data-loss-review','write-resume-handler-silent-success-review']),
+        recovery:new Set(['write-without-error-handler','write-commit-partial-state-review','rollback-limited-by-autocommit-review','incomplete-executions-disabled-review','data-loss-enabled']),
+        ordering:new Set(['concurrency-review'])
+      };
+      const active=[];
+      for(const [name,set] of Object.entries(focusRules)){
+        if(report.findings.some(f=>set.has(f.rule))) active.push(name);
+      }
+      if(active.length===1){
+        const labels={duplicates:'duplicate effects / idempotency',silent_skips:'silent skips / missing work',recovery:'failure recovery',ordering:'concurrency / ordering'};
+        q.innerHTML='<div class="kicker">Smallest likely paid scope</div><h3 style="margin-top:14px">A €79 Focused Risk Check may be enough.</h3><p>The current static evidence clusters around one risk area: <strong>'+labels[active[0]]+'</strong>. If that is the problem you want answered, there is no reason to start with the broader €149 audit.</p><p><a href="packages.html">Compare the €79 and €149 scopes →</a></p>';
+      } else {
+        q.innerHTML='<div class="kicker">Broader paid-audit fit</div><h3 style="margin-top:14px">The €149 Data Integrity Audit is the better starting point.</h3><p>The free scan found meaningful signals across multiple reliability categories, so business context can materially change the remediation order. Lead Flow, Invoice/Payment and AI Guardrails specialist modes are included automatically when context matches.</p><p><a href="intake.html">Prepare the local audit intake →</a> · <a href="packages.html">Compare services</a></p>';
+      }
     } else {
       q.innerHTML='<div class="kicker">Free result may be enough</div><h3 style="margin-top:14px">No strong paid-audit signal in the current static evidence.</h3><p>Keep the result and test with synthetic data. PCFlows should not push a paid review when the free scan has little additional context to prioritize.</p>';
     }
