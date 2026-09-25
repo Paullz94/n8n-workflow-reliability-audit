@@ -1,7 +1,7 @@
 (function (root, factory) {
   const api = factory();
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
-  root.NorthstarScanner = api;
+  root.PCFlowsScanner = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
   'use strict';
 
