@@ -19,6 +19,7 @@ from dataclasses import asdict
 from pathlib import Path
 from typing import Any
 
+import ai_review_packet
 import audit_make
 import report_builder
 
@@ -93,6 +94,7 @@ def build_delivery(
     findings_path = out_dir / "pcflows-findings.json"
     context_path_out = out_dir / "pcflows-context-used.json"
     manifest_path = out_dir / "pcflows-manifest.json"
+    ai_packet_path = out_dir / "pcflows-ai-review-packet.json"
 
     report = report_builder.render_report(blueprint_path.name, findings, context)
     report_path.write_text(report, encoding="utf-8")
@@ -103,6 +105,8 @@ def build_delivery(
     }
     findings_path.write_text(json.dumps(findings_payload, indent=2) + "\n", encoding="utf-8")
     context_path_out.write_text(json.dumps(context, indent=2) + "\n", encoding="utf-8")
+    ai_packet = ai_review_packet.make_packet(blueprint, raw_context)
+    ai_packet_path.write_text(json.dumps(ai_packet, indent=2) + "\n", encoding="utf-8")
 
     manifest = {
         "order_ref": order_ref,
@@ -115,8 +119,12 @@ def build_delivery(
             findings_path.name: sha256_file(findings_path),
             context_path_out.name: sha256_file(context_path_out),
         },
+        "internal_review_files": {
+            ai_packet_path.name: sha256_file(ai_packet_path),
+        },
         "privacy": {
             "raw_blueprint_included": False,
+            "ai_review_packet_included_in_customer_zip": False,
             "production_credentials_required": False,
         },
     }
@@ -132,6 +140,7 @@ def build_delivery(
         "report": str(report_path),
         "findings": str(findings_path),
         "manifest": str(manifest_path),
+        "ai_review_packet": str(ai_packet_path),
         "zip": str(zip_path),
         "finding_summary": audit_make.summary(findings),
     }
