@@ -31,7 +31,7 @@ KEYWORDS = {
     "price": ("price", "cost", "€149", "149", "how much"),
     "privacy": ("credential", "api key", "secret", "privacy", "webhook url", "data"),
     "send_files": ("send blueprint", "upload blueprint", "where do i send", "intake"),
-    "rescan": ("rescan", "re-scan", "after fix", "after remediation"),
+    "rescan": ("rescan", "re-scan", "after fix", "after remediation", "is it fixed", "verified fixed"),
     "implementation": ("fix it for me", "implement", "build it", "change my scenario"),
     "refund_policy": ("refund", "money back", "cancel order", "duplicate charge"),
     "security_certification": ("certify", "certification", "security audit", "soc 2", "iso 27001"),
@@ -74,7 +74,8 @@ def render_reply(route: SupportRoute) -> str:
         ),
         "rescan": (
             "The fixed-scope pilot includes one re-scan of the same scenario after remediation. Send the revised sanitized "
-            "blueprint under the same order reference; the comparison reports resolved, remaining and new static findings."
+            "blueprint under the same order reference; the comparison reports statically cleared, remaining and new findings. "
+            "A statically cleared finding is not called fixed until the required runtime proof exists."
         ),
         "implementation": (
             "The current PCFlows product is an audit and verification service, not an open-ended implementation retainer. "
