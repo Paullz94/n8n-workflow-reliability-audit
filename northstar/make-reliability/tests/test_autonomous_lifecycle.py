@@ -40,6 +40,38 @@ class AutonomousLifecycleTests(unittest.TestCase):
         self.assertTrue(d.autonomous)
         self.assertEqual(d.action, "stop_and_request_resanitization")
 
+    def test_personal_data_hard_stops_autonomously(self):
+        d = autonomous_lifecycle.decide({
+            "state":"files_received",
+            "personal_data_like":True,
+            "scope_fit":True,
+        })
+        self.assertEqual(d.next_state,"awaiting_safe_input")
+
+    def test_cross_case_mismatch_freezes_case(self):
+        d = autonomous_lifecycle.decide({
+            "state":"files_received",
+            "cross_case_mismatch":True,
+            "scope_fit":True,
+        })
+        self.assertEqual(d.next_state,"privacy_hold")
+
+    def test_verified_repair_cannot_start_before_public_gate(self):
+        d = autonomous_lifecycle.decide({
+            "state":"verified_repair_requested",
+            "verified_repair_public_enabled":False,
+            "repair_eligible":True,
+        })
+        self.assertEqual(d.next_state,"audit_or_diagnostic")
+
+    def test_unrealistic_repair_never_opens_contract(self):
+        d = autonomous_lifecycle.decide({
+            "state":"verified_repair_requested",
+            "verified_repair_public_enabled":True,
+            "repair_eligible":False,
+        })
+        self.assertEqual(d.next_state,"audit_or_diagnostic")
+
     def test_policy_refund_is_autonomous(self):
         d = autonomous_lifecycle.decide({
             "state":"refund_requested",
