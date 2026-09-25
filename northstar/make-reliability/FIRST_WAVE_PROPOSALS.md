@@ -111,3 +111,47 @@ Do not:
 - invent urgency or discounts.
 
 Use actual new information as the reason for a follow-up.
+
+
+---
+
+## Draft — Make.com QA & Troubleshooting
+
+Target:
+https://www.upwork.com/freelance-jobs/apply/Make-com-Automation-Specialist-Troubleshooting_~022098474011690711653/
+
+Use only after the registration/VAT launch gate and only if the job is still open.
+
+Draft:
+
+Your scope is unusually close to the work PCFlows is built for: reviewing existing Make.com scenarios for reliability and data-integrity problems before treating them as production-ready.
+
+For a first bounded milestone I would review a sanitized scenario around five failure classes: duplicate external effects on retries, silent skips/missing work, partial completion after downstream API failure, concurrency/ordering risk, and whether failures are observable and recoverable. I would also validate the data mappings, webhook/API boundaries and existing error-handler paths you called out.
+
+The deliverable is not a vague health score. It is a prioritized finding list tied to business impact, a prevent/detect/recover plan, and a concrete verification checklist your team can use after remediation. One revised-scenario re-scan can be included for the Data Integrity Audit scope.
+
+I should be transparent that PCFlows is a new audit/QA service, so I do not have customer testimonials or a long client case-study list to present. The public method, local scanner and synthetic sample report are available so you can inspect how the review works directly.
+
+I would start with one scenario or one clearly related workflow slice rather than asking you to commit to a long engagement before the first review is useful.
+
+Truth check before sending:
+- do not call runtime-dependent issues "fixed" from static evidence;
+- do not imply production-write access;
+- do not claim Make certification or prior customer projects;
+- if the buyer requires direct implementation as the initial deliverable, state the audit boundary instead of pretending PCFlows is a build agency.
+
+---
+
+## CapaciDesk qualification — do not submit as-is
+
+Target:
+https://www.upwork.com/freelance-jobs/apply/Automation-Specialist-for-Paid-Qualification-Project-n8n-Make-CRM-API-Integrations_~022101749575310645866/
+
+This is retained as a demand/agency signal, not a first-wave audit proposal.
+
+Reason:
+- their scoring criteria strongly match PCFlows reliability thinking;
+- however the paid qualification requires an implementation/build;
+- the current public PCFlows scope is audit/QA, while Verified Repair/runtime deployment remains disabled.
+
+Only reconsider if the buyer explicitly offers a bounded architecture/QA milestone that can be delivered honestly within the current product scope.
