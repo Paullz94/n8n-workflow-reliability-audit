@@ -293,3 +293,57 @@ Do not work around missing connectors with scraping, CAPTCHA bypass or rule-viol
 - Daily public Make.com opportunity research and weekly post-launch guide automation remain enabled.
 
 Routine support no longer depends on Paul's personal Gmail account. The next legal launch blocker remains the official Belgian enterprise/VAT state.
+
+
+## Autonomous operations update — 2026-09-25 evening
+
+### Connected operator tools
+
+- **PCFlows Gmail connected:** `pcmotionstudios@gmail.com` is verified as a separate Gmail connection.
+- Gmail labels created: `PCFlows/Customer`, `PCFlows/Order`, `PCFlows/Needs Review`, `PCFlows/Closed`.
+- Hourly **PCFlows Inbox Operator** condition-watch is enabled for routine inbound support/order handling. During registration pause it may answer interest/support but may not solicit payment or claim checkout is open.
+- **Clay connected:** prospect/company/contact research is available.
+- Three-times-weekly **PCFlows Agency Pipeline** condition-watch is enabled for small, research-first prospect discovery.
+
+### Demand-specific product packs
+
+Implemented:
+- Lead Flow Reliability;
+- Invoice & Payment Sync;
+- AI Workflow Guardrails.
+
+Each pack now has:
+- synthetic blueprint/context fixtures;
+- problem-specific priority ordering;
+- customer-readable acceptance tests;
+- context prompts;
+- pack report generation.
+
+`pack_selector.py` can route safe non-sensitive business context to a pack or keep the generic Data Integrity Audit when evidence is ambiguous.
+
+`fulfill_order.py` now performs pack selection automatically before rendering the paid report.
+
+### Ownerless routine lifecycle
+
+Implemented:
+- `autonomous_lifecycle.py` for routine lead -> support -> payment -> intake -> audit -> delivery -> rescan/refund states;
+- `support_router.py` for routine customer questions;
+- published owner-only exceptions are restricted to legal/KYC/account authorization, new owner-capital spend, or exceptional disputes.
+
+### Outbound marketing gate
+
+Clay research is enabled, but autonomous cold email remains deliberately disabled.
+
+Reason:
+Belgian direct-marketing/privacy compliance is a separate gate from enterprise/VAT registration. Public professional contact data is not treated as automatic permission to market.
+
+See:
+- `OUTBOUND_DIRECT_MARKETING_GATE.md`
+- `CLAY_PROSPECTING_POLICY.md`
+- `acquisition_policy.json`
+
+Prefer explicit job-post demand, inbound interest and marketplace-native proposals before cold email.
+
+### Work mode
+
+ChatGPT Work is **not required** for the current PCFlows operating design. Current work can continue through ordinary ChatGPT plus GitHub, Gmail, Stripe, Clay, web research and scheduled tasks. This avoids consuming the shared Work/Codex usage allowance merely for browser automation.
