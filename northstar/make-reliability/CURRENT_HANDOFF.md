@@ -280,3 +280,16 @@ Remaining one-time prerequisites for truly autonomous external operation:
 4. Upwork/Contra need either a supported direct connector or an authorized cloud-browser/Work workflow because no direct action connector was found in current plugin discovery.
 
 Do not work around missing connectors with scraping, CAPTCHA bypass or rule-violating automation.
+
+
+## Connected operating integrations — 2026-09-25
+
+- **Gmail / PCFlows support:** `PCMotionstudios@gmail.com` connected and verified.
+- Gmail labels prepared: `PCFlows/Customer`, `PCFlows/Order`, `PCFlows/Needs Review`, `PCFlows/Closed`.
+- **PCFlows Inbox Operator:** hourly autonomous routine-support condition watch enabled.
+- **Clay:** connected and usable for public company/contact prospect research. Initial automation-agency search has been exercised successfully.
+- **Stripe:** connected/live-capable; checkout remains deliberately inactive pending registration/VAT.
+- **GitHub:** connected for isolated product/site maintenance.
+- Daily public Make.com opportunity research and weekly post-launch guide automation remain enabled.
+
+Routine support no longer depends on Paul's personal Gmail account. The next legal launch blocker remains the official Belgian enterprise/VAT state.
