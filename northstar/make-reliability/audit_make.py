@@ -91,8 +91,57 @@ def _is_write_module(module: dict[str, Any]) -> bool:
     return False
 
 
+def normalize_blueprint(doc: dict[str, Any]) -> dict[str, Any]:
+    """Accept direct exports plus common API/wrapper/module-export shapes."""
+    if isinstance(doc.get("flow"), list):
+        return doc
+
+    wrapped = doc.get("blueprint")
+    if isinstance(wrapped, dict):
+        return wrapped
+    if isinstance(wrapped, str):
+        try:
+            parsed = json.loads(wrapped)
+        except json.JSONDecodeError:
+            parsed = None
+        if isinstance(parsed, dict):
+            return parsed
+
+    subflows = doc.get("subflows")
+    if isinstance(subflows, list) and subflows:
+        first = subflows[0]
+        if isinstance(first, dict) and isinstance(first.get("flow"), list):
+            return {"name": doc.get("name", "Module export"), "flow": first["flow"], "metadata": doc.get("metadata", {})}
+
+    return doc
+
+
+def _truthy(value: Any) -> bool:
+    if value is True or value == 1:
+        return True
+    return isinstance(value, str) and value.strip().lower() in {"1", "true", "yes"}
+
+
+def _has_retry_handler(module: dict[str, Any]) -> bool:
+    onerror = module.get("onerror")
+    if not isinstance(onerror, list):
+        return False
+    stack = [item for item in onerror if isinstance(item, dict)]
+    while stack:
+        item = stack.pop()
+        if str(item.get("module", "")).lower() == "builtin:break":
+            mapper = item.get("mapper") if isinstance(item.get("mapper"), dict) else {}
+            if _truthy(mapper.get("retry")):
+                return True
+        flow = item.get("flow")
+        if isinstance(flow, list):
+            stack.extend(x for x in flow if isinstance(x, dict))
+    return False
+
+
 def scan_blueprint(bp: dict[str, Any]) -> list[Finding]:
     findings: list[Finding] = []
+    bp = normalize_blueprint(bp)
     flow = bp.get("flow")
     if not isinstance(flow, list):
         return [Finding("invalid-blueprint", "critical", "Top-level 'flow' array is missing or invalid.")]
@@ -112,6 +161,14 @@ def scan_blueprint(bp: dict[str, Any]) -> list[Finding]:
                 "write-without-error-handler",
                 "high",
                 "Write-like module has no exported onerror route; verify failure handling and recovery behavior.",
+                mid, name, path,
+            ))
+
+        if _is_write_module(module) and _has_retry_handler(module):
+            findings.append(Finding(
+                "retrying-write-idempotency-review",
+                "medium",
+                "Write-like module has an automatic retry handler. Verify a retry cannot duplicate or repeat an external side effect.",
                 mid, name, path,
             ))
 
@@ -147,12 +204,36 @@ def scan_blueprint(bp: dict[str, Any]) -> list[Finding]:
                         mid, name, path,
                     ))
 
-    scenario_meta = bp.get("metadata", {}).get("scenario", {}) if isinstance(bp.get("metadata"), dict) else {}
-    if writes and isinstance(scenario_meta, dict) and scenario_meta.get("sequential") is False:
+    metadata = bp.get("metadata", {}) if isinstance(bp.get("metadata"), dict) else {}
+    scenario_meta = metadata.get("scenario", {}) if isinstance(metadata.get("scenario"), dict) else {}
+    instant = metadata.get("instant") is True
+
+    if writes and scenario_meta.get("sequential") is False:
         findings.append(Finding(
             "concurrency-review",
+            "medium" if instant else "low",
+            "Scenario allows overlapping runs and contains write-like modules. Verify concurrent executions cannot race or duplicate writes.",
+        ))
+
+    if writes and scenario_meta.get("dlq") is False:
+        findings.append(Finding(
+            "incomplete-executions-disabled-review",
+            "medium",
+            "Exported scenario has dlq=false. Verify that disabling stored incomplete executions is intentional for a workflow with external writes.",
+        ))
+
+    if scenario_meta.get("dataloss") is True:
+        findings.append(Finding(
+            "data-loss-enabled",
+            "high",
+            "Scenario is exported with data-loss mode enabled; failed data may be discarded when incomplete-execution storage cannot accept more items.",
+        ))
+
+    if scenario_meta.get("confidential") is True:
+        findings.append(Finding(
+            "confidential-observability-review",
             "low",
-            "Scenario is exported with sequential=false and contains write-like modules. Verify concurrent runs cannot race or duplicate writes.",
+            "Keep-data-confidential is enabled. Verify external observability exists because Make execution logs retain less payload detail.",
         ))
 
     for text in _string_values(bp):
