@@ -14,6 +14,7 @@ from __future__ import annotations
 import hashlib
 import json
 from pathlib import Path
+from concurrent.futures import ThreadPoolExecutor
 from typing import Any, Callable
 
 import audit_make
@@ -42,6 +43,9 @@ EVALUATORS: dict[str, Callable[..., dict[str, bool]]] = {
     "failed_work_replay": runtime_test_contract.assert_failed_work_replay,
     "data_loss_recovery": runtime_test_contract.assert_data_loss_recovery,
     "privacy_safe_observability": runtime_test_contract.assert_privacy_safe_observability,
+    "customer_match": runtime_test_contract.assert_customer_match,
+    "ambiguous_review": runtime_test_contract.assert_ambiguous_review,
+    "concurrent_pair": runtime_test_contract.assert_concurrent_pair,
 }
 
 
@@ -103,6 +107,17 @@ def _run_test(
     if evaluator_name=="duplicate_replay":
         first=client.run_scenario(scenario_id,data=input_data or {},responsive=True)
         second=client.run_scenario(scenario_id,data=input_data or {},responsive=True)
+        proof1=_extract_result(first)
+        proof2=_extract_result(second)
+        assertions=evaluator(proof1,proof2)
+        execution_ids=[first.get("executionId"),second.get("executionId")]
+        sanitized_outputs=[proof1,proof2]
+    elif evaluator_name=="concurrent_pair":
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            future1=pool.submit(client.run_scenario,scenario_id,data=input_data or {},responsive=True)
+            future2=pool.submit(client.run_scenario,scenario_id,data=input_data or {},responsive=True)
+            first=future1.result()
+            second=future2.result()
         proof1=_extract_result(first)
         proof2=_extract_result(second)
         assertions=evaluator(proof1,proof2)
