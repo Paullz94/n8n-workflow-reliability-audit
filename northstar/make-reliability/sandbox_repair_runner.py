@@ -155,6 +155,7 @@ def run_sandbox_repair(
             "status":"verified_in_sandbox",
             "all_tests_passed":True,
             "original_sha256":backup.get("original_sha256") or _canonical_sha256(original),
+            "requested_revised_sha256":_canonical_sha256(revised_blueprint),
             "deployed_sha256":_canonical_sha256(deployed),
             "tests":tests,
             "rollback_performed":False,
