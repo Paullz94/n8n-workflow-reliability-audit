@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>PCFlows Services & Pricing</title>
+  <meta name="description" content="Choose the right PCFlows Make.com reliability review: free preflight, focused risk check, full data integrity audit, or portfolio/release QA.">
+  <meta name="theme-color" content="#050505">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap site-nav">
+    <a class="wordmark" href="./">PCFlows</a>
+    <nav class="nav-links">
+      <a href="method.html">Method</a>
+      <a href="sample-report.html">Sample report</a>
+      <a class="nav-cta" href="scanner.html">Free preflight</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div class="kicker">Services & launch pricing</div>
+      <h1>Choose based on the problem, not on jargon.</h1>
+      <p class="lead">PCFlows uses one reliability engine with different scopes. The cheapest suitable option should win — not the most expensive one.</p>
+      <div class="notice" style="margin-top:24px">
+        Paid checkout remains paused until Belgian business registration and VAT setup are complete. These are the planned fixed-scope launch prices.
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="package-grid">
+        <article class="package-card">
+          <span class="tag">Self-serve</span>
+          <h3 style="margin-top:16px">Reliability Preflight</h3>
+          <div class="price">€0</div>
+          <p class="muted">For a first static check before sharing anything.</p>
+          <ul class="clean-list">
+            <li>1 sanitized scenario</li>
+            <li>Local browser scan</li>
+            <li>Deterministic findings</li>
+            <li>JSON + Markdown export</li>
+          </ul>
+          <a class="button primary" href="scanner.html">Run free preflight</a>
+        </article>
+
+        <article class="package-card">
+          <span class="tag">One clear concern</span>
+          <h3 style="margin-top:16px">Focused Risk Check</h3>
+          <div class="price">€79</div>
+          <p class="muted">When you have one specific question in one workflow.</p>
+          <ul class="clean-list">
+            <li>1 sanitized scenario</li>
+            <li>Choose one risk focus</li>
+            <li>Top relevant findings</li>
+            <li>Remediation checklist</li>
+            <li>Synthetic verification steps</li>
+          </ul>
+          <span class="button disabled">Opens after registration</span>
+        </article>
+
+        <article class="package-card featured">
+          <span class="tag">Core service</span>
+          <h3 style="margin-top:16px">Data Integrity Audit</h3>
+          <div class="price">€149</div>
+          <p class="muted">For one important workflow where missing, duplicated or unrecoverable work matters.</p>
+          <ul class="clean-list">
+            <li>1 sanitized scenario</li>
+            <li>Full reliability review</li>
+            <li>Business-impact prioritization</li>
+            <li>Prevent / detect / recover plan</li>
+            <li>Verification checklist</li>
+            <li>1 remediation re-scan</li>
+          </ul>
+          <span class="button disabled">Opens after registration</span>
+        </article>
+
+        <article class="package-card">
+          <span class="tag">Agency / multi-flow</span>
+          <h3 style="margin-top:16px">Portfolio / Release QA</h3>
+          <div class="price">€399</div>
+          <p class="muted">For agencies, freelancers or teams releasing several related workflows.</p>
+          <ul class="clean-list">
+            <li>Up to 3 sanitized scenarios</li>
+            <li>Per-scenario audit</li>
+            <li>Combined risk summary</li>
+            <li>Release / handoff checklist</li>
+            <li>Cross-scenario verification plan</li>
+            <li>1 combined re-scan round</li>
+          </ul>
+          <span class="button disabled">Opens after registration</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="kicker">Not sure which one?</div>
+        <h2>Use the service chooser.</h2>
+        <p class="lead">This runs locally in your browser. It does not submit anything.</p>
+      </div>
+
+      <div class="chooser">
+        <div class="chooser-grid">
+          <div>
+            <label for="scenarioCount">How many scenarios do you want reviewed?</label>
+            <select id="scenarioCount">
+              <option value="1">1 scenario</option>
+              <option value="2">2 scenarios</option>
+              <option value="3">3 scenarios</option>
+            </select>
+          </div>
+          <div>
+            <label for="goal">What do you need?</label>
+            <select id="goal">
+              <option value="explore">I just want a first check</option>
+              <option value="focused">I have one clear concern</option>
+              <option value="full">I want the whole workflow reviewed</option>
+              <option value="release">I am preparing handoff / release</option>
+            </select>
+          </div>
+        </div>
+
+        <label for="problem">Which problem sounds closest?</label>
+        <select id="problem">
+          <option value="generic">General reliability / not sure</option>
+          <option value="lead">Leads, CRM, routing, SMS/email follow-up</option>
+          <option value="invoice">Invoices, payments, Stripe, QuickBooks/Xero</option>
+          <option value="ai">AI/LLM output triggers CRM, email, finance or customer actions</option>
+        </select>
+
+        <div class="recommendation" id="recommendation"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="kicker">Specialist modes</div>
+        <h2>The €149 audit adapts to the workflow.</h2>
+        <p class="lead">These are not hidden surcharges. When your safe business context clearly matches one of these patterns, the report automatically uses the relevant acceptance tests and language.</p>
+      </div>
+
+      <div class="specialist-grid">
+        <article class="specialist">
+          <h3>Lead Flow Reliability</h3>
+          <p>For lead forms, CRM, sales routing, SMS/email and booking workflows.</p>
+          <div class="rule-list">
+            <div class="rule-row"><div class="label">Example</div><div class="value">Same lead becomes two CRM contacts.</div></div>
+            <div class="rule-row"><div class="label">Example</div><div class="value">Follow-up continues after a reply or booking.</div></div>
+          </div>
+        </article>
+
+        <article class="specialist">
+          <h3>Invoice & Payment Sync</h3>
+          <p>For CRM, Stripe, QuickBooks/Xero and invoice/payment state.</p>
+          <div class="rule-list">
+            <div class="rule-row"><div class="label">Example</div><div class="value">Retry creates the same invoice twice.</div></div>
+            <div class="rule-row"><div class="label">Example</div><div class="value">Partial payment incorrectly marks a deal fully paid.</div></div>
+          </div>
+        </article>
+
+        <article class="specialist">
+          <h3>AI Workflow Guardrails</h3>
+          <p>For LLM output that can trigger real business or customer-facing actions.</p>
+          <div class="rule-list">
+            <div class="rule-row"><div class="label">Example</div><div class="value">Malformed AI output reaches CRM without validation.</div></div>
+            <div class="rule-row"><div class="label">Example</div><div class="value">Automation keeps acting after human takeover.</div></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap grid-2">
+      <div>
+        <div class="kicker">What PCFlows is</div>
+        <h2>One reliability company, not four disconnected gigs.</h2>
+      </div>
+      <div class="rule-list">
+        <div class="rule-row"><div class="label">Brand</div><div class="value"><strong>PCFlows</strong> is the public business/trade name.</div></div>
+        <div class="rule-row"><div class="label">Northstar</div><div class="value">Internal project codename only. Customers should never need to know it.</div></div>
+        <div class="rule-row"><div class="label">PCMotionStudios</div><div class="value">Legacy/admin name retained mainly in the support mailbox address.</div></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-row">
+    <div><strong style="color:var(--text)">PCFlows</strong><br>Independent technical service · Not affiliated with Make.com</div>
+    <div class="footer-links">
+      <a href="./">Home</a>
+      <a href="scanner.html">Scanner</a>
+      <a href="method.html">Method</a>
+      <a href="faq.html">FAQ</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="mailto:PCMotionstudios@gmail.com">Support</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const count=document.getElementById('scenarioCount');
+  const goal=document.getElementById('goal');
+  const problem=document.getElementById('problem');
+  const out=document.getElementById('recommendation');
+
+  function specialist(){
+    return {
+      lead:'Lead Flow Reliability',
+      invoice:'Invoice & Payment Sync',
+      ai:'AI Workflow Guardrails',
+      generic:null
+    }[problem.value];
+  }
+
+  function render(){
+    const n=Number(count.value);
+    const g=goal.value;
+    let name,price,why;
+
+    if(n>1 || g==='release'){
+      name='Portfolio / Release QA';
+      price='€399';
+      why='You are reviewing multiple workflows or preparing a handoff/release, so a combined release view is more useful than separate one-off audits.';
+    } else if(g==='explore'){
+      name='Reliability Preflight';
+      price='€0';
+      why='Start with the local scanner. If it finds little to prioritize, there may be no reason to pay for a deeper review.';
+    } else if(g==='focused'){
+      name='Focused Risk Check';
+      price='€79';
+      why='You have one clearly defined concern, so a bounded review is more economical than the full audit.';
+    } else {
+      name='Data Integrity Audit';
+      price='€149';
+      why='You want one important workflow reviewed across reliability, failure and recovery categories.';
+    }
+
+    const s=specialist();
+    const extra=(s && name==='Data Integrity Audit')
+      ? '<p class="small">Specialist mode: <strong style="color:var(--text)">'+s+'</strong> is automatically included when the supplied business context confirms the fit.</p>'
+      : '';
+
+    out.innerHTML='<div class="kicker">Recommended starting point</div><h3 style="margin-top:12px">'+name+' · '+price+'</h3><p>'+why+'</p>'+extra+'<p class="small">This chooser is informational only. Paid checkout stays closed until registration is complete.</p>';
+  }
+
+  [count,goal,problem].forEach(el=>el.addEventListener('change',render));
+  render();
+})();
+</script>
+</body>
+</html>
