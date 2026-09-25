@@ -14,6 +14,12 @@
   const secretPatterns = [
     /\bBearer\s+[A-Za-z0-9._~+/=-]{16,}/i,
     /\bsk-[A-Za-z0-9_-]{16,}\b/,
+    /\b(?:sk|rk)_live_[A-Za-z0-9]{16,}\b/,
+    /\bghp_[A-Za-z0-9]{20,}\b/,
+    /\bgithub_pat_[A-Za-z0-9_]{20,}\b/,
+    /\bAKIA[A-Z0-9]{16}\b/,
+    /\bAIza[A-Za-z0-9_-]{30,}\b/,
+    /\bxox[baprs]-[A-Za-z0-9-]{10,}\b/,
     /https:\/\/hooks\.slack\.com\/services\/[A-Za-z0-9/_-]+/i,
     /https:\/\/hook(?:\.[a-z0-9-]+)?\.make\.com\/[A-Za-z0-9_-]{12,}/i,
     /https:\/\/hook\.integromat\.com\/[A-Za-z0-9_-]{12,}/i,
