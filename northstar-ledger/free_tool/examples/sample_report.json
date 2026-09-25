@@ -1,0 +1,11 @@
+{
+  "version": "0.1.0",
+  "files_scanned": 2,
+  "findings": [
+    {"rule":"SECRET-OPENAI","severity":"critical","path":"app.py","line":2,"message":"Possible OpenAI secret committed","evidence":"sk-pro…STUV"},
+    {"rule":"STRIPE-WEBHOOK-VERIFY","severity":"high","path":".","line":1,"message":"Stripe usage found without obvious webhook signature verification","evidence":""},
+    {"rule":"DEBUG-ENABLED","severity":"high","path":"app.py","line":1,"message":"Debug mode appears enabled","evidence":"DEBUG=True"},
+    {"rule":"CI-MISSING","severity":"low","path":".","line":1,"message":"No GitHub Actions workflow detected","evidence":""},
+    {"rule":"TESTS-MISSING","severity":"low","path":".","line":1,"message":"No obvious automated tests detected","evidence":""}
+  ]
+}
