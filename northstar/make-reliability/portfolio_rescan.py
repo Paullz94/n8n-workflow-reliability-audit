@@ -45,7 +45,7 @@ def render_portfolio_rescan(result:dict[str,Any])->str:
         "# PCFlows Portfolio Remediation Re-scan",
         "",
         f"Scenarios compared: **{result['scenario_count']}**",
-        f"Resolved static findings: **{t['resolved']}**",
+        f"Statically cleared findings: **{t['resolved']}**",
         f"Remaining static findings: **{t['remaining']}**",
         f"New static findings: **{t['new']}**",
         "",
@@ -64,8 +64,9 @@ def render_portfolio_rescan(result:dict[str,Any])->str:
     lines += [
         "## Release interpretation",
         "",
-        "A static finding marked resolved means the revised blueprint no longer matches that deterministic rule. "
-        "It does not prove the live production issue is fixed. Re-run the original synthetic acceptance tests before release/handoff.",
+        "A statically cleared finding means the revised blueprint no longer matches that deterministic rule. "
+        "Runtime-dependent findings are not independently verified fixed until the rule-specific connected synthetic checks pass. "
+        "Re-run the original acceptance tests before release/handoff.",
         "",
     ]
     return "\n".join(lines)
