@@ -48,6 +48,72 @@ class RuntimeTestContractTests(unittest.TestCase):
         self.assertNotIn("customer_email",r)
         self.assertNotIn("api_key",r)
 
+    def test_failure_recovery_requires_explicit_zero_duplicate_count(self):
+        r=runtime_test_contract.assert_failure_recovery({
+            "failure_injected":True,
+            "failure_observable":True,
+            "recovery_succeeded":True,
+            "side_effect_count":1,
+        })
+        self.assertFalse(r["duplicate_side_effects_zero"])
+        r2=runtime_test_contract.assert_failure_recovery({
+            "failure_injected":True,
+            "failure_observable":True,
+            "recovery_succeeded":True,
+            "duplicate_side_effect_count":0,
+        })
+        self.assertTrue(r2["duplicate_side_effects_zero"])
+
+    def test_skip_visibility_contract(self):
+        r=runtime_test_contract.assert_skip_visibility({
+            "failure_injected":True,
+            "missing_action_observable":True,
+            "silent_success_prevented":True,
+        })
+        self.assertTrue(all(r.values()))
+
+    def test_resume_fallback_contract(self):
+        r=runtime_test_contract.assert_resume_fallback({
+            "failure_injected":True,
+            "fallback_distinguishable":True,
+            "false_success_prevented":True,
+        })
+        self.assertTrue(all(r.values()))
+
+    def test_concurrency_contract(self):
+        r=runtime_test_contract.assert_concurrency({
+            "concurrent_test_executed":True,
+            "final_state_deterministic":True,
+            "duplicate_side_effect_count":0,
+        })
+        self.assertTrue(all(r.values()))
+
+    def test_failed_work_replay_contract(self):
+        r=runtime_test_contract.assert_failed_work_replay({
+            "failure_injected":True,
+            "failed_work_locatable":True,
+            "resume_or_replay_succeeded":True,
+            "duplicate_side_effect_count":0,
+        })
+        self.assertTrue(all(r.values()))
+
+    def test_data_loss_contract(self):
+        r=runtime_test_contract.assert_data_loss_recovery({
+            "failure_injected":True,
+            "failed_work_recoverable":True,
+            "unintended_data_loss_count":0,
+        })
+        self.assertTrue(all(r.values()))
+
+    def test_privacy_safe_observability_contract(self):
+        r=runtime_test_contract.assert_privacy_safe_observability({
+            "failure_injected":True,
+            "correlation_available":True,
+            "affected_event_identifiable":True,
+            "sensitive_payload_exposed":False,
+        })
+        self.assertTrue(all(r.values()))
+
 
 if __name__=="__main__":
     unittest.main()
