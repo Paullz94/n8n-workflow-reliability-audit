@@ -15,6 +15,7 @@ from typing import Any
 
 import ai_review_packet
 import audit_make
+import customer_claim_guard
 import focused_risk_check
 import fulfill_order
 import order_contract
@@ -91,6 +92,10 @@ def build_focused_delivery(
     report=focused_risk_check.render_focused_report(
         effective_focus,blueprint_path.name,blueprint,raw_context
     )
+    try:
+        customer_claim_guard.assert_safe_report(report)
+    except customer_claim_guard.ClaimGuardError as exc:
+        raise PackageFulfillmentError(str(exc)) from exc
     report_path.write_text(report,encoding="utf-8")
     findings_path.write_text(json.dumps({
         "order_ref":checked["session_id"],
@@ -192,6 +197,10 @@ def build_portfolio_delivery(
     _ensure_empty(out_dir)
     result=portfolio_qa.build_portfolio(loaded)
     report=portfolio_qa.render_portfolio(result)
+    try:
+        customer_claim_guard.assert_safe_report(report)
+    except customer_claim_guard.ClaimGuardError as exc:
+        raise PackageFulfillmentError(str(exc)) from exc
 
     report_path=out_dir/"pcflows-portfolio-release-qa.md"
     summary_path=out_dir/"pcflows-portfolio-summary.json"
