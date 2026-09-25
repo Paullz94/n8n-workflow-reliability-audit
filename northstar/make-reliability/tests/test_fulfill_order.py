@@ -39,13 +39,17 @@ class FulfillmentTests(unittest.TestCase):
             )
 
             self.assertTrue((out / "pcflows-audit-delivery.zip").exists())
+            self.assertTrue((out / "pcflows-ai-review-packet.json").exists())
             self.assertFalse((out / "blueprint.json").exists())
             manifest = json.loads((out / "pcflows-manifest.json").read_text())
             self.assertFalse(manifest["privacy"]["raw_blueprint_included"])
             report = (out / "pcflows-data-integrity-audit.md").read_text()
+            packet = (out / "pcflows-ai-review-packet.json").read_text()
             self.assertNotIn(private_value, report)
+            self.assertNotIn(private_value, packet)
             with zipfile.ZipFile(result["zip"]) as z:
                 self.assertNotIn("blueprint.json", z.namelist())
+                self.assertNotIn("pcflows-ai-review-packet.json", z.namelist())
 
     def test_secret_finding_hard_stops(self):
         with tempfile.TemporaryDirectory() as tmp:
