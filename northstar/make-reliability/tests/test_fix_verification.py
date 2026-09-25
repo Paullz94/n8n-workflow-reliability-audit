@@ -38,6 +38,9 @@ class FixVerificationTests(unittest.TestCase):
             still_present_after=False,
             evidence={
                 "source":"connected_test_run",
+                "provider":"make",
+                "observed_by_pcflows":True,
+                "execution_ids":["exec_1"],
                 "assertions":{
                     "duplicate_replay_executed":True,
                     "intended_side_effect_count_one":True,
@@ -73,6 +76,9 @@ class FixVerificationTests(unittest.TestCase):
             still_present_after=True,
             evidence={
                 "source":"connected_test_run",
+                "provider":"make",
+                "observed_by_pcflows":True,
+                "execution_ids":["exec_2"],
                 "assertions":{
                     "failure_injected":True,
                     "failure_observable":True,
@@ -80,9 +86,29 @@ class FixVerificationTests(unittest.TestCase):
                     "duplicate_side_effects_zero":True,
                 }
             },
+            trusted_connected_evidence=True,
         )
         self.assertFalse(r["verified_fixed"])
         self.assertEqual(r["status"],"verified_mitigated_not_statically_cleared")
+
+    def test_spoofed_connected_source_cannot_self_certify(self):
+        r=fix_verification.resolution_status(
+            rule="retrying-write-idempotency-review",
+            still_present_after=False,
+            evidence={
+                "source":"connected_test_run",
+                "provider":"make",
+                "observed_by_pcflows":True,
+                "execution_ids":["fake"],
+                "assertions":{
+                    "duplicate_replay_executed":True,
+                    "intended_side_effect_count_one":True,
+                },
+            },
+            trusted_connected_evidence=False,
+        )
+        self.assertFalse(r["verified_fixed"])
+        self.assertEqual(r["status"],"statically_cleared_runtime_pending")
 
 
 if __name__=="__main__":
