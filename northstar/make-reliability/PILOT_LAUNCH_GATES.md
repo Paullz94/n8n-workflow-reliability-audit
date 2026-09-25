@@ -64,6 +64,7 @@ Marketplace accounts are not required for the initial direct PCFlows pilot.
 - [x] Reconciliation refuses untrusted snapshots, ignores non-final refunds and hard-stops on conflicts.
 - [x] Checkout is deliberately disabled during the Belgian registration pause.
 - [ ] Belgian enterprise number received and verified.
+- [ ] Official economic-activity start date reached; current planned date is **2026-10-01**.
 - [ ] VAT identification / small-enterprise regime completed as legally available before paid launch.
 
 ## Gate F — operating autonomy
@@ -108,7 +109,7 @@ As of 2026-09-25:
 - planned start date: 2026-10-01;
 - VAT activation/small-enterprise route: not yet completed.
 
-The live Stripe Payment Link remains inactive until the registration/tax gate is complete.
+The live Stripe Payment Link remains inactive until the registration/tax gate is complete **and the official effective activity start date has been reached**. Receiving an enterprise number early does not by itself open checkout.
 
 During the pause, Northstar may continue only useful EUR 0 work. Major safe technical launch preparation is now complete; avoid speculative feature expansion until the enterprise/VAT details or real customer evidence create a concrete need.
 
