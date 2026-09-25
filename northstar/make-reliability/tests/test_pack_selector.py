@@ -25,6 +25,13 @@ class PackSelectorTests(unittest.TestCase):
         })
         self.assertEqual(r["pack_id"], "ai_guardrails")
 
+    def test_selects_client_onboarding(self):
+        r=pack_selector.select_pack({
+            "scenario_name":"New customer onboarding",
+            "business_goal":"Create project setup and welcome resources exactly once before kickoff",
+        })
+        self.assertEqual(r["pack_id"], "client_onboarding")
+
     def test_unknown_context_stays_generic(self):
         r=pack_selector.select_pack({
             "scenario_name":"Daily operations",
