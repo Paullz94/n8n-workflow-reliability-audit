@@ -69,23 +69,28 @@ def qualify(blueprint: dict[str, Any], raw_context: dict[str, Any] | None = None
     high_value = [f for f in findings if f.rule in HIGH_VALUE_RULES]
     high_or_critical = [f for f in findings if f.severity in {"critical", "high"}]
     critical_side_effects = context.get("critical_side_effects") or []
+    runtime_symptom = str(context.get("runtime_symptom") or "").strip()
+    expected_vs_actual = str(context.get("expected_vs_actual") or "").strip()
+    reported_runtime_problem = bool(runtime_symptom or expected_vs_actual)
 
-    if high_value or high_or_critical or critical_side_effects:
+    if high_value or high_or_critical or critical_side_effects or reported_runtime_problem:
         return {
             "route": "paid_audit_candidate",
             "paid_candidate": True,
-            "reason": "The scenario has reliability/data-integrity signals or business-critical side effects that justify contextual prioritization and verification.",
+            "reason": "The scenario has static reliability/data-integrity signals, business-critical side effects, or a concrete reported runtime symptom that justifies contextual diagnosis and verification.",
             "finding_count": len(findings),
             "high_value_rules": sorted({f.rule for f in high_value}),
-            "next_action": "Offer the fixed-scope Data Integrity Audit; keep production credentials out of scope.",
+            "reported_runtime_problem": reported_runtime_problem,
+            "next_action": "Offer the smallest suitable fixed scope. Do not reject a real runtime symptom merely because the static scan is quiet; keep production credentials out of scope.",
         }
 
     return {
         "route": "free_preflight_sufficient",
         "paid_candidate": False,
-        "reason": "The current static evidence does not yet justify selling a deeper audit.",
+        "reason": "The current static evidence and supplied business context do not yet justify a deeper paid review.",
         "finding_count": len(findings),
-        "next_action": "Give the free preflight result and ask the user to return if runtime symptoms or business-critical concerns exist.",
+        "hard_reject": False,
+        "next_action": "Give the free preflight result. If the customer has an actual runtime symptom, expected-vs-actual mismatch, or critical business concern, collect that bounded context and re-route rather than rejecting the case.",
     }
 
 
