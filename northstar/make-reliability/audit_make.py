@@ -122,6 +122,23 @@ def _truthy(value: Any) -> bool:
     return isinstance(value, str) and value.strip().lower() in {"1", "true", "yes"}
 
 
+def _error_directives(module: dict[str, Any]) -> set[str]:
+    onerror = module.get("onerror")
+    if not isinstance(onerror, list):
+        return set()
+    directives: set[str] = set()
+    stack = [item for item in onerror if isinstance(item, dict)]
+    while stack:
+        item = stack.pop()
+        name = str(item.get("module", "")).lower()
+        if name.startswith("builtin:"):
+            directives.add(name)
+        flow = item.get("flow")
+        if isinstance(flow, list):
+            stack.extend(x for x in flow if isinstance(x, dict))
+    return directives
+
+
 def _has_retry_handler(module: dict[str, Any]) -> bool:
     onerror = module.get("onerror")
     if not isinstance(onerror, list):
@@ -172,6 +189,30 @@ def scan_blueprint(bp: dict[str, Any]) -> list[Finding]:
                 mid, name, path,
             ))
 
+        if _is_write_module(module):
+            directives = _error_directives(module)
+            if "builtin:ignore" in directives:
+                findings.append(Finding(
+                    "write-skip-handler-data-loss-review",
+                    "high",
+                    "Write-like module uses Make's Skip/Ignore directive. A failed bundle can be dropped while the scenario continues and may still appear successful.",
+                    mid, name, path,
+                ))
+            if "builtin:resume" in directives:
+                findings.append(Finding(
+                    "write-resume-handler-silent-success-review",
+                    "high",
+                    "Write-like module uses Make's Resume directive. The failed write can be replaced with substitute output while downstream processing continues.",
+                    mid, name, path,
+                ))
+            if "builtin:commit" in directives:
+                findings.append(Finding(
+                    "write-commit-partial-state-review",
+                    "medium",
+                    "Write-like module uses Make's Commit directive. Earlier transactional changes can be preserved while the current run stops, creating intentional partial state.",
+                    mid, name, path,
+                ))
+
         if name.lower().startswith("http:"):
             mapper = module.get("mapper") if isinstance(module.get("mapper"), dict) else {}
             method = str(mapper.get("method") or module.get("method") or "").upper()
@@ -213,6 +254,25 @@ def scan_blueprint(bp: dict[str, Any]) -> list[Finding]:
             "concurrency-review",
             "medium" if instant else "low",
             "Scenario allows overlapping runs and contains write-like modules. Verify concurrent executions cannot race or duplicate writes.",
+        ))
+
+    if writes and scenario_meta.get("autoCommit") is True:
+        findings.append(Finding(
+            "auto-commit-recovery-review",
+            "low",
+            "Scenario has autoCommit=true and performs writes. For transaction-capable modules, earlier committed changes may no longer be reversible after a later failure.",
+        ))
+
+    rollback_paths = [
+        p for m, p in modules
+        if "builtin:rollback" in _error_directives(m)
+    ]
+    if rollback_paths and scenario_meta.get("autoCommit") is True:
+        findings.append(Finding(
+            "rollback-limited-by-autocommit-review",
+            "medium",
+            "Rollback handler is present while autoCommit=true. Make documents that previously committed transactional changes cannot be rolled back by a later error.",
+            path=rollback_paths[0],
         ))
 
     if writes and scenario_meta.get("dlq") is False:
