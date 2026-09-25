@@ -1,0 +1,12 @@
+{
+  "scenario_name": "Website Lead Intake",
+  "business_goal": "Every accepted lead must reach CRM once, be assigned once, and receive no automated follow-up after reply/booking/human takeover.",
+  "critical_side_effects": [
+    "Create/update CRM lead exactly once",
+    "Assign one sales owner",
+    "Send initial acknowledgement once"
+  ],
+  "duplicate_tolerance": "none",
+  "ordering_required": true,
+  "recovery_expectation": "Failed leads remain visible and replayable without duplicate CRM/outreach effects."
+}
