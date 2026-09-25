@@ -15,7 +15,9 @@ from typing import Any
 
 import ai_review_packet
 import audit_make
+import case_isolation
 import customer_claim_guard
+import customer_data_guard
 import focused_risk_check
 import fulfill_order
 import order_contract
@@ -76,6 +78,12 @@ def build_focused_delivery(
     raw_context=_load(context_path,"context")
     context=report_builder.sanitize_context(raw_context)
     fulfill_order.validate_context(context)
+    case_scope_id=case_isolation.case_scope_id(checked["session_id"])
+    try:
+        customer_data_guard.assert_no_sensitive_literals(blueprint,"blueprint")
+        customer_data_guard.assert_no_sensitive_literals(context,"context")
+    except customer_data_guard.SensitiveDataError as exc:
+        raise PackageFulfillmentError(str(exc)) from exc
     findings=_safe_scan(blueprint)
     effective_focus=(focus or str(raw_context.get("requested_focus") or "")).strip()
     if effective_focus not in focused_risk_check.FOCUS_RULES:
@@ -99,15 +107,17 @@ def build_focused_delivery(
     report_path.write_text(report,encoding="utf-8")
     findings_path.write_text(json.dumps({
         "order_ref":checked["session_id"],
+        "case_scope_id":case_scope_id,
         "package_id":checked["package_id"],
         "focus":effective_focus,
         "summary":audit_make.summary(findings),
         "findings":[f.__dict__ for f in findings],
     },indent=2)+"\n",encoding="utf-8")
-    context_out.write_text(json.dumps(context,indent=2)+"\n",encoding="utf-8")
+    context_out.write_text(json.dumps({"case_scope_id":case_scope_id,**context},indent=2)+"\n",encoding="utf-8")
 
     manifest={
         "order":checked,
+        "case_scope_id":case_scope_id,
         "focus":effective_focus,
         "blueprint_source_name":blueprint_path.name,
         "blueprint_sha256":_sha256(blueprint_path),
@@ -116,6 +126,8 @@ def build_focused_delivery(
         "delivery_files":{},
         "privacy":{
             "raw_blueprint_included":False,
+            "case_isolation_enabled":True,
+            "literal_customer_data_guard_enabled":True,
             "production_credentials_required":False,
             "included_rescan":False,
         },
@@ -132,6 +144,7 @@ def build_focused_delivery(
 
     return {
         "order_ref":checked["session_id"],
+        "case_scope_id":case_scope_id,
         "package_id":checked["package_id"],
         "focus":effective_focus,
         "zip":str(zip_path),
@@ -175,6 +188,7 @@ def build_portfolio_delivery(
     if not 1 <= len(scenarios) <= 3:
         raise PackageFulfillmentError("portfolio_release_qa supports 1 to 3 scenarios")
 
+    case_scope_id=case_isolation.case_scope_id(checked["session_id"])
     loaded=[]
     internal_packets=[]
     source_manifest=[]
@@ -183,9 +197,18 @@ def build_portfolio_delivery(
         context=_load(ctx_path,f"{name} context")
         sanitized=report_builder.sanitize_context(context)
         fulfill_order.validate_context(sanitized)
+        try:
+            customer_data_guard.assert_no_sensitive_literals(blueprint,f"{name} blueprint")
+            customer_data_guard.assert_no_sensitive_literals(sanitized,f"{name} context")
+        except customer_data_guard.SensitiveDataError as exc:
+            raise PackageFulfillmentError(str(exc)) from exc
         _safe_scan(blueprint)
         loaded.append((name,blueprint,context))
-        internal_packets.append((name,ai_review_packet.make_packet(blueprint,context)))
+        internal_packets.append((name,ai_review_packet.make_packet(
+            blueprint,
+            context,
+            case_scope_id=case_scope_id,
+        )))
         source_manifest.append({
             "name":name,
             "blueprint_source_name":bp_path.name,
@@ -209,6 +232,7 @@ def build_portfolio_delivery(
     report_path.write_text(report,encoding="utf-8")
     summary_path.write_text(json.dumps({
         "order_ref":checked["session_id"],
+        "case_scope_id":case_scope_id,
         "package_id":checked["package_id"],
         "scenario_count":result["scenario_count"],
         "aggregate_summary":result["aggregate_summary"],
@@ -234,6 +258,7 @@ def build_portfolio_delivery(
 
     manifest={
         "order":checked,
+        "case_scope_id":case_scope_id,
         "sources":source_manifest,
         "delivery_files":{
             report_path.name:_sha256(report_path),
@@ -242,6 +267,8 @@ def build_portfolio_delivery(
         "internal_review_files":internal_files,
         "privacy":{
             "raw_blueprints_included":False,
+            "case_isolation_enabled":True,
+            "literal_customer_data_guard_enabled":True,
             "ai_review_packets_in_customer_zip":False,
             "production_credentials_required":False,
             "max_scenarios":3,
@@ -257,6 +284,7 @@ def build_portfolio_delivery(
 
     return {
         "order_ref":checked["session_id"],
+        "case_scope_id":case_scope_id,
         "package_id":checked["package_id"],
         "scenario_count":result["scenario_count"],
         "report":str(report_path),
