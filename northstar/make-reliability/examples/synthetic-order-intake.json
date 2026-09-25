@@ -1,0 +1,46 @@
+{
+  "name": "Synthetic order intake reliability demo",
+  "flow": [
+    {
+      "id": 1,
+      "module": "gateway:CustomWebHook",
+      "mapper": {},
+      "metadata": {"designer": {"x": 0, "y": 0}}
+    },
+    {
+      "id": 2,
+      "module": "crm:updateContact",
+      "filter": {"name": "Known customer only"},
+      "mapper": {"contactId": "{{1.customer_id}}", "status": "received"},
+      "onerror": [
+        {
+          "id": 20,
+          "module": "builtin:Break",
+          "mapper": {"retry": true, "count": "3", "interval": "10"}
+        }
+      ],
+      "metadata": {"designer": {"x": 300, "y": 0}}
+    },
+    {
+      "id": 3,
+      "module": "http:ActionSendData",
+      "mapper": {"method": "POST", "url": "https://example.invalid/orders", "body": "{{1.order_id}}"},
+      "metadata": {"designer": {"x": 600, "y": 0}}
+    },
+    {
+      "id": 4,
+      "module": "google-sheets:addRow",
+      "mapper": {"order_id": "{{1.order_id}}", "status": "received"},
+      "metadata": {"designer": {"x": 900, "y": 0}}
+    }
+  ],
+  "metadata": {
+    "instant": true,
+    "scenario": {
+      "sequential": false,
+      "dlq": false,
+      "dataloss": false,
+      "confidential": true
+    }
+  }
+}
