@@ -130,6 +130,17 @@ GUIDANCE: dict[str, Guidance] = {
 
 SEVERITY_WEIGHT = {"critical": 5000, "high": 4000, "medium": 3000, "low": 2000, "info": 1000}
 PILLAR_ORDER = {"prevent": 0, "detect": 1, "recover": 2}
+RULE_REFERENCES = {
+    "write-skip-handler-data-loss-review": "https://help.make.com/skip-error-handler",
+    "write-resume-handler-silent-success-review": "https://help.make.com/resume-error-handler",
+    "write-commit-partial-state-review": "https://help.make.com/commit-error-handler",
+    "rollback-limited-by-autocommit-review": "https://help.make.com/rollback-error-handler",
+    "auto-commit-recovery-review": "https://help.make.com/scenario-settings",
+    "concurrency-review": "https://help.make.com/webhooks",
+    "incomplete-executions-disabled-review": "https://help.make.com/incomplete-executions",
+    "data-loss-enabled": "https://help.make.com/errors-that-dont-create-incomplete-executions",
+    "retrying-write-idempotency-review": "https://help.make.com/error-handlers",
+}
 ALLOWED_CONTEXT = {
     "scenario_name",
     "business_goal",
@@ -237,6 +248,9 @@ def render_report(source: str, findings: list[audit_make.Finding], context: dict
             f"**Verification:** {g.verify}",
             "",
         ]
+        source_url = RULE_REFERENCES.get(f.rule)
+        if source_url:
+            lines += [f"**Make reference:** {source_url}", ""]
 
     lines += [
         "## Verification checklist",
