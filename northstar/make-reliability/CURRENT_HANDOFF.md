@@ -64,9 +64,12 @@ Primary paid pilot:
 - raw blueprint excluded from delivery ZIP;
 - strict financial ledger;
 - Stripe PaymentIntent/Refund normalizer;
+- dry-run append-only Stripe reconciliation command;
 - Stripe EUR 149 product/price/Payment Link;
 - Checkout Session ID post-payment correlation flow;
-- public site, scanner, FAQ, sample report, privacy page and thank-you flow;
+- public site, scanner, FAQ, sample report, privacy page, service terms and thank-you flow;
+- zero-capital Peppol/e-invoicing shortlist for post-registration selection;
+- minimal bookkeeping evidence/CSV plan;
 - one-command validation runner;
 - launch gates and operational runbooks.
 
@@ -97,6 +100,8 @@ Payment Link exists but is deliberately **inactive**.
 
 Prepared checkout behavior:
 - required non-sensitive `Scenario name` field;
+- required `Buying as` classification (individual vs business/professional);
+- billing address required for customer/country evidence;
 - warning not to submit production credentials/secrets;
 - post-payment redirect includes `{CHECKOUT_SESSION_ID}`;
 - thank-you page uses the Checkout Session ID as the order reference for the customer's file-delivery email.
@@ -148,4 +153,15 @@ When received:
 5. reactivate live checkout only after those checks;
 6. begin small, platform-native acquisition.
 
-Until then, continue only EUR 0 product hardening and no-payment validation.
+## Remaining autonomous work assessment
+
+Safe pre-launch engineering is now largely exhausted:
+- checkout is prepared but inactive;
+- fulfillment and revenue reconciliation are deterministic;
+- privacy/terms/customer handoff are prepared;
+- Belgian VAT/e-invoicing/bookkeeping routes are researched without purchasing software;
+- no live customer payments exist.
+
+The next material step depends on official registration data rather than more speculative coding.
+
+Until the enterprise number arrives, only minor documentation/polish or passive no-payment validation remains. Do not create artificial activity merely to appear busy.
