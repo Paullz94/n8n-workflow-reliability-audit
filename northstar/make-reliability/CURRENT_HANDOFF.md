@@ -370,7 +370,8 @@ Fixed launch package ladder:
 Specialist modes inside the EUR149 audit, with no separate surcharge:
 - Lead Flow Reliability;
 - Invoice & Payment Sync;
-- AI Workflow Guardrails.
+- AI Workflow Guardrails;
+- Client Onboarding Reliability.
 
 Technical support now exists for:
 - focused single-risk reports;
@@ -404,3 +405,33 @@ Current important limitation:
 No direct Make.com connector was found in the available plugin directory. Therefore ordinary static re-scans can prove structural clearance, and supplied test artifacts can support remediation, but runtime-dependent issues are not called independently verified fixed until a connected synthetic execution path exists.
 
 Do not launch a done-for-you repair/fix guarantee until connected runtime verification is proven.
+
+
+## Verified Repair architecture — 2026-09-25 late
+
+Paul requires that an accepted customer issue is not treated as complete until it is actually proven against its definition of done.
+
+Implemented:
+- `resolution_contract.py`: every accepted issue gets explicit business description, proof mode, required assertions and close condition;
+- `repair_case.py`: a repair case cannot close until every accepted issue is `closed_verified`;
+- `pack_acceptance_verification.py`: specialist modes require all four business-level acceptance tests to pass;
+- `fix_eligibility.py`: PCFlows refuses a Verified Repair commitment if the issue cannot be independently tested;
+- `make_runtime_client.py`: safe future Make API run/replay client; token only from secure runtime environment;
+- `VERIFIED_REPAIR_OFFER.md`: internal EUR299 one-issue repair hypothesis, intentionally NOT public;
+- `MAKE_ACCESS_MODEL.md`: delegated Make team/service-identity access model that avoids customers emailing tokens/credentials.
+
+Important interpretation:
+- "100% fixed" means **100% of the accepted issue's agreed acceptance criteria pass**;
+- it does not mean claiming no other defect can ever exist in the customer's automation;
+- any issue that cannot be independently observed/tested is not eligible for the future Verified Repair product.
+
+Official Make API research confirms:
+- scenarios can be run via `POST /scenarios/{scenarioId}/run`;
+- executions can be replayed via `POST /scenarios/{scenarioId}/replay`;
+- scenarios can be updated through the API with `scenarios:write`;
+- Make team roles allow delegated team access; Team Member can edit team-owned resources, while Operator/Monitoring are insufficient for repair changes.
+
+Runtime blocker:
+No Make.com connector/service authorization is currently connected to PCFlows. The code path is prepared, but the final independent runtime proof/deployment gate cannot be exercised until a dedicated PCFlows Make service identity and secure authorization are connected.
+
+The current public products remain audit/QA products. **Verified Repair remains disabled and must not appear as purchasable until the runtime/deployment/rollback gates pass.**
