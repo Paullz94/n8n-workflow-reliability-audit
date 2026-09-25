@@ -90,6 +90,23 @@
     return false;
   }
 
+  function errorDirectives(module) {
+    if (!Array.isArray(module && module.onerror)) return new Set();
+    const directives = new Set();
+    const stack = module.onerror.filter(x => x && typeof x === 'object' && !Array.isArray(x));
+    while (stack.length) {
+      const item = stack.pop();
+      const name = moduleName(item).toLowerCase();
+      if (name.startsWith('builtin:')) directives.add(name);
+      if (Array.isArray(item.flow)) {
+        item.flow.forEach(x => {
+          if (x && typeof x === 'object' && !Array.isArray(x)) stack.push(x);
+        });
+      }
+    }
+    return directives;
+  }
+
   function hasRetryHandler(module) {
     if (!Array.isArray(module && module.onerror)) return false;
     const stack = module.onerror.filter(x => x && typeof x === 'object' && !Array.isArray(x));
@@ -158,6 +175,30 @@
           module, path
         ));
       }
+      if (isWriteModule(module)) {
+        const directives = errorDirectives(module);
+        if (directives.has('builtin:ignore')) {
+          findings.push(finding(
+            'write-skip-handler-data-loss-review', 'high',
+            "Write-like module uses Make's Skip/Ignore directive. A failed bundle can be dropped while the scenario continues and may still appear successful.",
+            module, path
+          ));
+        }
+        if (directives.has('builtin:resume')) {
+          findings.push(finding(
+            'write-resume-handler-silent-success-review', 'high',
+            "Write-like module uses Make's Resume directive. The failed write can be replaced with substitute output while downstream processing continues.",
+            module, path
+          ));
+        }
+        if (directives.has('builtin:commit')) {
+          findings.push(finding(
+            'write-commit-partial-state-review', 'medium',
+            "Write-like module uses Make's Commit directive. Earlier transactional changes can be preserved while the current run stops, creating intentional partial state.",
+            module, path
+          ));
+        }
+      }
       if (name.toLowerCase().startsWith('http:')) {
         const mapper = module.mapper && typeof module.mapper === 'object' ? module.mapper : {};
         const method = String(mapper.method || module.method || '').toUpperCase();
@@ -199,6 +240,23 @@
         'concurrency-review', instant ? 'medium' : 'low',
         'Scenario allows overlapping runs and contains write-like modules. Verify concurrent executions cannot race or duplicate writes.'
       ));
+    }
+    if (writes.length && scenario.autoCommit === true) {
+      findings.push(finding(
+        'auto-commit-recovery-review', 'low',
+        'Scenario has autoCommit=true and performs writes. For transaction-capable modules, earlier committed changes may no longer be reversible after a later failure.'
+      ));
+    }
+    const rollbackPaths = modules
+      .filter(([m]) => errorDirectives(m).has('builtin:rollback'))
+      .map(([, p]) => p);
+    if (rollbackPaths.length && scenario.autoCommit === true) {
+      const f = finding(
+        'rollback-limited-by-autocommit-review', 'medium',
+        'Rollback handler is present while autoCommit=true. Previously committed transactional changes cannot be rolled back by a later error.'
+      );
+      f.path = rollbackPaths[0];
+      findings.push(f);
     }
     if (writes.length && scenario.dlq === false) {
       findings.push(finding(
