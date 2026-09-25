@@ -40,6 +40,9 @@ class PackSelectorTests(unittest.TestCase):
         self.assertIsNone(r["pack_id"])
         self.assertEqual(r["route"], "generic_data_integrity")
 
+    def test_ai_is_not_matched_inside_daily(self):
+        self.assertFalse(pack_selector._matches("daily operations","ai"))
+
     def test_tie_does_not_guess(self):
         r=pack_selector.select_pack({
             "scenario_name":"AI invoice classifier",
