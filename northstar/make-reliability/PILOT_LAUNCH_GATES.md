@@ -71,7 +71,10 @@ Marketplace accounts are not required for the initial direct PCFlows pilot.
 - [x] Free scan is self-service.
 - [x] Local non-sensitive intake generator is self-service.
 - [x] Paid report generation is deterministic.
+- [x] Paid-audit fit/qualification routing is deterministic.
+- [x] AI-assisted review has a privacy-bounded packet and explicit non-invention rules.
 - [x] Paid delivery bundle generation is deterministic.
+- [x] Included re-scan has deterministic resolved/remaining/new comparison logic.
 - [x] Stripe Checkout Session ID is the stable order/fulfillment reference.
 - [x] Post-payment redirect and email handoff are prepared without a custom backend.
 - [x] Qualification fields are structured.
@@ -79,6 +82,7 @@ Marketplace accounts are not required for the initial direct PCFlows pilot.
 - [x] Support scope is bounded in the pilot definition.
 - [x] Revenue measurement logic is deterministic.
 - [ ] Checkout -> intake -> delivery is live for real paid customers (checkout intentionally paused pending registration).
+- [x] Included re-scan tooling exists and is designed to remain static-evidence-only.
 - [ ] Included re-scan lifecycle has been exercised with a real customer.
 - [ ] Real support burden measured from pilot customers.
 
