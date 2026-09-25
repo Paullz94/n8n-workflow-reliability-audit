@@ -94,6 +94,42 @@ class AuditMakeTests(unittest.TestCase):
         self.assertEqual(by_rule["data-loss-enabled"], "high")
         self.assertEqual(by_rule["confidential-observability-review"], "low")
 
+    def test_skip_handler_on_write_is_high_risk(self):
+        bp = {"flow": [{
+            "id": 1, "module": "crm:updateContact", "mapper": {},
+            "onerror": [{"id": 2, "module": "builtin:Ignore", "mapper": {}}]
+        }]}
+        by_rule = {f.rule: f.severity for f in audit_make.scan_blueprint(bp)}
+        self.assertEqual(by_rule["write-skip-handler-data-loss-review"], "high")
+
+    def test_resume_handler_on_write_is_high_risk(self):
+        bp = {"flow": [{
+            "id": 1, "module": "crm:updateContact", "mapper": {},
+            "onerror": [{"id": 2, "module": "builtin:Resume", "mapper": {"output": "fallback"}}]
+        }]}
+        by_rule = {f.rule: f.severity for f in audit_make.scan_blueprint(bp)}
+        self.assertEqual(by_rule["write-resume-handler-silent-success-review"], "high")
+
+    def test_commit_handler_on_write_is_partial_state_review(self):
+        bp = {"flow": [{
+            "id": 1, "module": "crm:updateContact", "mapper": {},
+            "onerror": [{"id": 2, "module": "builtin:Commit", "mapper": {}}]
+        }]}
+        by_rule = {f.rule: f.severity for f in audit_make.scan_blueprint(bp)}
+        self.assertEqual(by_rule["write-commit-partial-state-review"], "medium")
+
+    def test_rollback_with_autocommit_is_reviewed(self):
+        bp = {
+            "flow": [{
+                "id": 1, "module": "crm:updateContact", "mapper": {},
+                "onerror": [{"id": 2, "module": "builtin:Rollback", "mapper": {}}]
+            }],
+            "metadata": {"scenario": {"autoCommit": True, "dlq": True}},
+        }
+        rules = {f.rule for f in audit_make.scan_blueprint(bp)}
+        self.assertIn("auto-commit-recovery-review", rules)
+        self.assertIn("rollback-limited-by-autocommit-review", rules)
+
 
 if __name__ == "__main__":
     unittest.main()
