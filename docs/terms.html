@@ -1,47 +1,45 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Service Terms — PCFlows</title><link rel="icon" href="favicon.svg" type="image/svg+xml"><meta name="robots" content="index,follow">
-<style>:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color-scheme:dark;background:#0c1117;color:#eef2f6}*{box-sizing:border-box}body{margin:0;background:#0c1117;color:#eef2f6}main{max-width:820px;margin:auto;padding:40px 20px 72px}a{color:#eef2f6}h1{font-size:clamp(34px,7vw,54px)}h2{margin-top:34px}p,li{color:#b8c2cc;line-height:1.7}.card{border:1px solid #2b3540;background:#101721;border-radius:18px;padding:20px;margin:18px 0}.muted{font-size:13px;color:#8b949e}</style>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Service Terms — PCFlows</title>
+  <meta name="theme-color" content="#050505"><link rel="stylesheet" href="site.css">
 </head>
-<body><main>
-<p><a href="./">← PCFlows</a></p>
-<h1>Service terms</h1>
-<div class="card"><strong>Current status:</strong><p>Paid checkout is not open while PCFlows completes its Belgian business registration. These terms are prepared for the fixed-scope pilot and take effect for an order when checkout is activated.</p></div>
+<body>
+<header class="site-header"><div class="wrap site-nav"><a class="wordmark" href="./">PCFlows</a><nav class="nav-links"><a href="privacy.html">Privacy</a><a href="method.html">Method</a><a class="nav-cta" href="scanner.html">Free preflight</a></nav></div></header>
+<main><div class="wrap article">
+  <div class="article-top"><div class="kicker">Service terms</div><h1>Fixed scope. Clear boundaries.</h1><p class="lead">Paid checkout is currently paused while PCFlows completes Belgian business registration.</p></div>
 
-<h2>1. Service</h2>
-<p>The PCFlows Make.com Data Integrity Audit is a fixed-scope technical static review of one sanitized Make.com scenario blueprint. The pilot deliverable includes prioritized reliability/data-integrity findings, remediation and verification guidance, and one asynchronous re-scan after remediation.</p>
+  <h2>1. Service</h2>
+  <p>The PCFlows Make.com Data Integrity Audit is a fixed-scope technical static review of one sanitized Make.com scenario blueprint. The pilot includes prioritized reliability/data-integrity findings, remediation and verification guidance, and one asynchronous re-scan after remediation.</p>
 
-<h2>2. Customer authorization</h2>
-<p>You must own the submitted blueprint or be authorized to have it reviewed. Do not submit material that you are not permitted to share.</p>
+  <h2>2. Authorization</h2>
+  <p>You must own the submitted blueprint or be authorized to have it reviewed.</p>
 
-<h2>3. Sanitized input only</h2>
-<p>Production credentials, passwords, API keys, private webhook secrets, personal/customer records, or other confidential payload data are not required and should not be sent. If PCFlows detects a possible secret-like literal, fulfillment may pause until a newly sanitized blueprint is provided.</p>
+  <h2>3. Sanitized input only</h2>
+  <p>Production credentials, passwords, API keys, private webhook URLs, personal/customer records or confidential payloads are not required and should not be sent. Possible secret-like input can pause fulfillment until a sanitized copy is supplied.</p>
 
-<h2>4. Delivery</h2>
-<p>Delivery starts after successful payment and receipt of a usable sanitized blueprint plus the PCFlows intake information. The pilot is asynchronous. PCFlows aims to deliver the initial report within five business days after complete usable input is received. If the supplied material is unusable or outside scope, PCFlows will contact the customer rather than silently expanding the service.</p>
+  <h2>4. Delivery</h2>
+  <p>Delivery starts after successful payment and receipt of a usable sanitized blueprint plus the PCFlows intake information. The pilot is asynchronous and aims for initial delivery within five business days after complete usable input is received.</p>
 
-<h2>5. Included re-scan</h2>
-<p>One re-scan is included for the same scenario after the customer applies remediation. To keep the pilot bounded, the re-scan should be requested within 30 calendar days of the initial report unless otherwise agreed.</p>
+  <h2>5. Included re-scan</h2>
+  <p>One re-scan is included for the same scenario after remediation and should normally be requested within 30 calendar days of the initial report.</p>
 
-<h2>6. Out of scope</h2>
-<p>The audit does not include production account access, implementation retainers, emergency incident response, legal/tax advice, security or compliance certification, or a guarantee that every defect has been found.</p>
+  <h2>6. Out of scope</h2>
+  <p>The fixed price does not silently include production account access, unrestricted implementation, emergency incident response, legal/tax advice, security certification or compliance certification.</p>
 
-<h2>7. Static-analysis limitations</h2>
-<p>Static analysis cannot prove runtime correctness, credential validity, third-party availability, live data quality, complete business semantics, or business outcomes. Findings are review signals and technical guidance, not certification.</p>
+  <h2>7. Limitations</h2>
+  <p>Static analysis cannot prove runtime correctness, credential validity, third-party availability, live data quality, complete business semantics or the absence of defects.</p>
 
-<h2>8. Price and payment</h2>
-<p>The planned pilot price is EUR 149 for the described fixed scope. The Stripe checkout displays the amount payable and collects the billing information needed for payment and business records. Tax treatment follows PCFlows' applicable registration and customer circumstances at the time of sale.</p>
+  <h2>8. Price</h2>
+  <p>The planned pilot price is €149 for the documented fixed scope. Applicable tax treatment depends on PCFlows' registration and customer circumstances at the time of sale.</p>
 
-<h2>9. Cancellations and refunds</h2>
-<p>If PCFlows cannot perform the agreed audit because the supplied material is outside the documented scope, the order will be cancelled or refunded before substantive delivery begins. After a customized report has been delivered, refunds are assessed case-by-case for material non-delivery or clear failure to provide the described service. Nothing in these terms removes mandatory statutory rights that apply to a customer.</p>
+  <h2>9. Cancellations and refunds</h2>
+  <p>If PCFlows cannot perform the agreed audit because the supplied material falls outside the documented scope, the order will be cancelled or refunded before substantive delivery begins. After a customized report has been delivered, refunds are assessed case-by-case for material non-delivery or clear failure to provide the described service. Mandatory statutory rights remain unaffected.</p>
 
-<h2>10. Support</h2>
-<p>Support is asynchronous via <a href="mailto:PCMotionstudios@gmail.com">PCMotionstudios@gmail.com</a>. Never send payment-card details or production secrets by email.</p>
+  <h2>10. Support</h2>
+  <p>Support is asynchronous via <a href="mailto:PCMotionstudios@gmail.com">PCMotionstudios@gmail.com</a>.</p>
 
-<h2>11. Independent service</h2>
-<p>PCFlows is independent and is not affiliated with or endorsed by Make.com.</p>
-
-<p class="muted">Last updated: 25 September 2026. Official Belgian enterprise/VAT information will be added to the public site before paid checkout is activated.</p>
-</main></body></html>
+  <hr><p class="small">Last updated: 25 September 2026. Official enterprise/VAT information will be added before paid checkout is activated.</p>
+</div></main>
+</body></html>
