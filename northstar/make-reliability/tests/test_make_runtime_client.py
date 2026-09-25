@@ -104,5 +104,61 @@ class MakeRuntimeClientTests(unittest.TestCase):
         self.assertEqual(calls[0].method,"PATCH")
 
 
+    def test_production_write_requires_explicit_customer_authorization(self):
+        cfg=make_runtime_client.MakeRuntimeConfig("https://eu1.make.com")
+        client=make_runtime_client.MakeRuntimeClient(cfg)
+        env={
+            "PCFLOWS_MAKE_API_TOKEN":"secret-token",
+            "PCFLOWS_MAKE_PRODUCTION_WRITE_ENABLED":"true",
+            "PCFLOWS_MAKE_PRODUCTION_SCENARIO_IDS":"222",
+        }
+        with mock.patch.dict(os.environ,env,clear=True):
+            with self.assertRaises(make_runtime_client.MakeRuntimeError):
+                client.update_production_blueprint(222,{"flow":[]})
+
+    def test_production_update_backs_up_only_allowlisted_authorized_scenario(self):
+        cfg=make_runtime_client.MakeRuntimeConfig("https://eu1.make.com")
+        client=make_runtime_client.MakeRuntimeClient(cfg)
+        calls=[]
+        def fake_open(req,timeout):
+            calls.append((req.method,req.full_url))
+            if req.method=="GET":
+                return FakeResponse(b'{"blueprint":{"flow":[{"id":1,"module":"json:ParseJSON"}]}}')
+            return FakeResponse(b'{"scenario":{"id":222}}')
+        env={
+            "PCFLOWS_MAKE_API_TOKEN":"secret-token",
+            "PCFLOWS_MAKE_PRODUCTION_WRITE_ENABLED":"true",
+            "PCFLOWS_MAKE_PRODUCTION_SCENARIO_IDS":"222",
+            "PCFLOWS_REPAIR_CASE_ID":"repair_case_001",
+            "PCFLOWS_CUSTOMER_AUTHORIZATION_ID":"customer_auth_001",
+        }
+        with mock.patch.dict(os.environ,env,clear=True):
+            with mock.patch("urllib.request.urlopen",fake_open):
+                result=client.update_production_blueprint(
+                    222,
+                    {"flow":[{"id":1,"module":"json:ParseJSON","mapper":{}}]},
+                )
+        self.assertEqual(calls[0][0],"GET")
+        self.assertEqual(calls[1][0],"PATCH")
+        self.assertEqual(result["repair_case_id"],"repair_case_001")
+        self.assertEqual(result["customer_authorization_id"],"customer_auth_001")
+        self.assertTrue(result["original_sha256"])
+
+    def test_production_write_rejects_non_allowlisted_scenario(self):
+        cfg=make_runtime_client.MakeRuntimeConfig("https://eu1.make.com")
+        client=make_runtime_client.MakeRuntimeClient(cfg)
+        env={
+            "PCFLOWS_MAKE_API_TOKEN":"secret-token",
+            "PCFLOWS_MAKE_PRODUCTION_WRITE_ENABLED":"true",
+            "PCFLOWS_MAKE_PRODUCTION_SCENARIO_IDS":"333",
+            "PCFLOWS_REPAIR_CASE_ID":"repair_case_001",
+            "PCFLOWS_CUSTOMER_AUTHORIZATION_ID":"customer_auth_001",
+        }
+        with mock.patch.dict(os.environ,env,clear=True):
+            with self.assertRaises(make_runtime_client.MakeRuntimeError):
+                client.update_production_blueprint(222,{"flow":[]})
+
+
+
 if __name__=="__main__":
     unittest.main()
