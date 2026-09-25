@@ -2,7 +2,7 @@
 
 Updated: 2026-09-25
 
-The same deterministic PCFlows core can now render three buyer-specific audit layers.
+The same deterministic PCFlows core can now render four buyer-specific audit layers.
 
 ## Commands
 
@@ -17,6 +17,10 @@ python build_pack_report.py invoice_payment examples/vertical/invoice-payment-bl
 AI guardrails:
 
 python build_pack_report.py ai_guardrails examples/vertical/ai-guardrails-blueprint.json --context examples/vertical/ai-guardrails-context.json --out ai-guardrails-report.md
+
+Client onboarding:
+
+python build_pack_report.py client_onboarding <sanitized-blueprint.json> --context <safe-context.json> --out client-onboarding-report.md
 
 ## Design rule
 
