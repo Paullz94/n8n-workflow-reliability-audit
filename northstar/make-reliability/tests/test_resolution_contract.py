@@ -26,11 +26,15 @@ class ResolutionContractTests(unittest.TestCase):
             still_present_after=False,
             evidence={
                 "source":"connected_test_run",
+                "provider":"make",
+                "observed_by_pcflows":True,
+                "execution_ids":["exec_1"],
                 "assertions":{
                     "duplicate_replay_executed":True,
                     "intended_side_effect_count_one":True,
                 }
-            }
+            },
+            trusted_connected_evidence=True,
         )
         self.assertEqual(r["customer_status"],"closed_verified")
         self.assertTrue(resolution_contract.all_closed_verified([r]))
