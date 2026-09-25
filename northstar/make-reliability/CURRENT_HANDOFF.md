@@ -453,3 +453,28 @@ Official references:
 - https://help.make.com/official-make-plugin-for-chatgpt-is-now-available
 - https://help.make.com/connect-to-chatgpt
 - https://help.make.com/mcp-toolboxes
+
+
+## Full-suite validation — 2026-09-25 21:18 UTC
+
+Validation snapshot:
+- source branch: `northstar/make-reliability-20260925`;
+- isolated validation branch: `northstar-validation-20260925b`;
+- GitHub Actions run: 36190833559;
+- conclusion: **success**.
+
+Executed by `validate.py`:
+- Python `compileall`;
+- full unittest discovery;
+- package catalog/order-contract consistency;
+- browser scanner regression/privacy checks.
+
+Observed:
+- **242 tests**;
+- **OK**;
+- **PCFlows/Northstar validation: PASS**.
+
+This replaces the earlier failed 241-test checkpoint. The three prior failures were corrected before this successful run:
+- whole-word pack routing prevents `ai` matching inside `daily`;
+- AI/finance cross-domain ambiguity stays generic;
+- pack-report wording test was made semantic/case-insensitive.
