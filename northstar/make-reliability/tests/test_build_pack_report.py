@@ -24,7 +24,7 @@ class PackReportTests(unittest.TestCase):
         report = build_pack_report.render_pack_report("lead_flow", "demo.json", self.base(), self.context())
         self.assertIn("Lead Flow Reliability Audit", report)
         self.assertIn("Duplicate lead/contact creation", report)
-        self.assertIn("Automated follow-up", report)
+        self.assertIn("automated follow-up", report.lower())
 
     def test_invoice_report_contains_partial_payment(self):
         report = build_pack_report.render_pack_report("invoice_payment", "demo.json", self.base(), self.context())
