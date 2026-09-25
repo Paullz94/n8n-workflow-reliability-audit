@@ -10,6 +10,13 @@ assert.ok(rules({ blueprint: JSON.stringify({ flow: [{ id: 1, module: 'crm:updat
 assert.ok(rules({ flow: [{ id: 1, module: 'crm:updateContact', mapper: {}, onerror: [{ id: 2, module: 'builtin:Break', mapper: { retry: true } }] }] }).has('retrying-write-idempotency-review'));
 const safety = rules({ flow: [{ id: 1, module: 'crm:updateContact', mapper: {} }], metadata: { instant: true, scenario: { sequential: false, dlq: false, dataloss: true, confidential: true } } });
 for (const rule of ['concurrency-review','incomplete-executions-disabled-review','data-loss-enabled','confidential-observability-review']) assert.ok(safety.has(rule), rule);
+
+assert.ok(rules({ flow: [{ id: 1, module: 'crm:updateContact', mapper: {}, onerror: [{ id: 2, module: 'builtin:Ignore', mapper: {} }] }] }).has('write-skip-handler-data-loss-review'));
+assert.ok(rules({ flow: [{ id: 1, module: 'crm:updateContact', mapper: {}, onerror: [{ id: 2, module: 'builtin:Resume', mapper: {} }] }] }).has('write-resume-handler-silent-success-review'));
+assert.ok(rules({ flow: [{ id: 1, module: 'crm:updateContact', mapper: {}, onerror: [{ id: 2, module: 'builtin:Commit', mapper: {} }] }] }).has('write-commit-partial-state-review'));
+const rollback = rules({ flow: [{ id: 1, module: 'crm:updateContact', mapper: {}, onerror: [{ id: 2, module: 'builtin:Rollback', mapper: {} }] }], metadata: { scenario: { autoCommit: true, dlq: true } } });
+assert.ok(rollback.has('auto-commit-recovery-review'));
+assert.ok(rollback.has('rollback-limited-by-autocommit-review'));
 const secret = scanner.scanBlueprint({ flow: [{ id: 1, module: 'http:ActionSendData', mapper: { token: 'Bearer abcdefghijklmnopqrstuvwxyz123456' } }] });
 const secretFinding = secret.find(f => f.rule === 'possible-secret-in-blueprint');
 assert.ok(secretFinding);
