@@ -402,7 +402,7 @@ New components:
 - public `verification.html`: explains proof levels before purchase.
 
 Current important limitation:
-No direct Make.com connector was found in the available plugin directory. Therefore ordinary static re-scans can prove structural clearance, and supplied test artifacts can support remediation, but runtime-dependent issues are not called independently verified fixed until a connected synthetic execution path exists.
+A Make runtime connection is not connected to this ChatGPT session yet. Make now officially supports a ChatGPT plugin/MCP server and MCP toolboxes, so the preferred final integration is no longer a speculative custom bridge. Until that connection is authorized, ordinary static re-scans can prove structural clearance and supplied test artifacts can support remediation, but runtime-dependent issues are not called independently verified fixed.
 
 Do not launch a done-for-you repair/fix guarantee until connected runtime verification is proven.
 
@@ -435,3 +435,21 @@ Runtime blocker:
 No Make.com connector/service authorization is currently connected to PCFlows. The code path is prepared, but the final independent runtime proof/deployment gate cannot be exercised until a dedicated PCFlows Make service identity and secure authorization are connected.
 
 The current public products remain audit/QA products. **Verified Repair remains disabled and must not appear as purchasable until the runtime/deployment/rollback gates pass.**
+
+
+## Official Make MCP discovery — 2026-09-25
+
+Make's current official documentation confirms an official ChatGPT integration released on 2026-09-09.
+
+Capabilities documented by Make include building, running and reviewing automations from ChatGPT, with Make-hosted app connections and execution history.
+
+For PCFlows:
+- normal ChatGPT can connect; ChatGPT Work is not required;
+- Make MCP toolbox is preferred for narrow test-tool exposure;
+- Make MCP server can be used for broader scenario/account management if required;
+- current remaining prerequisite is to connect/authorize Make to ChatGPT.
+
+Official references:
+- https://help.make.com/official-make-plugin-for-chatgpt-is-now-available
+- https://help.make.com/connect-to-chatgpt
+- https://help.make.com/mcp-toolboxes
