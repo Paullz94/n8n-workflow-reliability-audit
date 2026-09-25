@@ -29,9 +29,17 @@ SIDE_EFFECT_MARKERS = (
     "slack",
     "gmail",
     "sendemail",
-    "httpRequest",
 )
-IDEMPOTENCY_MARKERS = ("dedup", "idempoten", "duplicate", "already processed")
+SAFE_HTTP_METHODS = {"GET", "HEAD", "OPTIONS"}
+IDEMPOTENCY_GUARD_MARKERS = (
+    "dedup",
+    "duplicate",
+    "already processed",
+    "processed event",
+    "idempotency guard",
+    "idempotency check",
+    "replay guard",
+)
 SECRET_KEY = re.compile(r"(?i)(api[_-]?key|password|passwd|secret|authorization|bearer|token)")
 SECRET_VALUE = re.compile(r"(?i)(bearer\s+[a-z0-9._-]{12,}|sk-[a-z0-9_-]{12,})")
 
@@ -61,9 +69,30 @@ def _node_type(node: dict[str, Any]) -> str:
     return str(node.get("type", "")).lower()
 
 
+def _node_name(node: dict[str, Any]) -> str:
+    return str(node.get("name", "")).strip()
+
+
 def _is_trigger(node: dict[str, Any]) -> bool:
     node_type = _node_type(node)
     return any(marker in node_type for marker in TRIGGER_MARKERS)
+
+
+def _http_method(node: dict[str, Any]) -> str:
+    params = node.get("parameters") if isinstance(node.get("parameters"), dict) else {}
+    return str(params.get("method", "GET")).upper()
+
+
+def _is_side_effect_node(node: dict[str, Any]) -> bool:
+    node_type = _node_type(node)
+    if "httprequest" in node_type:
+        return _http_method(node) not in SAFE_HTTP_METHODS
+    return any(marker in node_type for marker in SIDE_EFFECT_MARKERS)
+
+
+def _is_idempotency_guard(node: dict[str, Any]) -> bool:
+    identity = f"{_node_name(node)} {_node_type(node)}".lower()
+    return any(marker in identity for marker in IDEMPOTENCY_GUARD_MARKERS)
 
 
 def _connection_targets(connections: Any) -> dict[str, set[str]]:
@@ -97,6 +126,55 @@ def _reachable(adjacency: dict[str, set[str]], roots: set[str]) -> set[str]:
     return seen
 
 
+def _unguarded_side_effects(
+    node_by_name: dict[str, dict[str, Any]],
+    adjacency: dict[str, set[str]],
+    roots: set[str],
+) -> set[str]:
+    """Return reachable side-effect nodes that have at least one unguarded path.
+
+    This is intentionally conservative. A guard is recognized only by explicit
+    deduplication/replay-prevention naming, and a side effect remains unguarded
+    when any reachable path can reach it before such a guard.
+    """
+    unguarded: set[str] = set()
+    queue = deque((root, False) for root in roots if root in node_by_name)
+    seen: set[tuple[str, bool]] = set()
+
+    while queue:
+        current, guard_seen = queue.popleft()
+        state = (current, guard_seen)
+        if state in seen:
+            continue
+        seen.add(state)
+
+        node = node_by_name.get(current)
+        if node is None:
+            continue
+
+        guarded_here = guard_seen or _is_idempotency_guard(node)
+        if _is_side_effect_node(node) and not guarded_here:
+            unguarded.add(current)
+
+        for target in adjacency.get(current, set()):
+            if target in node_by_name:
+                queue.append((target, guarded_here))
+
+    return unguarded
+
+
+def failure_threshold_met(result: dict[str, Any], threshold: str) -> bool:
+    """Return True when result contains a finding at or above threshold."""
+    if threshold == "none":
+        return False
+    limit = SEVERITY_ORDER[threshold]
+    return any(
+        SEVERITY_ORDER.get(str(item.get("severity")), len(SEVERITY_ORDER)) <= limit
+        for item in result.get("findings", [])
+        if isinstance(item, dict)
+    )
+
+
 def audit_workflow(workflow: dict[str, Any]) -> dict[str, Any]:
     """Return a redacted static audit result for one exported workflow."""
     findings: list[Finding] = []
@@ -106,6 +184,7 @@ def audit_workflow(workflow: dict[str, Any]) -> dict[str, Any]:
             "The export has no non-empty string `id`; current n8n imports require one.",
             "Use an actual n8n export or assign a unique workflow ID before import.",
         ))
+
     nodes = workflow.get("nodes")
     if not isinstance(nodes, list):
         nodes = []
@@ -116,7 +195,10 @@ def audit_workflow(workflow: dict[str, Any]) -> dict[str, Any]:
         ))
 
     named_nodes = [node for node in nodes if isinstance(node, dict)]
-    names = [str(node.get("name", "")).strip() for node in named_nodes]
+    names = [_node_name(node) for node in named_nodes]
+    valid_names = {name for name in names if name}
+    node_by_name = {_node_name(node): node for node in named_nodes if _node_name(node)}
+
     duplicate_names = sorted(name for name, count in Counter(names).items() if name and count > 1)
     if duplicate_names:
         findings.append(Finding(
@@ -133,7 +215,11 @@ def audit_workflow(workflow: dict[str, Any]) -> dict[str, Any]:
             "Name every node before handoff.",
         ))
 
-    nodes_without_id = [str(node.get("name", "<unnamed>")) for node in named_nodes if not isinstance(node.get("id"), str) or not node.get("id", "").strip()]
+    nodes_without_id = [
+        _node_name(node) or "<unnamed>"
+        for node in named_nodes
+        if not isinstance(node.get("id"), str) or not node.get("id", "").strip()
+    ]
     if nodes_without_id:
         findings.append(Finding(
             "STRUCT-005", "high", "Nodes missing identifiers", None,
@@ -143,15 +229,40 @@ def audit_workflow(workflow: dict[str, Any]) -> dict[str, Any]:
 
     connections = workflow.get("connections", {})
     adjacency = _connection_targets(connections)
-    incoming: dict[str, int] = {name: 0 for name in names if name}
+
+    missing_sources = sorted(source for source in adjacency if source not in valid_names)
+    if missing_sources:
+        findings.append(Finding(
+            "GRAPH-002", "high", "Connections reference missing source nodes", None,
+            f"Unknown connection source(s): {', '.join(missing_sources)}.",
+            "Regenerate the export or remove stale connection entries before import/handoff.",
+        ))
+
+    missing_targets = sorted({
+        target
+        for targets in adjacency.values()
+        for target in targets
+        if target not in valid_names
+    })
+    if missing_targets:
+        findings.append(Finding(
+            "GRAPH-003", "high", "Connections reference missing target nodes", None,
+            f"Unknown connection target(s): {', '.join(missing_targets)}.",
+            "Regenerate the export or reconnect the affected branch to an existing node.",
+        ))
+
+    incoming: dict[str, int] = {name: 0 for name in valid_names}
     for targets in adjacency.values():
         for target in targets:
-            incoming[target] = incoming.get(target, 0) + 1
-    roots = {str(node.get("name")) for node in named_nodes if _is_trigger(node)}
+            if target in incoming:
+                incoming[target] += 1
+
+    roots = {_node_name(node) for node in named_nodes if _is_trigger(node) and _node_name(node)}
     if not roots:
         roots = {name for name, count in incoming.items() if count == 0}
+
     reachable = _reachable(adjacency, roots)
-    disconnected = sorted(set(incoming) - reachable)
+    disconnected = sorted(valid_names - reachable)
     if disconnected:
         findings.append(Finding(
             "GRAPH-001", "high", "Unreachable nodes", None,
@@ -168,18 +279,10 @@ def audit_workflow(workflow: dict[str, Any]) -> dict[str, Any]:
             "Attach an error workflow that records context and alerts an operator without exposing payload secrets.",
         ))
 
-    has_side_effect = False
-    has_idempotency_signal = False
     for node in named_nodes:
-        name = str(node.get("name", "")) or "<unnamed>"
+        name = _node_name(node) or "<unnamed>"
         node_type = _node_type(node)
         params = node.get("parameters") if isinstance(node.get("parameters"), dict) else {}
-        combined_identity = f"{name} {node_type}".lower()
-
-        if any(marker in combined_identity for marker in IDEMPOTENCY_MARKERS):
-            has_idempotency_signal = True
-        if any(marker.lower() in node_type for marker in SIDE_EFFECT_MARKERS):
-            has_side_effect = True
 
         if "webhook" in node_type:
             authentication = str(params.get("authentication", "none")).lower()
@@ -240,11 +343,31 @@ def audit_workflow(workflow: dict[str, Any]) -> dict[str, Any]:
                     "Remove it from node parameters, rotate if real, and use n8n credentials or an external secret store.",
                 ))
 
-    if active and roots and has_side_effect and not has_idempotency_signal:
+    side_effect_nodes = sorted(
+        name for name, node in node_by_name.items()
+        if name in reachable and _is_side_effect_node(node)
+    )
+    unguarded_side_effects = sorted(_unguarded_side_effects(node_by_name, adjacency, roots))
+
+    if active and roots and unguarded_side_effects:
         findings.append(Finding(
-            "DATA-001", "high", "No visible duplicate-prevention step", None,
-            "An active trigger reaches side-effect-capable nodes, but no node name/type signals deduplication or idempotency.",
-            "Define an idempotency key, persist processed-event state, and test repeated delivery. This heuristic requires human confirmation.",
+            "DATA-001", "high", "Side effects are reachable without a visible duplicate-prevention guard", None,
+            f"At least one trigger/root path reaches these side-effect node(s) before an explicit deduplication/replay guard: {', '.join(unguarded_side_effects)}.",
+            "Persist an idempotency key or processed-event marker before the side effect and test duplicate delivery. This graph heuristic requires human confirmation.",
+        ))
+
+    retrying_unguarded_writes = sorted(
+        name
+        for name in unguarded_side_effects
+        if "httprequest" in _node_type(node_by_name[name])
+        and _http_method(node_by_name[name]) not in SAFE_HTTP_METHODS
+        and node_by_name[name].get("retryOnFail") is True
+    )
+    if active and retrying_unguarded_writes:
+        findings.append(Finding(
+            "DATA-002", "high", "Retrying HTTP writes lack a visible upstream idempotency guard", None,
+            f"Retry-enabled mutating HTTP node(s) reachable without a guard: {', '.join(retrying_unguarded_writes)}.",
+            "Use a stable idempotency key accepted by the destination or persist deduplication state before retrying the write; verify repeated-delivery behavior synthetically.",
         ))
 
     if active and not workflow.get("versionId"):
@@ -258,12 +381,18 @@ def audit_workflow(workflow: dict[str, Any]) -> dict[str, Any]:
     counts = Counter(finding.severity for finding in findings)
     return {
         "tool": "Workflow Reliability Audit",
-        "schema_version": 1,
+        "schema_version": 2,
         "workflow": {
             "name": str(workflow.get("name", "Unnamed workflow")),
             "active": active,
             "node_count": len(named_nodes),
             "connection_source_count": len(adjacency),
+        },
+        "analysis": {
+            "root_nodes": sorted(roots),
+            "reachable_node_count": len(valid_names & reachable),
+            "side_effect_nodes": side_effect_nodes,
+            "unguarded_side_effect_nodes": unguarded_side_effects,
         },
         "scope": "Static export review only; execution, credentials, instance configuration, and business correctness remain unverified.",
         "summary": {severity: counts.get(severity, 0) for severity in SEVERITY_ORDER},
@@ -274,6 +403,7 @@ def audit_workflow(workflow: dict[str, Any]) -> dict[str, Any]:
 def render_markdown(result: dict[str, Any]) -> str:
     workflow = result["workflow"]
     summary = result["summary"]
+    analysis = result.get("analysis", {})
     lines = [
         f"# Workflow Reliability Audit — {workflow['name']}",
         "",
@@ -289,9 +419,19 @@ def render_markdown(result: dict[str, Any]) -> str:
         "|---:|---:|---:|---:|---:|",
         f"| {summary['critical']} | {summary['high']} | {summary['medium']} | {summary['low']} | {summary['info']} |",
         "",
-        "## Findings",
-        "",
     ]
+    if analysis:
+        side_effects = analysis.get("side_effect_nodes", [])
+        unguarded = analysis.get("unguarded_side_effect_nodes", [])
+        lines.extend([
+            "## Graph-aware reliability signals",
+            "",
+            f"- Reachable side-effect nodes: {len(side_effects)}",
+            f"- Side-effect nodes with at least one unguarded path: {len(unguarded)}",
+            "",
+        ])
+
+    lines.extend(["## Findings", ""])
     if not result["findings"]:
         lines.extend(["No static findings. This does not prove production readiness.", ""])
     for finding in result["findings"]:
@@ -321,6 +461,12 @@ def main() -> None:
     parser.add_argument("workflow", type=Path)
     parser.add_argument("--output", type=Path, help="Write a Markdown report.")
     parser.add_argument("--json-output", type=Path, help="Write a machine-readable report.")
+    parser.add_argument(
+        "--fail-on",
+        choices=("none", *SEVERITY_ORDER.keys()),
+        default="none",
+        help="Exit with status 1 when a finding at or above this severity exists.",
+    )
     args = parser.parse_args()
 
     raw = args.workflow.read_bytes()
@@ -334,6 +480,8 @@ def main() -> None:
         print(markdown)
     if args.json_output:
         args.json_output.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
+    if failure_threshold_met(result, args.fail_on):
+        raise SystemExit(1)
 
 
 if __name__ == "__main__":
