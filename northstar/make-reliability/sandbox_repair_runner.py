@@ -32,6 +32,16 @@ EVALUATORS: dict[str, Callable[..., dict[str, bool]]] = {
     "partial_payment": runtime_test_contract.assert_partial_payment,
     "invalid_ai_output": runtime_test_contract.assert_invalid_ai_output,
     "onboarding_resources": runtime_test_contract.assert_required_onboarding_resources,
+    "skip_visibility": runtime_test_contract.assert_skip_visibility,
+    "resume_fallback": runtime_test_contract.assert_resume_fallback,
+    "partial_state_reconciliation": runtime_test_contract.assert_partial_state_reconciliation,
+    "committed_state_reconciliation": runtime_test_contract.assert_committed_state_reconciliation,
+    "rollback_boundary": runtime_test_contract.assert_rollback_boundary,
+    "filter_skip": runtime_test_contract.assert_filter_skip,
+    "concurrency": runtime_test_contract.assert_concurrency,
+    "failed_work_replay": runtime_test_contract.assert_failed_work_replay,
+    "data_loss_recovery": runtime_test_contract.assert_data_loss_recovery,
+    "privacy_safe_observability": runtime_test_contract.assert_privacy_safe_observability,
 }
 
 
