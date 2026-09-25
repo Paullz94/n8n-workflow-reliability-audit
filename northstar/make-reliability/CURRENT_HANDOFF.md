@@ -59,6 +59,9 @@ Primary paid pilot:
 - local intake generator and JSON schema;
 - synthetic blueprint/preflight/paid-audit examples;
 - privacy-bounded `fulfill_order.py` delivery packager;
+- deterministic paid-audit qualification gate that can honestly keep low-value cases on the free tier;
+- privacy-bounded AI review packet/protocol (deterministic evidence remains source of truth);
+- deterministic before/after remediation re-scan diff;
 - SHA-256 delivery manifest;
 - hard stop on possible secret-like input;
 - raw blueprint excluded from delivery ZIP;
@@ -67,7 +70,8 @@ Primary paid pilot:
 - dry-run append-only Stripe reconciliation command;
 - Stripe EUR 149 product/price/Payment Link;
 - Checkout Session ID post-payment correlation flow;
-- public site, scanner, FAQ, sample report, privacy page, service terms and thank-you flow;
+- redesigned professional public site, scanner, FAQ, sample report, methodology page, privacy page, service terms and thank-you flow;
+- first evidence-based Make reliability guide for organic discovery;
 - zero-capital Peppol/e-invoicing shortlist for post-registration selection;
 - minimal bookkeeping evidence/CSV plan;
 - one-command validation runner;
@@ -117,6 +121,20 @@ Current status:
 - enterprise number: pending / in processing;
 - VAT identification/small-business regime: pending enterprise number.
 
+## Competitive learning
+
+Current research includes ScenarioTrace, MakeIntegration's Scenario Analyzer, several current Upwork reliability-audit offers and n8n audit products.
+
+Key decisions:
+- local browser scanning alone is not a moat;
+- do not compete on a generic health score;
+- deterministic evidence first, AI-assisted interpretation second;
+- EUR 149 sits within the visible current audit-service range;
+- runtime/log comparison is a possible later layer, but only after static-audit willingness-to-pay is proven;
+- continuous monitoring is deliberately postponed because it adds infrastructure/privacy/support obligations.
+
+See `COMPETITIVE_INTELLIGENCE.md`, `PRICING_EVIDENCE.md` and `PRODUCT_ROADMAP.md`.
+
 ## Market / positioning conclusion
 
 Demand exists across multiple independent sources (Make ecosystem, Upwork, Fiverr, Contra, adjacent Zapier market). Generic Make blueprint linting already has low-cost competitors.
@@ -132,7 +150,7 @@ PCFlows therefore differentiates on:
 
 ## Channel conclusion
 
-- GitHub/PCFlows site: active passive technical trust/discovery asset.
+- GitHub/PCFlows site: active passive technical trust/discovery asset; site source QA currently reports no broken local targets, missing JS element IDs, exposed Stripe URL or secret-pattern issue in the checked public files.
 - Make Community: autonomous research only under its current no-AI/no-automated-content rule.
 - Upwork: future legitimate platform-contained activity only.
 - Fiverr: future legitimate platform-contained activity only.
