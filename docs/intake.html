@@ -35,6 +35,29 @@
     <section class="tool-box" style="margin-top:18px">
       <div class="grid-2">
         <div>
+          <label for="scope">What do you need?</label>
+          <select id="scope">
+            <option value="full">Full one-scenario audit</option>
+            <option value="focused">One focused risk check</option>
+            <option value="release">Portfolio / release QA</option>
+          </select>
+          <p class="small">This helps route the order to the smallest suitable fixed scope.</p>
+        </div>
+        <div>
+          <label for="focus">Focused risk area</label>
+          <select id="focus">
+            <option value="">Not applicable / not sure</option>
+            <option value="duplicates">Duplicate effects / idempotency</option>
+            <option value="silent_skips">Silent skips / missing work</option>
+            <option value="recovery">Failure recovery</option>
+            <option value="ordering">Concurrency / ordering</option>
+          </select>
+          <p class="small">Required only for the €79 Focused Risk Check.</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div>
           <label for="scenario">Scenario name</label>
           <input id="scenario" maxlength="160" placeholder="e.g. Order intake">
           <p class="small">A simple internal label is enough.</p>
@@ -75,7 +98,7 @@
 
     <section class="card" style="margin-top:18px">
       <div class="kicker">What the file contains</div>
-      <p>Only the fields shown above. The paid report builder allowlists these values and ignores unexpected fields.</p>
+      <p>Only the fields shown above. The paid report builder allowlists these values and ignores unexpected fields. The requested scope/focus helps autonomous fulfillment choose the correct fixed package; it does not override the Stripe payment contract.</p>
       <p class="small">After payment, this file is sent together with one sanitized Make.com blueprint using the order-reference instructions provided by PCFlows.</p>
     </section>
   </div>
@@ -87,7 +110,12 @@ document.getElementById('download').addEventListener('click',()=>{
   const scenario=val('scenario'), goal=val('goal');
   const status=document.getElementById('status');
   if(!scenario||!goal){status.textContent='Scenario name and business goal are required.';return;}
+  const requestedScope=val('scope');
+  const requestedFocus=val('focus');
+  if(requestedScope==='focused' && !requestedFocus){status.textContent='Choose one focused risk area for the €79 check.';return;}
   const obj={
+    requested_scope:requestedScope,
+    requested_focus:requestedFocus,
     scenario_name:scenario,
     business_goal:goal,
     critical_side_effects:val('effects').split(/\r?\n/).map(x=>x.trim()).filter(Boolean).slice(0,10),
