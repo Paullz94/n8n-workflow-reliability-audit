@@ -46,6 +46,7 @@ class FixVerificationTests(unittest.TestCase):
                     "intended_side_effect_count_one":True,
                 }
             },
+            trusted_connected_evidence=True,
         )
         self.assertTrue(r["verified_fixed"])
         self.assertEqual(r["status"],"verified_fixed")
