@@ -135,6 +135,8 @@ def _run_test(
         "test_id":test_id,
         "evaluator":evaluator_name,
         "source":"connected_test_run",
+        "provider":"make",
+        "observed_by_pcflows":True,
         "passed":True,
         "assertions":assertions,
         "execution_ids":[x for x in execution_ids if x],
