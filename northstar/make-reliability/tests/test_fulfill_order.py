@@ -73,6 +73,34 @@ class FulfillmentTests(unittest.TestCase):
                     out_dir=root / "out",
                 )
 
+    def test_fulfillment_autoselects_lead_pack(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            bp = root / "blueprint.json"
+            context = root / "context.json"
+            out = root / "out"
+            bp.write_text(json.dumps({
+                "flow": [{"id": 1, "module": "crm:createContact", "mapper": {}}]
+            }), encoding="utf-8")
+            context.write_text(json.dumps({
+                "scenario_name": "Facebook leads to CRM",
+                "business_goal": "Route every lead to one sales owner and stop follow-up after booking",
+                "critical_side_effects": ["Create CRM lead exactly once"],
+                "duplicate_tolerance": "none",
+                "ordering_required": True,
+                "recovery_expectation": "Failed lead remains visible."
+            }), encoding="utf-8")
+
+            result = fulfill_order.build_delivery(
+                blueprint_path=bp,
+                context_path=context,
+                order_ref="cs_live_demo_pack",
+                out_dir=out,
+            )
+            self.assertEqual(result["pack_selection"]["pack_id"], "lead_flow")
+            report = (out / "pcflows-data-integrity-audit.md").read_text()
+            self.assertIn("Lead Flow Reliability Audit", report)
+
 
 if __name__ == "__main__":
     unittest.main()
