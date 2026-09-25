@@ -101,6 +101,9 @@ class FulfillmentTests(unittest.TestCase):
             report = (out / "pcflows-data-integrity-audit.md").read_text()
             self.assertIn("Lead Flow Reliability Audit", report)
 
+    def test_claim_guard_is_applied_to_customer_report(self):
+        self.assertIn("customer_claim_guard.assert_safe_report", __import__("inspect").getsource(fulfill_order.build_delivery))
+
 
 if __name__ == "__main__":
     unittest.main()
