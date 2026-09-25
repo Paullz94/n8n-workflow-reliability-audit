@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Make.com Error Handlers: Reliability Risks of Skip, Resume, Commit & Rollback — PCFlows</title>
+<meta name="description" content="A practical reliability guide to Make.com Skip, Resume, Commit, Rollback and Break error handlers, with data-integrity questions to verify before production.">
+<meta name="theme-color" content="#081019"><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<style>
+:root{--bg:#081019;--panel:#0d1722;--line:#223244;--text:#f5f7fa;--muted:#9caabd;--accent:#78e6c2;--accent2:#7bb8ff;--warn:#f4c96b;--danger:#ff8b81;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 75% -10%,rgba(123,184,255,.10),transparent 30%),var(--bg);color:var(--text)}a{color:var(--accent2)}
+main{max-width:860px;margin:auto;padding:44px 20px 80px}h1{font-size:clamp(40px,7vw,62px);line-height:1;letter-spacing:-.045em;margin:14px 0 20px}h2{margin-top:44px;font-size:30px;letter-spacing:-.025em}h3{margin-top:28px}p,li{color:#afbdcb;line-height:1.75}.eyebrow{color:var(--accent);font-size:12px;font-weight:850;letter-spacing:.12em;text-transform:uppercase}.card{border:1px solid var(--line);background:var(--panel);border-radius:18px;padding:20px;margin:18px 0}.callout{border-left:3px solid var(--accent);padding:14px 18px;background:rgba(120,230,194,.05);border-radius:0 12px 12px 0}.tag{display:inline-block;border:1px solid #2d4154;border-radius:999px;padding:5px 8px;font-size:11px;color:#afbdcb;margin-right:5px}.small{font-size:12px;color:#7f8fa0}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:700px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body><main>
+<p><a href="../">← PCFlows</a> · <a href="../method.html">Method</a> · <a href="../scanner.html">Free preflight</a></p>
+<div class="eyebrow">Reliability guide · Make.com</div>
+<h1>Error handlers can save a scenario — or hide the failure.</h1>
+<p>Make.com gives you several error-handler directives. They are powerful, but each one changes what “success”, “failure” and “recovery” mean for the business process. The important question is not simply “does this scenario have an error handler?” It is:</p>
+<div class="callout"><strong>What happens to the business event when this module fails?</strong></div>
+
+<p>This guide focuses on reliability and data integrity rather than on generic Make best practices. The examples below are intentionally conceptual; verify behavior against your own sanitized scenario and synthetic test data.</p>
+
+<h2>Why a green scenario is not enough</h2>
+<p>An automation can finish without a visible platform-level failure while still missing the business outcome you cared about. For example, a CRM write can fail, an error handler can let processing continue, and later modules can still succeed. The technical run is not the same thing as the business transaction.</p>
+<p>That is why PCFlows treats error directives as <em>reliability semantics</em>, not just exception-handling syntax.</p>
+
+<h2>Skip / Ignore</h2>
+<div class="card">
+<span class="tag">Potential silent loss</span><span class="tag">Detect</span>
+<p>Make's Skip/Ignore behavior can drop the failed bundle and continue processing later bundles. That can be completely intentional — for example, when one malformed optional record should not stop an entire batch.</p>
+<p>The risk appears when the skipped item represents business work that must happen exactly once: creating an invoice, updating an order, booking a lead, or recording a payment-related state change.</p>
+<strong>Ask:</strong>
+<ul>
+<li>Is losing this failed event acceptable?</li>
+<li>Can an operator see that it was skipped?</li>
+<li>Is there a quarantine or reconciliation path?</li>
+<li>Could the overall scenario still look successful while the business action is missing?</li>
+</ul>
+<p><strong>Safe verification:</strong> force a synthetic failure on the affected module and confirm the missing business action is visible somewhere operators actually monitor.</p>
+</div>
+
+<h2>Resume</h2>
+<div class="card">
+<span class="tag">Potential silent success</span><span class="tag">Detect</span>
+<p>Resume can provide substitute output for a failed module and allow downstream processing to continue. That is useful when a fallback value is genuinely part of the design.</p>
+<p>But a fallback can also blur the line between “the external write succeeded” and “we manufactured enough output to keep the rest of the scenario moving”.</p>
+<strong>Ask:</strong>
+<ul>
+<li>Can downstream modules distinguish real output from fallback output?</li>
+<li>Could a success notification be sent even though the important write failed?</li>
+<li>Is the fallback safe for every consumer downstream?</li>
+</ul>
+<p><strong>Safe verification:</strong> make the write fail on synthetic data, then inspect downstream behavior. Verify that nobody can interpret substitute output as proof the side effect happened.</p>
+</div>
+
+<h2>Commit</h2>
+<div class="card">
+<span class="tag">Partial state</span><span class="tag">Recover</span>
+<p>Commit is about preserving transactional changes before stopping the current run. Partial state is not automatically wrong; sometimes it is exactly what you want.</p>
+<p>The reliability question is whether that partial state is <strong>understood and reconcilable</strong>.</p>
+<strong>Ask:</strong>
+<ul>
+<li>Which earlier changes are intentionally kept?</li>
+<li>Can you identify records that stopped halfway through the larger process?</li>
+<li>Is there a compensating action or reconciliation job?</li>
+</ul>
+<p><strong>Safe verification:</strong> create a synthetic case where an earlier transaction completes and a later step fails. Confirm operators can identify the boundary between committed and unfinished work.</p>
+</div>
+
+<h2>Rollback</h2>
+<div class="card">
+<span class="tag">Transaction boundary</span><span class="tag">Recover</span>
+<p>Rollback is only as broad as the transaction boundary Make and the underlying modules can actually undo. Make documents an important limitation: previously committed changes cannot be rolled back later.</p>
+<p>This becomes especially important when scenario settings automatically commit work along the way.</p>
+<strong>Ask:</strong>
+<ul>
+<li>Which modules are truly transactional?</li>
+<li>Has earlier work already been committed?</li>
+<li>Does the team assume rollback means “undo everything” when it cannot?</li>
+</ul>
+<p><strong>Safe verification:</strong> force a later failure after an earlier transactional step and observe exactly what state remains.</p>
+</div>
+
+<h2>Break and retry</h2>
+<div class="card">
+<span class="tag">Duplicate-effect risk</span><span class="tag">Prevent</span>
+<p>Retry is essential for transient failures, but external writes are where retry becomes dangerous. A request may have reached the remote system successfully even if the caller never received a clean response.</p>
+<p>If you retry blindly, you can create the same side effect twice.</p>
+<strong>Ask:</strong>
+<ul>
+<li>Does the destination support idempotency keys?</li>
+<li>Can you upsert by a stable business key?</li>
+<li>Can the write be safely repeated?</li>
+<li>Do you know whether the first attempt committed before the error became visible?</li>
+</ul>
+<p><strong>Safe verification:</strong> replay the same synthetic event and confirm the intended external state exists only once.</p>
+</div>
+
+<h2>Scenario-level settings matter too</h2>
+<div class="grid">
+<div class="card"><h3>Sequential vs parallel</h3><p>Instant webhook scenarios can process events concurrently. If multiple events touch the same logical record, ordering and race behavior become part of your data-integrity design.</p></div>
+<div class="card"><h3>Incomplete executions</h3><p>Recovery settings determine whether failed work remains available to inspect and resume. For workflows with important writes, recovery design should be explicit rather than accidental.</p></div>
+</div>
+
+<h2>A practical review sequence</h2>
+<ol>
+<li>Identify every module that changes external state.</li>
+<li>Trace each module's error route.</li>
+<li>Classify the handler: stop, skip, substitute, retry, commit or rollback.</li>
+<li>Ask what business state remains after that behavior.</li>
+<li>Define how an operator would notice missing or partial work.</li>
+<li>Test the failure with synthetic data.</li>
+<li>Re-run the static review after remediation.</li>
+</ol>
+
+<h2>Use the free PCFlows preflight</h2>
+<p>The PCFlows Reliability Preflight checks a sanitized Make blueprint locally in your browser and looks for several of these reliability signals. It does not require a Make API token or production credentials.</p>
+<p><a href="../scanner.html">Run the free local preflight →</a></p>
+
+<h2>Primary Make references</h2>
+<ul>
+<li><a href="https://help.make.com/skip-error-handler">Skip error handler</a></li>
+<li><a href="https://help.make.com/resume-error-handler">Resume error handler</a></li>
+<li><a href="https://help.make.com/commit-error-handler">Commit error handler</a></li>
+<li><a href="https://help.make.com/rollback-error-handler">Rollback error handler</a></li>
+<li><a href="https://help.make.com/incomplete-executions">Incomplete executions</a></li>
+<li><a href="https://help.make.com/webhooks">Webhook processing / ordering</a></li>
+</ul>
+
+<p class="small">This guide is technical reliability information, not a certification or a guarantee that a scenario is correct. PCFlows is independent and is not affiliated with or endorsed by Make.com.</p>
+</main></body></html>
