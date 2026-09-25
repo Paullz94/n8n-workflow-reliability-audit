@@ -74,7 +74,7 @@ Marketplace accounts are not required for the initial direct PCFlows pilot.
 - [x] Paid-audit fit/qualification routing is deterministic.
 - [x] AI-assisted review has a privacy-bounded packet and explicit non-invention rules.
 - [x] Paid delivery bundle generation is deterministic.
-- [x] Included re-scan has deterministic resolved/remaining/new comparison logic.
+- [x] Included re-scan has deterministic statically-cleared/remaining/new comparison logic.
 - [x] Stripe Checkout Session ID is the stable order/fulfillment reference.
 - [x] Post-payment redirect and email handoff are prepared without a custom backend.
 - [x] Qualification fields are structured.
@@ -118,7 +118,7 @@ During the pause, Northstar may continue only useful EUR 0 work. Major safe tech
 - [x] EUR0 Reliability Preflight exists.
 - [x] EUR79 Focused Risk Check renderer exists.
 - [x] EUR149 Data Integrity Audit exists.
-- [x] Lead Flow / Invoice & Payment / AI Guardrails specialist modes exist inside the EUR149 audit.
+- [x] Lead Flow / Invoice & Payment / AI Guardrails / Client Onboarding specialist modes exist inside the EUR149 audit.
 - [x] EUR399 Portfolio / Release QA supports up to three scenarios.
 - [x] Combined Portfolio remediation re-scan exists.
 - [x] Public Services & Pricing page and local service chooser exist.
@@ -140,3 +140,32 @@ During the pause, Northstar may continue only useful EUR 0 work. Major safe tech
 - [ ] Done-for-you repair/fix package remains NOT launched until the two gates above pass.
 
 Commercial rule: the current packages sell audit, remediation guidance, verification plans and re-scan. Do not market a guaranteed live fix.
+
+
+## Verified Repair future-offer gates
+- [x] Per-issue resolution contract exists.
+- [x] Repair case cannot close until every accepted issue is closed_verified.
+- [x] Specialist pack closure requires every pack acceptance test.
+- [x] Fix eligibility refuses unverifiable repair commitments.
+- [x] Make API run/replay client abstraction exists.
+- [x] Make delegated-access/service-identity model documented.
+- [x] Internal EUR299 one-issue Verified Repair price hypothesis benchmarked; not public.
+- [ ] Dedicated PCFlows Make service identity exists.
+- [ ] Secure Make API/MCP authorization connected without emailing credentials.
+- [ ] Safe sandbox/test-team execution exercised against real Make.
+- [ ] Scenario backup/retrieval before write verified.
+- [ ] Safe update/deployment flow verified.
+- [ ] Automatic rollback after failed verification exercised.
+- [ ] At least one end-to-end synthetic repair reaches closed_verified in a real Make test environment.
+- [ ] Repair failure/refund policy finalized.
+- [ ] Only after every gate above: consider public Verified Repair checkout.
+
+## Validation caveat after latest hardening
+
+The Northstar validation command now runs:
+- Python compileall;
+- full unittest discovery;
+- package catalog/order-contract consistency;
+- browser scanner regression when Node is available.
+
+The latest branch contains substantially more tests than the last fully executed 31-test checkpoint. A direct local clone/run could not be executed from the current ChatGPT container because outbound DNS to GitHub is unavailable. Do **not** claim that the complete current suite has passed until it is executed by an environment that has the branch checkout. Static/source-level guards and individual connector-side checks were still performed during this hardening round.
