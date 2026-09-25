@@ -53,6 +53,7 @@ class SandboxRepairRunnerTests(unittest.TestCase):
         )
         self.assertEqual(result["status"],"verified_in_sandbox")
         self.assertTrue(result["all_tests_passed"])
+        self.assertTrue(result["requested_revised_sha256"])
         self.assertEqual(client.rollback_calls,0)
 
     def test_failed_assertion_rolls_back(self):
