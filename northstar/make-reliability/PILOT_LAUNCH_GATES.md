@@ -123,5 +123,5 @@ During the pause, Northstar may continue only useful EUR 0 work. Major safe tech
 - [x] Combined Portfolio remediation re-scan exists.
 - [x] Public Services & Pricing page and local service chooser exist.
 - [x] Site source QA passes after package redesign.
-- [ ] Stripe products/prices/payment links for EUR79 and EUR399 created after launch configuration review.
-- [ ] Checkout buttons activated only after Belgian enterprise/VAT gate.
+- [x] Inactive Stripe products/prices for EUR79 and EUR399 created; no public payment links yet.
+- [ ] Package-specific Payment Links configured/verified and checkout buttons activated only after Belgian enterprise/VAT gate.
