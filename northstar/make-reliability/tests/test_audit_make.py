@@ -137,6 +137,21 @@ class AuditMakeTests(unittest.TestCase):
         hit = next(f for f in findings if f.rule == "possible-secret-in-blueprint")
         self.assertNotIn("abcdefghijklmnopqrstuvwxyz", hit.message)
 
+    def test_common_provider_keys_are_secret_like(self):
+        samples = [
+            "sk_" + "live_" + "1234567890abcdefghijklmnop",
+            "ghp_" + "1234567890abcdefghijklmnopqrst",
+            "AKIA" + "1234567890ABCDEF",
+            "AIza" + "1234567890abcdefghijklmnopqrstuvw",
+            "xoxb-" + "1234567890-" + "abcdefghijklmno",
+        ]
+        for secret in samples:
+            with self.subTest(secret=secret[:8]):
+                findings = audit_make.scan_blueprint({
+                    "flow": [{"id": 1, "module": "http:ActionSendData", "mapper": {"value": secret}}]
+                })
+                self.assertIn("possible-secret-in-blueprint", {f.rule for f in findings})
+
 
 if __name__ == "__main__":
     unittest.main()
