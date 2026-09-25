@@ -204,3 +204,53 @@ Current strongest **post-launch** public fits, subject to re-checking that they 
 Make Community buyer posts are retained as product-validation research only. Do not post or DM AI-generated commercial content there under the current community rules.
 
 No outreach has been sent and no customer has been contacted during the registration pause.
+
+
+## Autonomy directive — 2026-09-25
+
+Paul clarified that the operating target is **fully autonomous routine operation after one-time prerequisites**.
+
+Paul should not be the daily operator for:
+- posts/content on connected/permitted channels;
+- prospect qualification;
+- standard customer replies;
+- checkout/payment handling;
+- intake;
+- audit generation/QA;
+- delivery;
+- re-scan;
+- deterministic refunds;
+- Stripe reconciliation;
+- follow-up.
+
+Owner input is reserved for genuine non-delegable prerequisites/exceptions:
+- enterprise/VAT/legal attestations;
+- KYC/identity;
+- connecting/authorizing third-party accounts;
+- explicit new owner-capital spend;
+- CAPTCHA/platform identity checks;
+- exceptional legal/payment disputes outside published policy.
+
+Implemented for this directive:
+- `autonomous_lifecycle.py` — routine state/action engine;
+- `support_router.py` — standard autonomous customer-response routing;
+- `pack_selector.py` — automatic generic vs Lead/Invoice/AI pack selection;
+- `vertical_packs.py` — Lead Flow, Invoice & Payment Sync and AI Workflow Guardrails;
+- `build_pack_report.py` — buyer-specific report/acceptance-test renderer;
+- synthetic fixtures/contexts for all three initial demand packs.
+
+Current one-time integration blocker for autonomous customer replies:
+- the connected Gmail account is not the public PCFlows support mailbox;
+- connect/authorize `PCMotionstudios@gmail.com` (or intentionally change the public support address to an already connected mailbox).
+
+Channel connector research:
+- no direct Upwork or Contra action connector was returned in current plugin discovery;
+- Clay is available for prospect discovery/engagement and has been surfaced as an optional connection;
+- Metricool is available for connected social publishing/analytics;
+- marketplace channels without a direct connector require an authorized supported cloud-browser/Work workflow or platform-native account setup.
+
+Scheduled autonomous loops:
+- daily Make.com opportunity research already active;
+- weekly owned-site PCFlows educational guide task now active, but it will publish only after the registration/VAT launch gate is complete.
+
+No checkout activation, customer outreach, paid posting or owner-capital spend is permitted before the launch gate.
