@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Workflow Guardrails — PCFlows</title>
+<meta name="description" content="Review Make.com AI workflows for malformed LLM output, unsafe downstream writes, missing human approval, retry duplication and handoff failures.">
+<meta name="theme-color" content="#050505"><link rel="stylesheet" href="site.css">
+</head>
+<body>
+<header class="site-header"><div class="wrap site-nav"><a class="wordmark" href="./">PCFlows</a><nav class="nav-links"><a href="packages.html">Services</a><a href="method.html">Method</a><a class="nav-cta" href="scanner.html">Free preflight</a></nav></div></header>
+<main>
+<section class="hero"><div class="wrap hero-grid">
+<div><div class="kicker">Specialist mode · included in €149 audit</div><h1>AI output should not become a business action just because it looks confident.</h1><p class="lead">AI Workflow Guardrails reviews Make.com scenarios where LLM output can update CRM, trigger finance/document flows, send customer messages or make other state-changing decisions.</p><div class="actions"><a class="button primary" href="scanner.html">Start with free preflight</a><a class="button secondary" href="packages.html">Compare services</a></div></div>
+<div class="hero-proof">
+<div class="hero-proof-row"><span>Structure</span><strong>What happens if AI returns malformed fields?</strong></div>
+<div class="hero-proof-row"><span>Uncertainty</span><strong>Can an ambiguous result still trigger a write?</strong></div>
+<div class="hero-proof-row"><span>Approval</span><strong>Which actions require a human decision?</strong></div>
+<div class="hero-proof-row"><span>Handoff</span><strong>Does automation stop when a human takes over?</strong></div>
+</div></div></section>
+
+<section class="section"><div class="wrap">
+<div class="section-head"><div class="kicker">Realistic failure patterns</div><h2>The model does not need to crash to be wrong.</h2></div>
+<div class="grid-3">
+<div class="panel"><h3>Malformed JSON</h3><p>The next module expects a number and status field. The LLM returns prose or null, but the flow still reaches a CRM write.</p></div>
+<div class="panel"><h3>Confident wrong classification</h3><p>An ambiguous lead/document is classified incorrectly and the automation treats the result as fact instead of routing to review.</p></div>
+<div class="panel"><h3>Unsafe finance/document action</h3><p>An extracted amount or identifier is wrong, but no deterministic validation or human approval exists before downstream action.</p></div>
+<div class="panel"><h3>Customer message after takeover</h3><p>A human starts handling the conversation, but scheduled AI follow-up remains active and sends another message.</p></div>
+<div class="panel"><h3>Retry duplicates action</h3><p>The same validated AI result is replayed after a timeout and creates the same CRM/email/document side effect twice.</p></div>
+<div class="panel"><h3>Fallback looks like success</h3><p>An error handler supplies substitute data and downstream modules cannot distinguish fallback output from a real AI result.</p></div>
+</div>
+</div></section>
+
+<section class="section"><div class="wrap grid-2">
+<div><div class="kicker">What PCFlows verifies</div><h2>Validate before state-changing actions.</h2></div>
+<div class="rule-list">
+<div class="rule-row"><div class="label">Malformed output</div><div class="value">Feed missing/null/wrong-type fields and verify high-impact writes are blocked or quarantined.</div></div>
+<div class="rule-row"><div class="label">Ambiguity</div><div class="value">Use an uncertain synthetic case and verify explicit review/fallback instead of silent commitment.</div></div>
+<div class="rule-row"><div class="label">Human takeover</div><div class="value">Move a case to human ownership and verify later automated actions stop.</div></div>
+<div class="rule-row"><div class="label">Replay</div><div class="value">Replay the same AI decision and confirm the external side effect remains exactly once.</div></div>
+</div></div></section>
+</main>
+<footer class="footer"><div class="wrap footer-row"><div><strong style="color:var(--text)">PCFlows</strong><br>Independent technical service · Not affiliated with Make.com</div><div class="footer-links"><a href="packages.html">Services</a><a href="privacy.html">Privacy</a><a href="mailto:PCMotionstudios@gmail.com">Support</a></div></div></footer>
+</body></html>
