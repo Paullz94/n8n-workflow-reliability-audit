@@ -30,6 +30,25 @@ SECRET_PATTERNS = [
     re.compile(r"(?:api[_-]?key|secret|token)\s*[:=]\s*[A-Za-z0-9._~+/=-]{12,}", re.I),
 ]
 HTTP_WRITE_METHODS = {"POST", "PUT", "PATCH", "DELETE"}
+KNOWN_RULES = frozenset({
+    "invalid-blueprint",
+    "empty-flow",
+    "write-without-error-handler",
+    "retrying-write-idempotency-review",
+    "write-skip-handler-data-loss-review",
+    "write-resume-handler-silent-success-review",
+    "write-commit-partial-state-review",
+    "http-write-idempotency-review",
+    "filtered-write-silent-skip-review",
+    "exported-designer-message",
+    "concurrency-review",
+    "auto-commit-recovery-review",
+    "rollback-limited-by-autocommit-review",
+    "incomplete-executions-disabled-review",
+    "data-loss-enabled",
+    "confidential-observability-review",
+    "possible-secret-in-blueprint",
+})
 
 
 @dataclass(frozen=True)
