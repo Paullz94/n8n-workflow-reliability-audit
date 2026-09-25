@@ -148,7 +148,7 @@ python validate.py
 ```
 
 Current validated local gate:
-- 23 Python unit tests: PASS;
+- 31 Python unit tests: PASS;
 - browser scanner regression/privacy checks: PASS.
 
 The browser test is skipped only when Node.js is unavailable.
