@@ -1,0 +1,72 @@
+{
+  "schema": "pcflows.solution-catalog.v1",
+  "updated": "2026-09-25",
+  "public_launch_enabled": false,
+  "solutions": [
+    {
+      "id": "lead_flow_reliability",
+      "name": "Lead Flow Reliability Audit",
+      "priority": 1,
+      "buyer_examples": [
+        "local service businesses",
+        "agencies",
+        "sales/RevOps teams"
+      ],
+      "plain_problem": "Leads are duplicated, routed to the wrong person, contacted twice, or silently fail to reach the CRM.",
+      "current_offer": "audit_only",
+      "price_hypothesis_eur": 149
+    },
+    {
+      "id": "invoice_payment_sync",
+      "name": "Invoice & Payment Sync Audit",
+      "priority": 2,
+      "buyer_examples": [
+        "small businesses",
+        "accounting practices",
+        "operations teams"
+      ],
+      "plain_problem": "CRM, Stripe and QuickBooks/Xero disagree about customers, invoices or payment status.",
+      "current_offer": "audit_only",
+      "price_hypothesis_eur": 149
+    },
+    {
+      "id": "ai_workflow_guardrails",
+      "name": "AI Workflow Guardrails Audit",
+      "priority": 3,
+      "buyer_examples": [
+        "AI automation agencies",
+        "operations teams",
+        "service businesses"
+      ],
+      "plain_problem": "AI output is inconsistent or wrong but still flows into CRM, finance, email or customer-facing actions.",
+      "current_offer": "audit_only",
+      "price_hypothesis_eur": 149
+    },
+    {
+      "id": "client_onboarding",
+      "name": "Client Onboarding Reliability Audit",
+      "priority": 4,
+      "buyer_examples": [
+        "agencies",
+        "professional services",
+        "SaaS/ops teams"
+      ],
+      "plain_problem": "A new customer is created in some systems but missing from others, or onboarding steps happen twice or not at all.",
+      "current_offer": "audit_only",
+      "price_hypothesis_eur": 149
+    },
+    {
+      "id": "release_qa",
+      "name": "Automation Release QA",
+      "priority": 5,
+      "buyer_examples": [
+        "automation agencies",
+        "freelancers",
+        "internal automation teams"
+      ],
+      "plain_problem": "A workflow is about to be handed over or reused, but nobody independently tested retries, failures and recovery.",
+      "current_offer": "audit_only",
+      "price_hypothesis_eur": 149
+    }
+  ]
+}
