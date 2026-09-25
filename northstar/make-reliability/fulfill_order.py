@@ -22,6 +22,7 @@ from typing import Any
 import ai_review_packet
 import audit_make
 import build_pack_report
+import customer_claim_guard
 import pack_selector
 import report_builder
 
@@ -108,6 +109,10 @@ def build_delivery(
         )
     else:
         report = report_builder.render_report(blueprint_path.name, findings, context)
+    try:
+        customer_claim_guard.assert_safe_report(report)
+    except customer_claim_guard.ClaimGuardError as exc:
+        raise FulfillmentError(str(exc)) from exc
     report_path.write_text(report, encoding="utf-8")
     findings_payload = {
         "order_ref": order_ref,
