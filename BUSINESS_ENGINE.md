@@ -2,6 +2,20 @@
 
 Target: EUR 5,000 in payment-provider-verified gross revenue from unrelated external customers.
 
+## Capital rule
+
+Owner capital budget: EUR 0.
+
+External spend is allowed only from revenue that PCFlows has already actually earned and settled. Reinvestment must be bounded, reversible where possible, and tied to a concrete acquisition, delivery, compliance, or infrastructure bottleneck. Do not spend anticipated revenue or ask the owner to pre-fund optional tools.
+
+Default reinvestment order after revenue exists:
+1. legally required operating/compliance costs;
+2. a bottleneck that directly increases paid conversion or delivery capacity;
+3. infrastructure that replaces recurring manual work;
+4. optional growth tools only after the first categories are covered.
+
+Keep a cash buffer rather than automatically spending every euro earned.
+
 ## Offer ladder
 
 1. Free local n8n quick scan — lead magnet, no upload.
@@ -52,7 +66,7 @@ Do not request real secrets or production personal data. Private workflow materi
 
 ## Launch gate
 
-Commercial checkout remains disabled until required Belgian seller registration/tax details are complete and can be represented accurately to buyers. Stripe currently has the technical products staged as inactive.
+Commercial checkout and outbound selling remain disabled until required Belgian seller registration/tax details are complete and can be represented accurately to buyers. Stripe currently has the technical products staged as inactive.
 
 After the gate is cleared:
 1. activate the two Stripe products;
