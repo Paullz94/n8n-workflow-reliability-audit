@@ -1,10 +1,10 @@
 # Fixed-Scope n8n Workflow Reliability Audit
 
-Status: limited validation pilot. The public repository is synthetic technical proof, not a customer case study or certification.
+Status: pre-launch B2B validation. The public repository is synthetic technical proof, not a customer case study or certification.
 
 ## Intended buyer
 
-Teams with an existing n8n workflow and a concrete reliability concern: duplicate side effects, missing/unsafe retries, silent success, unauthenticated webhooks, absent error paths, unclear recovery, or an undocumented handoff.
+Business teams with an existing n8n workflow and a concrete reliability concern: duplicate side effects, missing/unsafe retries, silent success, unauthenticated webhooks, absent error paths, unclear recovery, or an undocumented handoff.
 
 This is not a general “build any AI agent” offer.
 
