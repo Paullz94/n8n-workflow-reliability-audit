@@ -1,6 +1,5 @@
 window.PCFLOWS_CONFIG = Object.freeze({
   checkoutEnabled: false,
-  businessIdentityComplete: false,
   offers: {
     audit: {
       paymentUrl: "https://buy.stripe.com/14A7sMdqu1OneEL5QRgUM01",
