@@ -25,8 +25,11 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Run unit tests
+      - name: Run Python unit tests
         run: python -m unittest discover -s tests -v
+
+      - name: Run browser scanner unit tests
+        run: node --test tests/scanner.test.js
 
       - name: Verify redacted report generation
         shell: bash
