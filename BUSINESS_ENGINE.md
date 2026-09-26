@@ -19,8 +19,8 @@ Keep a cash buffer rather than automatically spending every euro earned.
 ## Offer ladder
 
 1. Free local n8n quick scan — lead magnet, no upload.
-2. n8n Reliability Audit — EUR 249 one-time, staged in Stripe but inactive until the launch gate is cleared.
-3. n8n Reliability Retrofit — EUR 890 one-time, staged in Stripe but inactive until the launch gate is cleared.
+2. n8n Reliability Audit — EUR 249 one-time; Stripe product is active, but its Payment Link and public checkout button remain disabled until final seller identity publication.
+3. n8n Reliability Retrofit — EUR 890 one-time; Stripe product is active, but its Payment Link and public checkout button remain disabled until final seller identity publication.
 4. Future recurring care offer only after real demand exists.
 
 ## Positioning
@@ -66,7 +66,7 @@ Do not request real secrets or production personal data. Private workflow materi
 
 ## Launch gate
 
-Commercial checkout and outbound selling remain disabled until required Belgian seller registration/tax details are complete and can be represented accurately to buyers. Stripe currently has the technical products staged as inactive.
+The owner has confirmed the Belgian registration/social-insurance/tax prerequisites are in order. Commercial checkout remains disabled until the final seller identity details are supplied and published accurately. Stripe products are active; staged Payment Links and public checkout buttons remain disabled.
 
 After the gate is cleared:
 1. activate the two Stripe products;

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Paid intake — PCFlows</title>
+<meta name="robots" content="noindex,nofollow">
+<style>
+body{max-width:820px;margin:48px auto;padding:0 20px;background:#08111f;color:#f6f8fb;font:17px/1.65 system-ui}
+a{color:#66e3c4}.box{border:1px solid #24334a;background:#0b1626;padding:20px;border-radius:14px;margin:22px 0}
+.btn{display:inline-block;padding:12px 16px;border-radius:10px;background:#66e3c4;color:#062119;text-decoration:none;font-weight:800}
+p,li{color:#c8d4e3}code{background:#111e30;padding:2px 5px;border-radius:5px;overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<p><a href="./">← PCFlows</a></p>
+<h1>Complete your paid PCFlows intake</h1>
+<p>Your payment reference is carried into this page so the workflow export can be matched to the correct order without asking you to copy payment details manually.</p>
+
+<div class="box">
+  <p><strong>Offer:</strong> <span id="offerName">service</span></p>
+  <p><strong>Checkout reference:</strong> <code id="checkoutRef">unknown</code></p>
+  <p><a class="btn" id="emailIntake" href="mailto:pcmotionstudios@gmail.com">Email the sanitized workflow export</a></p>
+</div>
+
+<h2>Attach one sanitized n8n workflow JSON export</h2>
+<p>The email button pre-fills the required intake questions and checkout reference. Attach the workflow JSON manually before sending.</p>
+
+<h2>Do not send</h2>
+<ul>
+<li>plaintext API keys, passwords, bearer tokens, or credentials;</li>
+<li>real customer/personal data;</li>
+<li>confidential production logs or screenshots containing secrets;</li>
+<li>unrelated files or full database exports.</li>
+</ul>
+
+<p>If sanitizing the export would destroy the behavior that needs review, describe that constraint in the email first instead of sending sensitive data.</p>
+
+<script src="intake.js" defer></script>
+</body></html>

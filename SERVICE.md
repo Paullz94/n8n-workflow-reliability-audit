@@ -26,7 +26,7 @@ This is not a general “build any AI agent” offer.
 - Synthetic before/after evidence, rollback notes, handoff, and one revision against written acceptance criteria.
 - Exact delivery date follows audit/scope review.
 
-These are the current staged fixed-scope prices. Paid checkout remains disabled until required Belgian seller registration/tax details are complete. Final seller details, currency, tax treatment, scope and acceptance criteria are disclosed before any paid work begins.
+These are the current staged fixed-scope prices. The owner has confirmed the Belgian registration/social-insurance/tax prerequisites are in order; paid checkout remains disabled until final seller identity details are published and the staged Payment Links are activated. Final seller details, currency, tax treatment, scope and acceptance criteria are disclosed before any paid work begins.
 
 ## Safe intake
 
