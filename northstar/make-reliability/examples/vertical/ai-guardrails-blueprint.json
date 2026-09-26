@@ -1,0 +1,40 @@
+{
+  "name": "Synthetic AI Qualification",
+  "flow": [
+    {
+      "id": 1,
+      "module": "gateway:CustomWebHook",
+      "mapper": {}
+    },
+    {
+      "id": 2,
+      "module": "openai-gpt-3:CreateCompletion",
+      "mapper": {
+        "prompt": "Classify synthetic lead"
+      }
+    },
+    {
+      "id": 3,
+      "module": "crm:updateContact",
+      "mapper": {
+        "qualification": "{{2.result}}"
+      }
+    },
+    {
+      "id": 4,
+      "module": "email:sendMessage",
+      "mapper": {
+        "body": "{{2.result}}"
+      }
+    }
+  ],
+  "metadata": {
+    "instant": true,
+    "scenario": {
+      "sequential": false,
+      "dlq": false,
+      "dataloss": false,
+      "confidential": true
+    }
+  }
+}

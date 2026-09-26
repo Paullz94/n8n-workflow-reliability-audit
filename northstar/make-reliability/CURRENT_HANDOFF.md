@@ -1,0 +1,587 @@
+# Current Handoff — Project Northstar Ledger / Make Reliability
+
+Updated: 2026-09-25
+
+## Canonical repository / branches
+
+Repository: `Paullz94/n8n-workflow-reliability-audit`
+
+Canonical product branch:
+`northstar/make-reliability-20260925`
+
+Public PCFlows site branch:
+`pcflows-site-20260925`
+
+Draft review PR:
+`#2 — northstar: isolated Make reliability/data-integrity pilot`
+
+Do not modify the pre-existing n8n implementation. Product code/history remains isolated under `northstar/`; the public site is isolated on its own site branch.
+
+## Goal
+
+Reach EUR 1,000 payment-provider-verified gross revenue from genuine external customers.
+
+Hard defaults:
+- EUR 0 owner capital except explicitly approved unavoidable setup cost;
+- EUR 500 reserve stays uninjected except an approved exact necessity;
+- business revenue is reinvested before owner capital;
+- no owner/test/pending/unverified/refunded/fictitious payment counts.
+
+## Current product
+
+Primary wedge:
+**PCFlows — Make.com Reliability & Data Integrity Audit**
+
+Public free layer:
+- privacy-first local browser preflight;
+- local non-sensitive audit-intake generator;
+- synthetic sample report;
+- FAQ/privacy/service information.
+
+Primary paid pilot:
+- EUR 149;
+- one sanitized blueprint;
+- deterministic scan + prioritized prevent/detect/recover report;
+- bounded review;
+- one asynchronous re-scan.
+
+## Built
+
+- multi-channel operating charter and channel guardrails;
+- Make static reliability analyzer;
+- nested route/error parsing;
+- retry/idempotency checks;
+- Skip/Ignore, Resume, Commit, Rollback/autocommit review rules;
+- concurrency/recovery/observability checks;
+- official Make rule-evidence map;
+- privacy-first browser scanner;
+- deterministic paid report builder;
+- local intake generator and JSON schema;
+- synthetic blueprint/preflight/paid-audit examples;
+- privacy-bounded `fulfill_order.py` delivery packager;
+- deterministic paid-audit qualification gate that can honestly keep low-value cases on the free tier;
+- privacy-bounded AI review packet/protocol (deterministic evidence remains source of truth);
+- deterministic before/after remediation re-scan diff;
+- SHA-256 delivery manifest;
+- hard stop on possible secret-like input;
+- raw blueprint excluded from delivery ZIP;
+- strict financial ledger;
+- Stripe PaymentIntent/Refund normalizer;
+- dry-run append-only Stripe reconciliation command;
+- Stripe EUR 149 product/price/Payment Link;
+- Checkout Session ID post-payment correlation flow;
+- redesigned professional public site, scanner, FAQ, sample report, methodology page, privacy page, service terms and thank-you flow;
+- first evidence-based Make reliability guide for organic discovery;
+- zero-capital Peppol/e-invoicing shortlist for post-registration selection;
+- minimal bookkeeping evidence/CSV plan;
+- one-command validation runner;
+- launch gates and operational runbooks.
+
+## Current financial state
+
+- owner reserve uninjected: EUR 500;
+- verified gross revenue: EUR 0;
+- business-generated cash: EUR 0;
+- revenue reinvested: EUR 0;
+- refunds: EUR 0;
+- net revenue: EUR 0.
+
+The KBO setup fee should be entered as an owner-funded expense only once payment evidence is actually available; do not infer it from a quote.
+
+No revenue claim changes without provider evidence.
+
+## Stripe state
+
+Stripe is connected and live-capable.
+
+Live product:
+`PCFlows — Make.com Data Integrity Audit`
+
+Price:
+EUR 149 one-time.
+
+Payment Link exists but is deliberately **inactive**.
+
+Prepared checkout behavior:
+- required non-sensitive `Scenario name` field;
+- required `Buying as` classification (individual vs business/professional);
+- billing address required for customer/country evidence;
+- warning not to submit production credentials/secrets;
+- post-payment redirect includes `{CHECKOUT_SESSION_ID}`;
+- thank-you page uses the Checkout Session ID as the order reference for the customer's file-delivery email.
+
+Do not reactivate checkout before the Belgian registration/VAT gate is complete.
+
+## Registration status
+
+Paul submitted the Belgian sole-proprietor / secondary-occupation onboarding through Xerius with planned start date **2026-10-01**.
+
+Current status:
+- self-employed affiliation: approved;
+- enterprise number: pending / in processing;
+- VAT identification/small-business regime: pending enterprise number.
+
+## Competitive learning
+
+Current research includes ScenarioTrace, MakeIntegration's Scenario Analyzer, several current Upwork reliability-audit offers and n8n audit products.
+
+Key decisions:
+- local browser scanning alone is not a moat;
+- do not compete on a generic health score;
+- deterministic evidence first, AI-assisted interpretation second;
+- EUR 149 sits within the visible current audit-service range;
+- runtime/log comparison is a possible later layer, but only after static-audit willingness-to-pay is proven;
+- continuous monitoring is deliberately postponed because it adds infrastructure/privacy/support obligations.
+
+See `COMPETITIVE_INTELLIGENCE.md`, `PRICING_EVIDENCE.md` and `PRODUCT_ROADMAP.md`.
+
+## Market / positioning conclusion
+
+Demand exists across multiple independent sources (Make ecosystem, Upwork, Fiverr, Contra, adjacent Zapier market). Generic Make blueprint linting already has low-cost competitors.
+
+PCFlows therefore differentiates on:
+- privacy-first/local scanning;
+- business-data integrity;
+- retry/idempotency;
+- silent-success/Skip/Resume risks;
+- recovery and rollback boundaries;
+- remediation verification;
+- evidence tied to Make documentation.
+
+## Channel conclusion
+
+- GitHub/PCFlows site: active passive technical trust/discovery asset; site source QA currently reports no broken local targets, missing JS element IDs, exposed Stripe URL or secret-pattern issue in the checked public files.
+- Make Community: autonomous research only under its current no-AI/no-automated-content rule.
+- Upwork: future legitimate platform-contained activity only.
+- Fiverr: future legitimate platform-contained activity only.
+- Contra: no bulk/systematic outreach.
+- Zapier: adjacent expansion only after Make willingness-to-pay validation.
+
+Do not launch simultaneously across many sites. Add channels one at a time after checkout/delivery/support are proven.
+
+## Immediate non-delegable gate
+
+Wait for Xerius to issue the enterprise number / registration confirmation.
+
+When received:
+1. verify KBO record and official start date;
+2. complete the VAT-identification/small-enterprise route that is legally available;
+3. add official business details to the public site and Stripe;
+4. perform a safe checkout test that does **not** count toward revenue;
+5. reactivate live checkout only after those checks;
+6. begin small, platform-native acquisition.
+
+## Remaining autonomous work assessment
+
+Safe pre-launch engineering is now largely exhausted:
+- checkout is prepared but inactive;
+- fulfillment and revenue reconciliation are deterministic;
+- privacy/terms/customer handoff are prepared;
+- Belgian VAT/e-invoicing/bookkeeping routes are researched without purchasing software;
+- no live customer payments exist.
+
+The next material step depends on official registration data rather than more speculative coding.
+
+Until the enterprise number arrives, only minor documentation/polish or passive no-payment validation remains. Do not create artificial activity merely to appear busy.
+
+
+## Pre-launch acquisition queue — 2026-09-25
+
+A current public opportunity queue is prepared in:
+- `ACQUISITION_QUEUE_2026-09-25.md`;
+- `prospect_queue.json`;
+- `prospect_ranker.py`;
+- `FIRST_WAVE_PROPOSALS.md`.
+
+The structured queue is hard-gated with `launch_enabled=false`, so the ranker will not mark any prospect contactable before the registration/VAT launch gate.
+
+Current strongest **post-launch** public fits, subject to re-checking that they are still open:
+1. Upwork — B2B client onboarding automation: strong reliability/testing fit and USD 600 visible project budget.
+2. Upwork — Make.com AI news/video workflow: existing Make setup, explicit error handling + duplicate-post protection, USD 500.
+3. Upwork — reusable OpenAI/Make automation template: master architecture has leverage across multiple client deployments.
+4. Upwork — Dropbox/vendor routing: explicit duplicate-submission and failed-automation concerns, but very high proposal competition.
+
+Make Community buyer posts are retained as product-validation research only. Do not post or DM AI-generated commercial content there under the current community rules.
+
+No outreach has been sent and no customer has been contacted during the registration pause.
+
+
+## Autonomy directive — 2026-09-25
+
+Paul clarified that the operating target is **fully autonomous routine operation after one-time prerequisites**.
+
+Paul should not be the daily operator for:
+- posts/content on connected/permitted channels;
+- prospect qualification;
+- standard customer replies;
+- checkout/payment handling;
+- intake;
+- audit generation/QA;
+- delivery;
+- re-scan;
+- deterministic refunds;
+- Stripe reconciliation;
+- follow-up.
+
+Owner input is reserved for genuine non-delegable prerequisites/exceptions:
+- enterprise/VAT/legal attestations;
+- KYC/identity;
+- connecting/authorizing third-party accounts;
+- explicit new owner-capital spend;
+- CAPTCHA/platform identity checks;
+- exceptional legal/payment disputes outside published policy.
+
+Implemented for this directive:
+- `autonomous_lifecycle.py` — routine state/action engine;
+- `support_router.py` — standard autonomous customer-response routing;
+- `pack_selector.py` — automatic generic vs Lead/Invoice/AI pack selection;
+- `vertical_packs.py` — Lead Flow, Invoice & Payment Sync and AI Workflow Guardrails;
+- `build_pack_report.py` — buyer-specific report/acceptance-test renderer;
+- synthetic fixtures/contexts for all three initial demand packs.
+
+Channel connector research:
+- no direct Upwork or Contra action connector was returned in current plugin discovery;
+- Clay is available for prospect discovery/engagement and has been surfaced as an optional connection;
+- Metricool is available for connected social publishing/analytics;
+- marketplace channels without a direct connector require an authorized supported cloud-browser/Work workflow or platform-native account setup.
+
+Scheduled autonomous loops:
+- daily Make.com opportunity research already active;
+- weekly owned-site PCFlows educational guide task now active, but it will publish only after the registration/VAT launch gate is complete.
+
+No checkout activation, customer outreach, paid posting or owner-capital spend is permitted before the launch gate.
+
+
+## Demand-pack + autonomy build completion
+
+Built in this round:
+- `vertical_packs.py` with Lead Flow, Invoice & Payment Sync and AI Workflow Guardrails packs;
+- synthetic blueprint/context fixtures for all three;
+- `build_pack_report.py` to append pack-specific acceptance tests/context questions to the shared deterministic audit;
+- `pack_selector.py` to route safe business context automatically or fall back to the generic audit instead of guessing;
+- fulfillment now auto-selects the appropriate pack and records that decision in the delivery manifest;
+- `autonomous_lifecycle.py` for ownerless routine lead/payment/intake/delivery/refund state transitions;
+- `support_router.py` for routine customer questions;
+- `refund_policy.py` for deterministic full-refund cases and exception boundaries;
+- `content_queue.json` for restrained post-launch social content;
+- weekly owned-site guide automation after the legal launch gate;
+- daily Make.com opportunity research remains active.
+
+Autonomy target is now explicit: routine operations must proceed without Paul after one-time prerequisites.
+
+Remaining one-time prerequisites for truly autonomous external operation:
+1. Belgian enterprise/VAT completion.
+2. Connect/authorize the public PCFlows support mailbox for Gmail actions.
+3. Connect a social/prospecting channel where desired (Clay is available; Metricool is available for social publishing).
+4. Upwork/Contra need either a supported direct connector or an authorized cloud-browser/Work workflow because no direct action connector was found in current plugin discovery.
+
+Do not work around missing connectors with scraping, CAPTCHA bypass or rule-violating automation.
+
+
+## Connected operating integrations — 2026-09-25
+
+- **Gmail / PCFlows support:** `PCMotionstudios@gmail.com` connected and verified.
+- Gmail labels prepared: `PCFlows/Customer`, `PCFlows/Order`, `PCFlows/Needs Review`, `PCFlows/Closed`.
+- **PCFlows Inbox Operator:** hourly autonomous routine-support condition watch enabled.
+- **Clay:** connected and usable for public company/contact prospect research. Initial automation-agency search has been exercised successfully.
+- **Stripe:** connected/live-capable; checkout remains deliberately inactive pending registration/VAT.
+- **GitHub:** connected for isolated product/site maintenance.
+- Daily public Make.com opportunity research and weekly post-launch guide automation remain enabled.
+
+Routine support no longer depends on Paul's personal Gmail account. The next legal launch blocker remains the official Belgian enterprise/VAT state.
+
+
+## Autonomous operations update — 2026-09-25 evening
+
+### Connected operator tools
+
+- **PCFlows Gmail connected:** `pcmotionstudios@gmail.com` is verified as a separate Gmail connection.
+- Gmail labels created: `PCFlows/Customer`, `PCFlows/Order`, `PCFlows/Needs Review`, `PCFlows/Closed`.
+- Hourly **PCFlows Inbox Operator** condition-watch is enabled for routine inbound support/order handling. During registration pause it may answer interest/support but may not solicit payment or claim checkout is open.
+- **Clay connected:** prospect/company/contact research is available.
+- Three-times-weekly **PCFlows Agency Pipeline** condition-watch is enabled for small, research-first prospect discovery.
+
+### Demand-specific product packs
+
+Implemented:
+- Lead Flow Reliability;
+- Invoice & Payment Sync;
+- AI Workflow Guardrails;
+- Client Onboarding Reliability.
+
+Each pack now has:
+- synthetic blueprint/context fixtures;
+- problem-specific priority ordering;
+- customer-readable acceptance tests;
+- context prompts;
+- pack report generation.
+
+`pack_selector.py` can route safe non-sensitive business context to a pack or keep the generic Data Integrity Audit when evidence is ambiguous.
+
+`fulfill_order.py` now performs pack selection automatically before rendering the paid report.
+
+### Ownerless routine lifecycle
+
+Implemented:
+- `autonomous_lifecycle.py` for routine lead -> support -> payment -> intake -> audit -> delivery -> rescan/refund states;
+- `support_router.py` for routine customer questions;
+- published owner-only exceptions are restricted to legal/KYC/account authorization, new owner-capital spend, or exceptional disputes.
+
+### Outbound marketing gate
+
+Clay research is enabled, but autonomous cold email remains deliberately disabled.
+
+Reason:
+Belgian direct-marketing/privacy compliance is a separate gate from enterprise/VAT registration. Public professional contact data is not treated as automatic permission to market.
+
+See:
+- `OUTBOUND_DIRECT_MARKETING_GATE.md`
+- `CLAY_PROSPECTING_POLICY.md`
+- `acquisition_policy.json`
+
+Prefer explicit job-post demand, inbound interest and marketplace-native proposals before cold email.
+
+### Work mode
+
+ChatGPT Work is **not required** for the current PCFlows operating design. Current work can continue through ordinary ChatGPT plus GitHub, Gmail, Stripe, Clay, web research and scheduled tasks. This avoids consuming the shared Work/Codex usage allowance merely for browser automation.
+
+
+## Public brand and package architecture — 2026-09-25
+
+Public brand/trade name:
+- **PCFlows**
+
+Internal-only names:
+- Project Northstar Ledger / Northstar = internal autonomous revenue-validation codename;
+- PCMotionStudios = legacy/admin namespace retained mainly in the support email address.
+
+Do not expose Northstar as the business name.
+
+Fixed launch package ladder:
+- Reliability Preflight — EUR 0;
+- Focused Risk Check — EUR 79;
+- Data Integrity Audit — EUR 149;
+- Portfolio / Release QA — EUR 399 for up to 3 related scenarios.
+
+Specialist modes inside the EUR149 audit, with no separate surcharge:
+- Lead Flow Reliability;
+- Invoice & Payment Sync;
+- AI Workflow Guardrails;
+- Client Onboarding Reliability.
+
+Technical support now exists for:
+- focused single-risk reports;
+- automatic vertical pack selection;
+- up-to-three-scenario portfolio QA;
+- combined before/after portfolio re-scan.
+
+The website now includes a public Services & Pricing page with a local service chooser. Paid checkout remains disabled until the Belgian registration/VAT launch gate is complete.
+
+Current site-source QA after the package redesign: 15 checked public files, 0 structural/link/JS/checkout-url/image/SVG issues found.
+
+
+## Remediation proof / customer-satisfaction hardening — 2026-09-25
+
+PCFlows now uses a strict proof ladder:
+- detected;
+- statically cleared;
+- evidence-supported;
+- independently verified fixed.
+
+For runtime-dependent findings, disappearing from a revised blueprint is explicitly **not** enough to claim the problem is fixed.
+
+New components:
+- `fix_verification.py`: rule-specific runtime assertion contract;
+- `remediation_proof_report.py`: customer-safe remediation proof report;
+- `customer_claim_guard.py`: blocks unsupported absolute success/fix language from normal paid reports;
+- `tests/test_static_remediation_regression.py`: synthetic before/after coverage for every current static rule;
+- public `verification.html`: explains proof levels before purchase.
+
+Current important limitation:
+A Make runtime connection is not connected to this ChatGPT session yet. Make now officially supports a ChatGPT plugin/MCP server and MCP toolboxes, so the preferred final integration is no longer a speculative custom bridge. Until that connection is authorized, ordinary static re-scans can prove structural clearance and supplied test artifacts can support remediation, but runtime-dependent issues are not called independently verified fixed.
+
+Do not launch a done-for-you repair/fix guarantee until connected runtime verification is proven.
+
+
+## Verified Repair architecture — 2026-09-25 late
+
+Paul requires that an accepted customer issue is not treated as complete until it is actually proven against its definition of done.
+
+Implemented:
+- `resolution_contract.py`: every accepted issue gets explicit business description, proof mode, required assertions and close condition;
+- `repair_case.py`: a repair case cannot close until every accepted issue is `closed_verified`;
+- `pack_acceptance_verification.py`: specialist modes require all four business-level acceptance tests to pass;
+- `fix_eligibility.py`: PCFlows refuses a Verified Repair commitment if the issue cannot be independently tested;
+- `make_runtime_client.py`: safe future Make API run/replay client; token only from secure runtime environment;
+- `VERIFIED_REPAIR_OFFER.md`: internal EUR299 one-issue repair hypothesis, intentionally NOT public;
+- `MAKE_ACCESS_MODEL.md`: delegated Make team/service-identity access model that avoids customers emailing tokens/credentials.
+
+Important interpretation:
+- "100% fixed" means **100% of the accepted issue's agreed acceptance criteria pass**;
+- it does not mean claiming no other defect can ever exist in the customer's automation;
+- any issue that cannot be independently observed/tested is not eligible for the future Verified Repair product.
+
+Official Make API research confirms:
+- scenarios can be run via `POST /scenarios/{scenarioId}/run`;
+- executions can be replayed via `POST /scenarios/{scenarioId}/replay`;
+- scenarios can be updated through the API with `scenarios:write`;
+- Make team roles allow delegated team access; Team Member can edit team-owned resources, while Operator/Monitoring are insufficient for repair changes.
+
+Runtime blocker:
+No Make.com connector/service authorization is currently connected to PCFlows. The code path is prepared, but the final independent runtime proof/deployment gate cannot be exercised until a dedicated PCFlows Make service identity and secure authorization are connected.
+
+The current public products remain audit/QA products. **Verified Repair remains disabled and must not appear as purchasable until the runtime/deployment/rollback gates pass.**
+
+
+## Official Make MCP discovery — 2026-09-25
+
+Make's current official documentation confirms an official ChatGPT integration released on 2026-09-09.
+
+Capabilities documented by Make include building, running and reviewing automations from ChatGPT, with Make-hosted app connections and execution history.
+
+For PCFlows:
+- normal ChatGPT can connect; ChatGPT Work is not required;
+- Make MCP toolbox is preferred for narrow test-tool exposure;
+- Make MCP server can be used for broader scenario/account management if required;
+- current remaining prerequisite is to connect/authorize Make to ChatGPT.
+
+Official references:
+- https://help.make.com/official-make-plugin-for-chatgpt-is-now-available
+- https://help.make.com/connect-to-chatgpt
+- https://help.make.com/mcp-toolboxes
+
+
+## Full-suite validation — 2026-09-25 21:18 UTC
+
+Validation snapshot:
+- source branch: `northstar/make-reliability-20260925`;
+- isolated validation branch: `northstar-validation-20260925b`;
+- GitHub Actions run: 36190833559;
+- conclusion: **success**.
+
+Executed by `validate.py`:
+- Python `compileall`;
+- full unittest discovery;
+- package catalog/order-contract consistency;
+- browser scanner regression/privacy checks.
+
+Observed:
+- **242 tests**;
+- **OK**;
+- **PCFlows/Northstar validation: PASS**.
+
+This replaces the earlier failed 241-test checkpoint. The three prior failures were corrected before this successful run:
+- whole-word pack routing prevents `ai` matching inside `daily`;
+- AI/finance cross-domain ambiguity stays generic;
+- pack-report wording test was made semantic/case-insensitive.
+
+
+## Realistic repair + customer-data isolation hardening — 2026-09-25
+
+New safeguards:
+- `repair_scope_gate.py`: rejects absolute/unbounded/unsafe/unverifiable repair promises;
+- `verified_repair_intake.py`: combines realistic scope qualification with technical verifiability before a future repair can be accepted;
+- `customer_data_guard.py`: blocks several high-risk literal customer/sensitive data classes before AI/delivery;
+- `case_isolation.py`: every paid order gets a pseudonymous case scope; cross-case document binding is rejected;
+- `incident_containment.py`: fail-closed behavior for sensitive-data detection, case-mismatch, unauthorized write, rollback failure and AI-policy violation;
+- `CUSTOMER_DATA_AI_CONTAINMENT.md` and `CUSTOMER_DATA_RETENTION.md`: no shared customer-document memory/vector store, no cross-customer prompt reuse, minimal technical-artifact retention, separate legal/billing records.
+
+Paid fulfillment now:
+- derives `case_scope_id` from the Stripe Checkout Session reference;
+- stamps manifests/context/findings/AI packets with the current case scope;
+- hard-stops on detected literal email/phone/IBAN/payment-card/JWT-like data;
+- still excludes the raw blueprint from the AI review packet and customer ZIP.
+
+Autonomous inbox operator now:
+- processes one customer thread/case at a time;
+- must never use another customer's content as context;
+- stops and labels Needs Review if case binding is ambiguous;
+- refuses absolute/unrealistic repair promises;
+- treats confirmed cross-customer exposure and production rollback failure as escalation cases after automatic containment.
+
+Latest isolated full validation after these changes:
+- GitHub Actions run: 36193858480;
+- **275 Python tests PASS**;
+- compileall PASS;
+- package consistency PASS;
+- browser scanner regression/privacy PASS;
+- overall `PCFlows/Northstar validation: PASS`.
+
+
+## Realistic repair and case-isolation hardening — 2026-09-25
+
+Added:
+- repair_scope_gate.py and verified_repair_intake.py: unbounded, unsafe, externally controlled, destructive-only or unverifiable repair requests cannot be accepted as Verified Repair;
+- customer_data_guard.py: high-risk literal customer/sensitive values can hard-stop processing before AI/delivery;
+- case_isolation.py: every paid order receives a pseudonymous case scope and cross-case binding is rejected;
+- incident_containment.py: fail-closed handling for privacy mismatch, unauthorized writes, rollback failure and unsupported AI output;
+- customer data containment/retention policies: no shared real-customer examples, no cross-case retrieval, and minimal technical-artifact retention.
+
+Paid fulfillment and AI review are now case-scoped. The autonomous inbox operator is also one-thread/one-case scoped and must stop rather than guess if the current case cannot be determined.
+
+Latest isolated validation after these changes:
+- GitHub Actions run 36193858480;
+- 275 Python tests PASS;
+- compileall PASS;
+- package consistency PASS;
+- browser scanner regression/privacy PASS;
+- overall PCFlows/Northstar validation PASS.
+
+
+## Takeover checkpoint — 2026-09-26
+
+### Verified operating state
+
+- Product branch remained isolated under `northstar/`; site branch remained isolated under `docs/`.
+- Draft PR #2 remains draft and unmerged.
+- Public PCFlows Pages deployment is green on site commit `2b5103da0a8f1592e52e60bbba33c3b8db06574e`.
+- Latest live Stripe reconciliation check found **0 PaymentIntents**; verified gross external revenue remains **EUR 0**.
+- EUR149 Payment Link `plink_1UJYXyLEUPyOUtb0elSom4yX` remains **inactive**.
+- EUR79 and EUR399 products/prices remain **inactive** and their Payment Links remain uncreated.
+- PCFlows Gmail contains no actionable customer/order traffic and no Xerius/KBO enterprise-number confirmation in the connected mailboxes at this checkpoint.
+- One redundant duplicate daily buyer-demand automation was disabled; the richer daily buyer-demand scan remains enabled.
+- Hourly PCFlows Inbox Operator, Clay agency research, and post-launch weekly guide tasks remain enabled within their existing gates.
+
+### Fresh commercial evidence
+
+The strongest newly re-checked launch-day buyer fit is an Upwork Make.com **QA & Troubleshooting** engagement asking for review/testing of existing Make scenarios, mappings, webhooks, APIs and reliability issues. This is closer to the currently sellable audit/QA offer than generic implementation work.
+
+Updated:
+- `prospect_queue.json`;
+- `ACQUISITION_QUEUE_2026-09-25.md`;
+- `FIRST_WAVE_PROPOSALS.md`.
+
+The proposal draft is deliberately truthful:
+- no customer testimonials/case studies claimed;
+- no Make certification claimed;
+- no production-write access implied;
+- runtime-dependent issues are not called fixed from static evidence.
+
+A separate paid qualification post strongly validates demand for idempotency/retry/logging/failure-alert outcomes, but it requires implementation work and therefore stays research-only unless the buyer explicitly accepts a bounded QA milestone.
+
+Clay research was refreshed for small/mid-sized Make/n8n/Zapier/CRM implementation firms. Working company research stays in Clay; no contact enrichment or cold outreach was performed because the separate direct-marketing gate remains closed.
+
+### Effective-date launch gate
+
+Official Belgian guidance treats revenue-generating service activity as economic activity and requires enterprise/VAT startup formalities around the commencement of that activity. The current official planned activity start is **2026-10-01**.
+
+Therefore PCFlows now has an explicit extra launch condition:
+- receiving an enterprise number before 2026-10-01 is **not enough** to open paid checkout;
+- paid checkout stays closed until the official activity start date is effective **and** enterprise/VAT/public-identity/checkout gates are complete.
+
+This is now encoded in:
+- `PILOT_LAUNCH_GATES.md`;
+- `ACTIVATION_RUNBOOK.md`;
+- `REGISTRATION_READINESS.md`.
+
+### Current highest-impact blocker
+
+The next material step is still non-delegable registration state:
+1. enterprise number / KBO confirmation;
+2. effective activity start date reached;
+3. VAT/e604 treatment confirmed;
+4. official business identity copied to site + Stripe;
+5. safe owner/test checkout validation excluded from revenue;
+6. activate package-specific checkout and begin the small platform-native acquisition wave.
+
+Until those conditions change, do not create artificial features, do not open payment paths, do not send cold email, and do not spend owner capital.

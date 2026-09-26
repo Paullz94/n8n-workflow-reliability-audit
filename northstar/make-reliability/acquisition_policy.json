@@ -1,0 +1,12 @@
+{
+  "schema": "pcflows.acquisition-policy.v1",
+  "updated": "2026-09-25",
+  "registration_launch_enabled": false,
+  "autonomous_cold_email_enabled": false,
+  "clay_research_enabled": true,
+  "marketplace_native_outreach_after_launch": true,
+  "make_community_ai_commercial_outreach": false,
+  "max_unsolicited_contacts_per_day_after_compliance": 2,
+  "suppression_required": true,
+  "notes": "Cold email stays disabled until separate direct-marketing compliance gate is documented; registration alone does not enable it."
+}

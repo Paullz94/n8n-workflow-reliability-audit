@@ -1,0 +1,15 @@
+{
+  "requested_scope": "full",
+  "requested_focus": "",
+  "scenario_name": "Client Onboarding",
+  "business_goal": "Create the required CRM, project, folder and welcome setup exactly once for every accepted customer before onboarding is marked complete.",
+  "critical_side_effects": [
+    "Create/update CRM customer exactly once",
+    "Create project exactly once",
+    "Create customer folder exactly once",
+    "Send welcome message once"
+  ],
+  "duplicate_tolerance": "none",
+  "ordering_required": true,
+  "recovery_expectation": "Partial onboarding must remain visible and recoverable without duplicate setup actions."
+}

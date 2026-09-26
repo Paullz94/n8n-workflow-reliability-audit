@@ -1,0 +1,42 @@
+{
+  "schema": "pcflows.content-queue.v1",
+  "updated": "2026-09-25",
+  "publish_gate": "enterprise_vat_launch_complete",
+  "rules": {
+    "max_social_posts_per_week": 2,
+    "max_owned_site_guides_per_week": 1,
+    "generated_images": false,
+    "fake_testimonials": false,
+    "make_community_autonomous_posts": false
+  },
+  "drafts": [
+    {
+      "id": "green_run_bad_data",
+      "topic": "A green Make.com run can still leave bad business data",
+      "target": "social",
+      "status": "prepared",
+      "text": "Your Make.com scenario can finish successfully while the business process still failed. A CRM write can fail, a Resume/Ignore path can keep the scenario moving, and downstream steps can still look healthy. Reliability is not only 'did Make throw an error?' It is 'did the intended business side effect happen exactly once, and can we prove/recover it if it did not?'"
+    },
+    {
+      "id": "lead_duplicate",
+      "topic": "Duplicate lead follow-up",
+      "target": "social",
+      "status": "prepared",
+      "text": "A common automation bug is not dramatic: the same lead arrives twice, a retry creates two CRM actions, and the customer gets contacted twice. The fix is usually not 'add more AI'. It is a stable business key, idempotent writes, deterministic routing and a stop condition after reply/booking/human takeover."
+    },
+    {
+      "id": "partial_payment",
+      "topic": "Partial payment state",
+      "target": "social",
+      "status": "prepared",
+      "text": "If an invoice is €2,300 and Stripe reports a €1,000 payment, should your CRM move the deal to Paid? This is the kind of automation edge case that creates expensive data disagreements. Payment workflows need explicit source-of-truth, stable matching, partial-payment rules and a reconciliation path when systems disagree."
+    },
+    {
+      "id": "ai_guardrail",
+      "topic": "AI output before business writes",
+      "target": "social",
+      "status": "prepared",
+      "text": "If an LLM returns malformed JSON or an uncertain classification, the next step should not automatically update CRM, finance or a customer-facing message. Treat AI output as untrusted input: validate the schema, define exception/human-approval paths, then make the state-changing action idempotent."
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "project": "Project Northstar Ledger",
+  "wedge": "make-reliability",
+  "currency": "EUR",
+  "target_verified_gross_revenue": 1000,
+  "owner_reserve_uninjected": 500,
+  "owner_capital_injected": 0,
+  "business_generated_cash": 0,
+  "verified_gross_revenue": 0,
+  "revenue_reinvested": 0,
+  "expenses": 0,
+  "refunds": 0,
+  "net_revenue": 0,
+  "net_operating_result": 0,
+  "revenue_recognition": {
+    "required": ["real_external_customer", "payment_provider_verified", "settled_or_provider_confirmed"],
+    "excluded": ["owner", "test", "pending", "refunded", "fictitious"]
+  },
+  "last_updated": "2026-09-25"
+}

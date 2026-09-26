@@ -1,0 +1,34 @@
+{
+  "name": "Synthetic Lead Flow",
+  "flow": [
+    {
+      "id": 1,
+      "module": "gateway:CustomWebHook",
+      "mapper": {}
+    },
+    {
+      "id": 2,
+      "module": "crm:createContact",
+      "mapper": {
+        "email": "{{1.email}}"
+      }
+    },
+    {
+      "id": 3,
+      "module": "sms:sendMessage",
+      "mapper": {
+        "to": "{{1.phone}}",
+        "body": "Thanks — we received your request."
+      }
+    }
+  ],
+  "metadata": {
+    "instant": true,
+    "scenario": {
+      "sequential": false,
+      "dlq": false,
+      "dataloss": false,
+      "confidential": true
+    }
+  }
+}
