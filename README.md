@@ -2,7 +2,17 @@
 
 [![Public tests](https://github.com/Paullz94/n8n-workflow-reliability-audit/actions/workflows/test.yml/badge.svg)](https://github.com/Paullz94/n8n-workflow-reliability-audit/actions/workflows/test.yml)
 
-A deterministic, dependency-free portfolio artifact for reviewing exported n8n workflow JSON without credentials or production access. It produces redacted Markdown and JSON findings.
+A deterministic, dependency-free toolkit for reviewing exported n8n workflow JSON without credentials or production access.
+
+## Free browser quick scan
+
+The repository now includes a zero-backend browser scanner in [index.html](index.html). When GitHub Pages is enabled for this repository, the intended public URL is:
+
+**https://paullz94.github.io/n8n-workflow-reliability-audit/**
+
+The browser scanner parses a selected JSON export locally in the browser. It does not intentionally upload the workflow file. It is a lightweight heuristic lead-in, not production certification.
+
+## What the full analyzer checks
 
 It currently checks structure/reachability, duplicate names, active workflows without an error workflow, unauthenticated webhooks, HTTP timeouts/retries, powerful nodes, possible hard-coded secrets, and a heuristic absence of duplicate prevention before side effects.
 
@@ -36,8 +46,15 @@ The project intentionally uses only the Python standard library.
 
 The same tests run on every public push and pull request using a standard GitHub-hosted Linux runner. The workflow has read-only repository permissions, a five-minute timeout, no cache/artifact storage, and pinned official action revisions.
 
-## Fixed-scope audit service
+## PCFlows service
 
-The analyzer is also the proof artifact for a small, manual reliability-audit pilot. See [SERVICE.md](SERVICE.md) for scope, boundaries, pricing hypotheses, and delivery process.
+The analyzer is the public proof artifact behind a fixed-scope reliability service.
 
-To ask whether an existing workflow fits, [open an audit-request issue](../../issues/new?template=workflow-audit-request.yml). Share metadata only—never credentials, customer data, private workflow exports, or confidential logs in a public issue.
+- **n8n Reliability Audit — EUR 249:** one sanitized workflow export up to 30 nodes, prioritized findings, manual review, synthetic verification plan, and one re-scan after remediation.
+- **n8n Reliability Retrofit — EUR 890:** one accepted reliability risk, bounded remediation, synthetic before/after evidence, rollback notes, handoff, and one revision.
+
+See [SERVICE.md](SERVICE.md) and [BUSINESS_ENGINE.md](BUSINESS_ENGINE.md) for scope, boundaries, operating rules, and the pre-launch commercial gate.
+
+Paid checkout is intentionally disabled until the required Belgian seller registration/tax details are complete.
+
+To ask whether an existing workflow fits, [open an audit-request issue](../../issues/new?template=workflow-audit-request.yml) or email **pcmotionstudios@gmail.com**. Share metadata only—never credentials, customer data, private workflow exports, or confidential logs in a public issue.
