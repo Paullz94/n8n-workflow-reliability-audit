@@ -53,7 +53,7 @@ The analyzer is the public proof artifact behind a fixed-scope reliability servi
 - **n8n Reliability Audit — EUR 249:** one sanitized workflow export up to 30 nodes, prioritized findings, manual review, synthetic verification plan, and one re-scan after remediation.
 - **n8n Reliability Retrofit — EUR 890:** one accepted reliability risk, bounded remediation, synthetic before/after evidence, rollback notes, handoff, and one revision.
 
-See [SERVICE.md](SERVICE.md) and [BUSINESS_ENGINE.md](BUSINESS_ENGINE.md) for scope, boundaries, operating rules, and the pre-launch commercial gate.
+See [SERVICE.md](SERVICE.md), [BUSINESS_ENGINE.md](BUSINESS_ENGINE.md), and [SALES_PLAYBOOK.md](SALES_PLAYBOOK.md) for scope, boundaries, operating rules, acquisition, qualification, and the pre-launch commercial gate.
 
 Paid checkout is intentionally disabled until the required Belgian seller registration/tax details are complete.
 
