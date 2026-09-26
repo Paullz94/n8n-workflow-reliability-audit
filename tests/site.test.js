@@ -1,27 +1,42 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const { isLaunchReady, offerUrl } = require("../site.js");
+const { sellerReady, isLaunchReady, offerUrl } = require("../site.js");
 
-const base = {
+const baseConfig = {
   checkoutEnabled: true,
-  businessIdentityComplete: true,
   offers: {
     audit: { paymentUrl: "https://buy.stripe.com/audit" },
     retrofit: { paymentUrl: "https://buy.stripe.com/retrofit" }
   }
 };
 
-test("launch requires both explicit flags and both Stripe links", () => {
-  assert.equal(isLaunchReady(base), true);
-  assert.equal(isLaunchReady({ ...base, checkoutEnabled: false }), false);
-  assert.equal(isLaunchReady({ ...base, businessIdentityComplete: false }), false);
-  assert.equal(isLaunchReady({ ...base, offers: { ...base.offers, audit: { paymentUrl: "" } } }), false);
+const baseSeller = {
+  complete: true,
+  legalName: "Example SRL",
+  tradeName: "PCFlows",
+  registeredAddress: "Example Street 1",
+  enterpriseNumber: "0123.456.789",
+  email: "business@example.com",
+  phone: "+32000000000"
+};
+
+test("seller readiness requires explicit completion and public identity fields", () => {
+  assert.equal(sellerReady(baseSeller), true);
+  assert.equal(sellerReady({ ...baseSeller, complete: false }), false);
+  assert.equal(sellerReady({ ...baseSeller, enterpriseNumber: "" }), false);
+});
+
+test("launch requires checkout flag, seller identity, and both Stripe links", () => {
+  assert.equal(isLaunchReady(baseConfig, baseSeller), true);
+  assert.equal(isLaunchReady({ ...baseConfig, checkoutEnabled: false }, baseSeller), false);
+  assert.equal(isLaunchReady(baseConfig, { ...baseSeller, complete: false }), false);
+  assert.equal(isLaunchReady({ ...baseConfig, offers: { ...baseConfig.offers, audit: { paymentUrl: "" } } }, baseSeller), false);
 });
 
 test("offer URL is withheld before launch", () => {
-  assert.equal(offerUrl({ ...base, checkoutEnabled: false }, "audit"), null);
+  assert.equal(offerUrl({ ...baseConfig, checkoutEnabled: false }, baseSeller, "audit"), null);
 });
 
 test("offer URL is returned after launch gate is complete", () => {
-  assert.equal(offerUrl(base, "retrofit"), "https://buy.stripe.com/retrofit");
+  assert.equal(offerUrl(baseConfig, baseSeller, "retrofit"), "https://buy.stripe.com/retrofit");
 });

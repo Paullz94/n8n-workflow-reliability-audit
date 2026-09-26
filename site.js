@@ -1,11 +1,24 @@
 (() => {
   "use strict";
 
-  function isLaunchReady(config) {
+  function sellerReady(seller) {
+    if (!seller || seller.complete !== true) return false;
+    const required = [
+      seller.legalName,
+      seller.tradeName,
+      seller.registeredAddress,
+      seller.enterpriseNumber,
+      seller.email,
+      seller.phone
+    ];
+    return required.every(value => String(value || "").trim().length > 0);
+  }
+
+  function isLaunchReady(config, seller) {
     return Boolean(
       config &&
       config.checkoutEnabled === true &&
-      config.businessIdentityComplete === true &&
+      sellerReady(seller) &&
       config.offers &&
       config.offers.audit &&
       /^https:\/\/buy\.stripe\.com\//.test(config.offers.audit.paymentUrl || "") &&
@@ -14,19 +27,20 @@
     );
   }
 
-  function offerUrl(config, offer) {
-    if (!isLaunchReady(config)) return null;
+  function offerUrl(config, seller, offer) {
+    if (!isLaunchReady(config, seller)) return null;
     return config.offers[offer] && config.offers[offer].paymentUrl || null;
   }
 
   function bindLaunchState() {
     if (typeof document === "undefined") return;
     const config = window.PCFLOWS_CONFIG || {};
-    const ready = isLaunchReady(config);
+    const seller = window.PCFLOWS_SELLER || {};
+    const ready = isLaunchReady(config, seller);
     const status = document.getElementById("launchStatus");
 
     for (const el of document.querySelectorAll("[data-checkout-offer]")) {
-      const url = offerUrl(config, el.getAttribute("data-checkout-offer"));
+      const url = offerUrl(config, seller, el.getAttribute("data-checkout-offer"));
       if (ready && url) {
         el.href = url;
         el.hidden = false;
@@ -45,7 +59,7 @@
   }
 
   if (typeof module !== "undefined" && module.exports) {
-    module.exports = { isLaunchReady, offerUrl };
+    module.exports = { sellerReady, isLaunchReady, offerUrl };
   }
 
   if (typeof window !== "undefined") {
