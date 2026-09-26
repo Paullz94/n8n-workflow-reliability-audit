@@ -28,8 +28,8 @@ jobs:
       - name: Run Python unit tests
         run: python -m unittest discover -s tests -v
 
-      - name: Run browser scanner unit tests
-        run: node --test tests/scanner.test.js
+      - name: Run browser and launch-gate unit tests
+        run: node --test tests/*.test.js
 
       - name: Verify redacted report generation
         shell: bash
