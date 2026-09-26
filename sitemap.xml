@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://paullz94.github.io/n8n-workflow-reliability-audit/</loc></url>
+  <url><loc>https://paullz94.github.io/n8n-workflow-reliability-audit/legal.html</loc></url>
   <url><loc>https://paullz94.github.io/n8n-workflow-reliability-audit/privacy.html</loc></url>
   <url><loc>https://paullz94.github.io/n8n-workflow-reliability-audit/guides/n8n-webhook-duplicates.html</loc></url>
   <url><loc>https://paullz94.github.io/n8n-workflow-reliability-audit/guides/n8n-retry-safety.html</loc></url>
