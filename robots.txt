@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://paullz94.github.io/n8n-workflow-reliability-audit/sitemap.xml
