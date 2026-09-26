@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>n8n webhook duplicates: 5 reliability checks before production — PCFlows</title>
+<meta name="description" content="A practical checklist for preventing duplicate side effects when n8n webhooks or API calls are retried.">
+<link rel="canonical" href="https://paullz94.github.io/n8n-workflow-reliability-audit/guides/n8n-webhook-duplicates.html">
+<style>body{max-width:820px;margin:48px auto;padding:0 20px;background:#08111f;color:#f6f8fb;font:17px/1.65 system-ui}a{color:#66e3c4}p,li{color:#c8d4e3}h1,h2{line-height:1.15}code{background:#111e30;padding:2px 5px;border-radius:5px}.cta{border:1px solid #24334a;background:#0b1626;padding:18px;border-radius:14px;margin:28px 0}</style>
+</head>
+<body>
+<p><a href="../">← PCFlows</a></p>
+<h1>n8n webhook duplicates: 5 reliability checks before production</h1>
+<p>Webhook retries are normal. Duplicate payments, CRM writes, emails, or database inserts are not. The important question is whether a repeated delivery can safely run through the workflow again.</p>
+
+<h2>1. Use a stable event identifier</h2>
+<p>Prefer an event or delivery ID supplied by the source. If the same business event arrives twice, both deliveries need to resolve to the same idempotency key. A workflow execution ID is usually not enough for cross-execution deduplication because a replay can create a new execution.</p>
+
+<h2>2. Reserve the event before the side effect</h2>
+<p>A simple “check whether this ID exists, then insert it” pattern can still race when two copies arrive at the same time. For business-critical writes, use an atomic uniqueness or reservation mechanism so only one execution can claim the operation.</p>
+
+<h2>3. Separate seen from completed</h2>
+<p>Marking an event as processed before the external action finishes can prevent duplicates while also losing the intended action after a crash. Track enough state to distinguish received, claimed, completed, and retryable failures.</p>
+
+<h2>4. Retry outbound requests only when they are safe to repeat</h2>
+<p>n8n supports retry controls for HTTP requests, but a retry can repeat a POST or PATCH that already succeeded remotely. When the destination supports idempotency keys, keep the same stable key across retries. Otherwise, design a deduplication or reconciliation step before enabling automatic retries.</p>
+
+<h2>5. Make exhausted retries visible</h2>
+<p>Retries should end in a traceable failure path. Route failures into an error workflow, queue, alert, or recovery process that preserves the operation key and enough context to safely decide whether to retry.</p>
+
+<div class="cta">
+<strong>Want a quick second pass?</strong>
+<p>PCFlows includes a free local browser scan for exported n8n workflow JSON. The file stays in your browser. A fixed-scope B2B audit adds manual review and a synthetic verification plan.</p>
+<p><a href="../#scanner">Run the free local scan</a></p>
+</div>
+
+<h2>Sources and further reading</h2>
+<ul>
+<li><a href="https://blog.n8n.io/idempotency-api/">n8n: Build Reliable Workflows With API Idempotency</a></li>
+<li><a href="https://n8n.io/workflows/18958-prevent-duplicate-webhook-processing-with-data-tables-idempotency-guard/">n8n template: Data Tables idempotency guard</a></li>
+</ul>
+</body></html>
