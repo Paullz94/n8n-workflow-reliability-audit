@@ -10,7 +10,7 @@ This is not a general “build any AI agent” offer.
 
 ## Pilot scopes
 
-### Static audit — target EUR 99
+### n8n Reliability Audit — EUR 249
 
 - One exported n8n workflow, up to 30 nodes.
 - Static, secret-redacted report plus manual review.
@@ -18,7 +18,7 @@ This is not a general “build any AI agent” offer.
 - No production credentials, production execution, or workflow edits.
 - Target delivery: two business days after safe intake and funded scope.
 
-### Reliability retrofit — target EUR 350
+### n8n Reliability Retrofit — EUR 890
 
 - One exported workflow, up to 30 nodes, plus agreed synthetic fixtures.
 - Reproduced before-state for the accepted failure/risk.
@@ -26,7 +26,7 @@ This is not a general “build any AI agent” offer.
 - Synthetic before/after evidence, rollback notes, handoff, and one revision against written acceptance criteria.
 - Exact delivery date follows audit/scope review.
 
-Prices are validation hypotheses and may exclude taxes where legally applicable. The final scope, seller details, currency, platform fee, tax treatment, and funded milestone are disclosed and agreed before any paid work begins.
+These are the current staged fixed-scope prices. Paid checkout remains disabled until required Belgian seller registration/tax details are complete. Final seller details, currency, tax treatment, scope and acceptance criteria are disclosed before any paid work begins.
 
 ## Safe intake
 
@@ -52,5 +52,5 @@ Do **not** post workflow JSON, URLs with tokens, credentials, API responses, cus
 
 ## Commercial validation rule
 
-The pilot is considered commercially validated only by an unrelated client's funded milestone or settled payment—not stars, repository traffic, compliments, or unpaid test requests.
+The offer is considered commercially validated only by an unrelated client's settled Stripe payment—not stars, repository traffic, compliments, or unpaid test requests.
 
