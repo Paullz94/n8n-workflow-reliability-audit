@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>n8n retry safety: when Retry On Fail can create duplicates — PCFlows</title>
+<meta name="description" content="How to reason about n8n retry safety, idempotency keys, partial success, and recovery before enabling automatic retries.">
+<link rel="canonical" href="https://paullz94.github.io/n8n-workflow-reliability-audit/guides/n8n-retry-safety.html">
+<style>body{max-width:820px;margin:48px auto;padding:0 20px;background:#08111f;color:#f6f8fb;font:17px/1.65 system-ui}a{color:#66e3c4}p,li{color:#c8d4e3}h1,h2{line-height:1.15}.cta{border:1px solid #24334a;background:#0b1626;padding:18px;border-radius:14px;margin:28px 0}</style>
+</head>
+<body>
+<p><a href="../">← PCFlows</a></p>
+<h1>n8n retry safety: when “Retry On Fail” can create duplicates</h1>
+<p>Automatic retries improve availability only when repeating the operation is safe. The dangerous case is uncertainty: the workflow timed out, but the remote system may already have completed the action.</p>
+
+<h2>The failure that matters</h2>
+<p>Imagine a workflow sends a create-order request. The remote service saves the order, but the response is lost. n8n sees a timeout and retries. Without idempotency, the second request can create a second order.</p>
+
+<h2>Use one operation identity</h2>
+<p>When an API supports idempotency, derive a stable key from the business operation and reuse it across retries. Do not generate a fresh key for each attempt. A new intended operation should receive a new key.</p>
+
+<h2>Do not stack retry layers blindly</h2>
+<p>Node-level retries, scheduler retries, manual reruns, webhook redelivery, and upstream retries can interact. Document which layer owns retry behavior and what makes a repeated attempt safe.</p>
+
+<h2>Test the ambiguous cases</h2>
+<ul>
+<li>the first request definitely failed before reaching the destination;</li>
+<li>the destination completed the write but the response was lost;</li>
+<li>two copies run concurrently;</li>
+<li>the first attempt completes only part of the workflow;</li>
+<li>a human manually retries the execution later.</li>
+</ul>
+
+<div class="cta">
+<strong>Evidence beats “it should be fine.”</strong>
+<p>The PCFlows reliability audit is built around explicit failure modes, remediation guidance, and synthetic verification rather than production-certification claims.</p>
+<p><a href="../#audit">See the fixed-scope audit</a></p>
+</div>
+
+<h2>Sources and further reading</h2>
+<ul>
+<li><a href="https://blog.n8n.io/idempotency-api/">n8n: Build Reliable Workflows With API Idempotency</a></li>
+<li><a href="https://n8n.io/workflows/13863-prevent-duplicate-webhook-executions-with-aari-idempotency-gate/">n8n template: Prevent duplicate webhook executions</a></li>
+</ul>
+</body></html>
