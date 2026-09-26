@@ -10,11 +10,11 @@ Do not accept consumer orders through the staged Stripe offers. The intended buy
 
 ## Owner-only prerequisites
 
-Paid checkout remains disabled until all applicable items below are complete:
+The owner has confirmed items 1-3 below are already complete. Paid checkout remains disabled until the remaining publication/account details are complete:
 
-1. Belgian KBO registration for the self-employed activity.
-2. Membership of a social insurance fund before starting the self-employed activity.
-3. VAT status determined and VAT identification completed if applicable.
+1. Belgian KBO registration for the self-employed activity. — owner confirmed complete
+2. Membership of a social insurance fund before starting the self-employed activity. — owner confirmed complete
+3. VAT status determined and VAT identification completed if applicable. — owner confirmed complete
 4. Registered business identity details available for publication:
    - legal/trade name;
    - registered business address;
@@ -46,7 +46,7 @@ Once the owner provides or confirms the final registration details, the operator
 - n8n Reliability Audit — EUR 249.
 - n8n Reliability Retrofit — EUR 890.
 
-Both Stripe products are intentionally inactive while this gate is open.
+Both Stripe products are active. Their Payment Links are intentionally inactive, and the site checkout switch is off, while the publication gate remains open.
 
 ## Outreach gate
 
