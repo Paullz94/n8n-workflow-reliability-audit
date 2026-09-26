@@ -12,8 +12,8 @@ body:
     attributes:
       label: Requested scope
       options:
-        - Static audit (target EUR 99)
-        - Reliability retrofit (target EUR 350 after scope review)
+        - n8n Reliability Audit (EUR 249; checkout currently pre-launch gated)
+        - n8n Reliability Retrofit (EUR 890; checkout currently pre-launch gated)
         - Unsure — fit question only
     validations:
       required: true
