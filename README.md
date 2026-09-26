@@ -48,12 +48,12 @@ The same tests run on every public push and pull request using a standard GitHub
 
 ## PCFlows service
 
-The analyzer is the public proof artifact behind a fixed-scope reliability service.
+The analyzer is the public proof artifact behind a fixed-scope B2B reliability service.
 
 - **n8n Reliability Audit — EUR 249:** one sanitized workflow export up to 30 nodes, prioritized findings, manual review, synthetic verification plan, and one re-scan after remediation.
 - **n8n Reliability Retrofit — EUR 890:** one accepted reliability risk, bounded remediation, synthetic before/after evidence, rollback notes, handoff, and one revision.
 
-See [SERVICE.md](SERVICE.md), [BUSINESS_ENGINE.md](BUSINESS_ENGINE.md), and [SALES_PLAYBOOK.md](SALES_PLAYBOOK.md) for scope, boundaries, operating rules, acquisition, qualification, and the pre-launch commercial gate.
+See [SERVICE.md](SERVICE.md), [BUSINESS_ENGINE.md](BUSINESS_ENGINE.md), [SALES_PLAYBOOK.md](SALES_PLAYBOOK.md), and [LAUNCH_GATE.md](LAUNCH_GATE.md) for scope, boundaries, operating rules, acquisition, qualification, and the owner-only pre-launch gate.
 
 Paid checkout is intentionally disabled until the required Belgian seller registration/tax details are complete.
 
