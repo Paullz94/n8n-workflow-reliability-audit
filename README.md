@@ -55,6 +55,6 @@ The analyzer is the public proof artifact behind a fixed-scope B2B reliability s
 
 See [SERVICE.md](SERVICE.md), [BUSINESS_ENGINE.md](BUSINESS_ENGINE.md), [SALES_PLAYBOOK.md](SALES_PLAYBOOK.md), and [LAUNCH_GATE.md](LAUNCH_GATE.md) for scope, boundaries, operating rules, acquisition, qualification, and the owner-only pre-launch gate.
 
-Paid checkout is intentionally disabled until the required Belgian seller registration/tax details are complete.
+Stripe checkout is technically staged behind the launch switch. The owner has confirmed the Belgian registration/social-insurance/tax prerequisites are in order; checkout remains hidden until the final public seller identity details are published.
 
-To ask whether an existing workflow fits, [open an audit-request issue](../../issues/new?template=workflow-audit-request.yml) or email **pcmotionstudios@gmail.com**. Share metadata only—never credentials, customer data, private workflow exports, or confidential logs in a public issue.
+To ask whether an existing workflow fits, [open an audit-request issue](../../issues/new?template=workflow-audit-request.yml) or email **pcmotionstudios@gmail.com**. Share metadata only—never credentials, customer data, private workflow exports, or confidential logs in a public issue.\n\nPaid orders use [intake.html](intake.html) and the deterministic [package_audit.py](package_audit.py) delivery-pack generator. See [FULFILLMENT_RUNBOOK.md](FULFILLMENT_RUNBOOK.md) for the payment-to-delivery flow.
