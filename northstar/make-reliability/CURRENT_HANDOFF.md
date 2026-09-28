@@ -623,3 +623,40 @@ Therefore:
 
 Latest Northstar public test after the 2026-09-28 state updates:
 - workflow run #36398708394 — SUCCESS.
+
+
+## Commercial execution update — 2026-09-28
+
+The operating objective is now explicitly non-terminal:
+- EUR 1,000 verified external gross revenue is the first minimum validation milestone, not the finish;
+- canonical milestones live in `REVENUE_MILESTONES.md`;
+- the business continues after each milestone unless a genuine blocker/pivot or explicit owner stop occurs.
+
+Sales execution changes:
+- `SALES_EMAIL_STYLE.md` now defines concise, specific, human-readable PCFlows sales copy;
+- no fabricated customer history, certifications or case studies;
+- legitimate deliverability only: tiny batches, plain text, no tracking/attachments/shortened links, one company/domain, suppression on opt-out/rejection/hard bounce;
+- a narrow Belgian generic-B2B route is staged in `OUTBOUND_DIRECT_MARKETING_GATE.md` but remains disabled until VAT/e604 commercial-activity readiness is complete;
+- four tailored first-wave agency emails have been prepared as unsent Gmail drafts; they are not customer contacts yet.
+
+Buyer demand:
+- Upwork "Make.com Automation Specialist — QA & Troubleshooting" was re-verified as a current listing and is the primary marketplace candidate;
+- scope directly requests review/testing of existing Make scenarios, mappings, webhooks/APIs and reliability issues;
+- observed 15–20 proposals, 6 interviewing and substantial prior client spend at the latest re-check;
+- submission is not possible from current connectors and remains gated by marketplace account access plus legal commercial readiness.
+
+Automation cleanup:
+- `PCFlows Inbox Operator` is the sole Gmail responder;
+- redundant `PCFlows Inbox Ops` is disabled to prevent duplicate customer replies;
+- `PCFlows Operator Watch` now monitors Stripe/GitHub only and must not answer email;
+- `PCFlows Buyer Demand` runs every 6 hours as a condition watch and silently updates high-signal opportunities.
+
+Current commercial reality:
+- enterprise/KBO number confirmed: 1043.055.054;
+- VAT status/number not yet confirmed;
+- no PCFlows external payment intents;
+- no paying PCFlows customer yet;
+- no owner capital added;
+- checkout remains inactive.
+
+Do not spend further cycles on speculative product features. The next meaningful transitions are buyer contact, reply, qualification, first paid intent and verified payment.
