@@ -16,5 +16,12 @@
   "generic_b2b_route_prepared": true,
   "generic_b2b_route_scope": "Belgian legal entities only; generic company/role mailboxes; high-fit PCFlows relevance; dedupe, suppression and opt-out required",
   "sales_email_standard": "SALES_EMAIL_STYLE.md",
-  "activation_note": "Do not enable before VAT/e604 commercial-activity gate is complete; re-check current Belgian rules at activation."
+  "activation_note": "Do not enable before VAT/e604 commercial-activity gate is complete; re-check current Belgian rules at activation.",
+  "vat_status": "owner_confirmed_ready",
+  "vat_number_handling": "Private until a genuine external customer needs it for quote/contract/invoice; do not infer or publish the number.",
+  "vat_is_acquisition_blocker": false,
+  "economic_activity_start_date": "2026-10-01",
+  "outreach_activation": "Automatically eligible from 2026-10-01 after final compliance/deliverability re-check; no owner confirmation required.",
+  "pre_start_allowed": "Research, qualification, buyer-demand monitoring, prospect validation, draft preparation, inbound non-binding responses, free preflight.",
+  "pre_start_blocked": "Unsolicited promotional sending before the registered economic-activity start date, paid contract/payment/fulfillment."
 }
