@@ -15,13 +15,6 @@
   }
 
   function renderSellerInfo(seller) {
-    if (!sellerReady(seller)) {
-      return {
-        ready: false,
-        html: "<p><strong>Pre-launch:</strong> final seller identity details are not yet published.</p>"
-      };
-    }
-
     const esc = value => String(value).replace(/[&<>"']/g, c => ({
       "&":"&amp;",
       "<":"&lt;",
@@ -29,6 +22,17 @@
       '"':"&quot;",
       "'":"&#39;"
     }[c]));
+
+    if (!sellerReady(seller)) {
+      const known = [];
+      if (seller.tradeName) known.push("<p><strong>Trade name:</strong> " + esc(seller.tradeName) + "</p>");
+      if (seller.enterpriseNumber) known.push("<p><strong>Enterprise number:</strong> " + esc(seller.enterpriseNumber) + "</p>");
+      if (seller.email) known.push("<p><strong>Email:</strong> <a href=\"mailto:" + esc(seller.email) + "\">" + esc(seller.email) + "</a></p>");
+      return {
+        ready: false,
+        html: "<p><strong>Pre-launch:</strong> paid checkout remains disabled until the remaining seller identity details are complete.</p>" + known.join("")
+      };
+    }
 
     const vat = seller.vatNumber
       ? "<p><strong>VAT:</strong> " + esc(seller.vatNumber) + "</p>"
