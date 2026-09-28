@@ -12,5 +12,9 @@
   "first_customer_vat_trigger": "First genuine external prospect who clearly wants to proceed with paid work",
   "owner_vat_input_policy": "Do not ask for VAT number before the first qualified customer signal. When that signal occurs, stop before paid quote/contract/payment and request the VAT prerequisite from the owner.",
   "pre_vat_allowed": "Research, qualification, passive/inbound informational responses, free preflight, proposal drafting, marketplace opportunity monitoring.",
-  "pre_vat_blocked": "Paid proposal submission where it constitutes beginning economic activity, paid quote/contract, payment solicitation/acceptance, checkout activation, invoicing, paid fulfillment."
+  "pre_vat_blocked": "Paid proposal submission where it constitutes beginning economic activity, paid quote/contract, payment solicitation/acceptance, checkout activation, invoicing, paid fulfillment.",
+  "generic_b2b_route_prepared": true,
+  "generic_b2b_route_scope": "Belgian legal entities only; generic company/role mailboxes; high-fit PCFlows relevance; dedupe, suppression and opt-out required",
+  "sales_email_standard": "SALES_EMAIL_STYLE.md",
+  "activation_note": "Do not enable before VAT/e604 commercial-activity gate is complete; re-check current Belgian rules at activation."
 }
