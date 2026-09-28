@@ -4,7 +4,7 @@ Updated: 2026-09-25
 
 PCFlows should not try to sell the EUR 149 audit to every free-scanner user.
 
-`qualify_audit.py` routes a sanitized blueprint/context into one of four outcomes:
+`qualify_audit.py` routes a sanitized blueprint/context into one of five outcomes:
 
 1. **resanitize_required**
    - possible secret-like literal found;
@@ -38,3 +38,13 @@ If the free preflight is sufficient, say so. This improves trust and keeps the p
 - It does not replace runtime evidence.
 
 The first paid customers remain willingness-to-pay experiments; qualification only protects scope and fit.
+
+
+## Commercial package mapping
+
+Qualification for a paid review is followed by scope selection:
+- one clearly defined risk family -> Focused Risk Check;
+- broad one-scenario review or single-scenario handoff/release -> Data Integrity Audit;
+- 2–3 related scenarios requiring combined release/handoff analysis -> Portfolio / Release QA.
+
+This mapping must not upsell a single-scenario customer to Portfolio / Release QA merely because they mention the word "release".
