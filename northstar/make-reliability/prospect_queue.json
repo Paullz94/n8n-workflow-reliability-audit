@@ -1,8 +1,8 @@
 {
   "schema": "pcflows.prospect-queue.v1",
-  "updated": "2026-09-26",
+  "updated": "2026-09-28",
   "launch_enabled": false,
-  "launch_gate": "Belgian enterprise number + VAT route + site identity + Stripe reactivation",
+  "launch_gate": "Belgian enterprise number + legally required VAT/e604 readiness before commercial activity + site identity + Stripe reactivation",
   "scoring_note": "Internal triage only; score is not a prediction of conversion probability.",
   "prospects": [
     {
@@ -171,7 +171,7 @@
       "channel": "upwork",
       "url": "https://www.upwork.com/freelance-jobs/apply/Make-com-Automation-Specialist-Troubleshooting_~022098474011690711653/",
       "observed_date": "2026-09-26",
-      "status": "watch_open",
+      "status": "watch_currently_listed",
       "contact_after_launch": true,
       "problem_fit": 3,
       "audit_first_fit": 3,
@@ -179,7 +179,8 @@
       "freshness": 3,
       "competition_penalty": 1,
       "proof_gap_penalty": 1,
-      "notes": "Direct current-offer fit: review/test existing Make scenarios, validate mappings/webhooks/APIs, identify reliability issues and recommend fixes. Hourly 1-3 month engagement; 15-20 proposals and 6 interviewing at re-check."
+      "notes": "Best direct current-product fit. Upwork's current QA/functional-testing listings still surface 'Make.com Automation Specialist – QA & Troubleshooting'; direct job URL may redirect to a category page, so re-check exact availability before any later submission. Scope is review/test of existing Make scenarios, mappings/webhooks/APIs and reliability issues.",
+      "last_rechecked": "2026-09-28"
     },
     {
       "id": "upwork_capacidesk_paid_qualification",
@@ -196,6 +197,23 @@
       "competition_penalty": 1,
       "proof_gap_penalty": 1,
       "notes": "Strong white-label demand signal: duplicate prevention/idempotency, temporary failure retries, logging and failure alerts are explicit evaluation criteria. Current task requires implementation/build, so do not pitch the audit product as a substitute unless the buyer explicitly accepts a QA-only milestone."
+    },
+    {
+      "id": "upwork_make_airtable_xero_manual_trial",
+      "title": "Urgent Make.com & Airtable Expert — Manual Trial Pipeline with Xero",
+      "channel": "upwork",
+      "url": "https://www.upwork.com/freelance-jobs/apply/Urgent-Make-com-Airtable-Expert-for-Business-Automation-Blueprint-Provided_~022104322611581701368/",
+      "observed_date": "2026-09-28",
+      "status": "watch_post_build_qa_angle",
+      "contact_after_launch": true,
+      "problem_fit": 3,
+      "audit_first_fit": 2,
+      "budget_signal": 3,
+      "freshness": 3,
+      "competition_penalty": 1,
+      "proof_gap_penalty": 1,
+      "notes": "USD 500. Buyer is deliberately dual-running legacy software and requiring a manual trial pipeline before going live. Flow touches AI extraction/rewrite, pricing grids, Xero invoices/quotes and Dropbox outputs. Strong Invoice & Payment Sync / AI Guardrails / release-QA relevance, but initial ask is implementation, so pitch only a bounded QA/review milestone if the buyer accepts that scope."
     }
-  ]
+  ],
+  "owner_input_trigger": "First genuine external prospect who clearly wants to proceed commercially; then request VAT prerequisite before quote/contract/payment."
 }
