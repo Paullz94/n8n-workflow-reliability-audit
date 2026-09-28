@@ -171,7 +171,7 @@
       "channel": "upwork",
       "url": "https://www.upwork.com/freelance-jobs/apply/Make-com-Automation-Specialist-Troubleshooting_~022098474011690711653/",
       "observed_date": "2026-09-26",
-      "status": "watch_currently_listed",
+      "status": "p1_verified_current_listing",
       "contact_after_launch": true,
       "problem_fit": 3,
       "audit_first_fit": 3,
@@ -179,7 +179,7 @@
       "freshness": 3,
       "competition_penalty": 1,
       "proof_gap_penalty": 1,
-      "notes": "Best direct current-product fit. Upwork's current QA/functional-testing listings still surface 'Make.com Automation Specialist – QA & Troubleshooting'; direct job URL may redirect to a category page, so re-check exact availability before any later submission. Scope is review/test of existing Make scenarios, mappings/webhooks/APIs and reliability issues.",
+      "notes": "Current Upwork listing independently re-verified. Direct fit: review and QA existing Make.com scenarios, triggers/actions, mappings, webhooks/APIs, identify reliability issues, troubleshoot and recommend fixes. 15-20 proposals, 6 interviewing, client last viewed about 2 hours before re-check; client has about USD 29K prior spend and 80 hires. This is the first marketplace submission candidate once marketplace account access and commercial/VAT gates permit.",
       "last_rechecked": "2026-09-28"
     },
     {
@@ -215,5 +215,6 @@
       "notes": "USD 500. Buyer is deliberately dual-running legacy software and requiring a manual trial pipeline before going live. Flow touches AI extraction/rewrite, pricing grids, Xero invoices/quotes and Dropbox outputs. Strong Invoice & Payment Sync / AI Guardrails / release-QA relevance, but initial ask is implementation, so pitch only a bounded QA/review milestone if the buyer accepts that scope."
     }
   ],
-  "owner_input_trigger": "First genuine external prospect who clearly wants to proceed commercially; then request VAT prerequisite before quote/contract/payment."
+  "owner_input_trigger": "First genuine external prospect who clearly wants to proceed commercially; then request VAT prerequisite before quote/contract/payment.",
+  "primary_marketplace_candidate": "upwork_make_qa_troubleshooting"
 }
