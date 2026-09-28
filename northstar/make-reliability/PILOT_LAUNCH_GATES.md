@@ -65,7 +65,7 @@ Marketplace accounts are not required for the initial direct PCFlows pilot.
 - [x] Checkout is deliberately disabled during the Belgian registration pause.
 - [ ] Belgian enterprise number received and verified.
 - [ ] Official economic-activity start date reached; current planned date is **2026-10-01**.
-- [ ] VAT identification / small-enterprise regime completed as legally available before paid launch.
+- [x] VAT identification/status confirmed ready by owner; VAT number remains private until a genuine customer requires it for commercial documentation.
 
 ## Gate F — operating autonomy
 
@@ -197,3 +197,13 @@ Owner instruction:
 - continue EUR 0 research, qualification, passive/inbound informational handling, free preflight support and proposal preparation autonomously.
 
 This trigger changes when owner input is requested; it does **not** waive the legal requirement to complete VAT identification before starting the economic activity.
+
+
+### Owner-confirmed VAT status — 2026-09-28
+
+- Owner confirms the VAT identification/status is in order.
+- VAT readiness is no longer an acquisition blocker.
+- The numeric VAT identifier remains intentionally undisclosed to the autonomous operator until a genuine external customer needs it for quote/contract/invoice documentation.
+- Do not infer or publish a VAT number by prefixing the enterprise number.
+- The registered economic-activity start date remains 2026-10-01. Promotional outbound starts no earlier than that date.
+- From 2026-10-01, compliant prospecting/outreach may proceed autonomously after a final current-law, dedupe, suppression and deliverability check. No fresh owner permission is required.
