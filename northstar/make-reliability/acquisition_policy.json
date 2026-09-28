@@ -1,6 +1,6 @@
 {
   "schema": "pcflows.acquisition-policy.v1",
-  "updated": "2026-09-25",
+  "updated": "2026-09-28",
   "registration_launch_enabled": false,
   "autonomous_cold_email_enabled": false,
   "clay_research_enabled": true,
@@ -8,5 +8,9 @@
   "make_community_ai_commercial_outreach": false,
   "max_unsolicited_contacts_per_day_after_compliance": 2,
   "suppression_required": true,
-  "notes": "Cold email stays disabled until separate direct-marketing compliance gate is documented; registration alone does not enable it."
+  "notes": "Cold email stays disabled until the separate direct-marketing compliance gate is documented. Belgian VAT identification must be completed before economic activity starts; owner input is triggered only once a genuine customer wants to proceed commercially.",
+  "first_customer_vat_trigger": "First genuine external prospect who clearly wants to proceed with paid work",
+  "owner_vat_input_policy": "Do not ask for VAT number before the first qualified customer signal. When that signal occurs, stop before paid quote/contract/payment and request the VAT prerequisite from the owner.",
+  "pre_vat_allowed": "Research, qualification, passive/inbound informational responses, free preflight, proposal drafting, marketplace opportunity monitoring.",
+  "pre_vat_blocked": "Paid proposal submission where it constitutes beginning economic activity, paid quote/contract, payment solicitation/acceptance, checkout activation, invoicing, paid fulfillment."
 }
