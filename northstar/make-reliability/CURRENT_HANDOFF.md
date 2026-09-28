@@ -602,3 +602,24 @@ Fresh demand on 2026-09-28:
 - Upwork continues to surface a Make.com QA & Troubleshooting role in current QA listings; this remains the cleanest direct audit/QA fit, but exact job availability must be re-checked before submission.
 - New USD 500 Make/Airtable/Xero manual-trial pipeline: strong reliability/data-integrity signal because the buyer is deliberately dual-running a legacy system and staging a manual trial before live webhooks. Initial scope is build work, so PCFlows should only offer a separate bounded QA/release milestone if accepted.
 - Clay research identified Unreal Staffing as an AI automation consultancy explicitly listing Clay, n8n, Make.com, Zapier, HubSpot and Salesforce. Keep as research/partnership signal only while cold outreach remains disabled.
+
+
+## Main-branch divergence guard — 2026-09-28
+
+Do **not** merge/rebase the current `main` branch into Northstar automatically.
+
+Observed state:
+- Northstar is 337 commits ahead and 9 commits behind `main`;
+- the 9 newer `main` commits are a separate/root-level PCFlows implementation (root `index.html`, scanner/intake/legal files, root sales/launch docs and a custom Pages workflow);
+- those files are outside the Northstar isolation contract and are not upstream prerequisites for the canonical Northstar product;
+- all current Northstar-vs-main changed files remain under `northstar/`;
+- the root-level custom `Deploy PCFlows site` workflow on `main` has repeatedly failed and did **not** replace the last successful GitHub Pages deployment from `pcflows-site-20260925`.
+
+Therefore:
+- keep PR #2 draft;
+- keep Northstar isolated;
+- do not pull the parallel root implementation into Northstar;
+- treat any future attempt to reconcile these histories as an explicit repository-convergence decision, not routine branch maintenance.
+
+Latest Northstar public test after the 2026-09-28 state updates:
+- workflow run #36398708394 — SUCCESS.
