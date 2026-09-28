@@ -5,13 +5,13 @@ The owner has now supplied the Belgian enterprise/KBO number. The remaining publ
 - Legal name:
 - Trade name: PCFlows
 - Registered business address:
-- Enterprise/KBO number: 1043055054 — supplied by owner
+- Enterprise/KBO number: 1043.055.054 — supplied by owner
 - VAT status:
 - VAT number (if applicable):
 - Professional email:
 - Professional phone:
 
-Do not infer or publish these values from Stripe, Gmail, account profiles, prior chats, or hidden personal data. Use only values the owner explicitly provides for publication.
+Do not infer or publish the remaining values from Stripe, Gmail, account profiles, prior chats, or hidden personal data. Enterprise number 1043.055.054 was explicitly supplied by the owner. VAT status/number must still be confirmed separately.
 
 After receipt:
 1. fill seller-config.js;
