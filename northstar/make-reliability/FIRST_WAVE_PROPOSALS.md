@@ -155,3 +155,30 @@ Reason:
 - the current public PCFlows scope is audit/QA, while Verified Repair/runtime deployment remains disabled.
 
 Only reconsider if the buyer explicitly offers a bounded architecture/QA milestone that can be delivered honestly within the current product scope.
+
+
+---
+
+## Draft — Manual Trial Pipeline / Xero QA angle
+
+Target:
+https://www.upwork.com/freelance-jobs/apply/Urgent-Make-com-Airtable-Expert-for-Business-Automation-Blueprint-Provided_~022104322611581701368/
+
+Status:
+Preparation only. The buyer's immediate ask is implementation, so do not pretend PCFlows is the build contractor. Use only if the buyer is open to a separate bounded QA/reliability milestone after or alongside implementation.
+
+Draft:
+
+The part of your scope that stands out is the decision to dual-run the legacy process and start with a manual trial pipeline before turning on automatic field webhooks. That is exactly the point where a bounded reliability review can reduce risk without changing your implementation plan.
+
+For a QA milestone I would focus on the state transitions that can create incorrect business output: repeated jobsheets producing duplicate Xero invoices/quotes, partial completion between Airtable/Xero/Dropbox, retry behavior after API failures, data validation before price calculations, and whether the AI rewrite step is isolated from financial fields that must remain deterministic.
+
+PCFlows is a new audit/QA service rather than a claim of years of Make implementation work. I would therefore scope this as an independent review of a sanitized scenario/blueprint, with prioritized prevent/detect/recover findings and a verification checklist, rather than claim I built the underlying system.
+
+If you only want the end-to-end builder and do not want an independent QA milestone, this is not the right fit and I would not stretch the offer.
+
+Truth constraints:
+- no claim of Xero/Make production client history;
+- no promise to implement or deploy the pipeline;
+- no "fixed" claim from static review alone;
+- no request for production credentials or live customer financial data.
