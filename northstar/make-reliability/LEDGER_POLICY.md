@@ -2,7 +2,7 @@
 
 Updated: 2026-09-25
 
-The EUR 1,000 success gate is deliberately stricter than a normal order counter.
+Revenue milestones are deliberately stricter than a normal order counter. EUR 1,000 is the first minimum commercial-validation milestone; reaching it does not end the workstream.
 
 ## Target-eligible revenue
 
@@ -15,7 +15,7 @@ A payment contributes to `verified_gross_revenue` only when all are true:
 - not an owner transaction;
 - no successful refund exists for that payment.
 
-**Strict refund rule:** if any completed refund exists, the entire payment is disqualified from the EUR 1,000 target. This is intentionally conservative.
+**Strict refund rule:** if any completed refund exists, the entire payment is disqualified from cumulative verified milestone revenue. This is intentionally conservative.
 
 ## Separate metrics
 
@@ -42,3 +42,15 @@ This flag is accounting evidence only; Paul still must actually give explicit ap
 The journal is append-only and uses stable event IDs. Duplicate IDs are rejected.
 
 Payment-provider exports/webhooks must eventually be normalized into the journal. A manual order form, invoice, promise to pay, screenshot, pending authorization, or self-reported sale is insufficient provider verification.
+
+
+## Milestone accounting
+
+Cumulative verified gross milestones are recorded when `verified_gross_revenue` reaches the thresholds in `REVENUE_MILESTONES.md`.
+
+A milestone:
+- is evidence, not permission to stop;
+- never resets cumulative verified gross revenue;
+- never converts test/owner/pending/refunded money into eligible revenue;
+- should trigger a short operating review of conversion, average order value, acquisition channel, fulfillment burden and repeat-purchase signal;
+- must be followed by continued operation unless a genuine blocker or pivot gate applies.
