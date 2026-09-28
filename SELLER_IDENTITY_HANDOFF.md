@@ -1,11 +1,11 @@
 # Seller identity handoff template
 
-When all technical validation is complete, the owner can provide the remaining public seller identity in one message using this template.
+The owner has now supplied the Belgian enterprise/KBO number. The remaining public seller identity can be completed later using this template.
 
 - Legal name:
 - Trade name: PCFlows
 - Registered business address:
-- Enterprise/KBO number:
+- Enterprise/KBO number: 1043055054 — supplied by owner
 - VAT status:
 - VAT number (if applicable):
 - Professional email:
