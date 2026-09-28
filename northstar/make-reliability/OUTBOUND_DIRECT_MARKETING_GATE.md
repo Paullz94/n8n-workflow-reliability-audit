@@ -1,7 +1,7 @@
 # PCFlows Outbound Direct-Marketing Gate
 
 Research date: 2026-09-25
-Status: outbound cold-email sending remains disabled.
+Status: narrow pre-launch B2B outreach enabled for verified generic legal-entity mailboxes; paid service starts 2026-10-01.
 
 ## Why there is a gate
 
@@ -97,3 +97,19 @@ Before switching `autonomous_cold_email_enabled` to true:
 5. message passes `SALES_EMAIL_STYLE.md`;
 6. first batch limited to two companies;
 7. inspect delivery/replies before expanding.
+
+
+## Pre-launch commercial messaging — 2026-09-28
+
+PCFlows may conduct limited pre-launch B2B advertising before 2026-10-01 when all of the following are true:
+- the message clearly says PCFlows officially starts service on 2026-10-01;
+- the recipient is a verified generic mailbox belonging to a legal entity;
+- the message is relevant to that company's public automation/integration activity;
+- the message is clearly labeled as advertising and includes an easy objection/STOP route;
+- no paid service is performed before 2026-10-01;
+- no payment or invoice is accepted/issued before 2026-10-01;
+- the outreach does not imply that PCFlows is already delivering paid services before the registered start date.
+
+This is a pre-launch acquisition activity, not permission to backdate commercial delivery or payment.
+
+The owner confirms VAT readiness is in order. The numeric VAT identifier stays private until a genuine customer requires it for commercial documentation.
