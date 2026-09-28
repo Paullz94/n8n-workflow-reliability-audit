@@ -27,7 +27,7 @@
       <h1>Choose based on the problem, not on jargon.</h1>
       <p class="lead">PCFlows uses one reliability engine with different scopes. The cheapest suitable option should win — not the most expensive one.</p>
       <div class="notice" style="margin-top:24px">
-        Paid checkout remains paused until Belgian business registration and VAT setup are complete. These are the planned fixed-scope launch prices.
+        PCFlows officially starts paid service on 1 October 2026. Pre-launch questions and fit checks are already open. These are the fixed launch prices.
       </div>
     </div>
   </section>
@@ -53,22 +53,23 @@
           <span class="tag">One clear concern</span>
           <h3 style="margin-top:16px">Focused Risk Check</h3>
           <div class="price">€79</div>
-          <p class="muted">When you have one specific question in one workflow.</p>
+          <p class="muted">For one specific reliability question in one workflow — not a full audit.</p>
           <ul class="clean-list">
             <li>1 sanitized scenario</li>
-            <li>Choose one risk focus</li>
-            <li>Top relevant findings</li>
+            <li>1 focus: duplicates, silent skips, recovery, or ordering</li>
+            <li>Relevant findings only</li>
             <li>Remediation checklist</li>
             <li>Synthetic verification steps</li>
+            <li>No included re-scan</li>
           </ul>
-          <span class="button disabled">Opens after registration</span>
+          <span class="button disabled">Paid service starts 1 October</span>
         </article>
 
         <article class="package-card featured">
           <span class="tag">Core service</span>
           <h3 style="margin-top:16px">Data Integrity Audit</h3>
           <div class="price">€149</div>
-          <p class="muted">For one important workflow where missing, duplicated or unrecoverable work matters.</p>
+          <p class="muted">For one important workflow when you want the full reliability picture, not just one risk question.</p>
           <ul class="clean-list">
             <li>1 sanitized scenario</li>
             <li>Full reliability review</li>
@@ -77,16 +78,16 @@
             <li>Verification checklist</li>
             <li>1 remediation re-scan</li>
           </ul>
-          <span class="button disabled">Opens after registration</span>
+          <span class="button disabled">Paid service starts 1 October</span>
         </article>
 
         <article class="package-card">
           <span class="tag">Agency / multi-flow</span>
           <h3 style="margin-top:16px">Portfolio / Release QA</h3>
           <div class="price">€399</div>
-          <p class="muted">For agencies, freelancers or teams releasing several related workflows.</p>
+          <p class="muted">Best for agencies, freelancers or teams reviewing 2–3 related workflows before release or client handoff.</p>
           <ul class="clean-list">
-            <li>Up to 3 sanitized scenarios</li>
+            <li>2–3 related sanitized scenarios</li>
             <li>Per-scenario audit</li>
             <li>Combined risk summary</li>
             <li>Release / handoff checklist</li>
@@ -94,7 +95,7 @@
             <li>1 combined re-scan round</li>
           </ul>
           <a class="button secondary" href="automation-release-qa.html">See release QA scope</a>
-          <span class="button disabled">Opens after registration</span>
+          <span class="button disabled">Paid service starts 1 October</span>
         </article>
       </div>
     </div>
@@ -228,10 +229,10 @@
     const g=goal.value;
     let name,price,why;
 
-    if(n>1 || g==='release'){
+    if(n>1){
       name='Portfolio / Release QA';
       price='€399';
-      why='You are reviewing multiple workflows or preparing a handoff/release, so a combined release view is more useful than separate one-off audits.';
+      why='You are reviewing multiple related workflows, so a combined release/handoff view is more useful than separate one-off audits.';
     } else if(g==='explore'){
       name='Reliability Preflight';
       price='€0';
@@ -243,7 +244,9 @@
     } else {
       name='Data Integrity Audit';
       price='€149';
-      why='You want one important workflow reviewed across reliability, failure and recovery categories.';
+      why=(g==='release')
+        ? 'You are preparing one workflow for handoff or release. The full one-scenario audit is the smallest suitable scope; Portfolio / Release QA is reserved for multiple related workflows.'
+        : 'You want one important workflow reviewed across reliability, failure and recovery categories.';
     }
 
     const s=specialist();
@@ -251,7 +254,7 @@
       ? '<p class="small">Specialist mode: <strong style="color:var(--text)">'+s+'</strong> is automatically included when the supplied business context confirms the fit.</p>'
       : '';
 
-    out.innerHTML='<div class="kicker">Recommended starting point</div><h3 style="margin-top:12px">'+name+' · '+price+'</h3><p>'+why+'</p>'+extra+'<p class="small">This chooser is informational only. Paid checkout stays closed until registration is complete.</p>';
+    out.innerHTML='<div class="kicker">Recommended starting point</div><h3 style="margin-top:12px">'+name+' · '+price+'</h3><p>'+why+'</p>'+extra+'<p class="small">This chooser is informational only. Paid service starts on 1 October 2026; pre-launch questions are welcome now.</p>';
   }
 
   [count,goal,problem].forEach(el=>el.addEventListener('change',render));
