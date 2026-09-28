@@ -185,3 +185,15 @@ The current complete suite has been executed successfully; see the full validati
 - [x] Browser scanner regression/privacy PASS.
 - [x] Overall `PCFlows/Northstar validation: PASS`.
 - Validation run: GitHub Actions #36190833559 on isolated snapshot of the canonical branch.
+
+
+## Owner VAT trigger — 2026-09-28
+
+Owner instruction:
+- do not ask Paul for the VAT number merely because preparation is ongoing;
+- the owner-input trigger is the **first genuine external prospect/customer who clearly wants to proceed with paid work**;
+- when that happens, stop before a paid quote/contract/payment and request the VAT prerequisite;
+- no checkout activation, invoice, payment acceptance or paid fulfillment before the legally required VAT/e604 step is complete;
+- continue EUR 0 research, qualification, passive/inbound informational handling, free preflight support and proposal preparation autonomously.
+
+This trigger changes when owner input is requested; it does **not** waive the legal requirement to complete VAT identification before starting the economic activity.
