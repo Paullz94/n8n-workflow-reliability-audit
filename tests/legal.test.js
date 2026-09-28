@@ -25,3 +25,16 @@ test("seller identity renders escaped public fields", () => {
   assert.match(rendered.html, /&lt;Example&gt;/);
   assert.doesNotMatch(rendered.html, /<Example>/);
 });
+
+
+test("partial pre-launch identity may publish the confirmed enterprise number without opening checkout", () => {
+  const rendered = renderSellerInfo({
+    complete: false,
+    tradeName: "PCFlows",
+    enterpriseNumber: "1043055054",
+    email: "pcmotionstudios@gmail.com"
+  });
+  assert.equal(rendered.ready, false);
+  assert.match(rendered.html, /1043055054/);
+  assert.match(rendered.html, /paid checkout remains disabled/);
+});
