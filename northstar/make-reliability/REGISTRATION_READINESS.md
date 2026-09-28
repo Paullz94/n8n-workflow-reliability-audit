@@ -8,7 +8,7 @@ This checklist exists to prevent the live Stripe checkout from reopening before 
 
 - Planned activity start: 2026-10-01.
 - Xerius self-employed affiliation: approved.
-- Enterprise number: pending.
+- Enterprise number: confirmed — 1043.055.054.
 - Stripe live Payment Link: intentionally inactive.
 - Public site: free scanner / no-payment interest only.
 
@@ -71,9 +71,9 @@ https://economie.fgov.be/nl/themas/verkoop/vormen-van-verkoop/verkoop-internet-e
 
 ## Reopen checkout only when
 
-- [ ] Enterprise number confirmed.
+- [x] Enterprise number confirmed.
 - [ ] Official economic-activity start date reached (currently planned **2026-10-01**); no paid orders before that effective date.
-- [ ] VAT regime/effective date confirmed.
+- [x] VAT status/readiness confirmed by owner; exact number withheld until a genuine customer requires commercial documentation.
 - [ ] Website carries required business identity/contact information.
 - [ ] Consumer withdrawal/start-of-service wording is configured if B2C sales are accepted.
 - [ ] Stripe price/tax/invoice behavior matches the confirmed VAT regime.
@@ -81,3 +81,14 @@ https://economie.fgov.be/nl/themas/verkoop/vormen-van-verkoop/verkoop-internet-e
 - [ ] Revenue ledger reconciliation remains provider-verified.
 
 Until then, keep validation free/no-payment.
+
+
+## Outreach timing
+
+VAT readiness itself is no longer a blocker.
+
+The official activity-start timing remains separate:
+- current registered/planned activity start: 2026-10-01;
+- outbound commercial promotion must not start before that date;
+- on and after 2026-10-01, the autonomous PCFlows B2B pipeline may begin compliant outreach without asking the owner again;
+- the VAT number should be requested only when an actual customer requires it for quote, contract, invoice or another legally necessary commercial document.
