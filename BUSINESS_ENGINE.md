@@ -66,7 +66,7 @@ Do not request real secrets or production personal data. Private workflow materi
 
 ## Launch gate
 
-The owner has confirmed the Belgian registration/social-insurance/tax prerequisites are in order. Commercial checkout remains disabled until the final seller identity details are supplied and published accurately. Stripe products are active; staged Payment Links and public checkout buttons remain disabled.
+The owner has confirmed the Belgian registration/social-insurance/tax prerequisites are in order and supplied enterprise number 1043055054. Commercial checkout remains disabled until the remaining seller identity details are supplied and published accurately. Stripe products are active; staged Payment Links and public checkout buttons remain disabled.
 
 After the gate is cleared:
 1. activate the two Stripe products;
