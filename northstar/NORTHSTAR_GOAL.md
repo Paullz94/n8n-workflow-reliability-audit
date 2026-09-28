@@ -4,7 +4,7 @@ Updated: 2026-09-25
 
 ## North-star outcome
 
-Reach **EUR 1,000 payment-provider-verified gross revenue from real external customers**.
+Build PCFlows into a durable, increasingly autonomous, profitable business. **EUR 1,000 payment-provider-verified gross revenue from real external customers is the first minimum validation milestone, not the end goal.** There is no artificial revenue ceiling.
 
 Financial defaults:
 - owner reserve: EUR 500, kept uninjected;
@@ -59,11 +59,15 @@ A short manual pilot is acceptable only when it:
 - is time-bounded;
 - has a clear path to automation.
 
-## Stop conditions
+## Continuation / stop conditions
 
-Continue safe EUR 0 work autonomously until one of these occurs:
-1. EUR 1,000 verified gross external revenue is reached;
-2. a genuine legal, safety, KYC, tax, banking, contractual, or non-delegable financial blocker requires Paul;
-3. a documented failure/pivot gate shows the current wedge is not viable.
+Reaching EUR 1,000 is **not** a stop condition. It records Milestone 1 commercial validation and the operator must continue toward repeatability, higher cumulative revenue, stronger monthly run-rate, repeat purchases and channel diversification.
 
-Do not stop merely because one website, listing, or acquisition route underperforms.
+Continue autonomous work until one of these occurs:
+1. a genuine legal, safety, KYC, tax, banking, contractual, identity/account or non-delegable financial blocker requires Paul;
+2. a documented failure/pivot gate shows the current wedge is not viable and a bounded pivot decision is required;
+3. Paul explicitly pauses or ends the workstream.
+
+Do not stop merely because one revenue milestone, website, listing, or acquisition route has been reached or underperforms.
+
+Canonical revenue milestones are defined in `make-reliability/REVENUE_MILESTONES.md`.
