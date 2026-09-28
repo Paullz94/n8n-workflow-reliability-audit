@@ -63,3 +63,37 @@ Current policy:
 `autonomous_cold_email_enabled = false`
 
 Do not flip this merely because registration completes. Registration and direct-marketing compliance are separate gates.
+
+
+## Narrow generic-B2B route prepared
+
+A post-VAT outbound route is prepared for Belgian B2B prospecting, but it is **not active yet**.
+
+The route is deliberately narrower than generic cold email:
+- verified business/legal-entity target only;
+- generic role/company mailbox only (for example info@, contact@, sales@ or partnerships@);
+- no named-person mailbox under this route;
+- one initial message per canonical company/domain;
+- high-fit automation/reliability context required;
+- plain-text, no attachment, no tracking;
+- clear STOP / objection instruction;
+- company/domain suppression after opt-out, rejection or hard bounce;
+- at most one relevant follow-up when legally and operationally permitted;
+- tiny batch size and provider-reputation monitoring.
+
+This route is designed around current Belgian e-communications/direct-marketing rules for legal entities and the GDPR objection requirements. It must be re-checked at activation time.
+
+The separate VAT/economic-activity launch gate still applies. Do not use this route to start commercial activity before the required VAT readiness is complete.
+
+Email copy must follow `SALES_EMAIL_STYLE.md`.
+
+## Activation sequence
+
+Before switching `autonomous_cold_email_enabled` to true:
+1. VAT/e604 status confirmed and commercial activity legally open;
+2. seller identity/privacy information current;
+3. suppression state and canonical company-domain dedupe verified;
+4. target qualifies as a legal-entity B2B recipient for the selected mailbox route;
+5. message passes `SALES_EMAIL_STYLE.md`;
+6. first batch limited to two companies;
+7. inspect delivery/replies before expanding.
