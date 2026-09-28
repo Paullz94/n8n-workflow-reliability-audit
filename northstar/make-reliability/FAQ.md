@@ -2,7 +2,7 @@
 
 Updated: 2026-09-25
 
-## Does Northstar need access to my Make account?
+## Does PCFlows need access to my Make account?
 
 No for the current blueprint audit. The intended input is a sanitized exported blueprint. Production credentials are out of scope.
 
@@ -40,11 +40,17 @@ Static analysis cannot prove:
 
 Generic linting is useful and already commoditized. Northstar is deliberately narrower: reliability, recovery and business-data integrity, with remediation/verification ordering.
 
-## What is the pilot price?
+## What does PCFlows cost?
 
-The primary pilot hypothesis is EUR 149 for one sanitized blueprint, bounded interpretation, up to two redacted/synthetic examples and one asynchronous re-scan.
+Current fixed launch ladder:
+- EUR0 Reliability Preflight — local static scan;
+- EUR79 Focused Risk Check — one selected risk family in one sanitized scenario, no included re-scan;
+- EUR149 Data Integrity Audit — full one-scenario reliability/data-integrity review with one re-scan;
+- EUR399 Portfolio / Release QA — normally 2–3 related scenarios with a combined release/handoff view and one combined re-scan round.
 
-This is a test offer, not evidence of existing customers or revenue.
+Lead Flow Reliability, Invoice & Payment Sync, AI Workflow Guardrails and Client Onboarding Reliability are specialist modes inside the EUR149 audit, not separate surcharges.
+
+Prices remain market hypotheses until real external customers buy.
 
 ## Are refunds counted toward the EUR 1,000 Northstar target?
 
@@ -60,4 +66,4 @@ No. The pilot is designed to avoid production credentials.
 
 ## Is this affiliated with Make?
 
-No. Northstar is an independent reliability-audit project and is not presented as an official Make product or certification.
+No. PCFlows is an independent technical reliability service and is not presented as an official Make product or certification.
