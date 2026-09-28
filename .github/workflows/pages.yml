@@ -7,9 +7,18 @@ on:
     paths:
       - 'index.html'
       - 'privacy.html'
+      - 'legal.html'
+      - 'intake.html'
+      - 'site.js'
+      - 'scanner.js'
+      - 'seller-config.js'
+      - 'launch-config.js'
+      - 'legal.js'
+      - 'intake.js'
       - 'robots.txt'
       - 'sitemap.xml'
       - '.nojekyll'
+      - 'guides/**'
       - '.github/workflows/pages.yml'
   workflow_dispatch:
 
@@ -34,13 +43,71 @@ jobs:
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
-      - name: Stage public site only
+      - name: Stage and validate public site
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p _site
-          cp index.html privacy.html robots.txt sitemap.xml .nojekyll _site/
+
+          rm -rf _site
+          mkdir -p _site/guides
+
+          cp \
+            index.html \
+            privacy.html \
+            legal.html \
+            intake.html \
+            site.js \
+            scanner.js \
+            seller-config.js \
+            launch-config.js \
+            legal.js \
+            intake.js \
+            robots.txt \
+            sitemap.xml \
+            .nojekyll \
+            _site/
+
+          cp guides/*.html _site/guides/
+
+          required=(
+            index.html
+            privacy.html
+            legal.html
+            intake.html
+            site.js
+            scanner.js
+            seller-config.js
+            launch-config.js
+            legal.js
+            intake.js
+            robots.txt
+            sitemap.xml
+            .nojekyll
+            guides/n8n-webhook-duplicates.html
+            guides/n8n-retry-safety.html
+          )
+
+          for file in "${required[@]}"; do
+            test -f "_site/$file" || {
+              echo "::error::Missing required public site file: $file"
+              exit 1
+            }
+          done
+
+          grep -q 'seller-config.js' _site/index.html
+          grep -q 'launch-config.js' _site/index.html
+          grep -q 'site.js' _site/index.html
+          grep -q 'scanner.js' _site/index.html
+          grep -q 'seller-config.js' _site/legal.html
+          grep -q 'legal.js' _site/legal.html
+          grep -q 'intake.js' _site/intake.html
+
+          # The commercial gate must remain closed until VAT/e604 and the
+          # remaining seller-identity/invoicing/Peppol/checkout-test gates pass.
+          grep -Eq 'checkoutEnabled:[[:space:]]*false' _site/launch-config.js
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
