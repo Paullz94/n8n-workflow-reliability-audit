@@ -585,3 +585,20 @@ The next material step is still non-delegable registration state:
 6. activate package-specific checkout and begin the small platform-native acquisition wave.
 
 Until those conditions change, do not create artificial features, do not open payment paths, do not send cold email, and do not spend owner capital.
+
+
+## Owner-input timing update — 2026-09-28
+
+Paul explicitly instructed that he will provide the VAT number only when PCFlows has its first genuine customer contact.
+
+Operational interpretation:
+- do not nag for VAT during research/preparation;
+- continue autonomous buyer research, qualification, passive/inbound informational responses, free-preflight support, proposal drafting and launch preparation;
+- if a genuine external prospect clearly asks to buy, commission paid work, receive a paid quote or otherwise proceed commercially, that is the owner-input trigger;
+- pause before paid quote/contract/payment and ask Paul for the VAT prerequisite;
+- do not activate checkout or start paid fulfillment until the legally required VAT/e604 and registration gates are complete.
+
+Fresh demand on 2026-09-28:
+- Upwork continues to surface a Make.com QA & Troubleshooting role in current QA listings; this remains the cleanest direct audit/QA fit, but exact job availability must be re-checked before submission.
+- New USD 500 Make/Airtable/Xero manual-trial pipeline: strong reliability/data-integrity signal because the buyer is deliberately dual-running a legacy system and staging a manual trial before live webhooks. Initial scope is build work, so PCFlows should only offer a separate bounded QA/release milestone if accepted.
+- Clay research identified Unreal Staffing as an AI automation consultancy explicitly listing Clay, n8n, Make.com, Zapier, HubSpot and Salesforce. Keep as research/partnership signal only while cold outreach remains disabled.
