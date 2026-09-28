@@ -12,13 +12,13 @@ Do not accept consumer orders through the staged Stripe offers. The intended buy
 
 The owner has confirmed items 1-3 below are already complete. Paid checkout remains disabled until the remaining publication/account details are complete:
 
-1. Belgian KBO registration for the self-employed activity. — owner confirmed complete; enterprise number 1043055054 supplied
+1. Belgian KBO registration for the self-employed activity. — complete; enterprise number 1043.055.054 assigned
 2. Membership of a social insurance fund before starting the self-employed activity. — owner confirmed complete
-3. VAT status determined and VAT identification completed if applicable. — owner confirmed complete
+3. VAT status / VAT identification — pending explicit owner confirmation; do not infer a VAT number from enterprise number 1043.055.054.
 4. Registered business identity details available for publication:
    - legal/trade name;
    - registered business address;
-   - enterprise number — complete: 1043055054;
+   - enterprise number — complete: 1043.055.054;
    - VAT number/status where applicable;
    - professional email;
    - professional phone number.
@@ -28,7 +28,7 @@ Do not publish a private home address or personal phone number from account data
 
 ## Automated steps after the owner clears the gate
 
-Once the owner provides or confirms the final registration details, the operator can:
+The KBO registration is complete. Once the owner provides or confirms the remaining public seller identity and VAT status, the operator can:
 
 1. update the website legal-identification section;
 2. update Stripe business/tax fields that the connected account permits;
