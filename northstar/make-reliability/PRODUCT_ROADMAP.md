@@ -114,4 +114,4 @@ Do not build yet:
 - expensive model/API dependency;
 - full observability platform.
 
-Northstar optimizes for a narrow product that can reach EUR 1,000 verified gross revenue before widening scope.
+Northstar optimizes for a narrow product that reaches EUR 1,000 verified gross revenue as the first minimum validation milestone. Scope expansion remains evidence-gated, but revenue growth must continue beyond EUR 1,000.
