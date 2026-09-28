@@ -130,3 +130,28 @@ Legitimate deliverability only:
 - provider warnings pause outbound rather than trigger evasion.
 
 A message being "less likely to be spam" must come from being wanted/relevant and technically clean, not from tricks intended to bypass spam detection.
+
+
+## Belgian legal-entity email labelling
+
+For unsolicited Belgian B2B advertising sent under the legal-entity exception:
+- the message must be clearly recognizable as advertising immediately on receipt;
+- use an explicit label such as `Reclame — ...` in Dutch or `Publicité — ...` in French;
+- identify PCFlows clearly;
+- include a simple reply-based objection path;
+- never send under this route to named-person addresses;
+- use only generic legal-entity addresses such as info@, contact@, hello@, sales@ or partnerships@ after verifying that the mailbox belongs to the company/legal entity.
+
+Do not weaken or disguise the advertising label for deliverability. Compliance takes precedence.
+
+## Support wording
+
+PCFlows may truthfully state that routine support questions inside the defined service scope are monitored continuously, including outside office hours, because the PCFlows inbox operator runs around the clock.
+
+Do not promise instant replies or guaranteed 24/7 human support.
+
+Preferred wording:
+`Routinevragen binnen onze vaste scope worden doorlopend gemonitord, ook buiten kantooruren; uitzonderingen worden geëscaleerd.`
+
+French:
+`Les questions de support routinières dans notre périmètre sont surveillées en continu, y compris hors heures de bureau; les exceptions sont escaladées.`
