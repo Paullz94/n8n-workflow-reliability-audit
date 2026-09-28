@@ -10,7 +10,7 @@ PCFlows will use a small fixed package ladder rather than one price or open-ende
 Self-serve local static scan.
 
 ### EUR 79 — Focused Risk Check
-For one clearly defined reliability concern in one sanitized scenario.
+For one clearly defined reliability concern in one sanitized scenario. This is deliberately not a mini full audit: the customer selects one risk family, receives only the relevant findings/remediation/verification steps, and no re-scan is included.
 
 Examples:
 - "Can this create duplicate invoices?"
@@ -28,7 +28,7 @@ One scenario, broad reliability/data-integrity review, business-context prioriti
 Lead Flow / Invoice & Payment Sync / AI Workflow Guardrails are specialist modes of this same product rather than separate surcharge products.
 
 ### EUR 399 — Portfolio / Release QA
-Up to three related scenarios, aimed at agencies/freelancers/teams before client handoff or release.
+Normally for 2–3 related scenarios, aimed at agencies/freelancers/teams before client handoff or release. A single-scenario handoff should normally remain the EUR149 Data Integrity Audit rather than being upsold to EUR399.
 
 Per-scenario findings + combined release/handover summary + one combined re-scan round.
 
@@ -58,3 +58,14 @@ The PCFlows prices remain hypotheses until real customers buy.
 - Do not sell Portfolio / Release QA until its automated multi-scenario pipeline passes tests.
 - Checkout stays disabled until Belgian registration/VAT launch gate is complete.
 - All prices are fixed-scope; no hidden open-ended implementation promise.
+
+
+## Scope-selection rule
+
+Use the smallest scope that fully answers the customer's real question:
+- exploratory static check -> EUR0;
+- one defined risk question -> EUR79;
+- one workflow, broad review or single-workflow release/handoff -> EUR149;
+- 2–3 related workflows needing a combined release/handoff view -> EUR399.
+
+Do not use the customer's willingness to spend as a reason to recommend a larger package.
