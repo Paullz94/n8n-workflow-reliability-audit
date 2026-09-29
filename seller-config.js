@@ -7,7 +7,7 @@
     tradeName: "PCFlows",
     registeredAddress: "",
     enterpriseNumber: "1043.055.054",
-    vatStatus: "",
+    vatStatus: "Confirmed by owner; numeric VAT identifier is provided to actual customers when required.",
     vatNumber: "",
     email: "pcmotionstudios@gmail.com",
     phone: ""
