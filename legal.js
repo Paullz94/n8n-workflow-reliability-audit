@@ -31,7 +31,7 @@
       if (seller.email) known.push("<p><strong>Email:</strong> <a href=\"mailto:" + esc(seller.email) + "\">" + esc(seller.email) + "</a></p>");
       return {
         ready: false,
-        html: "<p><strong>Pre-launch:</strong> paid checkout remains disabled until the remaining seller identity details are complete.</p>" + known.join("")
+        html: "<p><strong>Pre-launch:</strong> paid checkout remains disabled until the remaining public seller identity details are complete.</p>" + known.join("")
       };
     }
 
