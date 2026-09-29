@@ -48,14 +48,24 @@ The same tests run on every public push and pull request using a standard GitHub
 
 ## PCFlows service
 
-The analyzer is the public proof artifact behind a fixed-scope B2B reliability service.
+The analyzer is the public proof artifact behind fixed-scope B2B workflow-reliability services.
 
-- **n8n Reliability Audit — EUR 249:** one sanitized workflow export up to 30 nodes, prioritized findings, manual review, synthetic verification plan, and one re-scan after remediation.
-- **n8n Reliability Retrofit — EUR 890:** one accepted reliability risk, bounded remediation, synthetic before/after evidence, rollback notes, handoff, and one revision.
+- **Focused Risk Check — EUR 79:** one sanitized n8n workflow export, one agreed risk area, evidence-backed findings and bounded remediation guidance. No included re-scan.
+- **Data Integrity Audit — EUR 149:** one sanitized n8n workflow export, broader reliability/data-integrity review, remediation and verification guidance, plus one asynchronous re-scan after remediation.
+- **Portfolio / Release QA — EUR 399:** up to three related sanitized n8n workflow exports, a combined release-risk view and one combined re-scan round.
 
-See [SERVICE.md](SERVICE.md), [BUSINESS_ENGINE.md](BUSINESS_ENGINE.md), [SALES_PLAYBOOK.md](SALES_PLAYBOOK.md), and [LAUNCH_GATE.md](LAUNCH_GATE.md) for scope, boundaries, operating rules, acquisition, qualification, and the owner-only pre-launch gate.
+See [SERVICE.md](SERVICE.md), [BUSINESS_ENGINE.md](BUSINESS_ENGINE.md), [SALES_PLAYBOOK.md](SALES_PLAYBOOK.md), and [LAUNCH_GATE.md](LAUNCH_GATE.md) for scope, operating rules, acquisition, qualification and the pre-launch gate.
 
-Stripe checkout is technically staged behind a fail-closed launch switch. Belgian KBO registration is complete and enterprise number 1043.055.054 is recorded. VAT status is still pending explicit owner confirmation; checkout remains hidden until the remaining public seller identity, VAT status and checkout gate are complete.
+Belgian KBO registration is complete under enterprise number **1043.055.054**. The owner has confirmed VAT status is in order; the numeric VAT identifier is intentionally not published here and is supplied to an actual customer when required. This VAT status is not a launch blocker.
 
-To ask whether an existing workflow fits, [open an audit-request issue](../../issues/new?template=workflow-audit-request.yml) or email **pcmotionstudios@gmail.com**. Share metadata only—never credentials, customer data, private workflow exports, or confidential logs in a public issue.\n\nPaid orders use [intake.html](intake.html) and the deterministic [package_audit.py](package_audit.py) delivery-pack generator. See [FULFILLMENT_RUNBOOK.md](FULFILLMENT_RUNBOOK.md) for the payment-to-delivery flow.
-\n\n## Final launch handoff\n\nThe enterprise/KBO number 1043.055.054 is now supplied; VAT status remains a separate pending gate. The remaining owner input is isolated in [SELLER_IDENTITY_HANDOFF.md](SELLER_IDENTITY_HANDOFF.md). Public seller data is never inferred from connected accounts.\n
+Paid service, payment acceptance and invoicing begin **no earlier than 2026-10-01**. The three canonical live-mode Stripe Payment Links are staged but inactive and public checkout remains fail-closed. Clearly labeled pre-launch B2B acquisition may run now.
+
+The remaining publication gate is limited to public seller identity/contact fields that must not be inferred from account data. See [SELLER_IDENTITY_HANDOFF.md](SELLER_IDENTITY_HANDOFF.md).
+
+To ask whether an existing workflow fits, [open an audit-request issue](../../issues/new?template=workflow-audit-request.yml) or email **pcmotionstudios@gmail.com**. Share metadata only—never credentials, customer data, private workflow exports, or confidential logs in a public issue.
+
+Paid orders use [intake.html](intake.html) and the deterministic [package_audit.py](package_audit.py) delivery-pack generator. See [FULFILLMENT_RUNBOOK.md](FULFILLMENT_RUNBOOK.md) for the payment-to-delivery flow.
+
+## Commercial validation
+
+**EUR 1,000 of verified gross revenue from unrelated external customers is the first minimum validation milestone, not a stop condition.** Revenue beyond that milestone remains part of the operating objective. Test, owner-funded, pending, failed or refunded payments do not count.
