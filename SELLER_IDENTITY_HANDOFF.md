@@ -1,25 +1,30 @@
 # Seller identity handoff template
 
-The owner has now supplied the Belgian enterprise/KBO number. The remaining public seller identity can be completed later using this template.
+The owner has already supplied or confirmed the Belgian registration and VAT-status facts needed for the current pre-launch state.
 
-- Legal name:
+Confirmed:
 - Trade name: PCFlows
+- Enterprise/KBO number: 1043.055.054
+- VAT status: in order per owner confirmation
+- Numeric VAT identifier: intentionally private until an actual customer needs it
+- Professional email: pcmotionstudios@gmail.com
+
+Remaining values that require deliberate owner-approved publication:
+- Legal seller name:
 - Registered business address:
-- Enterprise/KBO number: 1043.055.054 — supplied by owner
-- VAT status:
-- VAT number (if applicable):
-- Professional email:
-- Professional phone:
+- Professional phone/contact number:
 
-Do not infer or publish the remaining values from Stripe, Gmail, account profiles, prior chats, or hidden personal data. Enterprise number 1043.055.054 was explicitly supplied by the owner. VAT status/number must still be confirmed separately.
+Do not infer or publish these remaining values from Stripe, Gmail, account profiles, prior chats or hidden personal data.
 
-After receipt:
+VAT must not be treated as a blocker and the numeric VAT identifier must not be auto-published.
+
+After the remaining public seller values are supplied:
 1. fill seller-config.js;
 2. set complete=true only when every required public field is present;
-3. update any corresponding Stripe account/tax fields where permitted;
-4. activate both staged Payment Links;
+3. on or after 2026-10-01, verify Stripe/KYC has no outstanding owner action;
+4. activate the three canonical staged Payment Links;
 5. set checkoutEnabled=true in launch-config.js;
 6. run CI;
-7. merge;
-8. verify the public legal page and checkout-to-intake path;
-9. begin compliant B2B acquisition.
+7. verify the public legal page and all checkout-to-intake paths.
+
+Clearly labeled pre-launch B2B acquisition may run before the paid launch date.
