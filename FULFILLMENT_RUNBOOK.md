@@ -1,6 +1,6 @@
 # PCFlows Fulfillment Runbook
 
-This runbook is for paid B2B orders after checkout is publicly activated.
+This runbook applies only to paid B2B orders accepted on or after 2026-10-01.
 
 ## 1. Payment event
 
@@ -8,77 +8,62 @@ Source of truth: Stripe.
 
 A customer is considered paid only when Stripe shows a successful settled external-customer payment for the relevant PCFlows offer.
 
-Record the Checkout Session/payment reference, offer, business/customer email, amount/currency, and payment status.
+Before fulfillment, verify the payment is live-mode, external rather than owner/test, successful and settled, not pending, and not refunded or disputed.
 
-Apply the Gmail label PCFlows/Paid Customer when the corresponding intake email arrives.
+If a genuine settled external payment somehow appears before 2026-10-01, stop normal fulfillment and flag it for review.
 
-## 2. Intake
+## 2. Canonical packages
 
-Stripe redirects the buyer to intake.html, carrying offer and session_id.
+### Focused Risk Check — EUR 79
+- one sanitized n8n workflow JSON export;
+- one agreed reliability risk area;
+- no included re-scan.
 
-The intake page creates a pre-filled email to pcmotionstudios@gmail.com.
+### Data Integrity Audit — EUR 149
+- one sanitized n8n workflow JSON export;
+- broader reliability/data-integrity review;
+- one asynchronous re-scan after remediation.
 
-Required metadata:
-- company;
-- business outcome;
-- connected systems by name;
-- symptom/risk;
-- n8n version + hosting type;
-- node count;
-- acceptance condition.
+### Portfolio / Release QA — EUR 399
+- up to three related sanitized n8n workflow JSON exports;
+- combined release-risk/reliability view;
+- one combined re-scan round.
 
-Required file:
-- one sanitized n8n workflow JSON export.
+## 3. Intake
 
-Reject or pause intake when secrets are present, personal/customer data is unnecessarily present, scope exceeds the purchased package, or the supplied export is not a single n8n workflow object.
+Stripe redirects the buyer to intake.html carrying offer and session_id.
 
-## 3. Static delivery pack
+Required metadata: company, business outcome, connected systems by name, symptom/risk, n8n version + hosting type, approximate node count per workflow, and acceptance condition.
 
-Run this command:
+Reject or pause intake when secrets are present, unnecessary personal/customer data is present, files exceed the purchased package, or exports are not valid n8n workflow objects.
+
+## 4. Static delivery pack
+
+For each workflow export in scope, run:
 
     python package_audit.py customer-workflow.json --output-dir delivery --order-ref CHECKOUT_SESSION_ID
 
-Expected output:
-- 01-audit-report.md
-- 02-audit-report.json
-- 03-client-summary.md
-- 04-synthetic-verification-plan.md
-- MANIFEST.json
+Expected output includes 01-audit-report.md, 02-audit-report.json, 03-client-summary.md, 04-synthetic-verification-plan.md and MANIFEST.json.
 
-The manifest cryptographically fingerprints both the supplied export and generated package files.
+For Portfolio / Release QA, keep per-workflow packs separate and add a combined manual release-risk summary; do not overwrite input hashes.
 
-## 4. Manual review gate
+## 5. Manual review gate
 
-The automated package is not the final paid audit by itself.
+The automated package is not the final paid deliverable by itself. Inspect critical/high findings, remove obvious heuristic false positives, add customer-specific context, ensure no secrets appear, keep recommendations within purchased scope, and confirm claims are evidence-backed.
 
-Before delivery:
-- inspect critical/high findings;
-- remove obvious heuristic false positives;
-- add concise context specific to the customer's stated business outcome;
-- ensure no secret values appear;
-- ensure recommendations remain within fixed scope;
-- confirm all claims are evidence-backed.
+## 6. Delivery and re-scan
 
-## 5. Delivery
+Send the final package to the paying business contact through the Inbox Operator workflow.
 
-Email the final package to the paying business contact.
+Purchased re-scan allowance:
+- Focused Risk Check: none;
+- Data Integrity Audit: one;
+- Portfolio / Release QA: one combined round.
 
-The delivery email should include the order reference, package scope, concise top risks, attached/final report files, reminder that static review is not production certification, and the next action for the synthetic verification plan.
+Preserve original and re-scan hashes separately.
 
-## 6. Re-scan
+## 7. Completion
 
-The EUR 249 audit includes one post-remediation re-scan.
+Mark an engagement complete only when deliverables were sent, the purchased re-scan allowance is completed or explicitly unused, no customer secrets remain in public repositories, and Stripe payment/refund/dispute state is reconciled.
 
-Use the new export as a separate input. Preserve both input hashes and never overwrite the original delivery pack.
-
-## 7. Retrofit
-
-The EUR 890 retrofit starts only after one specific accepted failure/risk is written down, the expected result is measurable, a rollback path is defined, and production secrets/access are not required by default.
-
-Create before/after evidence and include the exact export hashes.
-
-## 8. Completion
-
-Mark the engagement complete only when deliverables were sent, the purchased revision/re-scan allowance is either completed or explicitly unused, no customer secrets remain stored in public repositories, and Stripe payment/refund state is reconciled.
-
-Only settled non-refunded revenue counts toward the EUR 5,000 target.
+EUR 1,000 verified gross is the first minimum validation milestone, not a stop condition.
