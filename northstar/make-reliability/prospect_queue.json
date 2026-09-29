@@ -1,6 +1,6 @@
 {
   "schema": "pcflows.prospect-queue.v1",
-  "updated": "2026-09-28",
+  "updated": "2026-09-29",
   "launch_enabled": false,
   "launch_gate": "Belgian enterprise number + legally required VAT/e604 readiness before commercial activity + site identity + Stripe reactivation",
   "scoring_note": "Internal triage only; score is not a prediction of conversion probability.",
@@ -17,9 +17,10 @@
       "audit_first_fit": 3,
       "budget_signal": 2,
       "freshness": 2,
-      "competition_penalty": 2,
-      "proof_gap_penalty": 0,
-      "notes": "Duplicate submissions, failed automations, vendor reassignment. 50+ proposals; no interviews observed."
+      "competition_penalty": 3,
+      "proof_gap_penalty": 2,
+      "notes": "Fresh Upwork recheck on 2026-09-29: still visible, USD 25-47/hr, 50+ proposals, 0 interviewing, client last viewed last week. Excellent duplicate/failure/reassignment pain fit, but buyer asks for examples of similar real operational Make workflows. Do not imply nonexistent customer history; only offer a bounded EUR149/EUR399 architecture or reliability-QA milestone if accepted.",
+      "last_rechecked": "2026-09-29"
     },
     {
       "id": "upwork_b2b_onboarding",
@@ -27,15 +28,16 @@
       "channel": "upwork",
       "url": "https://www.upwork.com/freelance-jobs/apply/Zapier-Make-com-Automation-Expert-Needed-for-B2B-Client-Onboarding-Fixed-Rate-Per-Project_~022098817220936382782/",
       "observed_date": "2026-09-25",
-      "status": "watch_open",
-      "contact_after_launch": true,
+      "status": "unavailable_on_recheck",
+      "contact_after_launch": false,
       "problem_fit": 3,
       "audit_first_fit": 3,
       "budget_signal": 3,
-      "freshness": 2,
+      "freshness": 0,
       "competition_penalty": 1,
       "proof_gap_penalty": 0,
-      "notes": "USD 600 standard setup; reliable multi-step automation, webhooks/API troubleshooting, end-to-end testing."
+      "notes": "Fresh recheck on 2026-09-29 no longer resolves to the individual Upwork job and instead redirects to the generic jobs page. Treat as unavailable unless reposted.",
+      "last_rechecked": "2026-09-29"
     },
     {
       "id": "upwork_make_news_video",
@@ -43,15 +45,16 @@
       "channel": "upwork",
       "url": "https://www.upwork.com/freelance-jobs/apply/Make-com-News-Video-Automation_~022102865682167102192/",
       "observed_date": "2026-09-25",
-      "status": "watch_open",
+      "status": "p1_verified_current_listing",
       "contact_after_launch": true,
       "problem_fit": 3,
       "audit_first_fit": 2,
       "budget_signal": 3,
       "freshness": 3,
-      "competition_penalty": 1,
+      "competition_penalty": 2,
       "proof_gap_penalty": 0,
-      "notes": "Existing Make setup; error handling and duplicate-post protection; USD 500 fixed."
+      "notes": "Fresh Upwork recheck on 2026-09-29: USD 500 fixed, 20-50 proposals, 0 interviewing and no hire shown. Existing Make setup; explicit error handling, duplicate-post protection, review-before-publish, testing and handoff. Honest PCFlows scope: EUR149 reliability audit/review or EUR399 deeper release QA only if the buyer accepts an audit/QA milestone; do not claim full-build experience.",
+      "last_rechecked": "2026-09-29"
     },
     {
       "id": "upwork_automation_template",
@@ -171,16 +174,16 @@
       "channel": "upwork",
       "url": "https://www.upwork.com/freelance-jobs/apply/Make-com-Automation-Specialist-Troubleshooting_~022098474011690711653/",
       "observed_date": "2026-09-26",
-      "status": "p1_verified_current_listing",
-      "contact_after_launch": true,
+      "status": "closed_unavailable",
+      "contact_after_launch": false,
       "problem_fit": 3,
       "audit_first_fit": 3,
       "budget_signal": 2,
-      "freshness": 3,
+      "freshness": 0,
       "competition_penalty": 1,
       "proof_gap_penalty": 1,
-      "notes": "Current Upwork listing independently re-verified. Direct fit: review and QA existing Make.com scenarios, triggers/actions, mappings, webhooks/APIs, identify reliability issues, troubleshoot and recommend fixes. 15-20 proposals, 6 interviewing, client last viewed about 2 hours before re-check; client has about USD 29K prior spend and 80 hires. This is the first marketplace submission candidate once marketplace account access and commercial/VAT gates permit.",
-      "last_rechecked": "2026-09-28"
+      "notes": "Fresh Upwork recheck on 2026-09-29 shows the listing is no longer available. Remove from the submission queue.",
+      "last_rechecked": "2026-09-29"
     },
     {
       "id": "upwork_capacidesk_paid_qualification",
@@ -204,17 +207,18 @@
       "channel": "upwork",
       "url": "https://www.upwork.com/freelance-jobs/apply/Urgent-Make-com-Airtable-Expert-for-Business-Automation-Blueprint-Provided_~022104322611581701368/",
       "observed_date": "2026-09-28",
-      "status": "watch_post_build_qa_angle",
-      "contact_after_launch": true,
+      "status": "deprioritized_hired",
+      "contact_after_launch": false,
       "problem_fit": 3,
       "audit_first_fit": 2,
       "budget_signal": 3,
       "freshness": 3,
-      "competition_penalty": 1,
+      "competition_penalty": 3,
       "proof_gap_penalty": 1,
-      "notes": "USD 500. Buyer is deliberately dual-running legacy software and requiring a manual trial pipeline before going live. Flow touches AI extraction/rewrite, pricing grids, Xero invoices/quotes and Dropbox outputs. Strong Invoice & Payment Sync / AI Guardrails / release-QA relevance, but initial ask is implementation, so pitch only a bounded QA/review milestone if the buyer accepts that scope."
+      "notes": "Fresh Upwork recheck on 2026-09-29: USD 500 fixed, 50+ proposals, client viewed yesterday, 1 hire, 0 interviewing, and buyer requests a UK-based expert. Strong reliability demand signal, but no outreach now.",
+      "last_rechecked": "2026-09-29"
     }
   ],
   "owner_input_trigger": "First genuine external prospect who clearly wants to proceed commercially; then request VAT prerequisite before quote/contract/payment.",
-  "primary_marketplace_candidate": "upwork_make_qa_troubleshooting"
+  "primary_marketplace_candidate": "upwork_make_news_video"
 }
