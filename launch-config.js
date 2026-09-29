@@ -1,13 +1,18 @@
 window.PCFLOWS_CONFIG = Object.freeze({
   checkoutEnabled: false,
+  commercialStartAt: "2026-10-01T00:00:00+02:00",
   offers: {
-    audit: {
-      paymentUrl: "https://buy.stripe.com/14A7sMdqu1OneEL5QRgUM01",
-      amountEur: 249
+    focusedRiskCheck: {
+      paymentUrl: "https://buy.stripe.com/14AcN6dqu8cLeEL1ABgUM07",
+      amountEur: 79
     },
-    retrofit: {
-      paymentUrl: "https://buy.stripe.com/fZufZi2LQ2Sr54bbbbgUM02",
-      amountEur: 890
+    dataIntegrityAudit: {
+      paymentUrl: "https://buy.stripe.com/fZu4gA5Y2fFdbsz933gUM00",
+      amountEur: 149
+    },
+    portfolioReleaseQa: {
+      paymentUrl: "https://buy.stripe.com/fZu3cw0DIakTbsz6UVgUM08",
+      amountEur: 399
     }
   }
 });
