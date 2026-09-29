@@ -521,3 +521,52 @@ Proof gap / caution:
 - pursue only if the buyer accepts audit/QA as a distinct bounded phase rather than expecting PCFlows to deliver the full build.
 
 Priority: **P2 — launch-day re-check; strong reliability/data-integrity fit, bounded-scope viable, but a meaningful platform-proof gap remains.**
+
+
+### NEW P2 — Upwork: GoHighLevel lead-recovery workflow audit
+
+URL:
+https://www.upwork.com/freelance-jobs/apply/GoHighLevel-Marketing-Automation-Expert-for-Lead-Recovery_~022097373108010604271/
+
+Why this is unusually relevant:
+- this is an **existing workflow review**, not a greenfield-only brief;
+- the buyer explicitly wants the current logic reviewed, corrected and tested for re-entry, stop conditions, replies, bookings, opt-outs and overlapping workflow states;
+- the buyer explicitly wants testing for **duplicate/conflicting messages** and safe re-entry;
+- the buyer has already broken the engagement into milestones, with **USD 150 for “existing workflow audit and corrected system map”**, followed by implementation and final testing/handoff;
+- the overall project budget is **USD 750**.
+
+Freshness / competition at the 2026-09-29 public re-check:
+- posted about three weeks earlier;
+- **20–50 proposals**;
+- **0 interviewing** and no invites shown;
+- client activity showed **last viewed last week**.
+
+PCFlows fit:
+- **EUR 149** maps cleanly to the buyer's own first milestone: bounded workflow audit + corrected system map / prioritized reliability findings + verification checklist;
+- **EUR 79** only makes sense if the buyer narrows the scope to one defined reliability question;
+- **EUR 399** should not be proposed unless the buyer separately requests a broader multi-workflow release-QA scope;
+- PCFlows should not take the implementation milestone merely to win the work.
+
+Proof gap / caution:
+- the buyer asks for 2–3 examples of GoHighLevel systems personally designed or repaired and specifically values missed-call / lead-recovery experience;
+- PCFlows does **not** yet have that customer-history proof and must not imply otherwise;
+- if pursued on/after 2026-10-01, the proposal must lead with the bounded audit methodology and be explicit that the offer is independent QA/reliability review rather than a claim of prior GHL build history.
+
+Priority: **P2 — very strong audit-shape and price fit, but age + GHL-specific proof gap prevent P1. Re-check public availability on launch day.**
+
+### Material availability / competition changes — 2026-09-29 morning re-check
+
+- **Make.com QA & Troubleshooting** (previous NEW P1 from 2026-09-26): its direct public Upwork URL now redirects to a generic Automation Testing listings page instead of the job. Treat it as **currently unavailable / not actionable** unless the exact listing resolves again; do not spend launch-day application capacity on it.
+- **B2B Client Onboarding Automation**: its direct public Upwork URL now redirects to the generic Upwork jobs page instead of the listing. Treat it as **currently unavailable / not actionable** unless the exact post becomes directly accessible again.
+- **Make.com AI News Video Automation** remains publicly live: **USD 500 fixed**, posted 6 days ago, **20–50 proposals, 0 interviewing**. The existing Make setup plus explicit error handling and duplicate-post protection still make a bounded QA/release review defensible, but do not bid as the full content/video automation builder.
+- **Automation Template with OpenAI API** remains publicly live: **USD 450 fixed**, posted about 3 weeks ago, **20–50 proposals, 0 interviewing**. It remains a secondary pre-release QA angle because the buyer is primarily asking for the reusable architecture to be built.
+
+### Current launch-day shortlist after the 2026-09-29 re-check
+
+Subject to a fresh public check on/after **2026-10-01**:
+1. **Make.com AI News Video Automation** — strongest still-live direct Make reliability angle; target a bounded audit/release-QA phase around duplicate publication, error paths and handoff.
+2. **GoHighLevel + Make.com CRM / invoicing / lead-routing automation** — strong data-integrity fit, but only as a clearly separate EUR 149 QA phase and with the GHL proof gap stated honestly.
+3. **GoHighLevel lead-recovery workflow audit** — excellent audit-shaped milestone and duplicate/re-entry fit; P2 because the post is older and asks for GHL-specific prior systems.
+4. **Automation Template with OpenAI API** — useful pre-release QA angle, but less direct because the brief is mainly architecture/build work.
+
+Do not accept payment or perform paid client service before **2026-10-01**.
