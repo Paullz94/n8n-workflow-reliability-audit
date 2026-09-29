@@ -1,65 +1,63 @@
 # PCFlows Launch Gate
 
-This document defines the last owner-only prerequisites before paid sales can be activated.
+This document defines the remaining conditions before paid sales can be activated.
 
-## Commercial model
+## Commercial start
 
-PCFlows is B2B-only at launch.
+PCFlows is B2B-only at launch. Paid service, payment acceptance and invoicing begin **no earlier than 2026-10-01**.
 
-Do not accept consumer orders through the staged Stripe offers. The intended buyer is a company or professional team purchasing a fixed-scope technical workflow service for business use.
+Clearly labeled pre-launch B2B acquisition may run before that date, without implying paid fulfillment is already available.
 
-## Owner-only prerequisites
+## Completed owner prerequisites
 
-The owner has confirmed items 1-3 below are already complete. Paid checkout remains disabled until the remaining publication/account details are complete:
+1. Belgian KBO registration — complete; enterprise number **1043.055.054**.
+2. Social-insurance/tax readiness — owner confirmed complete.
+3. VAT status — owner confirmed in order. The numeric VAT identifier remains private until an actual customer needs it. VAT is not a blocker.
 
-1. Belgian KBO registration for the self-employed activity. — complete; enterprise number 1043.055.054 assigned
-2. Membership of a social insurance fund before starting the self-employed activity. — owner confirmed complete
-3. VAT status / VAT identification — pending explicit owner confirmation; do not infer a VAT number from enterprise number 1043.055.054.
-4. Registered business identity details available for publication:
-   - legal/trade name;
-   - registered business address;
-   - enterprise number — complete: 1043.055.054;
-   - VAT number/status where applicable;
-   - professional email;
-   - professional phone number.
-5. Stripe account updated with the final registration/tax information if required by Stripe.
+## Remaining public seller publication gate
 
-Do not publish a private home address or personal phone number from account data automatically. The owner must decide which legally valid registered/contact details are to be shown.
+The following values require deliberate owner-approved publication rather than inference from connected accounts:
+- legal seller name;
+- registered business address;
+- professional phone/contact number if used as a required public field.
 
-## Automated steps after the owner clears the gate
+Already known for public use:
+- trade name: PCFlows;
+- enterprise number: 1043.055.054;
+- professional email: pcmotionstudios@gmail.com;
+- non-sensitive VAT status statement.
 
-The KBO registration is complete. Once the owner provides or confirms the remaining public seller identity and VAT status, the operator can:
+Do not automatically publish a private home address, personal phone number or numeric VAT identifier.
 
-1. update the website legal-identification section;
-2. update Stripe business/tax fields that the connected account permits;
-3. activate the two staged B2B products;
-4. create Stripe Payment Links;
-5. configure the checkout wording and business-only confirmation;
-6. add the live checkout links to the website;
-7. run a non-live or otherwise safe checkout verification first where possible;
-8. activate the compliant B2B outreach workflow;
-9. monitor inbound leads and settled Stripe payments;
-10. count only real settled external-customer revenue toward the EUR 5,000 target.
+## Stripe / checkout state
 
-## Current staged offers
+Canonical staged offers:
+- Focused Risk Check — EUR 79;
+- Data Integrity Audit — EUR 149;
+- Portfolio / Release QA — EUR 399.
 
-- n8n Reliability Audit — EUR 249.
-- n8n Reliability Retrofit — EUR 890.
+The canonical products/prices are active in live-mode Stripe. Their Payment Links are deliberately **inactive** before launch.
 
-Both Stripe products are active. Their Payment Links are intentionally inactive, and the site checkout switch is off, while the publication gate remains open.
+The superseded EUR 249 n8n Reliability Audit and EUR 890 n8n Reliability Retrofit products/prices are inactive.
 
-## Outreach gate
+The public repository contains the correct staged Payment Link URLs, but checkoutEnabled remains false, site.js enforces the 2026-10-01 start date, seller identity must be complete, and Stripe links must be activated before public checkout is switched on.
 
-After registration is complete, outreach should prefer:
-- inbound requests;
-- generic legal-entity addresses such as info@, contact@ or sales@ when relevant and lawful;
-- public business contact forms;
-- opt-in or previously established business relationships.
+## Activation procedure
 
-Do not send unsolicited promotional mail to named natural-person work addresses without an applicable lawful basis or prior consent.
+On or after 2026-10-01, and only after the public seller identity gate is complete:
 
-## Capital rule
+1. verify Stripe/KYC shows no genuine owner action;
+2. activate all three canonical Payment Links;
+3. set checkoutEnabled=true in launch-config.js;
+4. run public CI;
+5. verify the legal page and all three checkout-to-intake redirects;
+6. verify the first real payment is external, settled, non-test and non-refunded;
+7. reconcile the payment before fulfillment.
 
-Optional owner capital budget: EUR 0.
+If a genuine settled external payment somehow appears before 2026-10-01, flag it for review instead of treating it as a normal order.
 
-Only settled PCFlows revenue may fund optional growth spend. Legally required registration/compliance costs are owner-only prerequisites because they must occur before the first lawful sale and therefore cannot be funded from future PCFlows revenue.
+## Commercial validation
+
+EUR 1,000 verified gross revenue is the first minimum validation milestone, not a stop condition. Continue acquiring and serving customers after the milestone.
+
+Only settled external-customer revenue counts. Tests, owner-funded transactions, pending/failed payments and refunds do not count.
