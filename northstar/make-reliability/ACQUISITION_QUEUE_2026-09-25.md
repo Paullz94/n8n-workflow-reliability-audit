@@ -490,3 +490,34 @@ If still open after registration:
 4. Reusable agency template — pre-release QA angle.
 
 Before submitting any proposal, re-check the live post. Do not use stale proposal counts as if they were current.
+
+
+---
+
+## Fresh demand re-check — 2026-09-29
+
+Paid client work still starts on **2026-10-01**. The opportunity below is launch preparation only until then.
+
+### NEW P2 — Upwork: GoHighLevel + Make.com CRM / invoicing / lead-routing automation
+
+URL:
+https://www.upwork.com/freelance-jobs/apply/GoHighLevel-GHL-Make-com-Automation-Expert-CRM-Setup-Workflow-Automation-API-Integration_~022102339702634857852/
+
+Why this is worth keeping:
+- fixed **USD 200** and the buyer explicitly says phased delivery is acceptable;
+- Make.com is used for lead intake/routing, invoicing/project setup, payment-status sync and other multi-system data movement;
+- the brief explicitly requires error handling, logging/failure alerts, reply/booking exit triggers, documentation and handoff;
+- at the 2026-09-29 re-check the post showed **20–50 proposals, 0 interviewing**, and very recent client viewing activity.
+
+PCFlows fit:
+- do **not** bid as the full GHL/Make implementation team;
+- if still open on/after 2026-10-01, the honest offer is a **EUR 149 single-scenario Data Integrity Audit / release-QA phase** around one high-impact flow, with duplicate/retry/failure-path and handoff verification;
+- **EUR 79** is only appropriate if the buyer narrows the request to one defined reliability question;
+- **EUR 399** is not justified against the advertised total project budget.
+
+Proof gap / caution:
+- the buyer explicitly asks for proven hands-on GoHighLevel + Make experience, including webhooks, HTTP modules and GHL API work;
+- PCFlows must not imply GHL client history, certification or production builds that do not exist;
+- pursue only if the buyer accepts audit/QA as a distinct bounded phase rather than expecting PCFlows to deliver the full build.
+
+Priority: **P2 — launch-day re-check; strong reliability/data-integrity fit, bounded-scope viable, but a meaningful platform-proof gap remains.**
