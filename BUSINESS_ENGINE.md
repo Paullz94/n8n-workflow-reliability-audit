@@ -1,80 +1,66 @@
 # PCFlows Revenue Engine
 
-Target: EUR 5,000 in payment-provider-verified gross revenue from unrelated external customers.
+First minimum validation milestone: **EUR 1,000 in payment-provider-verified gross revenue from unrelated external customers.**
+
+This is not a stop condition. Continue growth after the milestone through additional customers, conversion improvements, repeat demand and healthy delivery economics.
 
 ## Capital rule
 
-Owner capital budget: EUR 0.
+Owner capital budget for optional growth tools: EUR 0. External spend is allowed only from revenue PCFlows has already actually earned and settled.
 
-External spend is allowed only from revenue that PCFlows has already actually earned and settled. Reinvestment must be bounded, reversible where possible, and tied to a concrete acquisition, delivery, compliance, or infrastructure bottleneck. Do not spend anticipated revenue or ask the owner to pre-fund optional tools.
-
-Default reinvestment order after revenue exists:
-1. legally required operating/compliance costs;
-2. a bottleneck that directly increases paid conversion or delivery capacity;
-3. infrastructure that replaces recurring manual work;
-4. optional growth tools only after the first categories are covered.
-
-Keep a cash buffer rather than automatically spending every euro earned.
-
-## Offer ladder
+## Canonical offer ladder
 
 1. Free local n8n quick scan — lead magnet, no upload.
-2. n8n Reliability Audit — EUR 249 one-time; Stripe product is active, but its Payment Link and public checkout button remain disabled until final seller identity publication.
-3. n8n Reliability Retrofit — EUR 890 one-time; Stripe product is active, but its Payment Link and public checkout button remain disabled until final seller identity publication.
-4. Future recurring care offer only after real demand exists.
+2. Focused Risk Check — EUR 79 one-time.
+3. Data Integrity Audit — EUR 149 one-time.
+4. Portfolio / Release QA — EUR 399 one-time.
+5. Future recurring care only after real customer demand supports it.
+
+All three paid Stripe Payment Links are staged inactive before launch.
 
 ## Positioning
 
-Do not sell generic "AI automation". Sell a narrow operational outcome:
-- identify silent failure and partial-success risks;
-- reduce duplicate side effects;
-- review timeout/retry/error-routing posture;
-- create synthetic recovery evidence;
-- document rollback and handoff.
+Do not sell generic “AI automation”. Sell a narrow operational outcome: identify silent failure and partial-success risks, reduce duplicate side effects, review retry/error-routing posture, identify data-integrity risk, create synthetic verification guidance and document release/handoff risk.
 
-The public analyzer and synthetic fixtures are proof of technical capability. They are not customer case studies.
+The public analyzer and synthetic fixtures are proof of technical capability, not customer case studies.
 
-## Revenue math
+## Validation math
 
-- 6 retrofits = EUR 5,340.
-- 10 audits + 3 retrofits = EUR 5,160.
-- Treat gross revenue as validated only when Stripe shows settled external customer payments.
+Examples of ways to cross the first EUR 1,000 milestone:
+- 3 Portfolio / Release QA purchases = EUR 1,197;
+- 7 Data Integrity Audits = EUR 1,043;
+- 13 Focused Risk Checks = EUR 1,027.
+
+Do not optimize for merely crossing EUR 1,000; optimize for repeatable external demand and sustainable delivery.
 
 ## Acquisition engine
 
-Priority order:
-1. inbound from the free browser scan and GitHub proof repo;
-2. targeted B2B outreach to teams already using n8n or Make and showing a concrete reliability problem;
-3. technical content derived from real scanner rules and synthetic failures;
-4. referrals after completed paid work.
+Pre-launch B2B acquisition may run now, but must clearly state that paid service/payment acceptance starts no earlier than 2026-10-01.
+
+Prioritize inbound from the free browser scan and GitHub proof repo, narrowly targeted B2B outreach to teams with concrete reliability problems, technical content derived from scanner rules and synthetic failures, and referrals after completed work.
 
 Avoid bulk spam, fake reviews, fake case studies, manufactured urgency and claims of certification.
 
-## Intake
-
-Default intake email: pcmotionstudios@gmail.com
-
-Ask only for:
-- business outcome;
-- connected systems by name;
-- current symptom/risk;
-- n8n version + hosting type;
-- acceptance condition;
-- approximate node count.
-
-Do not request real secrets or production personal data. Private workflow material must be sanitized.
-
 ## Launch gate
 
-The owner has confirmed the Belgian registration/social-insurance/tax prerequisites are in order and supplied enterprise number 1043055054. Commercial checkout remains disabled until the remaining seller identity details are supplied and published accurately. Stripe products are active; staged Payment Links and public checkout buttons remain disabled.
+Completed:
+- Belgian KBO registration, enterprise number 1043.055.054;
+- owner-confirmed social-insurance/tax readiness;
+- owner-confirmed VAT status. The numeric VAT identifier remains private until an actual customer needs it.
 
-After the gate is cleared:
-1. activate the two Stripe products;
-2. create Payment Links;
-3. add those URLs to the pricing cards;
-4. verify a complete checkout in the appropriate environment;
-5. start targeted outreach and track only verified paid revenue.
+Still fail-closed:
+- remaining public seller identity/contact fields;
+- three staged Stripe Payment Links are inactive;
+- site checkoutEnabled remains false;
+- hard commercial start date is 2026-10-01.
+
+After the date is reached and the seller-publication gate is complete:
+1. verify Stripe/KYC has no outstanding owner action;
+2. activate the three canonical Payment Links;
+3. set checkoutEnabled=true;
+4. run CI and verify the public legal page plus checkout-to-intake path;
+5. reconcile each real external payment before fulfillment.
 
 ## Operating principle
 
-Automate analysis, qualification, delivery preparation, follow-up and reporting wherever the connected tools allow it. Escalate only actions that require the owner's legal identity, registration, KYC, credential entry, or explicit human approval.
+Automate analysis, qualification, delivery preparation, follow-up and reporting wherever connected tools allow it. Escalate only legal identity, KYC, credential entry, irreversible spend or other steps that genuinely require the owner.
