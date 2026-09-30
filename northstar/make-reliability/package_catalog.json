@@ -1,0 +1,134 @@
+{
+  "schema": "pcflows.package-catalog.v1",
+  "updated": "2026-09-25",
+  "currency": "EUR",
+  "checkout_enabled": false,
+  "packages": [
+    {
+      "id": "preflight_free",
+      "public_name": "Reliability Preflight",
+      "price_eur": 0,
+      "max_scenarios": 1,
+      "customer_fit": "Anyone who wants a first local static reliability check.",
+      "includes": [
+        "Local browser scan",
+        "Deterministic Make-specific findings",
+        "Severity and evidence",
+        "JSON and Markdown export"
+      ],
+      "excludes": [
+        "Contextual business prioritization",
+        "Custom audit report",
+        "Included re-scan"
+      ],
+      "automated": true
+    },
+    {
+      "id": "focused_risk_check",
+      "public_name": "Focused Risk Check",
+      "price_eur": 79,
+      "max_scenarios": 1,
+      "customer_fit": "One clearly defined concern in one sanitized scenario.",
+      "includes": [
+        "Deterministic scan",
+        "One chosen risk focus",
+        "Top prioritized findings for that focus",
+        "Short remediation checklist",
+        "Synthetic verification steps"
+      ],
+      "excludes": [
+        "Full cross-category audit",
+        "Included remediation re-scan"
+      ],
+      "automated": true
+    },
+    {
+      "id": "data_integrity_audit",
+      "public_name": "Data Integrity Audit",
+      "price_eur": 149,
+      "max_scenarios": 1,
+      "customer_fit": "One important workflow where duplicate, missing, out-of-order or unrecoverable work matters.",
+      "includes": [
+        "Full deterministic audit",
+        "Business-impact prioritization",
+        "Prevent / detect / recover plan",
+        "Verification checklist",
+        "One asynchronous re-scan",
+        "Automatic specialist mode when Lead Flow, Invoice & Payment Sync, or AI Workflow Guardrails context matches"
+      ],
+      "excludes": [
+        "Production implementation",
+        "Live account access",
+        "Continuous monitoring"
+      ],
+      "automated": true
+    },
+    {
+      "id": "portfolio_release_qa",
+      "public_name": "Portfolio / Release QA",
+      "price_eur": 399,
+      "max_scenarios": 3,
+      "customer_fit": "Agencies, freelancers, or teams handing over/releasing several related automations.",
+      "includes": [
+        "Up to 3 sanitized scenarios",
+        "Per-scenario deterministic audit",
+        "Combined risk summary",
+        "Release/handover checklist",
+        "Cross-scenario verification plan",
+        "One combined remediation re-scan round"
+      ],
+      "excludes": [
+        "Unlimited scenarios",
+        "Implementation retainer",
+        "Continuous monitoring"
+      ],
+      "automated": true
+    }
+  ],
+  "specialist_modes": [
+    {
+      "id": "lead_flow",
+      "name": "Lead Flow Reliability",
+      "price_behavior": "Included in Data Integrity Audit when context matches",
+      "examples": [
+        "duplicate CRM lead",
+        "double SMS/email",
+        "wrong sales owner",
+        "follow-up continues after reply/booking"
+      ]
+    },
+    {
+      "id": "invoice_payment",
+      "name": "Invoice & Payment Sync",
+      "price_behavior": "Included in Data Integrity Audit when context matches",
+      "examples": [
+        "duplicate invoice",
+        "partial payment marked paid",
+        "wrong customer matching",
+        "systems disagree on payment state"
+      ]
+    },
+    {
+      "id": "ai_guardrails",
+      "name": "AI Workflow Guardrails",
+      "price_behavior": "Included in Data Integrity Audit when context matches",
+      "examples": [
+        "malformed AI output",
+        "missing validation",
+        "unsafe customer/CRM action",
+        "human takeover not respected"
+      ]
+    },
+    {
+      "id": "client_onboarding",
+      "name": "Client Onboarding Reliability",
+      "price_behavior": "Included in Data Integrity Audit when context matches",
+      "examples": [
+        "project or folder created twice",
+        "welcome email sent but internal setup missing",
+        "onboarding stops halfway after API failure",
+        "automation continues after human handoff"
+      ]
+    }
+  ]
+}

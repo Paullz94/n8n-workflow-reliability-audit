@@ -1,0 +1,642 @@
+# PCFlows Pre-Launch Acquisition Queue
+
+Research date: 2026-09-25  
+Status: **research/preparation only — no paid outreach or live checkout before the Belgian enterprise/VAT launch gate**
+
+Purpose: keep a small, high-intent queue ready so PCFlows can start acquisition immediately after registration without mass-posting or improvising.
+
+## Scoring
+
+Each public signal is scored internally on:
+- **Problem fit** — reliability/data-integrity pain matches PCFlows.
+- **Audit-first fit** — buyer can benefit from diagnosis before implementation.
+- **Budget signal** — visible budget/spend or willingness to pay.
+- **Freshness** — recent activity.
+- **Channel fit** — PCFlows can respond legitimately after registration.
+- **Proof gap penalty** — subtract when the buyer explicitly requires production case studies/certification PCFlows does not yet have.
+
+Priority labels:
+- **P1** — first wave after launch.
+- **P2** — useful second wave / watch.
+- **RESEARCH ONLY** — valuable buyer signal but do not contact with AI-generated content.
+- **SKIP** — poor fit or honesty/proof constraint.
+
+---
+
+## P1 — first-wave targets after registration
+
+### 1. Upwork — Make.com Automation Expert Needed: Dropbox Workflow & Vendor Routing System
+URL:
+https://www.upwork.com/freelance-jobs/apply/Make-com-Automation-Expert-Needed-Dropbox-Workflow-Vendor-Routing-System_~022099482287866429576/
+
+Why it is relevant:
+- buyer explicitly asks how to handle duplicate submissions;
+- explicitly asks how to handle failed automations;
+- operational/high-volume workflow;
+- Make.com is central;
+- existing client spend indicates a real buyer rather than pure idea-stage research.
+
+Current observed state:
+- 50+ proposals;
+- 0 interviewing at last crawl;
+- client had roughly USD 1.8K spend and multiple hires.
+
+PCFlows angle:
+- do **not** compete as the cheapest full builder;
+- offer a bounded audit/verification pass on the proposed architecture or existing workflow before/handover;
+- emphasize duplicate-write, failure-path and vendor-reassignment verification.
+
+Fit: **high problem fit, medium conversion probability because competition is high.**
+
+---
+
+### 2. Upwork — AI Automation Specialist to Streamline Business Workflows
+URL:
+https://www.upwork.com/freelance-jobs/apply/Automation-Specialist-Streamline-Our-Business-Workflows_~022100777405998878845/
+
+Why it is relevant:
+- explicitly asks to debug/improve existing workflows;
+- asks for error handling, validation, retries and monitoring;
+- Make.com is one of the accepted platforms;
+- client has prior spend/hiring history.
+
+Observed:
+- USD 50 fixed;
+- 10–15 proposals;
+- one interview at crawl time.
+
+PCFlows angle:
+- the advertised budget is below the EUR 149 audit, so **do not force the paid audit**;
+- use as a buyer-language signal and possibly a narrow free/preflight-first relationship;
+- if applying after launch, be explicit that the fixed-scope PCFlows audit is separate from implementation.
+
+Fit: **strong pain fit; weak price fit. P1 only if the job remains open and scope supports a small audit milestone.**
+
+---
+
+### 3. Upwork — B2B Client Onboarding Automation
+URL:
+https://www.upwork.com/freelance-jobs/apply/Zapier-Make-com-Automation-Expert-Needed-for-B2B-Client-Onboarding-Fixed-Rate-Per-Project_~022098817220936382782/
+
+Why it is relevant:
+- USD 600 fixed standard setup;
+- reliable multi-step automation is explicitly required;
+- webhooks/API troubleshooting is explicitly required;
+- end-to-end testing is a deliverable;
+- ongoing/contract-to-hire potential.
+
+PCFlows angle:
+- a handoff/reliability audit can be framed as a bounded QA milestone around the finished onboarding flow;
+- focus on retries, duplicate lead/client creation, failure visibility and acceptance tests.
+
+Fit: **high budget + high reliability fit.**
+
+---
+
+### 4. Upwork — Make.com AI News Video Automation
+URL:
+https://www.upwork.com/freelance-jobs/apply/Make-com-News-Video-Automation_~022102865682167102192/
+
+Why it is relevant:
+- USD 500 fixed;
+- initial Make.com setup already exists;
+- requires error handling;
+- requires duplicate-post protection;
+- requires a working tested workflow and instructions.
+
+PCFlows angle:
+- audit the existing scenario before or after completion;
+- duplicate publication is a clear idempotency/business-side-effect problem;
+- verification can use synthetic/test content rather than production posting.
+
+Fit: **high audit-fit even though buyer is primarily seeking implementation.**
+
+---
+
+### 5. Upwork — Automation Template with OpenAI API
+URL:
+https://www.upwork.com/freelance-jobs/apply/Automation-Template-with-OpenAI-API_~022098444919224679789/
+
+Why it is relevant:
+- USD 450 fixed;
+- reusable master architecture intended for agency client deployments;
+- Make.com or n8n;
+- repeatability/handoff matters more than a one-off workflow.
+
+PCFlows angle:
+- reliability review of the reusable master template has leverage because errors would propagate to multiple client deployments;
+- position as a pre-release QA/data-integrity pass, not as generic build labor.
+
+Fit: **strong leverage fit; medium platform-specific fit because buyer may choose n8n.**
+
+---
+
+### 6. Upwork — AI Automation Consultation
+URL:
+https://www.upwork.com/freelance-jobs/apply/Automation-Consultation_~022100274931917570973/
+
+Why it is relevant:
+- USD 1,000 fixed;
+- buyer wants a review of existing business systems/workflows;
+- explicitly references Make.com;
+- buyer is already willing to pay for analysis before implementation.
+
+Caution:
+- requires proven experience with similar consultations for seven-figure businesses;
+- PCFlows must not imply client history/case studies it does not have.
+
+PCFlows angle:
+- only pursue if the proposal can honestly lead with the PCFlows audit methodology/tooling and explicitly distinguish that from missing enterprise case-study history.
+
+Fit: **high budget, medium product fit, significant proof-gap penalty.**
+
+---
+
+## P2 — watch / second-wave targets
+
+### 7. Upwork — Automation Specialist, EST-friendly
+URL:
+https://www.upwork.com/freelance-jobs/apply/Automation-Specialist-Work-from-Anywhere-EST-friendly_~022097382312851224869/
+
+Signal:
+- Make/n8n;
+- troubleshooting and optimizing existing workflows;
+- accurate CRM data normalization;
+- 3–6 month engagement;
+- USD 15–35/hr.
+
+Why not P1:
+- 50+ proposals / 46 interviewing at crawl time;
+- asks for physical proximity to Eastern Time Zone;
+- this is a staffing role, not a fixed audit product.
+
+Use:
+- buyer-language and future agency/subcontractor research.
+- do not bend location/experience claims to fit.
+
+---
+
+### 8. Upwork — Real-Time CRM ↔ Accounting Data Sync
+URL:
+https://www.upwork.com/freelance-jobs/apply/Automation-Expert-Needed-Real-Time-Data-Sync-Between-CRM-and-Accounting-Software_~022099803938899703478/
+
+Signal:
+- duplicate detection;
+- conflict resolution;
+- failed-sync alerts;
+- Make/n8n/Zapier;
+- accounting/business records make data integrity important.
+
+Why not P1:
+- at last crawl the job already showed one hire;
+- 50+ proposals.
+
+Use:
+- strong vertical proof that sync/data-integrity positioning is commercially meaningful.
+
+---
+
+### 9. Upwork — n8n / Make.com Data Cleanup & Automation
+URL:
+https://www.upwork.com/freelance-jobs/apply/n8n-Make-com-Automation-Specialist_~022090399504993038610/
+
+Signal:
+- remove duplicates/incorrect data;
+- build reliable data processing;
+- error handling and safeguards;
+- testing/documentation.
+
+Why not P1:
+- one hire already recorded;
+- 50+ proposals;
+- buyer asks for 2–3 examples of similar prior client work.
+
+Use:
+- demand evidence and wording research.
+
+---
+
+### 10. Make Community — MCA CRM automation audit-first request
+URL:
+https://community.make.com/t/need-make-airtable-expert-to-finish-mca-crm-automation/113875
+
+Buyer explicitly says:
+- existing scenario mostly built;
+- prevent duplicates;
+- prevent good fields being overwritten by blanks;
+- separate source authority;
+- proper error handling;
+- **open to paying for a short audit first**.
+
+This is almost a textbook PCFlows problem.
+
+However:
+- Make Community currently prohibits AI-generated/automated community content under its guidelines.
+- Do **not** post or DM AI-generated PCFlows sales copy into the community.
+- Keep this as product-validation evidence unless Paul personally writes/participates in compliance with the current rules.
+
+Priority: **RESEARCH ONLY despite exceptional product fit.**
+
+---
+
+### 11. Make Community — Long-Term Airtable + Make Automation Systems Specialist
+URL:
+https://community.make.com/t/hiring-long-term-airtable-make-automation-systems-specialist-18-25-hr/113873
+
+Buyer pain:
+- critical automations;
+- redundancy;
+- reliability;
+- retries;
+- duplicate prevention;
+- failed execution handling;
+- logging/monitoring;
+- documentation and safe production changes.
+
+Constraint:
+- explicitly requests real hands-on production experience with both Airtable + Make and proof of a system built personally.
+
+PCFlows use:
+- **RESEARCH ONLY / SKIP as a direct application** until real customer proof exists.
+- excellent list of the outcomes serious automation operators pay for.
+
+---
+
+### 12. Make Community — Senior Make.com architect / deterministic system
+URL:
+https://community.make.com/t/hiring-a-senior-make-com-architect-to-implement-an-existing-deterministic-automation-system-for-proposals-dispatch-billing-support-and-document-signing/104260
+
+Buyer explicitly values:
+- idempotency;
+- retries/recovery;
+- no duplicate billing/dispatch;
+- explicit state machines;
+- deterministic logic over AI judgment;
+- recovery documentation.
+
+This strongly validates PCFlows' conceptual direction.
+
+Constraint:
+- senior implementation/certified-partner preference;
+- not an honest first-client application for PCFlows.
+
+Priority: **RESEARCH ONLY.**
+
+---
+
+### 13. Make Community — Growing automation agency technical pro
+URL:
+https://community.make.com/t/technical-pro-make-for-growing-automation-agency/107876
+
+Signal:
+- automation agency has delivery demand/capacity pressure;
+- implementation, testing, error handling and documentation are valued;
+- agency partnerships are a potentially attractive future channel because one agency can produce repeated audits.
+
+Use:
+- watch as a future **agency partnership** archetype after PCFlows has real audit examples.
+
+Priority: **RESEARCH ONLY before proof + due community AI-content restriction.**
+
+---
+
+### 14. Make Community — Marketing automation integration
+URL:
+https://community.make.com/t/title-marketing-automation-expert-needed-for-mailer-selection-make-com-integration-and-website-setup/113291
+
+Signal:
+- buyer requires contact sync without duplicates;
+- Make integration;
+- testing of data flow.
+
+Use:
+- validates duplicate-prevention as ordinary business value, not just an advanced engineering concern.
+
+Priority: **RESEARCH ONLY.**
+
+---
+
+### 15. Make Community — WhatsApp + Claude + Gmail approval workflow
+URL:
+https://community.make.com/t/looking-for-a-freelancer-whatsapp-api-ai-automation-expert/109983
+
+Signal:
+- customer-facing AI output;
+- approval state;
+- webhook/API integration;
+- replies in thread mention logging, error handling and idempotency.
+
+Use:
+- future vertical for “human approval / exactly-once send” reliability audits.
+
+Priority: **RESEARCH ONLY.**
+
+---
+
+## Demand-language signals — not prospects
+
+These are useful for copy/product design, not outreach.
+
+### Reddit — “scenario successful, output empty”
+URL:
+https://www.reddit.com/r/nocode/comments/1s9j43x/makecom_scenario_runs_successfully_output_is/
+
+Signal:
+- green execution;
+- no platform error;
+- useful business output missing;
+- user asks how to detect silent logic breaks.
+
+PCFlows copy implication:
+“Successful execution is not the same as successful business outcome.”
+
+### Reddit — debugging pain in production Make scenarios
+URL:
+https://www.reddit.com/r/Make/comments/1wjjlq8/whats_the_most_frustrating_part_of_debugging_a/
+
+Signals in discussion:
+- upstream mapping/data-shape changes;
+- edge cases that do not necessarily throw errors;
+- complexity rises with scenario size;
+- correct error-handler use matters.
+
+### Make Community — production migration / DLQ discussions
+Examples:
+- https://www.reddit.com/r/Make/comments/1rnqrm7/i_migrated_15_airtable_modules_to_supabase_in_a/
+- https://www.reddit.com/r/Make/comments/1rr6h58/psa_replaying_makecom_dlq_items_uses_the_old/
+
+Signal:
+- production operators run into state/recovery behavior that is not obvious from the happy path.
+- useful roadmap evidence for later runtime-evidence analysis, not a reason to expand the pilot yet.
+
+---
+
+## First launch wave — planned cadence
+
+Do **not** blast every target at once.
+
+After registration/VAT/checkout activation:
+
+### Day 1
+- re-check all P1 links for current availability;
+- select the **best 2** still-open opportunities;
+- submit at most 2 platform-native tailored applications;
+- no duplicated boilerplate;
+- no unsupported case-study claims.
+
+### Day 2
+- observe views/replies;
+- if no negative signal, submit **1–2** additional high-fit applications;
+- keep outreach on-platform.
+
+### Day 3–5
+- evaluate:
+  - proposal views;
+  - replies;
+  - requests for proof;
+  - price objections;
+  - mismatch between audit and implementation demand.
+- adjust positioning only from actual evidence.
+
+### Direct website
+- keep free scanner live;
+- paid CTA only after legal activation;
+- do not run paid ads during the first validation cycle.
+
+---
+
+## Proposal truth policy
+
+Never claim:
+- years of Make.com client experience PCFlows does not have;
+- customer case studies/testimonials that do not exist;
+- Make certification/partner status;
+- production systems personally delivered when only synthetic/internal validation exists.
+
+Truthful proof available at launch:
+- public local scanner;
+- transparent method page;
+- synthetic sample report;
+- official Make-reference-backed rules;
+- deterministic before/after re-scan;
+- privacy-bounded workflow;
+- explicit limitations.
+
+---
+
+## The first hypothesis to test
+
+The strongest buyer pattern is **not** “I need somebody to build a Make scenario.”
+
+It is:
+
+> “I already have or am receiving an important workflow and I need confidence that retries, failures, duplicates, ordering and recovery will not corrupt the business process.”
+
+That is the niche PCFlows should test first.
+
+
+---
+
+## Fresh demand re-check — 2026-09-26
+
+Registration/checkout is still closed. The items below are **preparation only** until the Belgian enterprise/VAT launch gate is complete.
+
+### NEW P1 — Upwork: Make.com Automation Specialist — QA & Troubleshooting
+
+URL:
+https://www.upwork.com/freelance-jobs/apply/Make-com-Automation-Specialist-Troubleshooting_~022098474011690711653/
+
+Why this moves to the front of the launch queue:
+- the buyer explicitly wants existing Make.com scenarios **reviewed and tested** rather than a greenfield build;
+- scope names data mapping, webhooks, APIs, third-party integrations, workflow errors and reliability issues;
+- QA support is the engagement itself, which is unusually close to the current PCFlows audit/QA offer;
+- the client has substantial marketplace history/spend, so this is a stronger buyer signal than an idea-stage post.
+
+Observed at re-check:
+- hourly, under 30h/week;
+- 1–3 month engagement;
+- 15–20 proposals;
+- 6 interviewing.
+
+PCFlows angle:
+- propose a small bounded first milestone: sanitized scenario review + prioritized reliability/data-integrity findings + verification checklist;
+- do **not** claim that PCFlows will edit production or independently verify runtime fixes unless that separate access/proof scope exists;
+- if the buyer requires direct implementation from day one, keep scope truthful rather than stretching the product.
+
+Priority: **P1 launch-day re-check.**
+
+### New research signal — Upwork: CapaciDesk paid qualification
+
+URL:
+https://www.upwork.com/freelance-jobs/apply/Automation-Specialist-for-Paid-Qualification-Project-n8n-Make-CRM-API-Integrations_~022101749575310645866/
+
+Why it matters:
+- the evaluation explicitly scores duplicate prevention/idempotency, temporary API failure handling/retries, logging and repeated-failure alerts;
+- it is a paid qualification into a possible white-label supplier network;
+- this independently validates the same reliability outcomes PCFlows sells.
+
+Why it is **not** a launch-day PCFlows audit pitch:
+- the immediate paid task is to **build** a workflow, not merely audit one;
+- first-€1,000 strategy is intentionally audit/QA-first and must not promise implementation capability that is outside the current public scope.
+
+Priority: **RESEARCH / future agency-channel signal unless the buyer explicitly accepts a bounded QA-only milestone.**
+
+### Launch-day order after this re-check
+
+If still open after registration:
+1. Make.com QA & Troubleshooting — best direct current-product fit.
+2. B2B Client Onboarding — propose a bounded QA/handoff milestone, not the full implementation.
+3. Existing Make news/video automation — duplicate-publication/retry QA angle.
+4. Reusable agency template — pre-release QA angle.
+
+Before submitting any proposal, re-check the live post. Do not use stale proposal counts as if they were current.
+
+
+---
+
+## Fresh demand re-check — 2026-09-29
+
+Paid client work still starts on **2026-10-01**. The opportunity below is launch preparation only until then.
+
+### NEW P2 — Upwork: GoHighLevel + Make.com CRM / invoicing / lead-routing automation
+
+URL:
+https://www.upwork.com/freelance-jobs/apply/GoHighLevel-GHL-Make-com-Automation-Expert-CRM-Setup-Workflow-Automation-API-Integration_~022102339702634857852/
+
+Why this is worth keeping:
+- fixed **USD 200** and the buyer explicitly says phased delivery is acceptable;
+- Make.com is used for lead intake/routing, invoicing/project setup, payment-status sync and other multi-system data movement;
+- the brief explicitly requires error handling, logging/failure alerts, reply/booking exit triggers, documentation and handoff;
+- at the 2026-09-29 re-check the post showed **20–50 proposals, 0 interviewing**, and very recent client viewing activity.
+
+PCFlows fit:
+- do **not** bid as the full GHL/Make implementation team;
+- if still open on/after 2026-10-01, the honest offer is a **EUR 149 single-scenario Data Integrity Audit / release-QA phase** around one high-impact flow, with duplicate/retry/failure-path and handoff verification;
+- **EUR 79** is only appropriate if the buyer narrows the request to one defined reliability question;
+- **EUR 399** is not justified against the advertised total project budget.
+
+Proof gap / caution:
+- the buyer explicitly asks for proven hands-on GoHighLevel + Make experience, including webhooks, HTTP modules and GHL API work;
+- PCFlows must not imply GHL client history, certification or production builds that do not exist;
+- pursue only if the buyer accepts audit/QA as a distinct bounded phase rather than expecting PCFlows to deliver the full build.
+
+Priority: **P2 — launch-day re-check; strong reliability/data-integrity fit, bounded-scope viable, but a meaningful platform-proof gap remains.**
+
+
+### NEW P2 — Upwork: GoHighLevel lead-recovery workflow audit
+
+URL:
+https://www.upwork.com/freelance-jobs/apply/GoHighLevel-Marketing-Automation-Expert-for-Lead-Recovery_~022097373108010604271/
+
+Why this is unusually relevant:
+- this is an **existing workflow review**, not a greenfield-only brief;
+- the buyer explicitly wants the current logic reviewed, corrected and tested for re-entry, stop conditions, replies, bookings, opt-outs and overlapping workflow states;
+- the buyer explicitly wants testing for **duplicate/conflicting messages** and safe re-entry;
+- the buyer has already broken the engagement into milestones, with **USD 150 for “existing workflow audit and corrected system map”**, followed by implementation and final testing/handoff;
+- the overall project budget is **USD 750**.
+
+Freshness / competition at the 2026-09-29 public re-check:
+- posted about three weeks earlier;
+- **20–50 proposals**;
+- **0 interviewing** and no invites shown;
+- client activity showed **last viewed last week**.
+
+PCFlows fit:
+- **EUR 149** maps cleanly to the buyer's own first milestone: bounded workflow audit + corrected system map / prioritized reliability findings + verification checklist;
+- **EUR 79** only makes sense if the buyer narrows the scope to one defined reliability question;
+- **EUR 399** should not be proposed unless the buyer separately requests a broader multi-workflow release-QA scope;
+- PCFlows should not take the implementation milestone merely to win the work.
+
+Proof gap / caution:
+- the buyer asks for 2–3 examples of GoHighLevel systems personally designed or repaired and specifically values missed-call / lead-recovery experience;
+- PCFlows does **not** yet have that customer-history proof and must not imply otherwise;
+- if pursued on/after 2026-10-01, the proposal must lead with the bounded audit methodology and be explicit that the offer is independent QA/reliability review rather than a claim of prior GHL build history.
+
+Priority: **P2 — very strong audit-shape and price fit, but age + GHL-specific proof gap prevent P1. Re-check public availability on launch day.**
+
+### Material availability / competition changes — 2026-09-29 morning re-check
+
+- **Make.com QA & Troubleshooting** (previous NEW P1 from 2026-09-26): its direct public Upwork URL now redirects to a generic Automation Testing listings page instead of the job. Treat it as **currently unavailable / not actionable** unless the exact listing resolves again; do not spend launch-day application capacity on it.
+- **B2B Client Onboarding Automation**: its direct public Upwork URL now redirects to the generic Upwork jobs page instead of the listing. Treat it as **currently unavailable / not actionable** unless the exact post becomes directly accessible again.
+- **Make.com AI News Video Automation** remains publicly live: **USD 500 fixed**, posted 6 days ago, **20–50 proposals, 0 interviewing**. The existing Make setup plus explicit error handling and duplicate-post protection still make a bounded QA/release review defensible, but do not bid as the full content/video automation builder.
+- **Automation Template with OpenAI API** remains publicly live: **USD 450 fixed**, posted about 3 weeks ago, **20–50 proposals, 0 interviewing**. It remains a secondary pre-release QA angle because the buyer is primarily asking for the reusable architecture to be built.
+
+### Current launch-day shortlist after the 2026-09-29 re-check
+
+Subject to a fresh public check on/after **2026-10-01**:
+1. **Make.com AI News Video Automation** — strongest still-live direct Make reliability angle; target a bounded audit/release-QA phase around duplicate publication, error paths and handoff.
+2. **GoHighLevel + Make.com CRM / invoicing / lead-routing automation** — strong data-integrity fit, but only as a clearly separate EUR 149 QA phase and with the GHL proof gap stated honestly.
+3. **GoHighLevel lead-recovery workflow audit** — excellent audit-shaped milestone and duplicate/re-entry fit; P2 because the post is older and asks for GHL-specific prior systems.
+4. **Automation Template with OpenAI API** — useful pre-release QA angle, but less direct because the brief is mainly architecture/build work.
+
+Do not accept payment or perform paid client service before **2026-10-01**.
+
+
+---
+
+## Fresh demand re-check — 2026-09-30
+
+Paid client work starts on **2026-10-01**. The checks below are launch-eve acquisition research only; do not accept payment or perform paid service before that date.
+
+### NEW P2 — Upwork: AI Automation Specialist — Existing Workflow Automation & Error Handling
+
+URL:
+https://www.upwork.com/freelance-jobs/apply/Automation-Specialist-Existing-Workflow-Automation-Error-Handling_~022104533100819533048/
+
+Why this is a strong PCFlows fit:
+- the buyer explicitly wants **existing workflows audited, debugged and optimized**, rather than only a greenfield build;
+- the brief names failed or inconsistent runs, retries, fallbacks, exceptions, API/webhook/data/authentication problems, logging and monitoring;
+- it explicitly asks to prevent **duplicate actions**, handle edge cases, test thoroughly and document fixes/recommendations;
+- Make.com is one of the accepted platforms.
+
+Freshness / competition at the 2026-09-30 public re-check:
+- posted **2 days ago**;
+- **USD 150 fixed**;
+- **50+ proposals**;
+- **1 hire**;
+- **0 interviewing** shown;
+- client last viewed the post **2 days ago**.
+
+PCFlows fit:
+- **EUR 79** is the cleanest honest entry point if the buyer accepts a narrow single-workflow / single-risk reliability review within the advertised budget;
+- **EUR 149** is only defensible if the buyer explicitly accepts a separate, broader audit milestone despite the advertised USD 150 total;
+- **EUR 399** is not justified by the visible budget;
+- keep the offer audit/QA-first: findings, risk ranking, duplicate/retry/failure-path review and verification checklist; do not present PCFlows as the full implementation agency.
+
+Proof gap / caution:
+- the buyer asks for experienced automation/API/LLM troubleshooting, but the public brief does not require named customer case studies;
+- PCFlows may truthfully point to its public scanner, transparent method, synthetic sample report and deterministic verification approach;
+- do **not** imply customer history, certification or production systems that do not exist.
+
+Priority: **P2 — exceptionally close pain fit, but 50+ proposals and one existing hire materially reduce conversion probability. Re-check availability on 2026-10-01 before spending an application slot.**
+
+### Material change — GoHighLevel + Make.com CRM / invoicing / lead-routing automation
+
+URL:
+https://www.upwork.com/freelance-jobs/apply/GoHighLevel-GHL-Make-com-Automation-Expert-CRM-Setup-Workflow-Automation-API-Integration_~022102339702634857852/
+
+The 2026-09-30 public re-check now shows:
+- **USD 200 fixed**;
+- **20–50 proposals**;
+- **1 hire**;
+- **0 interviewing** shown;
+- client last viewed the post **4 days ago**.
+
+This is a material negative change from the 2026-09-29 queue state. The reliability/data-integrity fit remains real, but the buyer has already hired once and the GHL-specific proof gap remains.
+
+Action:
+- **deprioritize** this target behind still-unfilled audit-shaped opportunities;
+- do not spend launch-day capacity on it unless the listing shows renewed buyer activity or a distinct QA/release phase.
+
+### Launch-eve shortlist for 2026-10-01
+
+Subject to a fresh public check immediately before any application:
+
+1. **Make.com AI News Video Automation** — still publicly live at the 2026-09-30 check: **USD 500 fixed, 20–50 proposals, 0 interviewing**. Existing Make setup plus explicit error handling and duplicate-post protection still make a bounded release-QA audit the strongest live direct Make angle.
+2. **GoHighLevel lead-recovery workflow audit** — still **USD 750 total** with a buyer-defined **USD 150 audit/system-map milestone**, **20–50 proposals, 0 interviewing**. Excellent audit shape; keep the GHL experience proof gap explicit.
+3. **Existing Workflow Automation & Error Handling** — strongest direct pain-language fit discovered today, but already **50+ proposals and 1 hire**. Only use a launch slot if still open and the buyer accepts a bounded **EUR 79** audit/preflight rather than broad implementation.
+4. **Automation Template with OpenAI API** — still **USD 450 fixed, 20–50 proposals, 0 interviewing**. Keep as a secondary pre-release QA angle because the main brief is architecture/build work.
+
+**Deprioritized:** GoHighLevel + Make CRM/invoicing/lead-routing job because it now shows **1 hire**.
+
+No exceptional zero-friction, time-sensitive opportunity was found that justifies interrupting the owner for marketplace login/KYC/account authorization before launch.

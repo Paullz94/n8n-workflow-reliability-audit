@@ -1,0 +1,125 @@
+{
+  "schema": "pcflows.stripe-checkout-spec.v1",
+  "updated": "2026-09-25",
+  "global": {
+    "currency": "eur",
+    "billing_address_collection": "required",
+    "tax_id_collection_enabled": true,
+    "after_completion_redirect": "https://paullz94.github.io/n8n-workflow-reliability-audit/thanks.html?session_id={CHECKOUT_SESSION_ID}",
+    "inactive_message": "PCFlows is completing business registration. Checkout will reopen after the official registration and VAT setup are confirmed.",
+    "production_credentials_notice": "Do not include production credentials, passwords, API keys, private Make webhook URLs, customer records, or other secrets.",
+    "buying_as": {
+      "type": "dropdown",
+      "required": true,
+      "options": [
+        {
+          "value": "individual",
+          "label": "Individual / consumer"
+        },
+        {
+          "value": "business",
+          "label": "Business / professional customer"
+        }
+      ]
+    }
+  },
+  "packages": {
+    "focused_risk_check": {
+      "price_id": "price_1UJfIULEUPyOUtb0PVbLXkFt",
+      "amount_cents": 7900,
+      "payment_link_status": "not_created_until_launch_gate",
+      "metadata": {
+        "pcflows_package": "focused_risk_check",
+        "northstar_pilot": "true"
+      },
+      "fields": [
+        {
+          "key": "scenario_name",
+          "type": "text",
+          "required": true,
+          "label": "Scenario name"
+        },
+        {
+          "key": "risk_focus",
+          "type": "dropdown",
+          "required": true,
+          "label": "Risk focus",
+          "options": [
+            {
+              "value": "duplicates",
+              "label": "Duplicate effects / idempotency"
+            },
+            {
+              "value": "silent_skips",
+              "label": "Silent skips / missing work"
+            },
+            {
+              "value": "recovery",
+              "label": "Failure recovery"
+            },
+            {
+              "value": "ordering",
+              "label": "Concurrency / ordering"
+            }
+          ]
+        }
+      ]
+    },
+    "data_integrity_audit": {
+      "price_id": "price_1UJYXlLEUPyOUtb0yovnfhH0",
+      "amount_cents": 14900,
+      "payment_link_id": "plink_1UJYXyLEUPyOUtb0elSom4yX",
+      "payment_link_status": "inactive",
+      "metadata": {
+        "pcflows_package": "data_integrity_audit",
+        "northstar_offer": "make_data_integrity_audit",
+        "northstar_pilot": "true"
+      },
+      "fields": [
+        {
+          "key": "scenario_name",
+          "type": "text",
+          "required": true,
+          "label": "Scenario name"
+        }
+      ]
+    },
+    "portfolio_release_qa": {
+      "price_id": "price_1UJfIWLEUPyOUtb0EfhLDC8P",
+      "amount_cents": 39900,
+      "payment_link_status": "not_created_until_launch_gate",
+      "metadata": {
+        "pcflows_package": "portfolio_release_qa",
+        "northstar_pilot": "true"
+      },
+      "fields": [
+        {
+          "key": "portfolio_name",
+          "type": "text",
+          "required": true,
+          "label": "Portfolio / release name"
+        },
+        {
+          "key": "scenario_count",
+          "type": "dropdown",
+          "required": true,
+          "label": "Scenario count",
+          "options": [
+            {
+              "value": "1",
+              "label": "1 scenario"
+            },
+            {
+              "value": "2",
+              "label": "2 scenarios"
+            },
+            {
+              "value": "3",
+              "label": "3 scenarios"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "scenario_name": "Synthetic order intake",
+  "business_goal": "Accept each order exactly once and record the same final state in the CRM, downstream API and order ledger.",
+  "critical_side_effects": [
+    "Update customer/order state",
+    "POST order to downstream API",
+    "Append order to ledger"
+  ],
+  "duplicate_tolerance": "none",
+  "ordering_required": true,
+  "recovery_expectation": "Every accepted order must be recoverable after a transient downstream failure."
+}

@@ -1,0 +1,48 @@
+{
+  "name": "Synthetic Client Onboarding",
+  "flow": [
+    {
+      "id": 1,
+      "module": "gateway:CustomWebHook",
+      "mapper": {}
+    },
+    {
+      "id": 2,
+      "module": "crm:createContact",
+      "mapper": {
+        "email": "{{1.email}}"
+      }
+    },
+    {
+      "id": 3,
+      "module": "project:createProject",
+      "mapper": {
+        "client_id": "{{1.client_id}}"
+      }
+    },
+    {
+      "id": 4,
+      "module": "drive:createFolder",
+      "mapper": {
+        "name": "{{1.client_name}}"
+      }
+    },
+    {
+      "id": 5,
+      "module": "email:sendMessage",
+      "mapper": {
+        "to": "{{1.email}}",
+        "body": "Welcome"
+      }
+    }
+  ],
+  "metadata": {
+    "instant": true,
+    "scenario": {
+      "sequential": false,
+      "dlq": false,
+      "dataloss": false,
+      "confidential": true
+    }
+  }
+}

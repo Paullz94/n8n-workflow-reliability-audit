@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Northstar Make Reliability Preflight</title>
+  <style>
+    :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color-scheme:dark;background:#0d1117;color:#e6edf3}
+    *{box-sizing:border-box} body{margin:0;min-height:100vh;background:linear-gradient(180deg,#101722,#0d1117 45%);color:#e6edf3}
+    main{width:min(980px,calc(100% - 32px));margin:0 auto;padding:48px 0 72px}
+    .eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:#8b949e}.hero h1{font-size:clamp(32px,6vw,54px);line-height:1.02;margin:10px 0 14px}.hero p{max-width:760px;color:#9da7b3;line-height:1.6}
+    .privacy{display:inline-flex;gap:8px;align-items:center;border:1px solid #2d3744;background:#121a24;border-radius:999px;padding:8px 12px;font-size:13px;color:#c7d1db;margin:14px 0 28px}
+    .card{border:1px solid #30363d;background:#0f151d;border-radius:18px;padding:20px;margin:18px 0;box-shadow:0 14px 38px rgba(0,0,0,.18)}
+    label{display:block;font-weight:650;margin-bottom:8px} textarea{width:100%;min-height:230px;resize:vertical;background:#090d12;border:1px solid #30363d;border-radius:12px;color:#e6edf3;padding:14px;font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace}
+    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.button,button{border:0;border-radius:10px;padding:11px 15px;font-weight:700;cursor:pointer}.primary{background:#f0f6fc;color:#0d1117}.secondary{background:#21262d;color:#e6edf3;border:1px solid #30363d}.button input{display:none}.muted{color:#8b949e;font-size:13px}.status{margin-left:auto;color:#8b949e;font-size:13px}
+    .summary{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:14px 0}.metric{background:#090d12;border:1px solid #282f38;border-radius:12px;padding:12px}.metric b{display:block;font-size:24px}.metric span{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:#8b949e}
+    .finding{border-left:3px solid #6e7681;padding:12px 14px;margin:10px 0;background:#0b1016;border-radius:0 10px 10px 0}.finding[data-severity="critical"]{border-color:#f85149}.finding[data-severity="high"]{border-color:#db6d28}.finding[data-severity="medium"]{border-color:#d29922}.finding[data-severity="low"]{border-color:#58a6ff}.finding h3{margin:0 0 5px;font-size:15px}.finding p{margin:4px 0;color:#b4bec8;line-height:1.5}.meta{font:12px ui-monospace,SFMono-Regular,Menlo,monospace;color:#768390;word-break:break-word}
+    .scope{font-size:13px;color:#8b949e;line-height:1.6}.hidden{display:none!important}@media(max-width:700px){main{width:min(100% - 20px,980px);padding-top:28px}.summary{grid-template-columns:repeat(2,minmax(0,1fr))}.status{width:100%;margin-left:0}}
+  </style>
+</head>
+<body>
+<main>
+  <section class="hero">
+    <div class="eyebrow">Project Northstar Ledger · Make.com</div>
+    <h1>Reliability Preflight</h1>
+    <p>Scan a sanitized Make scenario blueprint for static reliability and data-integrity risks before they become duplicate writes, silent skips, recovery gaps or concurrency surprises.</p>
+    <div class="privacy">Local-only core scan · no upload · no account token</div>
+  </section>
+
+  <section class="card">
+    <label for="blueprint">Blueprint JSON</label>
+    <textarea id="blueprint" spellcheck="false" placeholder='Paste an exported Make blueprint here, or choose a local .json file.'></textarea>
+    <div class="row" style="margin-top:12px">
+      <label class="button secondary" for="file">Choose JSON<input id="file" type="file" accept="application/json,.json"></label>
+      <button class="primary" id="scan" type="button">Run local scan</button>
+      <button class="secondary" id="clear" type="button">Clear</button>
+      <span class="status" id="status">Nothing leaves this page.</span>
+    </div>
+  </section>
+
+  <section class="card hidden" id="results">
+    <div class="row"><div><div class="eyebrow">Static result</div><h2 style="margin:5px 0 0">Reliability findings</h2></div><span class="status" id="source"></span></div>
+    <div class="summary" id="summary"></div>
+    <div id="findings"></div>
+    <div class="row" style="margin-top:16px">
+      <button class="secondary" id="downloadJson" type="button">Download JSON</button>
+      <button class="secondary" id="downloadMd" type="button">Download Markdown</button>
+    </div>
+  </section>
+
+  <section class="card scope">
+    <strong>Scope.</strong> This preflight performs deterministic static checks only. It does not prove runtime correctness, credential validity, third-party availability, data quality or business outcomes. Sanitize exported blueprints before sharing them anywhere.
+  </section>
+</main>
+<script src="scanner-core.js"></script>
+<script>
+(() => {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const textarea = $('blueprint');
+  const file = $('file');
+  const status = $('status');
+  const results = $('results');
+  let current = null;
+  let sourceName = 'pasted blueprint';
+
+  file.addEventListener('change', async () => {
+    const selected = file.files && file.files[0];
+    if (!selected) return;
+    sourceName = selected.name;
+    textarea.value = await selected.text();
+    status.textContent = `Loaded ${selected.name} locally.`;
+  });
+
+  $('clear').addEventListener('click', () => {
+    textarea.value = '';
+    file.value = '';
+    sourceName = 'pasted blueprint';
+    current = null;
+    results.classList.add('hidden');
+    status.textContent = 'Nothing leaves this page.';
+  });
+
+  $('scan').addEventListener('click', () => {
+    try {
+      const parsed = JSON.parse(textarea.value);
+      const findings = NorthstarScanner.scanBlueprint(parsed);
+      const summary = NorthstarScanner.summarize(findings);
+      current = { source: sourceName, summary, findings };
+      render(current);
+      status.textContent = 'Scan complete. Processed in this browser.';
+    } catch (error) {
+      status.textContent = `Invalid JSON: ${error.message}`;
+      results.classList.add('hidden');
+      current = null;
+    }
+  });
+
+  function render(report) {
+    $('source').textContent = report.source;
+    $('summary').innerHTML = ['critical','high','medium','low','info']
+      .map(level => `<div class="metric"><b>${report.summary[level]}</b><span>${level}</span></div>`).join('');
+    $('findings').innerHTML = report.findings.length ? report.findings.map(f => {
+      const meta = [f.module, f.module_id !== null ? `id ${f.module_id}` : null, f.path].filter(Boolean).join(' · ');
+      return `<article class="finding" data-severity="${escapeHtml(f.severity)}"><h3>${escapeHtml(f.severity.toUpperCase())} · ${escapeHtml(f.rule)}</h3><p>${escapeHtml(f.message)}</p>${meta ? `<div class="meta">${escapeHtml(meta)}</div>` : ''}</article>`;
+    }).join('') : '<p class="muted">No static reliability findings detected by the current rule set.</p>';
+    results.classList.remove('hidden');
+  }
+
+  function escapeHtml(value) {
+    return String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+  }
+
+  function download(name, type, text) {
+    const blob = new Blob([text], { type });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 0);
+  }
+
+  $('downloadJson').addEventListener('click', () => {
+    if (current) download('make-reliability-preflight.json', 'application/json', JSON.stringify(current, null, 2) + '\n');
+  });
+  $('downloadMd').addEventListener('click', () => {
+    if (current) download('make-reliability-preflight.md', 'text/markdown', NorthstarScanner.renderMarkdown(current.source, current.findings));
+  });
+})();
+</script>
+</body>
+</html>

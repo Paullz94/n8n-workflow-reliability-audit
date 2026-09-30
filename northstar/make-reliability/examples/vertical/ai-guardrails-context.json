@@ -1,0 +1,11 @@
+{
+  "scenario_name": "AI Lead Qualification",
+  "business_goal": "Use AI to assist lead qualification without allowing malformed or uncertain output to trigger unsafe CRM/customer actions.",
+  "critical_side_effects": [
+    "Update lead status",
+    "Send customer-facing message"
+  ],
+  "duplicate_tolerance": "none",
+  "ordering_required": true,
+  "recovery_expectation": "Malformed/uncertain AI output is quarantined or reviewed before writes."
+}

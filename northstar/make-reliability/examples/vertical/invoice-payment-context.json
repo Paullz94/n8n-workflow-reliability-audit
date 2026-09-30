@@ -1,0 +1,12 @@
+{
+  "scenario_name": "CRM Invoice Payment Sync",
+  "business_goal": "Create at most one invoice per source order and keep payment status consistent across CRM and accounting.",
+  "critical_side_effects": [
+    "Create invoice exactly once",
+    "Attach invoice/payment to correct customer",
+    "Do not mark fully paid on partial payment"
+  ],
+  "duplicate_tolerance": "none",
+  "ordering_required": true,
+  "recovery_expectation": "Partial cross-system state must be visible and reconcilable."
+}

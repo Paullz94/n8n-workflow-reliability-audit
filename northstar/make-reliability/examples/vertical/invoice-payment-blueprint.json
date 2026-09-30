@@ -1,0 +1,35 @@
+{
+  "name": "Synthetic Invoice Payment Sync",
+  "flow": [
+    {
+      "id": 1,
+      "module": "gateway:CustomWebHook",
+      "mapper": {}
+    },
+    {
+      "id": 2,
+      "module": "quickbooks:createInvoice",
+      "mapper": {
+        "customer_id": "{{1.customer_id}}",
+        "amount": "{{1.total}}"
+      }
+    },
+    {
+      "id": 3,
+      "module": "crm:updateDeal",
+      "mapper": {
+        "status": "paid"
+      }
+    }
+  ],
+  "metadata": {
+    "instant": true,
+    "scenario": {
+      "sequential": false,
+      "dlq": false,
+      "dataloss": false,
+      "confidential": true,
+      "autoCommit": true
+    }
+  }
+}
