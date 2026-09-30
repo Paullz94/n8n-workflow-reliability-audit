@@ -570,3 +570,73 @@ Subject to a fresh public check on/after **2026-10-01**:
 4. **Automation Template with OpenAI API** — useful pre-release QA angle, but less direct because the brief is mainly architecture/build work.
 
 Do not accept payment or perform paid client service before **2026-10-01**.
+
+
+---
+
+## Fresh demand re-check — 2026-09-30
+
+Paid client work starts on **2026-10-01**. The checks below are launch-eve acquisition research only; do not accept payment or perform paid service before that date.
+
+### NEW P2 — Upwork: AI Automation Specialist — Existing Workflow Automation & Error Handling
+
+URL:
+https://www.upwork.com/freelance-jobs/apply/Automation-Specialist-Existing-Workflow-Automation-Error-Handling_~022104533100819533048/
+
+Why this is a strong PCFlows fit:
+- the buyer explicitly wants **existing workflows audited, debugged and optimized**, rather than only a greenfield build;
+- the brief names failed or inconsistent runs, retries, fallbacks, exceptions, API/webhook/data/authentication problems, logging and monitoring;
+- it explicitly asks to prevent **duplicate actions**, handle edge cases, test thoroughly and document fixes/recommendations;
+- Make.com is one of the accepted platforms.
+
+Freshness / competition at the 2026-09-30 public re-check:
+- posted **2 days ago**;
+- **USD 150 fixed**;
+- **50+ proposals**;
+- **1 hire**;
+- **0 interviewing** shown;
+- client last viewed the post **2 days ago**.
+
+PCFlows fit:
+- **EUR 79** is the cleanest honest entry point if the buyer accepts a narrow single-workflow / single-risk reliability review within the advertised budget;
+- **EUR 149** is only defensible if the buyer explicitly accepts a separate, broader audit milestone despite the advertised USD 150 total;
+- **EUR 399** is not justified by the visible budget;
+- keep the offer audit/QA-first: findings, risk ranking, duplicate/retry/failure-path review and verification checklist; do not present PCFlows as the full implementation agency.
+
+Proof gap / caution:
+- the buyer asks for experienced automation/API/LLM troubleshooting, but the public brief does not require named customer case studies;
+- PCFlows may truthfully point to its public scanner, transparent method, synthetic sample report and deterministic verification approach;
+- do **not** imply customer history, certification or production systems that do not exist.
+
+Priority: **P2 — exceptionally close pain fit, but 50+ proposals and one existing hire materially reduce conversion probability. Re-check availability on 2026-10-01 before spending an application slot.**
+
+### Material change — GoHighLevel + Make.com CRM / invoicing / lead-routing automation
+
+URL:
+https://www.upwork.com/freelance-jobs/apply/GoHighLevel-GHL-Make-com-Automation-Expert-CRM-Setup-Workflow-Automation-API-Integration_~022102339702634857852/
+
+The 2026-09-30 public re-check now shows:
+- **USD 200 fixed**;
+- **20–50 proposals**;
+- **1 hire**;
+- **0 interviewing** shown;
+- client last viewed the post **4 days ago**.
+
+This is a material negative change from the 2026-09-29 queue state. The reliability/data-integrity fit remains real, but the buyer has already hired once and the GHL-specific proof gap remains.
+
+Action:
+- **deprioritize** this target behind still-unfilled audit-shaped opportunities;
+- do not spend launch-day capacity on it unless the listing shows renewed buyer activity or a distinct QA/release phase.
+
+### Launch-eve shortlist for 2026-10-01
+
+Subject to a fresh public check immediately before any application:
+
+1. **Make.com AI News Video Automation** — still publicly live at the 2026-09-30 check: **USD 500 fixed, 20–50 proposals, 0 interviewing**. Existing Make setup plus explicit error handling and duplicate-post protection still make a bounded release-QA audit the strongest live direct Make angle.
+2. **GoHighLevel lead-recovery workflow audit** — still **USD 750 total** with a buyer-defined **USD 150 audit/system-map milestone**, **20–50 proposals, 0 interviewing**. Excellent audit shape; keep the GHL experience proof gap explicit.
+3. **Existing Workflow Automation & Error Handling** — strongest direct pain-language fit discovered today, but already **50+ proposals and 1 hire**. Only use a launch slot if still open and the buyer accepts a bounded **EUR 79** audit/preflight rather than broad implementation.
+4. **Automation Template with OpenAI API** — still **USD 450 fixed, 20–50 proposals, 0 interviewing**. Keep as a secondary pre-release QA angle because the main brief is architecture/build work.
+
+**Deprioritized:** GoHighLevel + Make CRM/invoicing/lead-routing job because it now shows **1 hire**.
+
+No exceptional zero-friction, time-sensitive opportunity was found that justifies interrupting the owner for marketplace login/KYC/account authorization before launch.
