@@ -1,6 +1,6 @@
 {
   "schema": "pcflows.prospect-queue.v1",
-  "updated": "2026-09-25",
+  "updated": "2026-10-01",
   "launch_enabled": false,
   "launch_gate": "Belgian enterprise number + VAT route + site identity + Stripe reactivation",
   "scoring_note": "Internal triage only; score is not a prediction of conversion probability.",
@@ -164,6 +164,22 @@
       "competition_penalty": 2,
       "proof_gap_penalty": 1,
       "notes": "Future agency partnership archetype; delivery/testing/error handling/documentation demand."
+    },
+    {
+      "id": "upwork_existing_workflow_error_handling_20260928",
+      "title": "AI Automation Specialist — Existing Workflow Automation & Error Handling",
+      "channel": "upwork",
+      "url": "https://www.upwork.com/freelance-jobs/apply/Automation-Specialist-Existing-Workflow-Automation-Error-Handling_~022104533100819533048/",
+      "observed_date": "2026-10-01",
+      "status": "watch_open",
+      "contact_after_launch": true,
+      "problem_fit": 3,
+      "audit_first_fit": 3,
+      "budget_signal": 3,
+      "freshness": 3,
+      "competition_penalty": 2,
+      "proof_gap_penalty": 1,
+      "notes": "USD 150 fixed. Existing workflows: reliability, retries, fallbacks, duplicate prevention, logging and testing. 50+ proposals; 1 hire; 0 interviewing at 2026-10-01 check. Best bounded offer: EUR 149 Data Integrity Audit — AI Workflow Guardrails. Upwork-native application only; do not expand scope into implementation/repair."
     }
   ]
 }
